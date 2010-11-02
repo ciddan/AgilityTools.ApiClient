@@ -3,6 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgilityTools.ApiClient.Adsml.Communication", "AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj", "{386AABE6-7A1F-40D9-A39D-183E433B3174}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgilityTools.ApiClient.Adsml.Communication.Tests", "AgilityTools.ApiClient.Adsml.Communication.Tests\AgilityTools.ApiClient.Adsml.Communication.Tests.csproj", "{6A9C6D0D-3A89-4A50-ABBB-16F23822013B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{F499236F-8259-4525-BED8-F365CAA7C7E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgilityTools.ApiClient.Adsml.Client", "AgilityTools.ApiClient.Adsml.Client\AgilityTools.ApiClient.Adsml.Client.csproj", "{0C8C8A8D-9948-4189-89F3-43549B4C8410}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgilityTools.ApiClient.Adsml.Client.Tests", "AgilityTools.ApiClient.Adsml.Client.Tests\AgilityTools.ApiClient.Adsml.Client.Tests.csproj", "{C13FFA76-5856-4120-80AA-F9B221BF2EB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,8 +21,24 @@ Global
 		{386AABE6-7A1F-40D9-A39D-183E433B3174}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{386AABE6-7A1F-40D9-A39D-183E433B3174}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{386AABE6-7A1F-40D9-A39D-183E433B3174}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A9C6D0D-3A89-4A50-ABBB-16F23822013B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A9C6D0D-3A89-4A50-ABBB-16F23822013B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A9C6D0D-3A89-4A50-ABBB-16F23822013B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A9C6D0D-3A89-4A50-ABBB-16F23822013B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C8C8A8D-9948-4189-89F3-43549B4C8410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C8C8A8D-9948-4189-89F3-43549B4C8410}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C8C8A8D-9948-4189-89F3-43549B4C8410}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C8C8A8D-9948-4189-89F3-43549B4C8410}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C13FFA76-5856-4120-80AA-F9B221BF2EB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C13FFA76-5856-4120-80AA-F9B221BF2EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13FFA76-5856-4120-80AA-F9B221BF2EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C13FFA76-5856-4120-80AA-F9B221BF2EB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6A9C6D0D-3A89-4A50-ABBB-16F23822013B} = {F499236F-8259-4525-BED8-F365CAA7C7E6}
+		{C13FFA76-5856-4120-80AA-F9B221BF2EB2} = {F499236F-8259-4525-BED8-F365CAA7C7E6}
 	EndGlobalSection
 EndGlobal
