@@ -5,13 +5,13 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Requests
 {
-    public class CreateRequest : IApiSerializable
+    public class CreateRequest : IAdsmlSerializable
     {
         public string ObjectTypeName { get; private set; }
         public string CreationPath { get; private set; }
         public IList<StructureAttribute> AttributesToSet { get; private set; }
 
-        public CreateRequest(string objectTypeName, string creationPath, IList<StructureAttribute> attributesToSet) {
+        public CreateRequest(string objectTypeName, string creationPath, params StructureAttribute[] attributesToSet) {
             if (string.IsNullOrEmpty(objectTypeName))
                 throw new InvalidOperationException("ObjectTypeName cannot be null or empty.");
 
@@ -22,8 +22,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                 throw new ArgumentNullException("attributesToSet");
 
             this.ObjectTypeName = objectTypeName;
-            this.AttributesToSet = attributesToSet;
             this.CreationPath = creationPath;
+
+            this.AttributesToSet = new List<StructureAttribute>(attributesToSet);
         }
 
         public XElement ToApiXml() {

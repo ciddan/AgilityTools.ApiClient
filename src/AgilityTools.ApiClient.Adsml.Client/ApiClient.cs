@@ -18,7 +18,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             _adapiWsUrl = adapiWsUrl;
         }
 
-        public XElement SendApiRequest<TRequest>(TRequest request) where TRequest : IApiSerializable
+        public XElement SendApiRequest<TRequest>(TRequest request) where TRequest : IAdsmlSerializable
         {
             return new XElement("result");
         }

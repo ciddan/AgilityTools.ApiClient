@@ -15,13 +15,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var attrs = new List<StructureAttribute>();
             
             //Act
-            var cr = new CreateRequest("foo", "bar", new List<StructureAttribute>());
+            var cr = new CreateRequest("foo", "bar", new StructureAttribute());
 
             //Assert
             Assert.That(cr, Is.Not.Null);
             Assert.That(cr.ObjectTypeName, Is.EqualTo("foo"));
             Assert.That(cr.CreationPath, Is.EqualTo("bar"));
-            Assert.That(cr.AttributesToSet, Is.EqualTo(attrs));
+            Assert.That(cr.AttributesToSet.Count, Is.AtLeast(1));
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         public void CreateRequest_Ctor_Throwns_InvalidOperationException_If_ObjectTypeName_Is_NullOrEmpty()
         {
             //Act
-            new CreateRequest(null, "bar", new List<StructureAttribute>());
+            new CreateRequest(null, "bar", new StructureAttribute());
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         public void CreateRequest_Ctor_Throwns_InvalidOperationException_If_CreationPath_Is_NullOrEmpty()
         {
             //Act
-            new CreateRequest("foo", string.Empty, new List<StructureAttribute>());
+            new CreateRequest("foo", string.Empty, new StructureAttribute());
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var attribute = new StructureAttribute
                             {DefinitionId = 215, Name = "fooAttributeName", Values = new List<StructureValue> {value}};
 
-            var request = new CreateRequest("fooObjectTypeName", "fooPath", new List<StructureAttribute> {attribute});
+            var request = new CreateRequest("fooObjectTypeName", "fooPath", attribute);
             
             //Act
             var actual = request.ToApiXml();

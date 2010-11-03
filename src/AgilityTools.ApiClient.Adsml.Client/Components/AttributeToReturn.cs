@@ -2,7 +2,7 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public class AttributeToReturn : IApiSerializable
+    public class AttributeToReturn : IAdsmlSerializable
     {
         public int DefinitionId { get; set; }
         public string Name { get; set; }

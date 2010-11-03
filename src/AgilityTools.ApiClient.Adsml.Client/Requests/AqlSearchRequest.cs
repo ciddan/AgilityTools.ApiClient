@@ -1,9 +1,10 @@
+using System;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Requests
 {
-    public class AqlSearchRequest : IApiSerializable
+    public class AqlSearchRequest : IAdsmlSerializable
     {
         public int ObjectTypeId { get; private set; }
         public int DefinitionIdToMatch { get; private set; }
@@ -11,30 +12,33 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         public string AttributeName { get; private set; }
         public string BasePath { get; private set; }
 
-        public bool OmitAttributes { get; set; }
+        public SearchControls SearchControls { get; private set; }
+        public bool OmitStructureAttributes { get; set; }
 
         private readonly bool _matchWithDefinitionId;
 
-        public AqlSearchRequest(int objectTypeId, int definitionIdToMatch, string searchTerm, 
+        public AqlSearchRequest(int objectTypeId, int definitionIdToMatch, string searchTerm, SearchControls searchControls = null,
                                 string basePath = "/Structures/Classification/JULA Produkter") {
 
             this.ObjectTypeId = objectTypeId;
             this.DefinitionIdToMatch = definitionIdToMatch;
             this.SearchTerm = searchTerm;
             this.BasePath = basePath;
+            this.SearchControls = searchControls;
 
-            this._matchWithDefinitionId = true;
+            _matchWithDefinitionId = true;
         }
 
-        public AqlSearchRequest(int objectTypeId, string attributeToMatch, string searchTerm, 
+        public AqlSearchRequest(int objectTypeId, string attributeToMatch, string searchTerm, SearchControls searchControls = null,
                                 string basePath = "/Structures/Classification/JULA Produkter") {
-            
+
             this.ObjectTypeId = objectTypeId;
             this.AttributeName = attributeToMatch;
             this.SearchTerm = searchTerm;
             this.BasePath = basePath;
+            this.SearchControls = searchControls;
 
-            this._matchWithDefinitionId = false;
+            _matchWithDefinitionId = false;
         }
 
         public XElement ToApiXml() {
@@ -47,32 +51,28 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                                 new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
                                 new XAttribute(XNamespace.Xmlns + "xsi", xsi),
                                 new XElement("SearchRequest",
-                                             new XAttribute("base", this.BasePath),
-                                             new XElement("Filter",
-                                                          new XElement("FilterString",
-                                                                       string.Format(
-                                                                           "FIND BELOW #{0} WHERE (#{1} = \"{2}\")",
-                                                                           this.ObjectTypeId, this.DefinitionIdToMatch, this.SearchTerm))
-                                                 )
-                                    )
-                )
+                                    new XAttribute("base", this.BasePath),
+                                    new XElement("Filter",
+                                        new XElement("FilterString",
+                                            string.Format(
+                                                "FIND BELOW #{0} WHERE (#{1} = \"{2}\")",
+                                                this.ObjectTypeId, this.DefinitionIdToMatch, this.SearchTerm)))))
                 : new XElement("BatchRequest",
                                 new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
                                 new XAttribute(XNamespace.Xmlns + "xsi", xsi),
                                 new XElement("SearchRequest",
-                                             new XAttribute("base", this.BasePath),
-                                             new XElement("Filter",
-                                                          new XElement("FilterString",
-                                                                       string.Format(
-                                                                           "FIND BELOW #{0} WHERE (\"{1}\" = \"{2}\")",
-                                                                           this.ObjectTypeId, this.AttributeName, this.SearchTerm))
-                                                 )
-                                    )
-                );
+                                    new XAttribute("base", this.BasePath),
+                                    new XElement("Filter",
+                                        new XElement("FilterString",
+                                            string.Format(
+                                                "FIND BELOW #{0} WHERE (\"{1}\" = \"{2}\")",
+                                                this.ObjectTypeId, this.AttributeName, this.SearchTerm)))));
 
-            if (this.OmitAttributes) {
-                request.Descendants("SearchRequest").First().Add(new XAttribute("returnNoAttributes", "true"));
-            }
+            if (this.SearchControls != null)
+                request.Descendants("SearchRequest").Single().Add(this.SearchControls.ToApiXml());
+
+            if(OmitStructureAttributes)
+                request.Descendants("SearchRequest").Single().Add(new XAttribute("returnNoAttributes", "true"));
 
             return request;
         }

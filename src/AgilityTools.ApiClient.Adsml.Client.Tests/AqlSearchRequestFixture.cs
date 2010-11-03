@@ -19,7 +19,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             Assert.That(aql.ObjectTypeId, Is.EqualTo(10));
             Assert.That(aql.SearchTerm, Is.EqualTo("foo"));
             Assert.That(aql.BasePath, Is.EqualTo("/Structures/Classification/JULA Produkter"));
-            Assert.That(aql.OmitAttributes, Is.EqualTo(false));
         }
 
         [Test]
@@ -34,7 +33,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             Assert.That(aql.ObjectTypeId, Is.EqualTo(10));
             Assert.That(aql.SearchTerm, Is.EqualTo("foo"));
             Assert.That(aql.BasePath, Is.EqualTo("/Structures/Classification/JULA Produkter"));
-            Assert.That(aql.OmitAttributes, Is.EqualTo(false));
         }
 
         [Test]
@@ -145,7 +143,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 )
             );
 
-            var aql = new AqlSearchRequest(10, 10, "foo", "/foo/bar");
+            var aql = new AqlSearchRequest(10, 10, "foo", null, "/foo/bar");
 
             //Act
             var actual = aql.ToApiXml();
@@ -172,7 +170,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 )
             );
 
-            var aql = new AqlSearchRequest(10, 10, "foo", "/foo/bar") {OmitAttributes = true};
+            var aql = new AqlSearchRequest(10, 10, "foo", null, "/foo/bar") { OmitStructureAttributes = true };
 
             //Act
             var actual = aql.ToApiXml();

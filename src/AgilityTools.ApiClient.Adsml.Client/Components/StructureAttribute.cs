@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public class StructureAttribute : IApiSerializable {
+    public class StructureAttribute : IAdsmlSerializable {
         public int DefinitionId { get; set; }
         public string Name { get; set; }
         public IList<StructureValue> Values { get; set; }
