@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AgilityTools.ApiClient.Adsml.Client
 {
     [Serializable]
-    public class ApiSerializationValidationException : Exception
+    public class ApiSerializationValidationException : Exception, ISerializable
     {
         public ApiSerializationValidationException() {
         }

@@ -13,10 +13,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
 
         public CreateRequest(string objectTypeName, string creationPath, IList<StructureAttribute> attributesToSet) {
             if (string.IsNullOrEmpty(objectTypeName))
-                throw new InvalidOperationException("An ObjectTypeName must be specified.");
+                throw new InvalidOperationException("ObjectTypeName cannot be null or empty.");
 
             if (string.IsNullOrEmpty(creationPath))
-                throw new InvalidOperationException("CreationPath cannot be empty.");
+                throw new InvalidOperationException("CreationPath cannot be null or empty.");
 
             if (attributesToSet == null)
                 throw new ArgumentNullException("attributesToSet");

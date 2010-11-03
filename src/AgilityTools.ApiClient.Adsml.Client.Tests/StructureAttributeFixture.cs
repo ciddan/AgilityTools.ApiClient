@@ -56,5 +56,50 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             Assert.That(actual, Is.Not.Null);
             Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
         }
+
+        [Test]
+        public void Can_Generate_Api_Xml_Without_Specifying_Attribute_Name()
+        {
+            //Arrange
+            var expected = new XElement("StructureAttribute",
+                                        new XAttribute("id", "46"),
+                                        new XElement("StructureValue",
+                                                     new XAttribute("langId", "10"),
+                                                     new XAttribute("scope", "global"),
+                                                     "foo"));
+
+            var value = new StructureValue { LanguageId = 10, Value = "foo" };
+            var attr = new StructureAttribute { DefinitionId = 46, Values = new List<StructureValue> { value } };
+
+            //Act
+            var actual = attr.ToApiXml();
+
+            //Assert
+            Assert.That(actual, Is.Not.Null);
+            Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+        }
+
+        [Test]
+        [ExpectedException(typeof (ApiSerializationValidationException), ExpectedMessage = "DefinitionId has to be set.")]
+        public void ToApiXml_Throws_ASVE_If_DefinitionId_Is_Not_Set() {
+            //Arrange
+            var value = new StructureValue { LanguageId = 10, Value = "foo" };
+            var attr = new StructureAttribute { Values = new List<StructureValue> { value } };
+
+            //Act
+            attr.ToApiXml();
+        }
+
+        [Test]
+        [ExpectedException(typeof(ApiSerializationValidationException), ExpectedMessage = "At least one StructureAttribute Value must be specified.")]
+        public void ToApiXml_Throws_ASVE_If_Values_Is_Not_Set()
+        {
+            //Arrange
+            var value = new StructureValue { LanguageId = 10, Value = "foo" };
+            var attr = new StructureAttribute { DefinitionId = 10 };
+
+            //Act
+            attr.ToApiXml();
+        }
     }
 }
