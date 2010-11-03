@@ -45,6 +45,7 @@
     <Compile Include="IApiClient.cs" />
     <Compile Include="IApiSerializable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\AqlSearchRequest.cs" />
     <Compile Include="Requests\CreateRequest.cs" />
     <Compile Include="StructureAttribute.cs" />
     <Compile Include="StructureValue.cs" />

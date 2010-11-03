@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ApiClientFixture.cs" />
     <Compile Include="ApiSerializationValidationExceptionFixture.cs" />
+    <Compile Include="AqlSearchRequestFixture.cs" />
     <Compile Include="CreateRequestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructureAttributeFixture.cs" />

@@ -11,11 +11,17 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
     {
         [Test]
         public void Can_Instatiate_New_CreateRequest() {
+            //Arrange
+            var attrs = new List<StructureAttribute>();
+            
             //Act
             var cr = new CreateRequest("foo", "bar", new List<StructureAttribute>());
 
             //Assert
             Assert.That(cr, Is.Not.Null);
+            Assert.That(cr.ObjectTypeName, Is.EqualTo("foo"));
+            Assert.That(cr.CreationPath, Is.EqualTo("bar"));
+            Assert.That(cr.AttributesToSet, Is.EqualTo(attrs));
         }
 
         [Test]
