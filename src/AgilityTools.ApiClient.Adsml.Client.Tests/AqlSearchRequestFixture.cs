@@ -200,7 +200,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 )
             );
 
-            var searchControls = new SearchControls {ExcludeResultsInBin = true, ExcludeResultsInDocumentFolder = true};
+            var searchControls = new SearchControl {ExcludeResultsInBin = true, ExcludeResultsInDocumentFolder = true};
 
             var aql = new AqlSearchRequest(10, 10, "foo", searchControls, "/foo/bar") { OmitStructureAttributes = true };
 
@@ -237,7 +237,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
 
             var searchControls =
-                new SearchControls(new AttributeSearchControls(new AttributeToReturn {DefinitionId = 10}))
+                new SearchControl(new AttributeSearchControls(new AttributeToReturn {DefinitionId = 10}))
                 {
                     ExcludeResultsInBin = true,
                     ExcludeResultsInDocumentFolder = true

@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public class SearchControls : IAdsmlSerializable
+    public class SearchControl : IAdsmlSerializable
     {
         public IList<ISearchControlComponent> SearchControlComponents { get; set; }
         public bool ExcludeResultsInBin { get; set; }
@@ -11,9 +11,9 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
         private XElement request;
 
-        public SearchControls() : this (null) { }
+        public SearchControl() : this (null) { }
 
-        public SearchControls(params ISearchControlComponent[] searchControlComponents)
+        public SearchControl(params ISearchControlComponent[] searchControlComponents)
         {
             if (searchControlComponents != null) {
                 this.SearchControlComponents = new List<ISearchControlComponent>(searchControlComponents);

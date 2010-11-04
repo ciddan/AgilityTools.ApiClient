@@ -11,31 +11,31 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         public string AttributeName { get; private set; }
         public string BasePath { get; private set; }
 
-        public SearchControls SearchControls { get; private set; }
+        public SearchControl SearchControl { get; private set; }
         public bool OmitStructureAttributes { get; set; }
 
         private readonly bool _matchWithDefinitionId;
 
-        public AqlSearchRequest(int objectTypeId, int definitionIdToMatch, string searchTerm, SearchControls searchControls = null,
+        public AqlSearchRequest(int objectTypeId, int definitionIdToMatch, string searchTerm, SearchControl searchControl = null,
                                 string basePath = "/Structures/Classification/JULA Produkter") {
 
             this.ObjectTypeId = objectTypeId;
             this.DefinitionIdToMatch = definitionIdToMatch;
             this.SearchTerm = searchTerm;
             this.BasePath = basePath;
-            this.SearchControls = searchControls;
+            this.SearchControl = searchControl;
 
             _matchWithDefinitionId = true;
         }
 
-        public AqlSearchRequest(int objectTypeId, string attributeToMatch, string searchTerm, SearchControls searchControls = null,
+        public AqlSearchRequest(int objectTypeId, string attributeToMatch, string searchTerm, SearchControl searchControl = null,
                                 string basePath = "/Structures/Classification/JULA Produkter") {
 
             this.ObjectTypeId = objectTypeId;
             this.AttributeName = attributeToMatch;
             this.SearchTerm = searchTerm;
             this.BasePath = basePath;
-            this.SearchControls = searchControls;
+            this.SearchControl = searchControl;
 
             _matchWithDefinitionId = false;
         }
@@ -67,8 +67,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                                                 "FIND BELOW #{0} WHERE (\"{1}\" = \"{2}\")",
                                                 this.ObjectTypeId, this.AttributeName, this.SearchTerm)))));
 
-            if (this.SearchControls != null)
-                request.Descendants("SearchRequest").Single().AddFirst(this.SearchControls.ToApiXml());
+            if (this.SearchControl != null)
+                request.Descendants("SearchRequest").Single().AddFirst(this.SearchControl.ToApiXml());
 
             if (OmitStructureAttributes)
                 request.Descendants("SearchRequest").Single().Add(new XAttribute("returnNoAttributes", "true"));

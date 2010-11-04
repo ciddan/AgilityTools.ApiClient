@@ -10,7 +10,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Instantiate_New_SearchControls() {
             //Act
-            var sc = new SearchControls();
+            var sc = new SearchControl();
 
             //Assert
             Assert.That(sc, Is.Not.Null);
@@ -19,7 +19,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Instantiate_New_SearchControls_And_Supply_SearchControls() {
             //Act
-            var sc = new SearchControls(new AttributeSearchControls());
+            var sc = new SearchControl(new AttributeSearchControls());
 
             //Assert
             Assert.That(sc, Is.Not.Null);
@@ -35,7 +35,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                         new XElement("Attribute", new XAttribute("id", "20")))
                 );
 
-            var controls = new SearchControls(new AttributeSearchControls(new AttributeToReturn {DefinitionId = 20}));
+            var controls = new SearchControl(new AttributeSearchControls(new AttributeToReturn {DefinitionId = 20}));
 
             //Act
             var actual = controls.ToApiXml();
@@ -58,7 +58,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                         new XElement("Attribute", new XAttribute("id", "20")))
                 );
 
-            var controls = new SearchControls(new AttributeSearchControls(new AttributeToReturn { DefinitionId = 20 }))
+            var controls = new SearchControl(new AttributeSearchControls(new AttributeToReturn { DefinitionId = 20 }))
                            {
                                ExcludeResultsInBin = true,
                                ExcludeResultsInDocumentFolder = true

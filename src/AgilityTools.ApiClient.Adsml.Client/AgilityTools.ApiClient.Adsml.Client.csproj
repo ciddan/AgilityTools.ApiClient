@@ -45,7 +45,8 @@
     <Compile Include="Components\AttributeSearchControls.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
     <Compile Include="Components\Filters.cs" />
-    <Compile Include="Components\SearchControls.cs" />
+    <Compile Include="Components\SearchControl.cs" />
+    <Compile Include="Components\SearchControlBuilder.cs" />
     <Compile Include="FluentSyntax\SearchControlSyntax.cs" />
     <Compile Include="IApiClient.cs" />
     <Compile Include="IAdsmlSerializable.cs" />
