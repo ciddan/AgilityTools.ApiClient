@@ -7,6 +7,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public int DefinitionId { get; set; }
         public string Name { get; set; }
 
+        internal AttributeToReturn() {}
+
         public XElement ToApiXml() {
             this.Validate();
 
@@ -19,6 +21,14 @@ namespace AgilityTools.ApiClient.Adsml.Client
                 attributeElement.Add(new XAttribute("id", this.DefinitionId.ToString()));
 
             return attributeElement;
+        }
+
+        public static AttributeToReturn WithDefinitionId(int definitionId) {
+            return new AttributeToReturn {DefinitionId = definitionId};
+        }
+
+        public static AttributeToReturn WithAttributeName(string name) {
+            return new AttributeToReturn {Name = name};
         }
 
         public void Validate() {

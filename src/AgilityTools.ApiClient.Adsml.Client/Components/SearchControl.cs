@@ -1,23 +1,19 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
     public class SearchControl : IAdsmlSerializable
     {
-        public IList<ISearchControlComponent> SearchControlComponents { get; set; }
-        public bool ExcludeResultsInBin { get; set; }
-        public bool ExcludeResultsInDocumentFolder { get; set; }
-
+        private readonly IList<ISearchRequestFilter> _requestFilters;
+        private readonly IList<ISearchControlComponent> _components;
+  
         private XElement request;
 
-        public SearchControl() : this (null) { }
-
-        public SearchControl(params ISearchControlComponent[] searchControlComponents)
-        {
-            if (searchControlComponents != null) {
-                this.SearchControlComponents = new List<ISearchControlComponent>(searchControlComponents);
-            }
+        internal SearchControl(IList<ISearchRequestFilter> requestFilters, IList<ISearchControlComponent> components) {
+            _requestFilters = requestFilters;
+            _components = components;
         }
 
         public XElement ToApiXml() {
@@ -25,8 +21,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
             
             this.ApplyFilters();
 
-            if (SearchControlComponents != null) {
-                foreach (var searchControlComponent in SearchControlComponents) {
+            if (this._components != null) {
+                foreach (var searchControlComponent in this._components) {
                     request.Add(searchControlComponent.ToApiXml());
                 }
             }
@@ -35,11 +31,9 @@ namespace AgilityTools.ApiClient.Adsml.Client
         }
 
         private void ApplyFilters() {
-            if (ExcludeResultsInBin)
-                request.Add(new XAttribute("excludeBin", "true"));
-
-            if (ExcludeResultsInDocumentFolder)
-                request.Add(new XAttribute("excludeDocument", "true"));
+            if (this._requestFilters != null) {
+                request.Add(this._requestFilters.Select(filter => filter.ToApiXml()));
+            }
         }
 
         public void Validate() { }

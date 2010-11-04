@@ -5,7 +5,11 @@ namespace AgilityTools.ApiClient.Adsml.Client
     public class SearchControlBuilder : ISearchControlBuilder
     {
         private IList<ISearchRequestFilter> RequestFilterList { get; set; }
-        private IList<AttributeToReturn> AttributesToReturn { get; set; }
+        private IList<ISearchControlComponent> ControlComponents { get; set; }
+
+        public SearchControlBuilder() {
+            ControlComponents = new List<ISearchControlComponent>();
+        }
 
         public IReturnedAttributes RequestFilters(params ISearchRequestFilter[] filters) {
 		    if (filters != null) {
@@ -19,14 +23,13 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public void ReturnedAttributes(params AttributeToReturn[] attributesToReturn)
         {
             if (attributesToReturn != null) {
-                this.AttributesToReturn =
-                    new List<AttributeToReturn>(attributesToReturn);
+                this.ControlComponents.Add(new AttributeSearchControls(attributesToReturn));
             }
         }
 
         public SearchControl Build()
         {
-            return new SearchControl(this.RequestFilterList, this.AttributesToReturn);
+            return new SearchControl(this.RequestFilterList, this.ControlComponents);
         }
     }
 }

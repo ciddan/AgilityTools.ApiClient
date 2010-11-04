@@ -200,7 +200,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 )
             );
 
-            var searchControls = new SearchControl {ExcludeResultsInBin = true, ExcludeResultsInDocumentFolder = true};
+            var builder = new SearchControlBuilder();
+            builder.RequestFilters(Filter.ExcludeBin(), Filter.ExcludeDocument());
+
+            var searchControls = builder.Build();
 
             var aql = new AqlSearchRequest(10, 10, "foo", searchControls, "/foo/bar") { OmitStructureAttributes = true };
 
@@ -235,13 +238,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                         new XElement("Filter",
                             new XElement("FilterString", "FIND BELOW #10 WHERE (#10 = \"foo\")"))));
 
+            var builder = new SearchControlBuilder();
 
-            var searchControls =
-                new SearchControl(new AttributeSearchControls(new AttributeToReturn {DefinitionId = 10}))
-                {
-                    ExcludeResultsInBin = true,
-                    ExcludeResultsInDocumentFolder = true
-                };
+            builder.RequestFilters(Filter.ExcludeBin(), 
+                                   Filter.ExcludeDocument())
+                   .ReturnedAttributes(AttributeToReturn.WithDefinitionId(10));
+
+            var searchControls = builder.Build();
 
             var aql = new AqlSearchRequest(10, 10, "foo", searchControls, "/foo/bar") { OmitStructureAttributes = true };
 
