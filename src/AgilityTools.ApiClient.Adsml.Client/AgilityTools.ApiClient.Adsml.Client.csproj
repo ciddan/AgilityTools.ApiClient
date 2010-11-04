@@ -44,10 +44,13 @@
     <Compile Include="ApiSerializationValidationException.cs" />
     <Compile Include="Components\AttributeSearchControls.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
+    <Compile Include="Components\Filters.cs" />
     <Compile Include="Components\SearchControls.cs" />
+    <Compile Include="FluentSyntax\SearchControlSyntax.cs" />
     <Compile Include="IApiClient.cs" />
     <Compile Include="IAdsmlSerializable.cs" />
     <Compile Include="Components\ISearchControlComponent.cs" />
+    <Compile Include="FluentSyntax\IFluentInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\AqlSearchRequest.cs" />
     <Compile Include="Requests\CreateRequest.cs" />
