@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -69,9 +68,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                                                 this.ObjectTypeId, this.AttributeName, this.SearchTerm)))));
 
             if (this.SearchControls != null)
-                request.Descendants("SearchRequest").Single().Add(this.SearchControls.ToApiXml());
+                request.Descendants("SearchRequest").Single().AddFirst(this.SearchControls.ToApiXml());
 
-            if(OmitStructureAttributes)
+            if (OmitStructureAttributes)
                 request.Descendants("SearchRequest").Single().Add(new XAttribute("returnNoAttributes", "true"));
 
             return request;

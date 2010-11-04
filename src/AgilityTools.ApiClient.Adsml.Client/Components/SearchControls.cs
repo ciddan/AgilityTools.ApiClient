@@ -25,8 +25,10 @@ namespace AgilityTools.ApiClient.Adsml.Client
             
             this.ApplyFilters();
 
-            foreach (var searchControlComponent in SearchControlComponents) {
-                request.Add(searchControlComponent.ToApiXml());
+            if (SearchControlComponents != null) {
+                foreach (var searchControlComponent in SearchControlComponents) {
+                    request.Add(searchControlComponent.ToApiXml());
+                }
             }
 
             return request;

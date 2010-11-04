@@ -181,5 +181,78 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             Console.WriteLine(actual.ToString());
         }
+
+        [Test]
+        public void Can_Generate_Api_Xml_With_SearchControl_Filters()
+        {
+            //Arrange
+            XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+            var expected = new XElement("BatchRequest",
+                new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+                new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                new XElement("SearchRequest",
+                    new XAttribute("base", "/foo/bar"),
+                    new XAttribute("returnNoAttributes", "true"),
+                    new XElement("SearchControls", new XAttribute("excludeBin", "true"), new XAttribute("excludeDocument", "true")),
+                    new XElement("Filter",
+                        new XElement("FilterString", "FIND BELOW #10 WHERE (#10 = \"foo\")")
+                    )
+                )
+            );
+
+            var searchControls = new SearchControls {ExcludeResultsInBin = true, ExcludeResultsInDocumentFolder = true};
+
+            var aql = new AqlSearchRequest(10, 10, "foo", searchControls, "/foo/bar") { OmitStructureAttributes = true };
+
+            //Act
+            var actual = aql.ToApiXml();
+
+            Console.WriteLine(actual.ToString());
+
+            //Assert
+            Assert.That(actual, Is.Not.Null);
+            Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+        }
+
+        [Test]
+        public void Can_Generate_Api_Xml_With_SearchControl_Filters_And_Components()
+        {
+            //Arrange
+            XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+            var expected =
+                new XElement("BatchRequest",
+                    new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+                    new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                    new XElement("SearchRequest",
+                        new XAttribute("base", "/foo/bar"),
+                        new XAttribute("returnNoAttributes", "true"),
+                        new XElement("SearchControls",
+                            new XAttribute("excludeBin", "true"),
+                            new XAttribute("excludeDocument", "true"),
+                            new XElement("AttributesToReturn",
+                                new XElement("Attribute",
+                                    new XAttribute("id", "10")))),
+                        new XElement("Filter",
+                            new XElement("FilterString", "FIND BELOW #10 WHERE (#10 = \"foo\")"))));
+
+
+            var searchControls =
+                new SearchControls(new AttributeSearchControls(new AttributeToReturn {DefinitionId = 10}))
+                {
+                    ExcludeResultsInBin = true,
+                    ExcludeResultsInDocumentFolder = true
+                };
+
+            var aql = new AqlSearchRequest(10, 10, "foo", searchControls, "/foo/bar") { OmitStructureAttributes = true };
+
+            //Act
+            var actual = aql.ToApiXml();
+
+            Console.WriteLine(actual.ToString());
+
+            //Assert
+            Assert.That(actual, Is.Not.Null);
+            Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+        }
     }
 }
