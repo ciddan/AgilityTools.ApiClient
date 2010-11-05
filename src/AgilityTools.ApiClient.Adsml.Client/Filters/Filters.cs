@@ -11,9 +11,89 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public static ExcludeDocumentFilter ExcludeDocument() {
             return new ExcludeDocumentFilter(true);
         }
+
+        public static ReturnAllAttributesFilter OmitStructureAttributes() {
+            return new ReturnAllAttributesFilter(false);
+        }
+
+        public static AllowPagingFilter AllowPaging() {
+            return new AllowPagingFilter(true);
+        }
+
+        public static PageSizeFilter PageSize(int pageSize) {
+            return new PageSizeFilter(pageSize);
+        }
+
+        public static CountLimitFilter CountLimit(int countLimit) {
+            return new CountLimitFilter(countLimit);
+        }
     }
 
-    public class ExcludeBinFilter : ISearchRequestFilter
+    public class ReturnAllAttributesFilter : ISearchRequestFilter, ILookupRequestFilter
+    {
+        private readonly bool _returnAllAttributes;
+
+        public ReturnAllAttributesFilter(bool returnAllAttributes) {
+            _returnAllAttributes = returnAllAttributes;
+        }
+
+        public XAttribute ToApiXml() {
+            return new XAttribute("returnAllAttributes", _returnAllAttributes);
+        }
+    }
+
+    public class AllowPagingFilter : ISearchRequestFilter, ILookupRequestFilter
+    {
+        private readonly bool _allowPaging;
+
+        public AllowPagingFilter(bool allowPaging) {
+            _allowPaging = allowPaging;
+        }
+
+        public XAttribute ToApiXml() {
+            return new XAttribute("allowPaging", _allowPaging);
+        }
+    }
+
+    public class PageSizeFilter : ISearchRequestFilter, ILookupRequestFilter
+    {
+        private readonly int _pageSize;
+
+        public PageSizeFilter(int pageSize) {
+            _pageSize = pageSize;
+        }
+
+        public XAttribute ToApiXml() {
+            this.Validate();
+            return new XAttribute("pageSize", _pageSize);
+        }
+
+        private void Validate() {
+            if (this._pageSize <= 0)
+                throw new ApiSerializationValidationException("PageSize must be larger than 0.");
+        }
+    }
+
+    public class CountLimitFilter : ISearchRequestFilter, ILookupRequestFilter
+    {
+        private readonly int _countLimit;
+
+        public CountLimitFilter(int countLimit) {
+            _countLimit = countLimit;
+        }
+
+        public XAttribute ToApiXml() {
+            this.Validate();
+            return new XAttribute("countLimit", _countLimit);
+        }
+
+        private void Validate() {
+            if (this._countLimit <= 0)
+                throw new ApiSerializationValidationException("countLimit must be larger than 0.");
+        }
+    }
+
+    public class ExcludeBinFilter : ISearchRequestFilter, ILookupRequestFilter
     {
         private readonly bool _excludeBin;
 
@@ -26,7 +106,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         }
     }
 
-    public class ExcludeDocumentFilter : ISearchRequestFilter
+    public class ExcludeDocumentFilter : ISearchRequestFilter, ILookupRequestFilter
     {
         private readonly bool _excludeDocument;
 

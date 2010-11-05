@@ -9,13 +9,13 @@ namespace AgilityTools.ApiClient.Adsml.Client
     {
         public IList<XAttribute> OuterNodeAttributes { get; set; }
 
-        private readonly IEnumerable<IAdsmlSerializable> _contentNodes;
+        private readonly IEnumerable<IAttributeControl> _contentNodes;
 
-        internal AttributeSearchControl(params AttributeToReturn[] attributesToReturn) {
+        internal AttributeSearchControl(params IAttributeControl[] attributesToReturn) {
             if (attributesToReturn == null)
                 throw new ArgumentNullException("attributesToReturn");
 
-            _contentNodes = new List<IAdsmlSerializable>(attributesToReturn);
+            _contentNodes = new List<IAttributeControl>(attributesToReturn);
         }
 
         public XElement ToApiXml() {

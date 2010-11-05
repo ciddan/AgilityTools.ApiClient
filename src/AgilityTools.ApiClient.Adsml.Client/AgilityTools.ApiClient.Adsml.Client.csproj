@@ -44,8 +44,12 @@
     <Compile Include="ApiSerializationValidationException.cs" />
     <Compile Include="Components\AttributeSearchControl.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
-    <Compile Include="Components\Filters.cs" />
+    <Compile Include="Components\IAttributeControl.cs" />
+    <Compile Include="Filters\Filters.cs" />
     <Compile Include="Components\IControlComponent.cs" />
+    <Compile Include="Filters\ILookupRequestFilter.cs" />
+    <Compile Include="Filters\IRequestFilter.cs" />
+    <Compile Include="Filters\ISearchRequestFilter.cs" />
     <Compile Include="Components\ReferenceControlComponent.cs" />
     <Compile Include="Components\SearchControl.cs" />
     <Compile Include="Components\SearchControlBuilder.cs" />
