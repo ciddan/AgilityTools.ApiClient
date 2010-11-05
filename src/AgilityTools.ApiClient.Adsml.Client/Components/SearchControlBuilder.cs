@@ -11,7 +11,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             ControlComponents = new List<ISearchControlComponent>();
         }
 
-        public IReturnedAttributes RequestFilters(params ISearchRequestFilter[] filters) {
+        public IReturnedAttributeConfigureReferences RequestFilters(params ISearchRequestFilter[] filters) {
 		    if (filters != null) {
 		        this.RequestFilterList =
 		            new List<ISearchRequestFilter>(filters);
@@ -20,10 +20,18 @@ namespace AgilityTools.ApiClient.Adsml.Client
             return this;
         }
 
-        public void ReturnedAttributes(params AttributeToReturn[] attributesToReturn)
+        public IConfigureReferences ReturnedAttributes(params AttributeToReturn[] attributesToReturn)
         {
             if (attributesToReturn != null) {
                 this.ControlComponents.Add(new AttributeSearchControl(attributesToReturn));
+            }
+
+            return this;
+        }
+
+        public void ConfigureReferenceHandling(params IReferenceOptions[] referenceOptions) {
+            if (referenceOptions != null) {
+                this.ControlComponents.Add(new ReferenceControl(referenceOptions));
             }
         }
 

@@ -45,9 +45,11 @@
     <Compile Include="Components\AttributeSearchControl.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
     <Compile Include="Components\IAttributeControl.cs" />
+    <Compile Include="Components\ReferenceControl.cs" />
     <Compile Include="Filters\Filters.cs" />
     <Compile Include="Components\IControlComponent.cs" />
     <Compile Include="Filters\ILookupRequestFilter.cs" />
+    <Compile Include="Filters\IReferenceOptions.cs" />
     <Compile Include="Filters\IRequestFilter.cs" />
     <Compile Include="Filters\ISearchRequestFilter.cs" />
     <Compile Include="Components\ReferenceControlComponent.cs" />
