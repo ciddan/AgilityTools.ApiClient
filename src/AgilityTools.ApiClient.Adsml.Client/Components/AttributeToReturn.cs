@@ -31,6 +31,10 @@ namespace AgilityTools.ApiClient.Adsml.Client
             return new AttributeToReturn {Name = name};
         }
 
+        public static AttributeToReturn WithNameAndId(string name, int definitionId) {
+            return new AttributeToReturn { DefinitionId = definitionId, Name = name};
+        }
+
         public void Validate() {
             if (DefinitionId == 0 && string.IsNullOrEmpty(Name))
                 throw new ApiSerializationValidationException(
