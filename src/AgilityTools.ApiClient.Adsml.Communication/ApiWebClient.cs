@@ -47,9 +47,7 @@ namespace AgilityTools.ApiClient.Adsml.Communication
 
             _webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
-            _webClient.DownloadDataCompleted += (sender, args) => {
-                                                    callback.Invoke(args.Result);
-                                                };
+            _webClient.UploadDataCompleted += (sender, args) => callback.Invoke(args.Result);
             _webClient.UploadDataAsync(uri, method, data);
         }
 
