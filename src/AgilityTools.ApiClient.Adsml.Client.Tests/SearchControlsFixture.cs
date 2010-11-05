@@ -60,8 +60,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             var builder = new SearchControlBuilder();
 
-            builder.RequestFilters(Filter.ExcludeBin(),
-                                   Filter.ExcludeDocument())
+            builder.RequestFilters(RequestFilter.ExcludeBin(),
+                                   RequestFilter.ExcludeDocument())
                 .ReturnedAttributes(AttributeToReturn.WithDefinitionId(20));
 
             var controls = builder.Build();

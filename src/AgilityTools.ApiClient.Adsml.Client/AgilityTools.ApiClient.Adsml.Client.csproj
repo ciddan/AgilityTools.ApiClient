@@ -45,6 +45,8 @@
     <Compile Include="Components\AttributeSearchControl.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
     <Compile Include="Components\Filters.cs" />
+    <Compile Include="Components\IControlComponent.cs" />
+    <Compile Include="Components\ReferenceControlComponent.cs" />
     <Compile Include="Components\SearchControl.cs" />
     <Compile Include="Components\SearchControlBuilder.cs" />
     <Compile Include="FluentSyntax\SearchControlSyntax.cs" />

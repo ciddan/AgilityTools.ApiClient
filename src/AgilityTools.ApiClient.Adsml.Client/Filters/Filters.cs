@@ -2,11 +2,6 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public interface ISearchRequestFilter
-    {
-        XAttribute ToApiXml();
-    }
-
     public static class Filter
     {
         public static ExcludeBinFilter ExcludeBin() {

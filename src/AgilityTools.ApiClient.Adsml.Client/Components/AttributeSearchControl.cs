@@ -11,7 +11,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
         private readonly IEnumerable<IAdsmlSerializable> _contentNodes;
 
-        public AttributeSearchControl(params AttributeToReturn[] attributesToReturn) {
+        internal AttributeSearchControl(params AttributeToReturn[] attributesToReturn) {
             if (attributesToReturn == null)
                 throw new ArgumentNullException("attributesToReturn");
 
