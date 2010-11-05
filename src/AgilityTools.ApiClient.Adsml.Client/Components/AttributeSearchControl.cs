@@ -5,13 +5,13 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public class AttributeSearchControls : ISearchControlComponent
+    public class AttributeSearchControl : ISearchControlComponent
     {
         public IList<XAttribute> OuterNodeAttributes { get; set; }
 
         private readonly IEnumerable<IAdsmlSerializable> _contentNodes;
 
-        public AttributeSearchControls(params AttributeToReturn[] attributesToReturn) {
+        public AttributeSearchControl(params AttributeToReturn[] attributesToReturn) {
             if (attributesToReturn == null)
                 throw new ArgumentNullException("attributesToReturn");
 

@@ -23,7 +23,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public void ReturnedAttributes(params AttributeToReturn[] attributesToReturn)
         {
             if (attributesToReturn != null) {
-                this.ControlComponents.Add(new AttributeSearchControls(attributesToReturn));
+                this.ControlComponents.Add(new AttributeSearchControl(attributesToReturn));
             }
         }
 

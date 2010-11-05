@@ -11,7 +11,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Instantiate_New_AttributeSearchControls() {
             //Act
-            var asc = new AttributeSearchControls();
+            var asc = new AttributeSearchControl();
 
             //Assert
             Assert.That(asc, Is.Not.Null);
@@ -20,7 +20,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Ctor_Accepts_AttributeToReturn_Param_Array() {
             //Act
-            var sc = new AttributeSearchControls(new AttributeToReturn());
+            var sc = new AttributeSearchControl(new AttributeToReturn());
 
             //Assert
             Assert.That(sc, Is.Not.Null);
@@ -30,14 +30,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [ExpectedException(typeof(ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: attributesToReturn")]
         public void Ctor_Throws_ArgumentNullException_If_ParamArray_Is_null() {
             //Act
-            new AttributeSearchControls(null);
+            new AttributeSearchControl(null);
         }
 
         [Test]
         public void Can_Generate_Api_Xml() {
             //Arrange
             var expected = new XElement("AttributesToReturn", new XElement("Attribute", new XAttribute("id", "20")));
-            var asc = new AttributeSearchControls(new AttributeToReturn {DefinitionId = 20});
+            var asc = new AttributeSearchControl(new AttributeToReturn {DefinitionId = 20});
 
             //Act
             var actual = asc.ToApiXml();
@@ -53,7 +53,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var expected = new XElement("AttributesToReturn", new XAttribute("foo", "bar"),
                                         new XElement("Attribute", new XAttribute("id", "20")));
             
-            var asc = new AttributeSearchControls(new AttributeToReturn { DefinitionId = 20 })
+            var asc = new AttributeSearchControl(new AttributeToReturn { DefinitionId = 20 })
                       {
                           OuterNodeAttributes = new List<XAttribute> {new XAttribute("foo", "bar")}
                       };

@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="ApiClient.cs" />
     <Compile Include="ApiSerializationValidationException.cs" />
-    <Compile Include="Components\AttributeSearchControls.cs" />
+    <Compile Include="Components\AttributeSearchControl.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
     <Compile Include="Components\Filters.cs" />
     <Compile Include="Components\SearchControl.cs" />
