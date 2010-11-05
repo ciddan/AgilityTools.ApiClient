@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using NUnit.Framework;
 
 namespace AgilityTools.ApiClient.Adsml.Communication.Tests
@@ -20,10 +22,33 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            var result = client.UploadData("http://penny:9080/Agility/Directory", "POST", new byte[] {});
+            var result = client.UploadData("http://agilitytest:9080/Agility/Directory", "POST", new byte[] {});
 
             //Assert
             Assert.That(result, Is.Not.Null);
+        }
+
+        [Test]
+        public void Can_Upload_Data_Async_With_ApiWebClient() {
+            //Arrange
+            var manualEvent = new ManualResetEvent(false);
+
+            IApiWebClient client = new ApiWebClient();
+
+            bool callbackCalled = false;
+
+            Action<byte[]> callback = data => {
+                                          callbackCalled = true;
+                                          manualEvent.Set();
+                                      };
+
+            //Act
+            client.UploadDataAsync("http://penny:9080/Agility/Directory", "POST", new byte[] { }, callback);
+
+            manualEvent.WaitOne();
+
+            //Assert
+            Assert.That(callbackCalled, Is.True);
         }
 
         [Test]
@@ -52,7 +77,7 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            client.UploadData("http://penny:9080/Agility/Directory", string.Empty, new byte[] {});
+            client.UploadData("http://agilitytest:9080/Agility/Directory", string.Empty, new byte[] {});
         }
 
         [Test]
@@ -62,7 +87,7 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            client.UploadDataAsync("http://penny:9080/Agility/Directory", "POST", null, d => { });
+            client.UploadDataAsync("http://agilitytest:9080/Agility/Directory", "POST", null, d => { });
         }
 
         [Test]
@@ -84,7 +109,7 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            client.UploadDataAsync("http://penny:9080/Agility/Directory", string.Empty, new byte[] { }, d => { });
+            client.UploadDataAsync("http://agilitytest:9080/Agility/Directory", string.Empty, new byte[] { }, d => { });
         }
 
         [Test]
@@ -95,7 +120,7 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            client.UploadDataAsync("http://penny:9080/Agility/Directory", "POST", null, d => { });
+            client.UploadDataAsync("http://agilitytest:9080/Agility/Directory", "POST", null, d => { });
         }
 
         [Test]
@@ -106,7 +131,7 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            client.UploadDataAsync("http://penny:9080/Agility/Directory", "POST", new byte[] { }, null);
+            client.UploadDataAsync("http://agilitytest:9080/Agility/Directory", "POST", new byte[] { }, null);
         }
     }
 }
