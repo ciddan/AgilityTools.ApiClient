@@ -50,7 +50,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var attr = new StructureAttribute{DefinitionId = 46, Name = "bar", Values = new List<StructureValue>{value}};
             
             //Act
-            var actual = attr.ToApiXml();
+            var actual = attr.ToAdsml();
 
             //Assert
             Assert.That(actual, Is.Not.Null);
@@ -72,7 +72,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var attr = new StructureAttribute { DefinitionId = 46, Values = new List<StructureValue> { value } };
 
             //Act
-            var actual = attr.ToApiXml();
+            var actual = attr.ToAdsml();
 
             //Assert
             Assert.That(actual, Is.Not.Null);
@@ -87,7 +87,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var attr = new StructureAttribute { Values = new List<StructureValue> { value } };
 
             //Act
-            attr.ToApiXml();
+            attr.ToAdsml();
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var attr = new StructureAttribute { DefinitionId = 10 };
 
             //Act
-            attr.ToApiXml();
+            attr.ToAdsml();
         }
     }
 }

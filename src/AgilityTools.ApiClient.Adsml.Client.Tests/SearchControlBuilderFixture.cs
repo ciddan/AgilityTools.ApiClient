@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace AgilityTools.ApiClient.Adsml.Client.Tests
 {
     [TestFixture]
-    public class SearchControlsFixture
+    public class SearchControlBuilderFixture
     {
         [Test]
         public void Can_Instantiate_New_SearchControls() {
@@ -35,12 +35,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                         new XElement("Attribute", new XAttribute("id", "20"))));
 
             var builder = new SearchControlBuilder();
-            builder.ReturnedAttributes(AttributeToReturn.WithDefinitionId(20));
+            builder.SpecifyReturnedAttributes(AttributeToReturn.WithDefinitionId(20));
 
             var controls = builder.Build();
 
             //Act
-            var actual = controls.ToApiXml();
+            var actual = controls.ToAdsml();
 
             //Assert
             Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
@@ -60,14 +60,44 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             var builder = new SearchControlBuilder();
 
-            builder.RequestFilters(Filter.ExcludeBin(),
+            builder.AddRequestFilters(Filter.ExcludeBin(),
                                    Filter.ExcludeDocument())
-                .ReturnedAttributes(AttributeToReturn.WithDefinitionId(20));
+                .SpecifyReturnedAttributes(AttributeToReturn.WithDefinitionId(20));
 
             var controls = builder.Build();
 
             //Act
-            var actual = controls.ToApiXml();
+            var actual = controls.ToAdsml();
+
+            //Assert
+            Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+
+            Console.WriteLine(actual.ToString());
+        }
+
+        [Test]
+        public void Can_Generate_Api_Xml_With_ReferenceControls()
+        {
+            //Arrange
+            var expected =
+                new XElement("SearchControls",
+                 new XElement("ReferenceControls",
+                    new XAttribute("channelId", "3"),
+                    new XAttribute("resolveAttributes", "true"),
+                    new XAttribute("resolveSpecialCharacters", "true"),
+                    new XAttribute("valueOnly", "true")));
+
+            var builder = new SearchControlBuilder();
+
+            builder.ConfigureReferenceHandling(ReferenceOptions.UseChannel(3),
+                                               ReferenceOptions.ResolveAttributes(),
+                                               ReferenceOptions.ResolveSpecialCharacters(),
+                                               ReferenceOptions.ReturnValuesOnly());
+
+            var controls = builder.Build();
+
+            //Act
+            var actual = controls.ToAdsml();
 
             //Assert
             Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));

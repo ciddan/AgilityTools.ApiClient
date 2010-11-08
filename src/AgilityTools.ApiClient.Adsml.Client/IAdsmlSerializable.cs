@@ -3,7 +3,7 @@ using System.Xml.Linq;
 namespace AgilityTools.ApiClient.Adsml.Client
 {
     public interface IAdsmlSerializable {
-        XElement ToApiXml();
+        XElement ToAdsml();
         void Validate();
     }
 }

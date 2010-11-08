@@ -94,7 +94,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var aql = new AqlSearchRequest(10, 10, "foo");
 
             //Act
-            var actual = aql.ToApiXml();
+            var actual = aql.ToAdsml();
 
             //Assert
             Assert.That(actual, Is.Not.Null);
@@ -120,7 +120,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var aql = new AqlSearchRequest(10, "bar", "foo");
 
             //Act
-            var actual = aql.ToApiXml();
+            var actual = aql.ToAdsml();
 
             //Assert
             Assert.That(actual, Is.Not.Null);
@@ -146,7 +146,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var aql = new AqlSearchRequest(10, 10, "foo", null, "/foo/bar");
 
             //Act
-            var actual = aql.ToApiXml();
+            var actual = aql.ToAdsml();
 
             //Assert
             Assert.That(actual, Is.Not.Null);
@@ -173,7 +173,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var aql = new AqlSearchRequest(10, 10, "foo", null, "/foo/bar") { OmitStructureAttributes = true };
 
             //Act
-            var actual = aql.ToApiXml();
+            var actual = aql.ToAdsml();
 
             //Assert
             Assert.That(actual, Is.Not.Null);
@@ -201,14 +201,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             );
 
             var builder = new SearchControlBuilder();
-            builder.RequestFilters(Filter.ExcludeBin(), Filter.ExcludeDocument());
+            builder.AddRequestFilters(Filter.ExcludeBin(), Filter.ExcludeDocument());
 
             var searchControls = builder.Build();
 
             var aql = new AqlSearchRequest(10, 10, "foo", searchControls, "/foo/bar") { OmitStructureAttributes = true };
 
             //Act
-            var actual = aql.ToApiXml();
+            var actual = aql.ToAdsml();
 
             Console.WriteLine(actual.ToString());
 
@@ -240,16 +240,16 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             var builder = new SearchControlBuilder();
 
-            builder.RequestFilters(Filter.ExcludeBin(), 
+            builder.AddRequestFilters(Filter.ExcludeBin(), 
                                    Filter.ExcludeDocument())
-                   .ReturnedAttributes(AttributeToReturn.WithDefinitionId(10));
+                   .SpecifyReturnedAttributes(AttributeToReturn.WithDefinitionId(10));
 
             var searchControls = builder.Build();
 
             var aql = new AqlSearchRequest(10, 10, "foo", searchControls, "/foo/bar") { OmitStructureAttributes = true };
 
             //Act
-            var actual = aql.ToApiXml();
+            var actual = aql.ToAdsml();
 
             Console.WriteLine(actual.ToString());
 

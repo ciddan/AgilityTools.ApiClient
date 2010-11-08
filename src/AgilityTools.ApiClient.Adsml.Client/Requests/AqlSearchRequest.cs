@@ -40,7 +40,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
             _matchWithDefinitionId = false;
         }
 
-        public XElement ToApiXml() {
+        public XElement ToAdsml() {
             this.Validate();
 
             XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
@@ -68,7 +68,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                                                 this.ObjectTypeId, this.AttributeName, this.SearchTerm)))));
 
             if (this.SearchControl != null)
-                request.Descendants("SearchRequest").Single().AddFirst(this.SearchControl.ToApiXml());
+                request.Descendants("SearchRequest").Single().AddFirst(this.SearchControl.ToAdsml());
 
             if (OmitStructureAttributes)
                 request.Descendants("SearchRequest").Single().Add(new XAttribute("returnNoAttributes", "true"));

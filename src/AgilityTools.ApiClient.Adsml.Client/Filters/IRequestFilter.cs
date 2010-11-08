@@ -4,6 +4,6 @@ namespace AgilityTools.ApiClient.Adsml.Client
 {
     public interface IRequestFilter
     {
-        XAttribute ToApiXml();
+        XAttribute ToAdsml();
     }
 }

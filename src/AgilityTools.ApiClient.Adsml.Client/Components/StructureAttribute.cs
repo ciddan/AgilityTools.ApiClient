@@ -17,17 +17,17 @@ namespace AgilityTools.ApiClient.Adsml.Client
 		    this.Values = values;
 	    }
 
-	    public XElement ToApiXml() {
+	    public XElement ToAdsml() {
 		    this.Validate();
 
 	        return !string.IsNullOrEmpty(this.Name)
 	                   ? new XElement("StructureAttribute",
 	                                  new XAttribute("id", this.DefinitionId),
 	                                  new XAttribute("name", this.Name),
-	                                  this.Values.Select(val => val.ToApiXml()).ToList())
+	                                  this.Values.Select(val => val.ToAdsml()).ToList())
 	                   : new XElement("StructureAttribute",
 	                                  new XAttribute("id", this.DefinitionId),
-	                                  this.Values.Select(val => val.ToApiXml()).ToList());
+	                                  this.Values.Select(val => val.ToAdsml()).ToList());
 	    }
 
 	    public void Validate() {

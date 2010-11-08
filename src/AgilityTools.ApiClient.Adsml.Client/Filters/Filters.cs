@@ -37,7 +37,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             _returnAllAttributes = returnAllAttributes;
         }
 
-        public XAttribute ToApiXml() {
+        public XAttribute ToAdsml() {
             return new XAttribute("returnAllAttributes", _returnAllAttributes);
         }
     }
@@ -50,7 +50,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             _allowPaging = allowPaging;
         }
 
-        public XAttribute ToApiXml() {
+        public XAttribute ToAdsml() {
             return new XAttribute("allowPaging", _allowPaging);
         }
     }
@@ -63,7 +63,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             _pageSize = pageSize;
         }
 
-        public XAttribute ToApiXml() {
+        public XAttribute ToAdsml() {
             this.Validate();
             return new XAttribute("pageSize", _pageSize);
         }
@@ -82,7 +82,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             _countLimit = countLimit;
         }
 
-        public XAttribute ToApiXml() {
+        public XAttribute ToAdsml() {
             this.Validate();
             return new XAttribute("countLimit", _countLimit);
         }
@@ -101,7 +101,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             _excludeBin = excludeBin;
         }
 
-        public XAttribute ToApiXml() {
+        public XAttribute ToAdsml() {
             return new XAttribute("excludeBin", _excludeBin);
         }
     }
@@ -114,7 +114,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             _excludeDocument = excludeDocument;
         }
 
-        public XAttribute ToApiXml() {
+        public XAttribute ToAdsml() {
             return new XAttribute("excludeDocument", _excludeDocument);
         }
     }

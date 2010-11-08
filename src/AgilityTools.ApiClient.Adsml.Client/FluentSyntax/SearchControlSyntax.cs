@@ -11,13 +11,13 @@ namespace AgilityTools.ApiClient.Adsml.Client
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ISearchRequestFilters : IFluentInterface
     {
-        IReturnedAttributeConfigureReferences RequestFilters(params ISearchRequestFilter[] filters);
+        IReturnedAttributeConfigureReferences AddRequestFilters(params ISearchRequestFilter[] filters);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IReturnedAttributes : IFluentInterface
     {
-        IConfigureReferences ReturnedAttributes(params AttributeToReturn[] attributesToReturn);
+        IConfigureReferences SpecifyReturnedAttributes(params AttributeToReturn[] attributesToReturn);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]

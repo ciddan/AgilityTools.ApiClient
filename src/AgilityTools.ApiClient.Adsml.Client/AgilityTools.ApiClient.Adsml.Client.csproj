@@ -46,13 +46,13 @@
     <Compile Include="Components\AttributeToReturn.cs" />
     <Compile Include="Components\IAttributeControl.cs" />
     <Compile Include="Components\ReferenceControl.cs" />
+    <Compile Include="Components\ReferenceOptions.cs" />
     <Compile Include="Filters\Filters.cs" />
     <Compile Include="Components\IControlComponent.cs" />
     <Compile Include="Filters\ILookupRequestFilter.cs" />
-    <Compile Include="Filters\IReferenceOptions.cs" />
+    <Compile Include="Components\IReferenceOptions.cs" />
     <Compile Include="Filters\IRequestFilter.cs" />
     <Compile Include="Filters\ISearchRequestFilter.cs" />
-    <Compile Include="Components\ReferenceControlComponent.cs" />
     <Compile Include="Components\SearchControl.cs" />
     <Compile Include="Components\SearchControlBuilder.cs" />
     <Compile Include="FluentSyntax\SearchControlSyntax.cs" />

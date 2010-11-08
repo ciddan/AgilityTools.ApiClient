@@ -78,7 +78,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var request = new CreateRequest("fooObjectTypeName", "fooPath", attribute);
             
             //Act
-            var actual = request.ToApiXml();
+            var actual = request.ToAdsml();
 
             //Assert
             Assert.That(actual, Is.Not.Null);

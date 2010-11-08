@@ -27,7 +27,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
             this.AttributesToSet = new List<StructureAttribute>(attributesToSet);
         }
 
-        public XElement ToApiXml() {
+        public XElement ToAdsml() {
             this.Validate();
 
             XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
@@ -38,7 +38,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                                              new XAttribute("name", this.CreationPath),
                                              new XAttribute("type", this.ObjectTypeName),
                                              new XElement("AttributesToSet",
-                                                          this.AttributesToSet.Select(attrs => attrs.ToApiXml()))
+                                                          this.AttributesToSet.Select(attrs => attrs.ToAdsml()))
                                     ));
         }
 

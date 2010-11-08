@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 using AgilityTools.ApiClient.Adsml.Communication;

@@ -22,7 +22,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var atr = AttributeToReturn.WithDefinitionId(10);
 
             //Act
-            var acutal = atr.ToApiXml();
+            var acutal = atr.ToAdsml();
 
             //Assert
             Assert.That(acutal.ToString(), Is.EqualTo(expected.ToString()));
@@ -36,7 +36,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var atr = AttributeToReturn.WithAttributeName("foo");
 
             //Act
-            var acutal = atr.ToApiXml();
+            var acutal = atr.ToAdsml();
 
             //Assert
             Assert.That(acutal.ToString(), Is.EqualTo(expected.ToString()));
@@ -50,7 +50,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var atr = AttributeToReturn.WithNameAndId("foo", 10);
 
             //Act
-            var acutal = atr.ToApiXml();
+            var acutal = atr.ToAdsml();
 
             //Assert
             Assert.That(acutal.ToString(), Is.EqualTo(expected.ToString()));

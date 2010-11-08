@@ -9,7 +9,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
         internal AttributeToReturn() {}
 
-        public XElement ToApiXml() {
+        public XElement ToAdsml() {
             this.Validate();
 
             var attributeElement = new XElement("Attribute");

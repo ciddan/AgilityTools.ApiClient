@@ -15,7 +15,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var actual = Filter.ExcludeBin();
 
             //Assert
-            Assert.That(actual.ToApiXml().ToString(), Is.EqualTo(expected.ToString()));
+            Assert.That(actual.ToAdsml().ToString(), Is.EqualTo(expected.ToString()));
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var actual = Filter.ExcludeDocument();
 
             //Assert
-            Assert.That(actual.ToApiXml().ToString(), Is.EqualTo(expected.ToString()));
+            Assert.That(actual.ToAdsml().ToString(), Is.EqualTo(expected.ToString()));
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var actual = Filter.OmitStructureAttributes();
 
             //Assert
-            Assert.That(actual.ToApiXml().ToString(), Is.EqualTo(expected.ToString()));
+            Assert.That(actual.ToAdsml().ToString(), Is.EqualTo(expected.ToString()));
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var actual = Filter.AllowPaging();
 
             //Assert
-            Assert.That(actual.ToApiXml().ToString(), Is.EqualTo(expected.ToString()));
+            Assert.That(actual.ToAdsml().ToString(), Is.EqualTo(expected.ToString()));
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var actual = Filter.PageSize(1);
 
             //Assert
-            Assert.That(actual.ToApiXml().ToString(), Is.EqualTo(expected.ToString()));
+            Assert.That(actual.ToAdsml().ToString(), Is.EqualTo(expected.ToString()));
         }
 
         [Test]
@@ -75,35 +75,35 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var actual = Filter.CountLimit(1);
 
             //Assert
-            Assert.That(actual.ToApiXml().ToString(), Is.EqualTo(expected.ToString()));
+            Assert.That(actual.ToAdsml().ToString(), Is.EqualTo(expected.ToString()));
         }
 
         [Test]
         [ExpectedException(typeof (ApiSerializationValidationException))]
         public void PageSizeFilter_Throws_When_PageSize_Is_0() {
             //Act
-            Filter.PageSize(0).ToApiXml();
+            Filter.PageSize(0).ToAdsml();
         }
 
         [Test]
         [ExpectedException(typeof (ApiSerializationValidationException))]
         public void PageSizeFilter_Throws_When_PageSize_Is_Negative() {
             //Act
-            Filter.PageSize(-1).ToApiXml();
+            Filter.PageSize(-1).ToAdsml();
         }
 
         [Test]
         [ExpectedException(typeof (ApiSerializationValidationException))]
         public void CountLimitFilter_Throws_When_CountLimit_Is_0() {
             //Act
-            Filter.CountLimit(0).ToApiXml();
+            Filter.CountLimit(0).ToAdsml();
         }
 
         [Test]
         [ExpectedException(typeof (ApiSerializationValidationException))]
         public void CountLimitFilter_Throws_When_CountLimit_Is_Negative() {
             //Act
-            Filter.CountLimit(-1).ToApiXml();
+            Filter.CountLimit(-1).ToAdsml();
         }
     }
 }

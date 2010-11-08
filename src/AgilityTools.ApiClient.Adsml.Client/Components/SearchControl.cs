@@ -16,7 +16,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             _components = components;
         }
 
-        public XElement ToApiXml() {
+        public XElement ToAdsml() {
             request = new XElement("SearchControls");
             
             this.ApplyFilters();
@@ -32,7 +32,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
         private void ApplyFilters() {
             if (this._requestFilters != null) {
-                request.Add(this._requestFilters.Select(filter => filter.ToApiXml()));
+                request.Add(this._requestFilters.Select(filter => filter.ToAdsml()));
             }
         }
 

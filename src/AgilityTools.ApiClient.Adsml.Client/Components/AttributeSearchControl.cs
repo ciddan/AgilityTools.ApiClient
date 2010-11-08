@@ -22,9 +22,9 @@ namespace AgilityTools.ApiClient.Adsml.Client
             return this.OuterNodeAttributes != null
                        ? new XElement("AttributesToReturn",
                                       this.OuterNodeAttributes.Select(attrs => attrs),
-                                      _contentNodes.Select(cnode => cnode.ToApiXml()))
+                                      _contentNodes.Select(cnode => cnode.ToAdsml()))
                        : new XElement("AttributesToReturn",
-                                      _contentNodes.Select(cnode => cnode.ToApiXml()));
+                                      _contentNodes.Select(cnode => cnode.ToAdsml()));
 
         }
     }
