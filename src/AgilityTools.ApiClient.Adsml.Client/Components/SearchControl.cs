@@ -23,7 +23,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
             if (this._components != null) {
                 foreach (var searchControlComponent in this._components) {
-                    request.Add(searchControlComponent.ToApiXml());
+                    request.Add(searchControlComponent.ToAdsml());
                 }
             }
 

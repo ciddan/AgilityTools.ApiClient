@@ -236,7 +236,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             builder.AddRequestFilters(Filter.ExcludeBin(), 
                                    Filter.ExcludeDocument())
-                   .SpecifyReturnedAttributes(AttributeToReturn.WithDefinitionId(10));
+                   .ReturnAttributes(AttributeToReturn.WithDefinitionId(10));
 
             var searchControls = builder.Build();
 

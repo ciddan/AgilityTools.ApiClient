@@ -18,7 +18,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             _referenceOptions = new List<IReferenceOptions>(referenceOptions);
         }
 
-        public XElement ToApiXml() {
+        public XElement ToAdsml() {
             return this.OuterNodeAttributes != null
                        ? new XElement("ReferenceControls",
                                       this.OuterNodeAttributes.Select(attrs => attrs),

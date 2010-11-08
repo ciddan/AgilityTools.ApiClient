@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace AgilityTools.ApiClient.Adsml.Client
@@ -11,7 +12,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             ControlComponents = new List<ISearchControlComponent>();
         }
 
-        public IReturnedAttributeConfigureReferences AddRequestFilters(params ISearchRequestFilter[] filters) {
+        public IReturnedAttributesReturnedLanguagesConfigureReferences AddRequestFilters(params ISearchRequestFilter[] filters) {
 		    if (filters != null) {
 		        this.RequestFilterList =
 		            new List<ISearchRequestFilter>(filters);
@@ -20,10 +21,18 @@ namespace AgilityTools.ApiClient.Adsml.Client
             return this;
         }
 
-        public IConfigureReferences SpecifyReturnedAttributes(params AttributeToReturn[] attributesToReturn)
+        public IReturnedLanguagesConfigureReferences ReturnAttributes(params IAttributeControl[] attributesToReturn)
         {
             if (attributesToReturn != null) {
-                this.ControlComponents.Add(new AttributeSearchControl(attributesToReturn));
+                this.ControlComponents.Add(new AttributeControl(attributesToReturn));
+            }
+
+            return this;
+        }
+
+        public IConfigureReferences ReturnLanguages(params IReturnedLanguageControl[] languagesToReturn) {
+            if (languagesToReturn != null) {
+                this.ControlComponents.Add(new LanguageControl(languagesToReturn));
             }
 
             return this;

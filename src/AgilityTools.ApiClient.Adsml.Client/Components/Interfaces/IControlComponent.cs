@@ -6,6 +6,6 @@ namespace AgilityTools.ApiClient.Adsml.Client
     public interface IControlComponent
     {
         IList<XAttribute> OuterNodeAttributes { get; set; }
-        XElement ToApiXml();
+        XElement ToAdsml();
     }
 }

@@ -35,7 +35,29 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                         new XElement("Attribute", new XAttribute("id", "20"))));
 
             var builder = new SearchControlBuilder();
-            builder.SpecifyReturnedAttributes(AttributeToReturn.WithDefinitionId(20));
+            builder.ReturnAttributes(AttributeToReturn.WithDefinitionId(20));
+
+            var controls = builder.Build();
+
+            //Act
+            var actual = controls.ToAdsml();
+
+            //Assert
+            Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+
+            Console.WriteLine(actual.ToString());
+        }
+
+        [Test]
+        public void Can_Generate_Api_Xml_With_LanguagesToReturn() {
+            //Arrange
+            var expected =
+                new XElement("SearchControls",
+                    new XElement("LanguagesToReturn",
+                        new XElement("Language", new XAttribute("id", "10"))));
+
+            var builder = new SearchControlBuilder();
+            builder.ReturnLanguages(LanguageToReturn.WithLanguageId(10));
 
             var controls = builder.Build();
 
@@ -62,7 +84,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             builder.AddRequestFilters(Filter.ExcludeBin(),
                                    Filter.ExcludeDocument())
-                .SpecifyReturnedAttributes(AttributeToReturn.WithDefinitionId(20));
+                .ReturnAttributes(AttributeToReturn.WithDefinitionId(20));
 
             var controls = builder.Build();
 
@@ -76,8 +98,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        public void Can_Generate_Api_Xml_With_ReferenceControls()
-        {
+        public void Can_Generate_Api_Xml_With_ReferenceControls() {
             //Arrange
             var expected =
                 new XElement("SearchControls",
@@ -103,6 +124,62 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
 
             Console.WriteLine(actual.ToString());
+        }
+
+        [Test]
+        public void Can_Generate_Api_Xml_With_All_Controls() {
+            //Arrange
+
+            var expected =
+                new XElement("SearchControls",
+                             new XAttribute("excludeBin", "true"),
+                             new XAttribute("excludeDocument", "true"),
+                             new XAttribute("returnAllAttributes", "false"),
+                             new XAttribute("allowPaging", "true"),
+                             new XAttribute("pageSize", "2"),
+                             new XAttribute("countLimit", "5"),
+                             new XElement("AttributesToReturn",
+                                          new XElement("Attribute", new XAttribute("id", "215")),
+                                          new XElement("Attribute", new XAttribute("id", "390"))),
+                             new XElement("LanguagesToReturn",
+                                          new XElement("Language", new XAttribute("id", "10")),
+                                          new XElement("Language", new XAttribute("id", "11"))),
+                             new XElement("ReferenceControls",
+                                          new XAttribute("channelId", "3"),
+                                          new XAttribute("resolveAttributes", "true"),
+                                          new XAttribute("resolveSpecialCharacters", "true"),
+                                          new XAttribute("valueOnly", "true"))).ToString();
+
+            var builder = new SearchControlBuilder();
+
+            builder
+                .AddRequestFilters(
+                    Filter.ExcludeBin(),
+                    Filter.ExcludeDocument(),
+                    Filter.OmitStructureAttributes(),
+                    Filter.AllowPaging(),
+                    Filter.PageSize(2),
+                    Filter.CountLimit(5))
+                .ReturnAttributes(
+                    AttributeToReturn.WithDefinitionId(215),
+                    AttributeToReturn.WithDefinitionId(390))
+                .ReturnLanguages(
+                    LanguageToReturn.WithLanguageId(10),
+                    LanguageToReturn.WithLanguageId(11))
+                .ConfigureReferenceHandling(
+                    ReferenceOptions.UseChannel(3),
+                    ReferenceOptions.ResolveAttributes(),
+                    ReferenceOptions.ResolveSpecialCharacters(),
+                    ReferenceOptions.ReturnValuesOnly());
+
+            var searchControl = builder.Build();
+            //Act
+            var actual = searchControl.ToAdsml().ToString();
+
+            //Assert
+            Assert.That(actual, Is.EqualTo(expected));
+
+            Console.WriteLine(actual);
         }
     }
 }

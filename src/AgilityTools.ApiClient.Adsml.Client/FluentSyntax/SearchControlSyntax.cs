@@ -3,21 +3,33 @@ using System.ComponentModel;
 namespace AgilityTools.ApiClient.Adsml.Client
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface ISearchControlBuilder : IFluentInterface, ISearchRequestFilters, IReturnedAttributeConfigureReferences { }
+    public interface ISearchControlBuilder : IFluentInterface, 
+                                             ISearchRequestFilters, 
+                                             IReturnedAttributesReturnedLanguagesConfigureReferences, 
+                                             IReturnedLanguagesConfigureReferences { }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface IReturnedAttributeConfigureReferences : IFluentInterface, IReturnedAttributes, IConfigureReferences { }
+    public interface IReturnedAttributesReturnedLanguagesConfigureReferences : IFluentInterface, IReturnedAttributes, IReturnedLanguages, IConfigureReferences { }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface IReturnedLanguagesConfigureReferences : IReturnedLanguages, IConfigureReferences { }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ISearchRequestFilters : IFluentInterface
     {
-        IReturnedAttributeConfigureReferences AddRequestFilters(params ISearchRequestFilter[] filters);
+        IReturnedAttributesReturnedLanguagesConfigureReferences AddRequestFilters(params ISearchRequestFilter[] filters);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IReturnedAttributes : IFluentInterface
     {
-        IConfigureReferences SpecifyReturnedAttributes(params AttributeToReturn[] attributesToReturn);
+        IReturnedLanguagesConfigureReferences ReturnAttributes(params IAttributeControl[] attributesToReturn);
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface IReturnedLanguages : IFluentInterface
+    {
+        IConfigureReferences ReturnLanguages(params IReturnedLanguageControl[] languagesToReturn);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
