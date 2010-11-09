@@ -6,7 +6,10 @@ namespace AgilityTools.ApiClient.Adsml.Client
     public interface ISearchControlBuilder : IFluentInterface, 
                                              ISearchRequestFilters, 
                                              IReturnedAttributesReturnedLanguagesConfigureReferences, 
-                                             IReturnedLanguagesConfigureReferences { }
+                                             IReturnedLanguagesConfigureReferences
+    {
+        SearchControl Build();
+    }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IReturnedAttributesReturnedLanguagesConfigureReferences : IFluentInterface, IReturnedAttributes, IReturnedLanguages, IConfigureReferences { }
