@@ -26,7 +26,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var value = new StructureValue {LanguageId = 10, Scope = "local", Value = "foo"};
 
             //Act
-            var actual = value.ToApiXml();
+            var actual = value.ToAdsml();
 
             //Assert
             Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
@@ -43,7 +43,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var value = new StructureValue { LanguageId = 10, Value = "foo" };
 
             //Act
-            var actual = value.ToApiXml();
+            var actual = value.ToAdsml();
 
             //Assert
             Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
@@ -56,7 +56,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var value = new StructureValue { Scope = "local", Value = "foo" };
 
             //Act
-            value.ToApiXml();
+            value.ToAdsml();
         }
     }
 }

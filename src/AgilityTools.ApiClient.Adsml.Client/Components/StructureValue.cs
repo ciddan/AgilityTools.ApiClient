@@ -8,7 +8,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public string Scope { get; set; }
         public string Value { get; set; }
 
-        public XElement ToApiXml() {
+        public XElement ToAdsml() {
             if (string.IsNullOrEmpty(this.Scope))
                 this.Scope = "global";
 

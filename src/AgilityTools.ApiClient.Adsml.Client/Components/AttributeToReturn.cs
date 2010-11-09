@@ -2,12 +2,14 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public class AttributeToReturn : IAdsmlSerializable
+    public class AttributeToReturn : IAttributeControl
     {
         public int DefinitionId { get; set; }
         public string Name { get; set; }
 
-        public XElement ToApiXml() {
+        internal AttributeToReturn() {}
+
+        public XElement ToAdsml() {
             this.Validate();
 
             var attributeElement = new XElement("Attribute");
@@ -19,6 +21,18 @@ namespace AgilityTools.ApiClient.Adsml.Client
                 attributeElement.Add(new XAttribute("id", this.DefinitionId.ToString()));
 
             return attributeElement;
+        }
+
+        public static AttributeToReturn WithDefinitionId(int definitionId) {
+            return new AttributeToReturn {DefinitionId = definitionId};
+        }
+
+        public static AttributeToReturn WithAttributeName(string name) {
+            return new AttributeToReturn {Name = name};
+        }
+
+        public static AttributeToReturn WithNameAndId(string name, int definitionId) {
+            return new AttributeToReturn { DefinitionId = definitionId, Name = name};
         }
 
         public void Validate() {

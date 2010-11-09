@@ -1,11 +1,11 @@
-using System.Collections.Generic;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public interface ISearchControlComponent
+    public interface IControlComponent
     {
         IList<XAttribute> OuterNodeAttributes { get; set; }
-        XElement ToApiXml();
+        XElement ToAdsml();
     }
 }

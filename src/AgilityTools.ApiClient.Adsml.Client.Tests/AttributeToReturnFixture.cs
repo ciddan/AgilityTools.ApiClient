@@ -19,10 +19,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         public void Can_Generate_Api_Xml_With_DefinitionId() {
             //Arrange
             var expected = new XElement("Attribute", new XAttribute("id", "10"));
-            var atr = new AttributeToReturn {DefinitionId = 10};
+            var atr = AttributeToReturn.WithDefinitionId(10);
 
             //Act
-            var acutal = atr.ToApiXml();
+            var acutal = atr.ToAdsml();
 
             //Assert
             Assert.That(acutal.ToString(), Is.EqualTo(expected.ToString()));
@@ -33,24 +33,24 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         {
             //Arrange
             var expected = new XElement("Attribute", new XAttribute("name", "foo"));
-            var atr = new AttributeToReturn { Name = "foo" };
+            var atr = AttributeToReturn.WithAttributeName("foo");
 
             //Act
-            var acutal = atr.ToApiXml();
+            var acutal = atr.ToAdsml();
 
             //Assert
             Assert.That(acutal.ToString(), Is.EqualTo(expected.ToString()));
         }
 
         [Test]
-        public void Can_Generate_Api_Xml_With__DefinitionId_And_Name()
+        public void Can_Generate_Api_Xml_With_DefinitionId_And_Name()
         {
             //Arrange
             var expected = new XElement("Attribute", new XAttribute("name", "foo"), new XAttribute("id", "10"));
-            var atr = new AttributeToReturn {Name = "foo", DefinitionId = 10};
+            var atr = AttributeToReturn.WithNameAndId("foo", 10);
 
             //Act
-            var acutal = atr.ToApiXml();
+            var acutal = atr.ToAdsml();
 
             //Assert
             Assert.That(acutal.ToString(), Is.EqualTo(expected.ToString()));
