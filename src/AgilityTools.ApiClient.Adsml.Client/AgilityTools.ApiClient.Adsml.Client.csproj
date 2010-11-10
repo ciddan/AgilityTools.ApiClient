@@ -59,7 +59,7 @@
     <Compile Include="Components\SearchControl.cs" />
     <Compile Include="Components\SearchControlBuilder.cs" />
     <Compile Include="FluentSyntax\AqlQueryBuilderSyntax.cs" />
-    <Compile Include="FluentSyntax\QueryTypes.cs" />
+    <Compile Include="Components\QueryTypes.cs" />
     <Compile Include="FluentSyntax\SearchControlSyntax.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\StringValueAttribute.cs" />
