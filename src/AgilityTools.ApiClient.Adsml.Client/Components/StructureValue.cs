@@ -2,7 +2,7 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public class StructureValue : IAdsmlSerializable
+    public class StructureValue : IAdsmlSerializable<XElement>
     {
         public int LanguageId { get; set; }
         public string Scope { get; set; }

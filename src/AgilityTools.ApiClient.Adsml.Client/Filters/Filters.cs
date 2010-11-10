@@ -40,6 +40,9 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public XAttribute ToAdsml() {
             return new XAttribute("returnAllAttributes", _returnAllAttributes);
         }
+
+        public void Validate() {
+        }
     }
 
     public class AllowPagingFilter : ISearchRequestFilter, ILookupRequestFilter
@@ -52,6 +55,9 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
         public XAttribute ToAdsml() {
             return new XAttribute("allowPaging", _allowPaging);
+        }
+
+        public void Validate() {
         }
     }
 
@@ -68,7 +74,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             return new XAttribute("pageSize", _pageSize);
         }
 
-        private void Validate() {
+        public void Validate() {
             if (this._pageSize <= 0)
                 throw new ApiSerializationValidationException("PageSize must be larger than 0.");
         }
@@ -87,7 +93,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             return new XAttribute("countLimit", _countLimit);
         }
 
-        private void Validate() {
+        public void Validate() {
             if (this._countLimit <= 0)
                 throw new ApiSerializationValidationException("countLimit must be larger than 0.");
         }
@@ -104,6 +110,9 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public XAttribute ToAdsml() {
             return new XAttribute("excludeBin", _excludeBin);
         }
+
+        public void Validate() {
+        }
     }
 
     public class ExcludeDocumentFilter : ISearchRequestFilter, ILookupRequestFilter
@@ -116,6 +125,9 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
         public XAttribute ToAdsml() {
             return new XAttribute("excludeDocument", _excludeDocument);
+        }
+
+        public void Validate() {
         }
     }
 }

@@ -2,8 +2,5 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public interface IRequestFilter
-    {
-        XAttribute ToAdsml();
-    }
+    public interface IRequestFilter : IAdsmlSerializable<XAttribute> { }
 }

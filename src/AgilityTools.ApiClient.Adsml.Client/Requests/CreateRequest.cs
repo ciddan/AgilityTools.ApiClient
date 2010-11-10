@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Requests
 {
-    public class CreateRequest : IAdsmlSerializable
+    public class CreateRequest : IAdsmlSerializable<XElement>
     {
         public string ObjectTypeName { get; private set; }
         public string CreationPath { get; private set; }

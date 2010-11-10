@@ -9,8 +9,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         private readonly IApiWebClient _webClient;
         private readonly string _adapiWsUrl;
 
-        public ApiClient(IApiWebClient webClient, string adapiWsUrl = "http://penny:9080/Agility/Directory")
-        {
+        public ApiClient(IApiWebClient webClient, string adapiWsUrl = "http://penny:9080/Agility/Directory") {
             if (webClient == null) 
                 throw new ArgumentNullException("webClient");
 
@@ -18,13 +17,11 @@ namespace AgilityTools.ApiClient.Adsml.Client
             _adapiWsUrl = adapiWsUrl;
         }
 
-        public XElement SendApiRequest<TRequest>(TRequest request) where TRequest : IAdsmlSerializable
-        {
+        public XElement SendApiRequest<TRequest>(TRequest request) where TRequest : IAdsmlSerializable<XElement> {
             return new XElement("result");
         }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             _webClient.Dispose();
         }
     }

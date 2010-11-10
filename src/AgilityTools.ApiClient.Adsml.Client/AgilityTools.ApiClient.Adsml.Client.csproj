@@ -50,6 +50,7 @@
     <Compile Include="Components\LanguageToReturn.cs" />
     <Compile Include="Components\ReferenceControl.cs" />
     <Compile Include="Components\ReferenceOptions.cs" />
+    <Compile Include="Components\SearchControlComponentBase.cs" />
     <Compile Include="Filters\Filters.cs" />
     <Compile Include="Components\Interfaces\IControlComponent.cs" />
     <Compile Include="Filters\ILookupRequestFilter.cs" />

@@ -5,7 +5,7 @@ using AgilityTools.ApiClient.Adsml.Client.Helpers;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Requests
 {
-    public class AqlSearchRequest : IAdsmlSerializable
+    public class AqlSearchRequest : IAdsmlSerializable<XElement>
     {
         internal string BasePath { get; private set; }     
         internal string QueryType { get; private set; }

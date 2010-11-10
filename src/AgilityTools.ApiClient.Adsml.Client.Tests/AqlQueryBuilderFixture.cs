@@ -104,13 +104,15 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                         .AddRequestFilters( 
                             Filter.ExcludeBin(),
                             Filter.ExcludeDocument(),
-                            Filter.CountLimit(1))
+                            Filter.CountLimit(1),
+                            Filter.OmitStructureAttributes())
                         .ReturnAttributes(AttributeToReturn.WithDefinitionId(215))
                         .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
                         .ConfigureReferenceHandling(
                             ReferenceOptions.ResolveAttributes(),
                             ReferenceOptions.ResolveSpecialCharacters(),
-                            ReferenceOptions.UseChannel(3));
+                            ReferenceOptions.UseChannel(3),
+                            ReferenceOptions.ReturnValuesOnly());
 
             //Assert
             Console.WriteLine(aqlBuilder.Build().ToAdsml());

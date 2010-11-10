@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public class SearchControl : IAdsmlSerializable
+    public class SearchControl : IAdsmlSerializable<XElement>
     {
         private readonly IList<ISearchRequestFilter> _requestFilters;
         private readonly IList<ISearchControlComponent> _components;
