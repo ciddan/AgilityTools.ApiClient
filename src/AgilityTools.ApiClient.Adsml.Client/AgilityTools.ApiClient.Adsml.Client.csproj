@@ -58,8 +58,12 @@
     <Compile Include="Filters\ISearchRequestFilter.cs" />
     <Compile Include="Components\SearchControl.cs" />
     <Compile Include="Components\SearchControlBuilder.cs" />
-    <Compile Include="FluentSyntax\AqlQuerySyntax.cs" />
+    <Compile Include="FluentSyntax\AqlQueryBuilderSyntax.cs" />
+    <Compile Include="FluentSyntax\QueryTypes.cs" />
     <Compile Include="FluentSyntax\SearchControlSyntax.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\StringValueAttribute.cs" />
+    <Compile Include="Helpers\IdNameReference.cs" />
     <Compile Include="IApiClient.cs" />
     <Compile Include="IAdsmlSerializable.cs" />
     <Compile Include="Components\Interfaces\ISearchControlComponent.cs" />

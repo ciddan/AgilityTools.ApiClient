@@ -48,14 +48,4 @@ namespace AgilityTools.ApiClient.Adsml.Client
     {
         ISearchControlBuilder ConfigureSearchControls();
     }
-
-    public enum QueryTypes
-    {
-        Above,
-        Below,
-        Child,
-        Parent,
-        LinkTo,
-        LinkFrom
-    }
 }
