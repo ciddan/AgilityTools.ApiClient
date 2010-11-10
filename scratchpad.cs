@@ -42,4 +42,4 @@ builder.ConfigureQuery()
 		   		RefOptions.ResolveSpecialCharacters()
 		   		RefOptions.ReturnValueOnly());
 
-var result = apiClient.SendQuery(builder.BuildQuery());
+var query = build.Build();
