@@ -15,15 +15,22 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
 
         public bool OmitStructureAttributes { get; set; }
 
+        private string _aqlFind;
+
         internal AqlSearchRequest(string basePath, QueryTypes queryType, IdNameReference typeToFind, string queryString, SearchControl searchControl) {
             this.BasePath = basePath;
             this.QueryType = queryType.GetStringValue();
-            this.ObjectTypeToFind = typeToFind.ToString();
             this.QueryString = queryString;
             this.SearchControl = searchControl;
+
+            if (typeToFind != null) {
+                this.ObjectTypeToFind = typeToFind.ToString();
+            }
         }
 
         public XElement ToAdsml() {
+            _aqlFind = BuildAqlFind();
+            
             this.Validate();
 
             XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
@@ -37,7 +44,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                             new XElement("FilterString",
                                 string.Format(
                                     "{0}WHERE ({1})",
-                                    buildAqlFind(), this.QueryString)))));
+                                    _aqlFind, this.QueryString)))));
 
             if (!string.IsNullOrEmpty(this.BasePath))
                 request.Descendants("SearchRequest").Single().Add(new XAttribute("base", this.BasePath));
@@ -56,12 +63,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                 throw new ApiSerializationValidationException("An AQL QueryString must be provided.");
             }
 
-            if (string.IsNullOrEmpty(this.BasePath) && !string.IsNullOrEmpty(this.QueryType)) {
+            if (string.IsNullOrEmpty(this.BasePath) && this.QueryType != string.Empty) {
                 throw new ApiSerializationValidationException("To use a specific QueryType the base path must be provided.");
             }
         }
 
-        private string buildAqlFind() {
+        private string BuildAqlFind() {
             var sb = new StringBuilder();
 
             sb.Append("FIND ");

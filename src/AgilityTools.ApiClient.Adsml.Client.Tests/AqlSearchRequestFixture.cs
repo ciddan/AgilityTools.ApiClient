@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Helpers;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
@@ -198,6 +199,46 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             //Assert
             Assert.That(actual, Is.Not.Null);
             Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+        }
+
+        [Test]
+        public void Should_Default_ObjectTypeToMatch_To_Any_If_Not_Specified() {
+            //Arrange
+            var builder = new AqlQueryBuilder();
+            builder.QueryString("foo");
+
+            //Act
+            var requestXml = builder.Build().ToAdsml();
+            var filterString = requestXml.Descendants("Filter").Single().Value;
+
+            //Assert
+            Assert.That(filterString.Contains("ANY"));
+        }
+
+        [Test]
+        [ExpectedException(typeof(ApiSerializationValidationException), ExpectedMessage = "An AQL QueryString must be provided.")]
+        public void Validate_Should_Throw_ASVE_If_No_QueryString_Is_Provided() {
+            //Arrange
+            var builder = new AqlQueryBuilder();
+            var request = builder.Build();
+
+            //Act
+            request.Validate();
+        }
+
+        [Test]
+        [ExpectedException(typeof(ApiSerializationValidationException), ExpectedMessage = "To use a specific QueryType the base path must be provided.")]
+        public void Validate_Should_Throw_ASVE_If_QueryType_But_No_BasePath_Is_Provided()
+        {
+            //Arrange
+            var builder = new AqlQueryBuilder();
+            builder.QueryType(QueryTypes.Below)
+                   .QueryString("foo");
+
+            var request = builder.Build();
+
+            //Act
+            request.Validate();
         }
     }
 }

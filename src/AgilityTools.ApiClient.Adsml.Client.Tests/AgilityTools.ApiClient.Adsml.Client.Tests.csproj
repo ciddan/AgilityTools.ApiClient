@@ -52,6 +52,7 @@
     <Compile Include="AttributeToReturnFixture.cs" />
     <Compile Include="CreateRequestFixture.cs" />
     <Compile Include="FilterFixture.cs" />
+    <Compile Include="LanguageControlFixture.cs" />
     <Compile Include="LanguageToReturnFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceOptionsFixture.cs" />

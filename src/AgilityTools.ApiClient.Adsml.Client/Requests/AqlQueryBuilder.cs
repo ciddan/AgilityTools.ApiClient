@@ -1,4 +1,3 @@
-using System;
 using AgilityTools.ApiClient.Adsml.Client.Helpers;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Requests
@@ -12,10 +11,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         internal string Query { get; private set; }
         internal SearchControlBuilder SearchControlBuilder { get; private set; }
 
-        public IQTypeIOTTFindIQStringICSControls BasePath(string path) {
-            if (path == null) 
-                throw new ArgumentNullException("path");
+        public AqlQueryBuilder() {
+            this.ObjectTypeId = -1;
+        }
 
+        public IQTypeIOTTFindIQStringICSControls BasePath(string path) {
             this.Path = path;
 
             return this;
@@ -52,10 +52,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         }
 
         public AqlSearchRequest Build() {
-            var objectTypeToFind =
-                !string.IsNullOrEmpty(ObjectTypeName)
-                    ? new IdNameReference(ObjectTypeName)
-                    : new IdNameReference(ObjectTypeId);
+            IdNameReference objectTypeToFind = null;
+
+            if (!string.IsNullOrEmpty(this.ObjectTypeName))
+                objectTypeToFind = new IdNameReference(this.ObjectTypeName);
+
+            if (this.ObjectTypeId != -1)
+                objectTypeToFind = new IdNameReference(this.ObjectTypeId);
 
             var searchControl =
                 this.SearchControlBuilder != null

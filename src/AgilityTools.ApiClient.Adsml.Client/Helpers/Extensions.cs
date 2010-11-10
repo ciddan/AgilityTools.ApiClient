@@ -17,9 +17,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Helpers
             var attribs = fieldInfo.GetCustomAttributes(
                 typeof(StringValueAttribute), false) as StringValueAttribute[];
 
-            if (attribs == null)
-                return null;
-
             // Return the first if there was a match.
             return attribs.Length > 0 ? attribs[0].StringValue : null;
         }

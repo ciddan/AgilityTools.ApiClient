@@ -125,6 +125,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             //Act
             builder.BasePath("/foo/bar")
+                   .ObjectTypeToFind("baz")
                    .QueryString("foo");
 
             var request = builder.Build();

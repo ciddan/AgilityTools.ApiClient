@@ -4,17 +4,19 @@ namespace AgilityTools.ApiClient.Adsml.Client
 {
     public enum QueryTypes
     {
+        [StringValue("")]
+        None = 0,
         [StringValue("ABOVE")]
-        Above,
+        Above = 1,
         [StringValue("BELOW")]
-        Below,
+        Below = 2,
         [StringValue("CHILD")]
-        Child,
+        Child = 3,
         [StringValue("PARENT")]
-        Parent,
+        Parent = 4,
         [StringValue("LINK-TO")]
-        LinkTo,
+        LinkTo = 5,
         [StringValue("LINK-FROM")]
-        LinkFrom
+        LinkFrom = 6
     }
 }
