@@ -9,8 +9,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public string Name { get; set; }
         public IList<StructureValue> Values { get; set; }
 
-	    public StructureAttribute() {
-		    this.Values = new List<StructureValue>();
+	    public StructureAttribute() : this(new List<StructureValue>()) {
 	    }
 
 	    public StructureAttribute(IList<StructureValue> values){
@@ -30,7 +29,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
 	                                  this.Values.Select(val => val.ToAdsml()).ToList());
 	    }
 
-	    public void Validate() {
+        private void Validate() {
 		    if (this.DefinitionId == 0)
                 throw new ApiSerializationValidationException("DefinitionId has to be set.");
 		

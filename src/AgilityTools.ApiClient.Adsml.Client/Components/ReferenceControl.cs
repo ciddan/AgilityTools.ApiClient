@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
@@ -9,6 +10,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             if (referenceOptions == null)
                 throw new ArgumentNullException("referenceOptions");
 
+            this.OuterNodeAttributes = new List<XAttribute>();
             this.ContentNodes = new List<IReferenceOptions>(referenceOptions);
             this.NodeName = "ReferenceControls";
         }

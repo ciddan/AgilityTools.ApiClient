@@ -28,8 +28,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         }
 
         public XElement ToAdsml() {
-            this.Validate();
-
             XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
             return new XElement("BatchRequest",
                                 new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
@@ -40,11 +38,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                                              new XElement("AttributesToSet",
                                                           this.AttributesToSet.Select(attrs => attrs.ToAdsml()))
                                     ));
-        }
-
-        public void Validate() {
-            // No validation is necessary here since all params must be set in ctor, 
-            // and are enforced by safeguarding checks.    
         }
     }
 }

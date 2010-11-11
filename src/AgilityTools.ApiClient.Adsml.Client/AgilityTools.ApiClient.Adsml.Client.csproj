@@ -44,7 +44,9 @@
     <Compile Include="ApiSerializationValidationException.cs" />
     <Compile Include="Components\AttributeControl.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
+    <Compile Include="Components\ControlComponentBase.cs" />
     <Compile Include="Components\Interfaces\IAttributeControl.cs" />
+    <Compile Include="Components\Interfaces\ILookupControlComponent.cs" />
     <Compile Include="Components\Interfaces\IReturnedLanguageControl.cs" />
     <Compile Include="Components\LanguageControl.cs" />
     <Compile Include="Components\LanguageToReturn.cs" />

@@ -17,7 +17,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             return new XElement("StructureValue", new XAttribute("langId", this.LanguageId.ToString()), new XAttribute("scope", this.Scope), this.Value);
         }
 
-        public void Validate() {
+        private void Validate() {
             if (this.LanguageId == 0)
                 throw new ApiSerializationValidationException("LanguageId has to be set.");
 	    }

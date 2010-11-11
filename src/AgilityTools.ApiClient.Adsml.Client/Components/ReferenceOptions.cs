@@ -32,8 +32,6 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public XAttribute ToAdsml() {
             return new XAttribute("resolveAttributes", _resolve);
         }
-
-        public void Validate() { }
     }
 
     public class ResolveSpecialCharactersFilter : IReferenceOptions
@@ -47,8 +45,6 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public XAttribute ToAdsml() {
             return new XAttribute("resolveSpecialCharacters", _resolve);
         }
-
-        public void Validate() { }
     }
 
     public class ReturnValueOnlyFilter : IReferenceOptions
@@ -62,8 +58,6 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public XAttribute ToAdsml() {
             return new XAttribute("valueOnly", _resolve);
         }
-
-        public void Validate() { }
     }
 
     public class UseChannelFilter : IReferenceOptions
@@ -77,7 +71,5 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public XAttribute ToAdsml() {
             return new XAttribute("channelId", _channelId.ToString());
         }
-
-        public void Validate() { }
     }
 }

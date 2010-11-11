@@ -1,3 +1,4 @@
+using System;
 using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
@@ -29,7 +30,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         }
     }
 
-    public class ReturnAllAttributesFilter : ISearchRequestFilter, ILookupRequestFilter
+    public class ReturnAllAttributesFilter : ISearchRequestFilter, ICreateRequestFilter
     {
         private readonly bool _returnAllAttributes;
 
@@ -40,12 +41,22 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public XAttribute ToAdsml() {
             return new XAttribute("returnAllAttributes", _returnAllAttributes);
         }
+    }
 
-        public void Validate() {
+    public class FailOnErrorFilter : ICreateRequestFilter
+    {
+        private readonly bool _failOnError;
+
+        public FailOnErrorFilter(bool failOnError) {
+            _failOnError = failOnError;
+        }
+
+        public XAttribute ToAdsml() {
+            return new XAttribute("failOnError", _failOnError);
         }
     }
 
-    public class AllowPagingFilter : ISearchRequestFilter, ILookupRequestFilter
+    public class AllowPagingFilter : ISearchRequestFilter
     {
         private readonly bool _allowPaging;
 
@@ -56,12 +67,9 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public XAttribute ToAdsml() {
             return new XAttribute("allowPaging", _allowPaging);
         }
-
-        public void Validate() {
-        }
     }
 
-    public class PageSizeFilter : ISearchRequestFilter, ILookupRequestFilter
+    public class PageSizeFilter : ISearchRequestFilter
     {
         private readonly int _pageSize;
 
@@ -74,13 +82,13 @@ namespace AgilityTools.ApiClient.Adsml.Client
             return new XAttribute("pageSize", _pageSize);
         }
 
-        public void Validate() {
+        internal void Validate() {
             if (this._pageSize <= 0)
                 throw new ApiSerializationValidationException("PageSize must be larger than 0.");
         }
     }
 
-    public class CountLimitFilter : ISearchRequestFilter, ILookupRequestFilter
+    public class CountLimitFilter : ISearchRequestFilter
     {
         private readonly int _countLimit;
 
@@ -93,13 +101,13 @@ namespace AgilityTools.ApiClient.Adsml.Client
             return new XAttribute("countLimit", _countLimit);
         }
 
-        public void Validate() {
+        internal void Validate() {
             if (this._countLimit <= 0)
                 throw new ApiSerializationValidationException("countLimit must be larger than 0.");
         }
     }
 
-    public class ExcludeBinFilter : ISearchRequestFilter, ILookupRequestFilter
+    public class ExcludeBinFilter : ISearchRequestFilter
     {
         private readonly bool _excludeBin;
 
@@ -110,12 +118,9 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public XAttribute ToAdsml() {
             return new XAttribute("excludeBin", _excludeBin);
         }
-
-        public void Validate() {
-        }
     }
 
-    public class ExcludeDocumentFilter : ISearchRequestFilter, ILookupRequestFilter
+    public class ExcludeDocumentFilter : ISearchRequestFilter
     {
         private readonly bool _excludeDocument;
 
@@ -125,9 +130,6 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
         public XAttribute ToAdsml() {
             return new XAttribute("excludeDocument", _excludeDocument);
-        }
-
-        public void Validate() {
         }
     }
 }

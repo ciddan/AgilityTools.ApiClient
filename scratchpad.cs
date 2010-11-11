@@ -18,8 +18,7 @@ builder.Configure()
 
 var builder = new AqlQueryBuilder();
 
-builder.ConfigureQuery()
-	   .BasePath("/foo/bar")
+builder.BasePath("/foo/bar")
 	   .QueryType(QueryTypes.Below) // Enum of types
 	   .ObjectTypeToFind(12)		// Optional, can be string
 	   .QueryString("\"objectId\" <= \"10\"")
@@ -42,4 +41,31 @@ builder.ConfigureQuery()
 		   		RefOptions.ResolveSpecialCharacters()
 		   		RefOptions.ReturnValueOnly());
 
-var query = build.Build();
+var query = builder.Build();
+
+var builder = new CreateRequestBuilder();
+
+builder.NewContextName("/foo/bar")
+	   .ObjectTypeToCreate("Produkt")
+	   .FailOnError()
+	   .AttributesToSet(
+   		 StructureAttribute.CreateNew(215, 
+	   		 new StructureValue(10, "foo"),
+	   		 new StructureValue(11, "bar")),
+	   	 StructureAttribute.CreateNew(391, 
+	   		 new StructureValue(10, "foo"),
+	   		 new StructureValue(11, "bar")))
+	   .ConfigureLookupControls()
+	   	.foo();
+
+// OR
+
+IList<StructureAttribute> attributes = new List<StructureAttribute>();
+// Fill collection
+
+builder.NewContextName("/foo/bar")
+	   .ObjectTypeToCreate("Produkt")
+	   .FailOnError()
+	   .AttributesToSet(attributes)
+	   .ConfigureLookupControls()
+	   	.foo();

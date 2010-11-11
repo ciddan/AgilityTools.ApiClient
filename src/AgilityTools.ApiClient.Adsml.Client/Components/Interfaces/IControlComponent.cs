@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public interface IControlComponent
+    public interface IControlComponent : IAdsmlSerializable<XElement>
     {
         IList<XAttribute> OuterNodeAttributes { get; set; }
-        XElement ToAdsml();
     }
 }
