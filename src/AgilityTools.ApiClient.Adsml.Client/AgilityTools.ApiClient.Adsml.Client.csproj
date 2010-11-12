@@ -55,6 +55,7 @@
     <Compile Include="Components\SearchControlComponentBase.cs" />
     <Compile Include="Filters\Filters.cs" />
     <Compile Include="Components\Interfaces\IControlComponent.cs" />
+    <Compile Include="Filters\ICreateRequestFilter.cs" />
     <Compile Include="Filters\ILookupRequestFilter.cs" />
     <Compile Include="Components\Interfaces\IReferenceOptions.cs" />
     <Compile Include="Filters\IRequestFilter.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Components\SearchControlBuilder.cs" />
     <Compile Include="FluentSyntax\AqlQueryBuilderSyntax.cs" />
     <Compile Include="Components\QueryTypes.cs" />
+    <Compile Include="FluentSyntax\CreateRequestBuilderSyntax.cs" />
     <Compile Include="FluentSyntax\SearchControlSyntax.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\StringValueAttribute.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Requests\CreateRequest.cs" />
     <Compile Include="Components\StructureAttribute.cs" />
     <Compile Include="Components\StructureValue.cs" />
+    <Compile Include="Requests\CreateRequestBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj">

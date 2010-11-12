@@ -56,7 +56,20 @@ builder.NewContextName("/foo/bar")
 	   		 new StructureValue(10, "foo"),
 	   		 new StructureValue(11, "bar")))
 	   .ConfigureLookupControls()
-	   	.foo();
+	   	   .AddRequestFilters(
+		   		Filter.ReturnRelationsAsAttributes(),
+		   		Filter.ResolveContextReferences())
+		   .ReturnAttributes(
+		   		Attribute.WithDefinitionId(31),
+		   		Attribute.WithName("foo"))
+		   .ReturnLanguages(
+			    Language.WithId(10),
+			    Language.WithId(11))
+		   .ConfigureReferenceHandling(
+		   		RefOptions.UseChannel(3),
+		   		RefOptions.ResolveAttributes(),
+		   		RefOptions.ResolveSpecialCharacters()
+		   		RefOptions.ReturnValueOnly());
 
 // OR
 
@@ -68,4 +81,3 @@ builder.NewContextName("/foo/bar")
 	   .FailOnError()
 	   .AttributesToSet(attributes)
 	   .ConfigureLookupControls()
-	   	.foo();
