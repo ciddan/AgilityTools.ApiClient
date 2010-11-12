@@ -30,7 +30,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         }
     }
 
-    public class ReturnAllAttributesFilter : ISearchRequestFilter, ICreateRequestFilter
+    public class ReturnAllAttributesFilter : ISearchRequestFilter
     {
         private readonly bool _returnAllAttributes;
 
@@ -43,7 +43,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         }
     }
 
-    public class FailOnErrorFilter : ICreateRequestFilter
+    public class FailOnErrorFilter
     {
         private readonly bool _failOnError;
 
