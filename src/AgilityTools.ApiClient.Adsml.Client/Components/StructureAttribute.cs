@@ -16,6 +16,16 @@ namespace AgilityTools.ApiClient.Adsml.Client
 		    this.Values = values;
 	    }
 
+        public StructureAttribute(int definitionId, IList<StructureValue> values) {
+            this.DefinitionId = definitionId;
+            this.Values = values;
+        }
+
+        public StructureAttribute(string name, IList<StructureValue> values) {
+            this.Name = name;
+            this.Values = values;
+        }
+
 	    public XElement ToAdsml() {
 		    this.Validate();
 
@@ -36,5 +46,13 @@ namespace AgilityTools.ApiClient.Adsml.Client
 		    if (this.Values.Count() < 1)
                 throw new ApiSerializationValidationException("At least one StructureAttribute Value must be specified.");
 	    }
+
+        public static StructureAttribute CreateNew(string name, params StructureValue[] values) {
+            return new StructureAttribute(name, values);
+        }
+
+        public static StructureAttribute CreateNew(int definitionId, params StructureValue[] values) {
+            return new StructureAttribute(definitionId, values);
+        }
     }
 }

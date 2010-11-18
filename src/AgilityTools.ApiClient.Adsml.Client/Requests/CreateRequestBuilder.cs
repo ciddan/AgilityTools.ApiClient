@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,29 +8,39 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
     {
         internal string ContextName { get; private set; }
         internal string ObjectType { get; private set; }
-        internal bool FailOnErrorFlag { get; private set; }
         internal StructureAttribute[] Attributes { get; private set; }
         internal LookupControlBuilder LookupControlBuilder { get; private set; }
+        internal IList<ICreateRequestFilter> RequestFilters { get; private set; }
 
-        public IOTTCreateIFOErrorIATSet NewContextName(string contextName) {
+        public CreateRequestBuilder() {
+            this.RequestFilters = new List<ICreateRequestFilter>();
+        }
+
+        public IOTTCreateRNAttributesIFOErrorIATSet NewContextName(string contextName) {
             this.ContextName = contextName;
 
             return this; 
         }
 
-        public IFOErrorIATSet ObjectTypeToCreate(string objectType) {
+        public IRNAttributesFOErrorIATSet ObjectTypeToCreate(string objectType) {
             this.ObjectType = objectType;
             
             return this;
         }
 
-        public IAttributesToSet FailOnError() {
-            this.FailOnErrorFlag = true;
+        public IFOErrorIATSet ReturnNoAttributes() {
+            this.RequestFilters.Add(Filter.OmitStructureAttributes());
 
             return this;
         }
 
-        public IConfigLookupControls AttributesToSet(IList<StructureAttribute> structureAttributes) {
+        public IAttributesToSet FailOnError() {
+            this.RequestFilters.Add(Filter.FailOnError());
+
+            return this;
+        }
+
+        public IConfigLookupControls AttributesToSet(IEnumerable<StructureAttribute> structureAttributes) {
             this.Attributes = structureAttributes.ToArray();
 
             return this;
@@ -48,7 +59,15 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         }
 
         public CreateRequest Build() {
-            return new CreateRequest(this.ObjectType, this.ContextName, this.Attributes);
+            var createRequest = new CreateRequest(this.ObjectType, this.ContextName, this.Attributes);
+
+            if (this.LookupControlBuilder != null)
+                createRequest.LookupControl = this.LookupControlBuilder.Build();
+
+            if (this.RequestFilters.Count() >= 1)
+                createRequest.RequestFilters = this.RequestFilters;
+
+            return createRequest;
         }
     }
 }

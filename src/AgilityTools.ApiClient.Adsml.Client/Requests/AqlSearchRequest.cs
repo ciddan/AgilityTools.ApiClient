@@ -13,7 +13,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         internal string QueryString { get; private set; }
         internal SearchControl SearchControl { get; private set; }
 
-        public bool OmitStructureAttributes { get; set; }
+        public bool ReturnNoAttributes { get; set; }
 
         private string _aqlFind;
 
@@ -49,7 +49,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
             if (!string.IsNullOrEmpty(this.BasePath))
                 request.Descendants("SearchRequest").Single().Add(new XAttribute("base", this.BasePath));
 
-            if (OmitStructureAttributes)
+            if (this.ReturnNoAttributes)
                 request.Descendants("SearchRequest").Single().Add(new XAttribute("returnNoAttributes", "true"));
 
             if (this.SearchControl != null)

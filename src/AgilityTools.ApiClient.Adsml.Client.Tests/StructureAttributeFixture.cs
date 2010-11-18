@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests
@@ -14,6 +15,28 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             //Assert
             Assert.That(sAttr, Is.Not.Null);
+        }
+
+        [Test]
+        public void Can_Create_New_StructureAttribute_Using_Factory_Method_Providing_Attribute_Name() {
+            //Act
+            var sa = StructureAttribute.CreateNew("foo", new StructureValue(10, "bar"));
+
+            //Assert
+            Assert.That(sa.Name, Is.EqualTo("foo"));
+            Assert.That(sa.Values.Count(), Is.EqualTo(1));
+            Assert.That(sa.Values[0].Value, Is.EqualTo("bar"));
+        }
+
+        [Test]
+        public void Can_Create_New_StructureAttribute_Using_Factory_Method_Providing_DefinitionId() {
+            //Act
+            var sa = StructureAttribute.CreateNew(10, new StructureValue(10, "bar"));
+
+            //Assert
+            Assert.That(sa.DefinitionId, Is.EqualTo(10));
+            Assert.That(sa.Values.Count(), Is.EqualTo(1));
+            Assert.That(sa.Values[0].Value, Is.EqualTo("bar"));
         }
 
         [Test]

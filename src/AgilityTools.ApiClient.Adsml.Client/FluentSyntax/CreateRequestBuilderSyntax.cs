@@ -10,7 +10,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
                                              IObjectTypeToCreate,
                                              IFailOnError,
                                              IAttributesToSet,
-                                             IOTTCreateIFOErrorIATSet,
+                                             IOTTCreateRNAttributesIFOErrorIATSet,
+                                             IRNAttributesFOErrorIATSet,
                                              IFOErrorIATSet,
                                              IConfigLookupControls
     {
@@ -18,7 +19,10 @@ namespace AgilityTools.ApiClient.Adsml.Client
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface IOTTCreateIFOErrorIATSet : IFluentInterface, IObjectTypeToCreate, IFailOnError, IAttributesToSet { }
+    public interface IOTTCreateRNAttributesIFOErrorIATSet : IFluentInterface, IObjectTypeToCreate, IReturnNoAttributes, IFailOnError, IAttributesToSet { }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface IRNAttributesFOErrorIATSet : IFluentInterface, IReturnNoAttributes, IFailOnError, IAttributesToSet { }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IFOErrorIATSet : IFluentInterface, IFailOnError, IAttributesToSet { }
@@ -26,13 +30,19 @@ namespace AgilityTools.ApiClient.Adsml.Client
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface INewContextName : IFluentInterface
     {
-        IOTTCreateIFOErrorIATSet NewContextName(string contextName);
+        IOTTCreateRNAttributesIFOErrorIATSet NewContextName(string contextName);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IObjectTypeToCreate : IFluentInterface
     {
-        IFOErrorIATSet ObjectTypeToCreate(string objectType);
+        IRNAttributesFOErrorIATSet ObjectTypeToCreate(string objectType);
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface IReturnNoAttributes : IFluentInterface
+    {
+        IFOErrorIATSet ReturnNoAttributes();
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -44,7 +54,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IAttributesToSet : IFluentInterface
     {
-        IConfigLookupControls AttributesToSet(IList<StructureAttribute> structureAttributes);
+        IConfigLookupControls AttributesToSet(IEnumerable<StructureAttribute> structureAttributes);
         IConfigLookupControls AttributesToSet(params StructureAttribute[] structureAttributes);
     }
 

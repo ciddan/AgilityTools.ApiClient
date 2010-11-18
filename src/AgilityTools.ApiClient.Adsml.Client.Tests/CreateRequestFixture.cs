@@ -11,9 +11,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
     {
         [Test]
         public void Can_Instatiate_New_CreateRequest() {
-            //Arrange
-            var attrs = new List<StructureAttribute>();
-            
             //Act
             var cr = new CreateRequest("foo", "bar", new StructureAttribute());
 
@@ -79,6 +76,100 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             
             //Act
             var actual = request.ToAdsml();
+
+            //Assert
+            Assert.That(actual, Is.Not.Null);
+            Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+        }
+
+        [Test]
+        public void Can_Generate_Api_Xml_With_Request_Filters()
+        {
+            //Arrange
+            XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+            var expected = new XElement("BatchRequest",
+                new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+                new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                new XElement("CreateRequest",
+                    new XAttribute("name", "fooPath"),
+                    new XAttribute("type", "fooObjectTypeName"),
+                    new XAttribute("returnAllAttributes", "false"),
+                    new XAttribute("failOnError", "true"),
+                    new XElement("AttributesToSet",
+                        new XElement("StructureAttribute",
+                            new XAttribute("id", "215"),
+                            new XAttribute("name", "fooAttributeName"),
+                            new XElement("StructureValue",
+                                new XAttribute("langId", "10"),
+                                new XAttribute("scope", "global"),
+                                "fooValue"
+                            )
+                        )
+                    )
+                )
+            );
+
+            var value = new StructureValue { LanguageId = 10, Value = "fooValue" };
+            var attribute = new StructureAttribute { DefinitionId = 215, Name = "fooAttributeName", Values = new List<StructureValue> { value } };
+
+            var request = new CreateRequest("fooObjectTypeName", "fooPath", attribute)
+                          {
+                              RequestFilters =
+                                  new List<ICreateRequestFilter>
+                                  {
+                                      Filter.OmitStructureAttributes(),
+                                      Filter.FailOnError()
+                                  }
+                          };
+
+            //Act
+            var actual = request.ToAdsml();
+
+            //Assert
+            Assert.That(actual, Is.Not.Null);
+            Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+        }
+
+        [Test]
+        public void Can_Generate_Api_Xml_With_LookupControl()
+        {
+            //Arrange
+            XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+            var expected = new XElement("BatchRequest",
+                new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+                new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                new XElement("CreateRequest",
+                    new XAttribute("name", "fooPath"),
+                    new XAttribute("type", "fooObjectTypeName"),
+                    new XElement("LookupControls", 
+                        new XElement("AttributesToReturn", 
+                            new XElement("Attribute", new XAttribute("id", "10")))),  
+                    new XElement("AttributesToSet",
+                        new XElement("StructureAttribute",
+                            new XAttribute("id", "215"),
+                            new XAttribute("name", "fooAttributeName"),
+                            new XElement("StructureValue",
+                                new XAttribute("langId", "10"),
+                                new XAttribute("scope", "global"),
+                                "fooValue"
+                            )
+                        )
+                    )
+                )
+            );
+
+            var value = new StructureValue { LanguageId = 10, Value = "fooValue" };
+            var attribute = new StructureAttribute { DefinitionId = 215, Name = "fooAttributeName", Values = new List<StructureValue> { value } };
+
+            var lcb = new LookupControlBuilder();
+            lcb.ReturnAttributes(AttributeToReturn.WithDefinitionId(10));
+            var lc = lcb.Build();
+
+            var request = new CreateRequest("fooObjectTypeName", "fooPath", attribute) { LookupControl = lc };
+
+            //Act
+            var actual = request.ToAdsml();
+            Console.WriteLine(actual.ToString());
 
             //Assert
             Assert.That(actual, Is.Not.Null);

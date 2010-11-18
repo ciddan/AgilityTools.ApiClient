@@ -67,6 +67,7 @@
     <Compile Include="FluentSyntax\AqlQueryBuilderSyntax.cs" />
     <Compile Include="Components\QueryTypes.cs" />
     <Compile Include="FluentSyntax\CreateRequestBuilderSyntax.cs" />
+    <Compile Include="FluentSyntax\LookupControlBuilderSyntax.cs" />
     <Compile Include="FluentSyntax\SearchControlBuilderSyntax.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\StringValueAttribute.cs" />

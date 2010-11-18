@@ -27,6 +27,14 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public static CountLimitFilter CountLimit(int countLimit) {
             return new CountLimitFilter(countLimit);
         }
+
+        public static FailOnErrorFilter FailOnError() {
+            return new FailOnErrorFilter(true);
+        }
+
+        public static ReturnRelationsAsAttributesFilter ReturnRelationsAsAttributes() {
+            return new ReturnRelationsAsAttributesFilter(true);
+        }
     }
 
     public class ReturnAllAttributesFilter : ISearchRequestFilter, ICreateRequestFilter
@@ -129,6 +137,19 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
         public XAttribute ToAdsml() {
             return new XAttribute("excludeDocument", _excludeDocument);
+        }
+    }
+
+    public class ReturnRelationsAsAttributesFilter : ILookupRequestFilter
+    {
+        private readonly bool _returnAsAttributes;
+
+        public ReturnRelationsAsAttributesFilter(bool returnAsAttributes) {
+            _returnAsAttributes = returnAsAttributes;
+        }
+
+        public XAttribute ToAdsml() {
+            return new XAttribute("returnRelationsAsAttributes", _returnAsAttributes);
         }
     }
 }

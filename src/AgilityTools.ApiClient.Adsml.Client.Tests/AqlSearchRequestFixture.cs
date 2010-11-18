@@ -62,7 +62,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                                            new IdNameReference(10),
                                            "#10 = \"foo\"",
                                            null) 
-                                           {OmitStructureAttributes = true};
+                                           {ReturnNoAttributes = true};
 
             //Act
             var actual = aql.ToAdsml();
@@ -100,7 +100,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                                QueryTypes.Below,
                                new IdNameReference(10),
                                "#10 = \"foo\"",
-                               searchControls) { OmitStructureAttributes = true };
+                               searchControls) { ReturnNoAttributes = true };
 
             //Act
             var actual = aql.ToAdsml();
@@ -144,7 +144,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                    QueryTypes.Below,
                    new IdNameReference(10),
                    "#10 = \"foo\"",
-                   searchControls) { OmitStructureAttributes = true };
+                   searchControls) { ReturnNoAttributes = true };
 
             //Act
             var actual = aql.ToAdsml();
@@ -189,7 +189,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                                            QueryTypes.Below,
                                            new IdNameReference(10),
                                            "#10 = \"foo\"",
-                                           searchControls) {OmitStructureAttributes = true};
+                                           searchControls) {ReturnNoAttributes = true};
 
             //Act
             var actual = aql.ToAdsml();

@@ -8,6 +8,16 @@ namespace AgilityTools.ApiClient.Adsml.Client
         public string Scope { get; set; }
         public string Value { get; set; }
 
+        public StructureValue() {
+            
+        }
+
+        public StructureValue(int languageId, string value, string scope = "global") {
+            this.LanguageId = languageId;
+            this.Value = value;
+            this.Scope = scope;
+        }
+
         public XElement ToAdsml() {
             if (string.IsNullOrEmpty(this.Scope))
                 this.Scope = "global";
