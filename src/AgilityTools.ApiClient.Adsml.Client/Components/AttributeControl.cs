@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public class AttributeControl : SearchControlComponentBase<IAttributeControl>
+    public class AttributeControl : ControlComponentBase<IAttributeControl>, ISearchControlComponent, ILookupControlComponent
     {
         internal AttributeControl(params IAttributeControl[] attributesToReturn) {
             if (attributesToReturn == null)

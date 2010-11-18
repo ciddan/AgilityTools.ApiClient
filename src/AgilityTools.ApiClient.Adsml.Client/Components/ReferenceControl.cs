@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public class ReferenceControl : SearchControlComponentBase<IReferenceOptions>
+    public class ReferenceControl : ControlComponentBase<IReferenceOptions>, ISearchControlComponent, ILookupControlComponent 
     {
         internal ReferenceControl(params IReferenceOptions[] referenceOptions) {
             if (referenceOptions == null)

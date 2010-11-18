@@ -11,7 +11,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
                                              IFailOnError,
                                              IAttributesToSet,
                                              IOTTCreateIFOErrorIATSet,
-                                             IFOErrorIATSet
+                                             IFOErrorIATSet,
+                                             IConfigLookupControls
     {
         CreateRequest Build();
     }
@@ -43,7 +44,13 @@ namespace AgilityTools.ApiClient.Adsml.Client
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IAttributesToSet : IFluentInterface
     {
-        void AttributesToSet(IList<StructureAttribute> structureAttributes);
-        void AttributesToSet(params StructureAttribute[] structureAttributes);
+        IConfigLookupControls AttributesToSet(IList<StructureAttribute> structureAttributes);
+        IConfigLookupControls AttributesToSet(params StructureAttribute[] structureAttributes);
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface IConfigLookupControls
+    {
+        ILookupControlBuilder ConfigureLookupControls();
     }
 }

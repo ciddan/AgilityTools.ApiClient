@@ -3,9 +3,9 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-    public class SearchControl : ControlBase
+    public class LookupControl : ControlBase
     {
-        internal SearchControl(IEnumerable<ISearchRequestFilter> requestFilters, IEnumerable<ISearchControlComponent> components) {
+        internal LookupControl(IEnumerable<ILookupRequestFilter> requestFilters, IEnumerable<ILookupControlComponent> components) {
             if (requestFilters != null)
                 this.RequestFilters = new List<IRequestFilter>(requestFilters);
 
@@ -13,7 +13,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
                 this.Components = new List<IControlComponent>(components);
             
             this.OuterNodeAttributes = new List<XAttribute>();
-            this.NodeName = "SearchControls";
+            this.NodeName = "LookupControls";
         }
     }
 }
