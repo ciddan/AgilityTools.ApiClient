@@ -5,6 +5,6 @@ namespace AgilityTools.ApiClient.Adsml.Client
 {
     public interface IApiClient : IDisposable
     {
-        XElement SendApiRequest<TRequest>(TRequest request) where TRequest : IAdsmlSerializable<XElement>;
+        XElement SendApiRequest<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement>;
     }
 }
