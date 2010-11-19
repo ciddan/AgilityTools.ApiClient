@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
 using AgilityTools.ApiClient.Adsml.Client.Filters;
@@ -11,7 +13,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
     {
         internal string ContextName { get; private set; }
         internal string ObjectType { get; private set; }
-        internal StructureAttribute[] Attributes { get; private set; }
+        internal IAdsmlAttribute<XElement>[] Attributes { get; private set; }
         internal LookupControlBuilder LookupControlBuilder { get; private set; }
         internal IList<ICreateRequestFilter> RequestFilters { get; private set; }
 
@@ -43,15 +45,21 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
             return this;
         }
 
-        public IConfigLookupControls AttributesToSet(IEnumerable<StructureAttribute> structureAttributes) {
+        public IConfigLookupControls AttributesToSet(IEnumerable<IAdsmlAttribute<XElement>> structureAttributes) {
             this.Attributes = structureAttributes.ToArray();
 
             return this;
         }
 
-        public IConfigLookupControls AttributesToSet(params StructureAttribute[] structureAttributes) {
+        public IConfigLookupControls AttributesToSet(params IAdsmlAttribute<XElement>[] structureAttributes) {
             this.Attributes = structureAttributes;
 
+            return this;
+        }
+
+        public IConfigLookupControls AttributesToSet(Func<IList<IAdsmlAttribute<XElement>>> attributeFactory) {
+            this.Attributes = attributeFactory.Invoke().ToArray();
+            
             return this;
         }
 

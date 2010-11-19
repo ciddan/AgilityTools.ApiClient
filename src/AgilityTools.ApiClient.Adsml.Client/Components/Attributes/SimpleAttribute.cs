@@ -6,15 +6,19 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 {
     public class SimpleAttribute : AttributeBase
     {
-        public SimpleAttribute(SimpleAttributeType attributeType) : base("SimpleAttribute") {
+        public SimpleAttribute(AttributeType attributeType) : base("SimpleAttribute") {
             base.AttributeExtensions = new List<XAttribute>
                                         {
-                                            new XAttribute("simpleAttributeType", attributeType.GetStringValue())
+                                            new XAttribute("type", attributeType.GetStringValue())
                                         };
+        }
+
+        public static SimpleAttribute New(AttributeType attributeType, string attributeName, object value) {
+            return new SimpleAttribute(attributeType) {Name = attributeName, Value = value};
         }
     }
 
-    public enum SimpleAttributeType
+    public enum AttributeType
     {
         [StringValue("text")]
         Text = 1,

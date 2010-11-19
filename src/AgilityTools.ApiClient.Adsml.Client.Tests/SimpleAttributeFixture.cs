@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
@@ -11,7 +12,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Instantiate_New_Simple_Attribute() {
             //Act
-            var attribute = new SimpleAttribute(SimpleAttributeType.Text);
+            var attribute = new SimpleAttribute(AttributeType.Text);
 
             //Assert
             Assert.That(attribute, Is.Not.Null);
@@ -20,11 +21,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Instantiation_Sets_Correct_Values_On_BaseType_Props() {
             //Act
-            var attribute = new SimpleAttribute(SimpleAttributeType.Date);
+            var attribute = new SimpleAttribute(AttributeType.Date);
 
             //Assert
             Assert.That(attribute.AttributeExtensions.Count(), Is.EqualTo(1));
-            Assert.That(attribute.AttributeExtensions.ElementAt(0).ToString(), Is.EqualTo(new XAttribute("simpleAttributeType", "date").ToString()));
+            Assert.That(attribute.AttributeExtensions.ElementAt(0).ToString(), Is.EqualTo(new XAttribute("type", "date").ToString()));
             Assert.That(attribute.ElementName, Is.EqualTo("SimpleAttribute"));
         }
 
@@ -32,17 +33,19 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         public void Can_Generate_Api_Xml() {
             //Arrange
             var expected = new XElement("SimpleAttribute",
-                                new XAttribute("name", "objectId"),
-                                new XAttribute("simpleAttributeType", "integer"),
-                                "1777").ToString();
+                                        new XAttribute("name", "objectTypeId"),
+                                        new XAttribute("type", "integer"),
+                                        new XElement("Value", "12")).ToString();
 
-            var attribute = new SimpleAttribute(SimpleAttributeType.Integer)
+            var attribute = new SimpleAttribute(AttributeType.Integer)
                             {
-                                Value = 1777, Name = "objectId"
+                                Value = 12,
+                                Name = "objectTypeId"
                             };
 
             //Act
             var actual = attribute.ToAdsml().ToString();
+            Console.WriteLine(actual);
 
             //Assert
             Assert.That(actual, Is.EqualTo(expected));
@@ -52,23 +55,17 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [ExpectedException(typeof (ApiSerializationValidationException), ExpectedMessage = "Name must be set.")]
         public void Validate_Throws_ASVE_If_Name_Is_Not_Set() {
             //Arrange
-            var attribute = new SimpleAttribute(SimpleAttributeType.Binary)
-                            {
-                                Value = 1777
-                            };
+            var attribute = new SimpleAttribute(AttributeType.Binary) { Value = 1777 };
 
             //Act
             attribute.ToAdsml();
         }
 
         [Test]
-        [ExpectedException(typeof(ApiSerializationValidationException), ExpectedMessage = "Value must be set.")]
+        [ExpectedException(typeof (ApiSerializationValidationException), ExpectedMessage = "Value must be set.")]
         public void Validate_Throws_ASVE_If_Value_Is_Not_Set() {
             //Arrange
-            var attribute = new SimpleAttribute(SimpleAttributeType.Decimal)
-                            {
-                                Name = "objectId"
-                            };
+            var attribute = new SimpleAttribute(AttributeType.Decimal) { Name = "objectId" };
 
             //Act
             attribute.ToAdsml();

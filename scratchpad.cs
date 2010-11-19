@@ -48,13 +48,10 @@ var builder = new CreateRequestBuilder();
 builder.NewContextName("/foo/bar")
 	   .ObjectTypeToCreate("Produkt")
 	   .FailOnError()
-	   .AttributesToSet(
-   		 StructureAttribute.CreateNew(215, 
-	   		 new StructureValue(10, "foo"),
-	   		 new StructureValue(11, "bar")),
-	   	 StructureAttribute.CreateNew(391, 
-	   		 new StructureValue(10, "foo"),
-	   		 new StructureValue(11, "bar")))
+	   .AttributesToSet(() => new List<IAdsmlAttribute> {
+		   	StructureAttribute.New(215, new StructureValue(10, "foo")),
+		   	RelationAttribute.New(31, 1779))
+	   	})
 	   .ConfigureLookupControls()
 	   	   .AddRequestFilters(
 		   		Filter.ReturnRelationsAsAttributes(),
@@ -92,6 +89,6 @@ var builder = new ModifyRequestBuilder();
 builder.Context("/foo/bar")
 	   .ReturnNoAttributes()
 	   .FailOnError()
-	   .AddModification<SAttr>(Modifications.ReplaceAttribute, (attr) => attr = /*...*/)
+	   .AddModification<SAttr>(Modifications.ReplaceAttribute, () => attr = /*...*/)
 	   .ConfigureLookupControls()
 	   	.Foo();

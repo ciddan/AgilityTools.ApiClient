@@ -12,12 +12,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
     {
         public string ObjectTypeName { get; private set; }
         public string CreationPath { get; private set; }
-        public IList<StructureAttribute> AttributesToSet { get; private set; }
+        public IList<IAdsmlAttribute<XElement>> AttributesToSet { get; private set; }
 
         internal LookupControl LookupControl { get; set; }
         internal IEnumerable<ICreateRequestFilter> RequestFilters { get; set; }
 
-        public CreateRequest(string objectTypeName, string creationPath, params StructureAttribute[] attributesToSet) {
+        public CreateRequest(string objectTypeName, string creationPath, params IAdsmlAttribute<XElement>[] attributesToSet) {
             if (string.IsNullOrEmpty(objectTypeName))
                 throw new InvalidOperationException("ObjectTypeName cannot be null or empty.");
 
@@ -30,7 +30,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
             this.ObjectTypeName = objectTypeName;
             this.CreationPath = creationPath;
 
-            this.AttributesToSet = new List<StructureAttribute>(attributesToSet);
+            this.AttributesToSet = new List<IAdsmlAttribute<XElement>>(attributesToSet);
         }
 
         public XElement ToAdsml() {

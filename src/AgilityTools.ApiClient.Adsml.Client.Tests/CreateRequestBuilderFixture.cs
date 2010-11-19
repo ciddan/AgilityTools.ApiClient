@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
 using AgilityTools.ApiClient.Adsml.Client.Filters;
@@ -89,6 +90,22 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             //Assert
             Assert.That(builder.Attributes.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Can_Set_Attributes_To_Be_Created_With_ListFactory_Overload() {
+            //Arrange
+            var builder = new CreateRequestBuilder();
+            
+            //Act
+            builder.AttributesToSet(() => new List<IAdsmlAttribute<XElement>>
+                                          {
+                                              StructureAttribute.New(10, new StructureValue(10, "foo")),
+                                              SimpleAttribute.New(AttributeType.Text, "objectName", "foo")
+                                          });
+
+            //Assert
+            Assert.That(builder.Attributes.Count(), Is.EqualTo(2));
         }
 
         [Test]

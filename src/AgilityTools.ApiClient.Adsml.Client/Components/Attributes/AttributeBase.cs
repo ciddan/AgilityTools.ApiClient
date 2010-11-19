@@ -18,7 +18,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
         public virtual XElement ToAdsml() {
             Validate();
 
-            var element = new XElement(this.ElementName, new XAttribute("name", this.Name), this.Value);
+            var element = new XElement(this.ElementName, new XAttribute("name", this.Name), new XElement("Value", this.Value));
 
             if (this.AttributeExtensions != null) {
                 element.Add(AttributeExtensions);
