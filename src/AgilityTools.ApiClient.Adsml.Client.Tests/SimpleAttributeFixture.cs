@@ -12,7 +12,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Instantiate_New_Simple_Attribute() {
             //Act
-            var attribute = new SimpleAttribute(AttributeType.Text);
+            var attribute = new SimpleAttribute(AttributeTypes.Text);
 
             //Assert
             Assert.That(attribute, Is.Not.Null);
@@ -21,7 +21,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Instantiation_Sets_Correct_Values_On_BaseType_Props() {
             //Act
-            var attribute = new SimpleAttribute(AttributeType.Date);
+            var attribute = new SimpleAttribute(AttributeTypes.Date);
 
             //Assert
             Assert.That(attribute.AttributeExtensions.Count(), Is.EqualTo(1));
@@ -37,7 +37,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                                         new XAttribute("type", "integer"),
                                         new XElement("Value", "12")).ToString();
 
-            var attribute = new SimpleAttribute(AttributeType.Integer)
+            var attribute = new SimpleAttribute(AttributeTypes.Integer)
                             {
                                 Value = 12,
                                 Name = "objectTypeId"
@@ -55,7 +55,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [ExpectedException(typeof (ApiSerializationValidationException), ExpectedMessage = "Name must be set.")]
         public void Validate_Throws_ASVE_If_Name_Is_Not_Set() {
             //Arrange
-            var attribute = new SimpleAttribute(AttributeType.Binary) { Value = 1777 };
+            var attribute = new SimpleAttribute(AttributeTypes.Binary) { Value = 1777 };
 
             //Act
             attribute.ToAdsml();
@@ -65,7 +65,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [ExpectedException(typeof (ApiSerializationValidationException), ExpectedMessage = "Value must be set.")]
         public void Validate_Throws_ASVE_If_Value_Is_Not_Set() {
             //Arrange
-            var attribute = new SimpleAttribute(AttributeType.Decimal) { Name = "objectId" };
+            var attribute = new SimpleAttribute(AttributeTypes.Decimal) { Name = "objectId" };
 
             //Act
             attribute.ToAdsml();

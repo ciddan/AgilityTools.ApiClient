@@ -101,7 +101,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             builder.AttributesToSet(() => new List<IAdsmlAttribute<XElement>>
                                           {
                                               StructureAttribute.New(10, new StructureValue(10, "foo")),
-                                              SimpleAttribute.New(AttributeType.Text, "objectName", "foo")
+                                              SimpleAttribute.New(AttributeTypes.Text, "objectName", "foo")
                                           });
 
             //Assert
