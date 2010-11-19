@@ -54,6 +54,7 @@
     <Compile Include="Components\LanguageToReturn.cs" />
     <Compile Include="Components\LookupControl.cs" />
     <Compile Include="Components\LookupControlBuilder.cs" />
+    <Compile Include="Components\ModificationItem.cs" />
     <Compile Include="Components\ReferenceControl.cs" />
     <Compile Include="Components\ReferenceOptions.cs" />
     <Compile Include="Components\ControlComponentBase.cs" />

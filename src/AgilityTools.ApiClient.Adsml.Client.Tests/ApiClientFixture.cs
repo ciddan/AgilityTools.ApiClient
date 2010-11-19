@@ -75,7 +75,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         public void Can_Send_ApiRequests_Via_ApiClient()
         {
             //Arrange
-            var request = new CreateRequest("lol", "lol", StructureAttribute.CreateNew(215, new StructureValue(10, "foo")));
+            var request = new CreateRequest("lol", "lol", StructureAttribute.New(215, new StructureValue(10, "foo")));
 
             //Act
             var result = _client.SendApiRequest(request);

@@ -92,7 +92,6 @@ var builder = new ModifyRequestBuilder();
 builder.Context("/foo/bar")
 	   .ReturnNoAttributes()
 	   .FailOnError()
-	   .OperationType(OperationTypes.AddAttribute)
-	   .Attributes(/*IList or params[]<: AdsmlAttribute / StructureAttribute>*/)
+	   .AddModification<SAttr>(Modifications.ReplaceAttribute, (attr) => attr = /*...*/)
 	   .ConfigureLookupControls()
 	   	.Foo();

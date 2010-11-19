@@ -21,7 +21,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Create_New_StructureAttribute_Using_Factory_Method_Providing_Attribute_Name() {
             //Act
-            var sa = StructureAttribute.CreateNew("foo", new StructureValue(10, "bar"));
+            var sa = StructureAttribute.New("foo", new StructureValue(10, "bar"));
 
             //Assert
             Assert.That(sa.Name, Is.EqualTo("foo"));
@@ -32,7 +32,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Create_New_StructureAttribute_Using_Factory_Method_Providing_DefinitionId() {
             //Act
-            var sa = StructureAttribute.CreateNew(10, new StructureValue(10, "bar"));
+            var sa = StructureAttribute.New(10, new StructureValue(10, "bar"));
 
             //Assert
             Assert.That(sa.DefinitionId, Is.EqualTo(10));

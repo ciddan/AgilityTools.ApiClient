@@ -72,7 +72,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Set_Attributes_To_Be_Created_With_Params_Overload() {
             //Act
-            _builder.AttributesToSet(StructureAttribute.CreateNew(10, new StructureValue(10, "foo")));
+            _builder.AttributesToSet(StructureAttribute.New(10, new StructureValue(10, "foo")));
 
             //Assert
             Assert.That(_builder.Attributes.Count(), Is.EqualTo(1));
@@ -82,7 +82,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         public void Can_Set_Attributes_To_Be_Created_With_List_Overload() {
             //Arrange
             var builder = new CreateRequestBuilder();
-            var attributes = new List<StructureAttribute>{StructureAttribute.CreateNew(10, new StructureValue(10, "foo"))};
+            var attributes = new List<StructureAttribute>{StructureAttribute.New(10, new StructureValue(10, "foo"))};
 
             //Act
             builder.AttributesToSet(attributes);
@@ -111,7 +111,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                    .ReturnNoAttributes()
                    .FailOnError()
                    .AttributesToSet(
-                        StructureAttribute.CreateNew(215, new StructureValue(10, "169010")))
+                        StructureAttribute.New(215, new StructureValue(10, "169010")))
                    .ConfigureLookupControls()
                         .ReturnAttributes(AttributeToReturn.WithDefinitionId(215))
                         .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
@@ -131,7 +131,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                    .ReturnNoAttributes()
                    .FailOnError()
                    .AttributesToSet(
-                       StructureAttribute.CreateNew(215, new StructureValue(10, "169010")))
+                       StructureAttribute.New(215, new StructureValue(10, "169010")))
                    .ConfigureLookupControls()
                        .ReturnAttributes(AttributeToReturn.WithDefinitionId(215))
                        .ReturnLanguages(LanguageToReturn.WithLanguageId(10))

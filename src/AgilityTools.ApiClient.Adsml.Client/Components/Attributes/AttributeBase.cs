@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 {
-    public abstract class AdsmlAttribute : IAdsmlSerializable<XElement>
+    public abstract class AttributeBase : IAdsmlAttribute<XElement>
     {
         public string Name { get; set; }
         public object Value { get; set; }
@@ -11,7 +11,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
         internal string ElementName { get; set; }
         internal IEnumerable<XAttribute> AttributeExtensions { get; set; }
 
-        protected AdsmlAttribute(string elementName) {
+        protected AttributeBase(string elementName) {
             this.ElementName = elementName;
         }
 

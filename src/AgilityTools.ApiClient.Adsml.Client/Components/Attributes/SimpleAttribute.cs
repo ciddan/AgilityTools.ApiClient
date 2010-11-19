@@ -4,7 +4,7 @@ using AgilityTools.ApiClient.Adsml.Client.Helpers;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 {
-    public class SimpleAttribute : AdsmlAttribute
+    public class SimpleAttribute : AttributeBase
     {
         public SimpleAttribute(SimpleAttributeType attributeType) : base("SimpleAttribute") {
             base.AttributeExtensions = new List<XAttribute>

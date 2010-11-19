@@ -5,6 +5,7 @@ using NUnit.Framework;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests
 {
+    [TestFixture]
     public class SimpleAttributeFixture
     {
         [Test]
@@ -51,7 +52,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [ExpectedException(typeof (ApiSerializationValidationException), ExpectedMessage = "Name must be set.")]
         public void Validate_Throws_ASVE_If_Name_Is_Not_Set() {
             //Arrange
-            var attribute = new SimpleAttribute(SimpleAttributeType.Integer)
+            var attribute = new SimpleAttribute(SimpleAttributeType.Binary)
                             {
                                 Value = 1777
                             };
@@ -64,7 +65,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [ExpectedException(typeof(ApiSerializationValidationException), ExpectedMessage = "Value must be set.")]
         public void Validate_Throws_ASVE_If_Value_Is_Not_Set() {
             //Arrange
-            var attribute = new SimpleAttribute(SimpleAttributeType.Integer)
+            var attribute = new SimpleAttribute(SimpleAttributeType.Decimal)
                             {
                                 Name = "objectId"
                             };

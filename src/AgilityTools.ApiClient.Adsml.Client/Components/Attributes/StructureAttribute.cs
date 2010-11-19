@@ -4,7 +4,8 @@ using System.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 {
-    public class StructureAttribute : IAdsmlSerializable<XElement> {
+    public class StructureAttribute : IAdsmlAttribute<XElement>
+    {
         public int DefinitionId { get; set; }
         public string Name { get; set; }
         public IList<StructureValue> Values { get; set; }
@@ -47,11 +48,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
                 throw new ApiSerializationValidationException("At least one StructureAttribute Value must be specified.");
 	    }
 
-        public static StructureAttribute CreateNew(string name, params StructureValue[] values) {
+        public static StructureAttribute New(string name, params StructureValue[] values) {
             return new StructureAttribute(name, values);
         }
 
-        public static StructureAttribute CreateNew(int definitionId, params StructureValue[] values) {
+        public static StructureAttribute New(int definitionId, params StructureValue[] values) {
             return new StructureAttribute(definitionId, values);
         }
     }
