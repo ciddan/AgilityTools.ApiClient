@@ -14,7 +14,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
         }
 
         public static SimpleAttribute New(AttributeTypes attributeType, string attributeName, object value) {
-            return new SimpleAttribute(attributeType) {Name = attributeName, Value = value};
+            return new SimpleAttribute(attributeType) { Name = attributeName, Value = value};
         }
     }
 }

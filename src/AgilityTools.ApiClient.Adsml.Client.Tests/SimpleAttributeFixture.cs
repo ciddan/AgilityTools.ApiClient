@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
@@ -10,9 +11,18 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
     public class SimpleAttributeFixture
     {
         [Test]
-        public void Can_Instantiate_New_Simple_Attribute() {
+        public void Can_Instantiate_New_SimpleAttribute() {
             //Act
             var attribute = new SimpleAttribute(AttributeTypes.Text);
+
+            //Assert
+            Assert.That(attribute, Is.Not.Null);
+        }
+
+        [Test]
+        public void Can_Instantiate_New_SimpleAttribute_With_FactoryMethod() {
+            //Act
+            var attribute = SimpleAttribute.New(AttributeTypes.Integer, "objectId", 1777);
 
             //Assert
             Assert.That(attribute, Is.Not.Null);
@@ -35,7 +45,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var expected = new XElement("SimpleAttribute",
                                         new XAttribute("name", "objectTypeId"),
                                         new XAttribute("type", "integer"),
-                                        new XElement("Value", "12")).ToString();
+                                        new XElement("Value", new XCData("12"))).ToString();
 
             var attribute = new SimpleAttribute(AttributeTypes.Integer)
                             {
@@ -52,7 +62,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof (ApiSerializationValidationException), ExpectedMessage = "Name must be set.")]
+        [ExpectedException(typeof(ApiSerializationValidationException), ExpectedMessage = "Name must be set.")]
         public void Validate_Throws_ASVE_If_Name_Is_Not_Set() {
             //Arrange
             var attribute = new SimpleAttribute(AttributeTypes.Binary) { Value = 1777 };
@@ -65,7 +75,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [ExpectedException(typeof (ApiSerializationValidationException), ExpectedMessage = "Value must be set.")]
         public void Validate_Throws_ASVE_If_Value_Is_Not_Set() {
             //Arrange
-            var attribute = new SimpleAttribute(AttributeTypes.Decimal) { Name = "objectId" };
+            var attribute = new SimpleAttribute(AttributeTypes.Decimal) { Name="foo" };
 
             //Act
             attribute.ToAdsml();

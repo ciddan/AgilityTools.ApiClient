@@ -50,6 +50,7 @@
     <Compile Include="AqlSearchRequestFixture.cs" />
     <Compile Include="AttributeControlFixture.cs" />
     <Compile Include="AttributeToReturnFixture.cs" />
+    <Compile Include="ContextAttributeFixture.cs" />
     <Compile Include="CreateRequestBuilderFixture.cs" />
     <Compile Include="CreateRequestFixture.cs" />
     <Compile Include="FilterFixture.cs" />

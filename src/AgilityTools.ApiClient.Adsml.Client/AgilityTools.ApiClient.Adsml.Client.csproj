@@ -44,7 +44,8 @@
     <Compile Include="ApiSerializationValidationException.cs" />
     <Compile Include="Components\AttributeControl.cs" />
     <Compile Include="Components\Attributes\AttributeBase.cs" />
-    <Compile Include="Components\Attributes\AttributeType.cs" />
+    <Compile Include="Components\Attributes\AttributeTypes.cs" />
+    <Compile Include="Components\Attributes\ContextAttribute.cs" />
     <Compile Include="Components\Attributes\IAdsmlAttribute.cs" />
     <Compile Include="Components\Attributes\SimpleAttribute.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />

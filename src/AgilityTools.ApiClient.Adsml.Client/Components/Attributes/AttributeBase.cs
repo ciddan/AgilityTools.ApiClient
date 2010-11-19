@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
@@ -9,7 +10,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
         public object Value { get; set; }
 
         internal string ElementName { get; set; }
-        internal IEnumerable<XAttribute> AttributeExtensions { get; set; }
+        internal IList<XAttribute> AttributeExtensions { get; set; }
 
         protected AttributeBase(string elementName) {
             this.ElementName = elementName;
@@ -18,9 +19,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
         public virtual XElement ToAdsml() {
             Validate();
 
-            var element = new XElement(this.ElementName, new XAttribute("name", this.Name), new XElement("Value", this.Value));
+            var element = new XElement(this.ElementName, new XAttribute("name", this.Name), 
+                            new XElement("Value", new XCData(this.Value.ToString())));
 
-            if (this.AttributeExtensions != null) {
+            if (this.AttributeExtensions != null && this.AttributeExtensions.Count() >= 1) {
                 element.Add(AttributeExtensions);
             }
 
