@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Filters;
 
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public abstract class ControlBase : IControlComponent
     {

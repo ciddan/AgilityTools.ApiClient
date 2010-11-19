@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components;
 using NUnit.Framework;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests

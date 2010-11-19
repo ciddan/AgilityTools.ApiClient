@@ -1,6 +1,7 @@
 using System.Text;
 using System.Linq;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Helpers;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Requests
@@ -17,9 +18,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
 
         private string _aqlFind;
 
-        internal AqlSearchRequest(string basePath, QueryTypes queryType, IdNameReference typeToFind, string queryString, SearchControl searchControl) {
+        internal AqlSearchRequest(string basePath, AqlQueryTypes aqlQueryType, IdNameReference typeToFind, string queryString, SearchControl searchControl) {
             this.BasePath = basePath;
-            this.QueryType = queryType.GetStringValue();
+            this.QueryType = aqlQueryType.GetStringValue();
             this.QueryString = queryString;
             this.SearchControl = searchControl;
 

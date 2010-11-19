@@ -1,5 +1,6 @@
 using System;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 using AgilityTools.ApiClient.Adsml.Communication;
 using Moq;
@@ -74,7 +75,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         public void Can_Send_ApiRequests_Via_ApiClient()
         {
             //Arrange
-            var request = new CreateRequest("lol", "lol", new StructureAttribute());
+            var request = new CreateRequest("lol", "lol", StructureAttribute.CreateNew(215, new StructureValue(10, "foo")));
 
             //Act
             var result = _client.SendApiRequest(request);

@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.Filters
 {
     public static class Filter
     {
@@ -37,7 +37,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         }
     }
 
-    public class ReturnAllAttributesFilter : ISearchRequestFilter
+    public class ReturnAllAttributesFilter : ISearchRequestFilter, ICreateRequestFilter, IModifyRequestFilter
     {
         private readonly bool _returnAllAttributes;
 
@@ -50,7 +50,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         }
     }
 
-    public class FailOnErrorFilter
+    public class FailOnErrorFilter : ICreateRequestFilter, IModifyRequestFilter
     {
         private readonly bool _failOnError;
 

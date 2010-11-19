@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 
 namespace AgilityTools.ApiClient.Adsml.Client
@@ -27,7 +28,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IQueryType : IFluentInterface
     {
-        IOTTFindIQStringICSControls QueryType(QueryTypes type);
+        IOTTFindIQStringICSControls QueryType(AqlQueryTypes type);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]

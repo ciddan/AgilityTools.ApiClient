@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components;
+using AgilityTools.ApiClient.Adsml.Client.Filters;
 using AgilityTools.ApiClient.Adsml.Client.Helpers;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 using NUnit.Framework;
@@ -26,7 +28,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             );
 
             var aql = new AqlSearchRequest("/Structures/Classification/JULA Produkter", 
-                                           QueryTypes.Below,
+                                           AqlQueryTypes.Below,
                                            new IdNameReference(10), 
                                            "#10 = \"foo\"", 
                                            null);
@@ -58,7 +60,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             );
 
             var aql = new AqlSearchRequest("/foo/bar",
-                                           QueryTypes.Below,
+                                           AqlQueryTypes.Below,
                                            new IdNameReference(10),
                                            "#10 = \"foo\"",
                                            null) 
@@ -97,7 +99,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var searchControls = builder.Build();
 
             var aql = new AqlSearchRequest("/foo/bar",
-                               QueryTypes.Below,
+                               AqlQueryTypes.Below,
                                new IdNameReference(10),
                                "#10 = \"foo\"",
                                searchControls) { ReturnNoAttributes = true };
@@ -141,7 +143,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var searchControls = builder.Build();
 
             var aql = new AqlSearchRequest("/foo/bar",
-                   QueryTypes.Below,
+                   AqlQueryTypes.Below,
                    new IdNameReference(10),
                    "#10 = \"foo\"",
                    searchControls) { ReturnNoAttributes = true };
@@ -186,7 +188,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var searchControls = builder.Build();
 
             var aql = new AqlSearchRequest("/foo/bar",
-                                           QueryTypes.Below,
+                                           AqlQueryTypes.Below,
                                            new IdNameReference(10),
                                            "#10 = \"foo\"",
                                            searchControls) {ReturnNoAttributes = true};
@@ -232,7 +234,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         {
             //Arrange
             var builder = new AqlQueryBuilder();
-            builder.QueryType(QueryTypes.Below)
+            builder.QueryType(AqlQueryTypes.Below)
                    .QueryString("foo");
 
             var request = builder.Build();

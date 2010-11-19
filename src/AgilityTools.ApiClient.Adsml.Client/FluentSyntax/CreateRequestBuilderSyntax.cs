@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.FluentSyntax
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ICreateRequestBuilder : IFluentInterface,

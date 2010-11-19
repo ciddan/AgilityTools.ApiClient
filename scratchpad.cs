@@ -81,3 +81,18 @@ builder.NewContextName("/foo/bar")
 	   .FailOnError()
 	   .AttributesToSet(attributes)
 	   .ConfigureLookupControls()
+
+
+/*----------------------------------------------------------------------*/
+/*                    MODIFY OPERATION                                  */
+/*----------------------------------------------------------------------*/
+
+var builder = new ModifyRequestBuilder();
+
+builder.Context("/foo/bar")
+	   .ReturnNoAttributes()
+	   .FailOnError()
+	   .OperationType(OperationTypes.AddAttribute)
+	   .Attributes(/*IList or params[]<: AdsmlAttribute / StructureAttribute>*/)
+	   .ConfigureLookupControls()
+	   	.Foo();

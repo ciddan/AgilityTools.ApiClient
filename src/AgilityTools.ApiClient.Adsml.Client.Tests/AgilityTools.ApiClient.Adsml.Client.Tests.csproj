@@ -60,6 +60,7 @@
     <Compile Include="ReferenceControlFixture.cs" />
     <Compile Include="ReferenceOptionsFixture.cs" />
     <Compile Include="SearchControlBuilderFixture.cs" />
+    <Compile Include="SimpleAttributeFixture.cs" />
     <Compile Include="StringValueFixture.cs" />
     <Compile Include="StructureAttributeFixture.cs" />
     <Compile Include="StructureValueFixture.cs" />
