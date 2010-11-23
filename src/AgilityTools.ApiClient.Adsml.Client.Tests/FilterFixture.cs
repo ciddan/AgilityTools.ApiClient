@@ -34,7 +34,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Generate_A_OmitStructureAttributes_Filter_Tag() {
             //Arrange
-            var expected = new XAttribute("returnAllAttributes", "false");
+            var expected = new XAttribute("returnNoAttributes", "true");
 
             //Act
             var actual = Filter.OmitStructureAttributes();

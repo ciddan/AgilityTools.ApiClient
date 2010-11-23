@@ -136,7 +136,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 new XElement("SearchControls",
                              new XAttribute("excludeBin", "true"),
                              new XAttribute("excludeDocument", "true"),
-                             new XAttribute("returnAllAttributes", "false"),
+                             new XAttribute("returnNoAttributes", "true"),
                              new XAttribute("allowPaging", "true"),
                              new XAttribute("pageSize", "2"),
                              new XAttribute("countLimit", "5"),
