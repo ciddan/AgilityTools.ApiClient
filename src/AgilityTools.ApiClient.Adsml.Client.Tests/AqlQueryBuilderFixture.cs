@@ -1,5 +1,7 @@
 using System;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components;
+using AgilityTools.ApiClient.Adsml.Client.Filters;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 using NUnit.Framework;
 
@@ -35,10 +37,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var aql = new AqlQueryBuilder();
 
             //Act
-            aql.QueryType(QueryTypes.Below);
+            aql.QueryType(AqlQueryTypes.Below);
 
             //Assert
-            Assert.That(aql.SelectedQueryType.ToString(), Is.EqualTo("Below"));
+            Assert.That(aql.SelectedAqlQueryType.ToString(), Is.EqualTo("Below"));
         }
 
         [Test]
@@ -97,7 +99,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             //Act
             aqlBuilder.BasePath("/foo/bar")
-                      .QueryType(QueryTypes.Below)
+                      .QueryType(AqlQueryTypes.Below)
                       .ObjectTypeToFind(12)
                       .QueryString("#215 = \"foo\"")
                       .ConfigureSearchControls()

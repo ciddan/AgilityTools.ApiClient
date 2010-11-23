@@ -43,6 +43,12 @@
     <Compile Include="ApiClient.cs" />
     <Compile Include="ApiSerializationValidationException.cs" />
     <Compile Include="Components\AttributeControl.cs" />
+    <Compile Include="Components\Attributes\AttributeBase.cs" />
+    <Compile Include="Components\Attributes\AttributeTypes.cs" />
+    <Compile Include="Components\Attributes\ContextAttribute.cs" />
+    <Compile Include="Components\Attributes\IAdsmlAttribute.cs" />
+    <Compile Include="Components\Attributes\RelationAttribute.cs" />
+    <Compile Include="Components\Attributes\SimpleAttribute.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
     <Compile Include="Components\ControlBase.cs" />
     <Compile Include="Components\Interfaces\IAttributeControl.cs" />
@@ -52,6 +58,7 @@
     <Compile Include="Components\LanguageToReturn.cs" />
     <Compile Include="Components\LookupControl.cs" />
     <Compile Include="Components\LookupControlBuilder.cs" />
+    <Compile Include="Components\ModificationItem.cs" />
     <Compile Include="Components\ReferenceControl.cs" />
     <Compile Include="Components\ReferenceOptions.cs" />
     <Compile Include="Components\ControlComponentBase.cs" />
@@ -60,14 +67,18 @@
     <Compile Include="Filters\ICreateRequestFilter.cs" />
     <Compile Include="Filters\ILookupRequestFilter.cs" />
     <Compile Include="Components\Interfaces\IReferenceOptions.cs" />
+    <Compile Include="Filters\IModifyRequestFilter.cs" />
     <Compile Include="Filters\IRequestFilter.cs" />
     <Compile Include="Filters\ISearchRequestFilter.cs" />
     <Compile Include="Components\SearchControl.cs" />
     <Compile Include="Components\SearchControlBuilder.cs" />
     <Compile Include="FluentSyntax\AqlQueryBuilderSyntax.cs" />
-    <Compile Include="Components\QueryTypes.cs" />
+    <Compile Include="Components\AqlQueryTypes.cs" />
     <Compile Include="FluentSyntax\CreateRequestBuilderSyntax.cs" />
     <Compile Include="FluentSyntax\LookupControlBuilderSyntax.cs" />
+    <Compile Include="Requests\ModifyRequest.cs" />
+    <Compile Include="Requests\ModifyRequestBuilder.cs" />
+    <Compile Include="FluentSyntax\ModifyRequestBuilderSyntax.cs" />
     <Compile Include="FluentSyntax\SearchControlBuilderSyntax.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\StringValueAttribute.cs" />
@@ -80,8 +91,8 @@
     <Compile Include="Requests\AqlQueryBuilder.cs" />
     <Compile Include="Requests\AqlSearchRequest.cs" />
     <Compile Include="Requests\CreateRequest.cs" />
-    <Compile Include="Components\StructureAttribute.cs" />
-    <Compile Include="Components\StructureValue.cs" />
+    <Compile Include="Components\Attributes\StructureAttribute.cs" />
+    <Compile Include="Components\Attributes\StructureValue.cs" />
     <Compile Include="Requests\CreateRequestBuilder.cs" />
   </ItemGroup>
   <ItemGroup>

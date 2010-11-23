@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public class ReferenceControl : ControlComponentBase<IReferenceOptions>, ISearchControlComponent, ILookupControlComponent 
     {

@@ -1,5 +1,6 @@
 using System;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 using AgilityTools.ApiClient.Adsml.Communication;
 using Moq;
@@ -14,21 +15,18 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         private Mock<IApiWebClient> _mockWebClient;
 
         [SetUp]
-        public void Setup()
-        {
+        public void Setup() {
             _client = new ApiClient(new ApiWebClient());
             _mockWebClient = new Mock<IApiWebClient>();
         }
 
         [TearDown]
-        public void Cleanup()
-        {
+        public void Cleanup() {
             _client.Dispose();
         }
 
         [Test]
-        public void Can_Instantiate_New_ApiClient()
-        {
+        public void Can_Instantiate_New_ApiClient() {
             //Act
             IApiClient client = new ApiClient(new ApiWebClient());
 
@@ -37,8 +35,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        public void Can_Instantiate_New_ApiClient_And_Supply_Specific_Endpoint_Url()
-        {
+        public void Can_Instantiate_New_ApiClient_And_Supply_Specific_Endpoint_Url() {
             //Act
             IApiClient client = new ApiClient(new ApiWebClient(), "http://agilitytest:9080/Agility/Directory");
 
@@ -47,16 +44,24 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: webClient")]
-        public void ApiClient_Ctor_Throws_ArgumentNullException_If_ApiWebClient_Is_Null()
-        {
+        [ExpectedException(typeof (ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: webClient")]
+        public void ApiClient_Ctor_Throws_ArgumentNullException_If_ApiWebClient_Is_Null() {
             //Act
             new ApiClient(null);
         }
 
         [Test]
-        public void Can_Dispose_Api_Client()
-        {
+        [ExpectedException(typeof(ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
+        public void SendRequest_Throws_ArgumentNullException_If_Request_Is_Null() {
+            //Arrange
+            var client = new ApiClient(new ApiWebClient());
+
+            //Act
+            client.SendApiRequest<CreateRequest>(null);
+        }
+
+        [Test]
+        public void Can_Dispose_Api_Client() {
             //Arrange
             var mockWebClient = new Mock<IApiWebClient>();
             mockWebClient.Setup(s => s.Dispose()).Verifiable();
@@ -71,10 +76,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        public void Can_Send_ApiRequests_Via_ApiClient()
-        {
+        public void Can_Send_ApiRequests_Via_ApiClient() {
             //Arrange
-            var request = new CreateRequest("lol", "lol", new StructureAttribute());
+            var request = new CreateRequest("lol", "lol", StructureAttribute.New(215, new StructureValue(10, "foo")));
 
             //Act
             var result = _client.SendApiRequest(request);

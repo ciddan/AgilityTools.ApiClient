@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public abstract class ControlComponentBase<TContentNode> : IControlComponent where TContentNode : IAdsmlSerializable<XObject>
     {

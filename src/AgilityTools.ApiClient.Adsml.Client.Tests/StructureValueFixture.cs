@@ -1,4 +1,5 @@
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
 using NUnit.Framework;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests
@@ -21,7 +22,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var expected = new XElement("StructureValue",
                                         new XAttribute("langId", "10"),
                                         new XAttribute("scope", "local"),
-                                        "foo");
+                                        new XCData("foo"));
 
             var value = new StructureValue {LanguageId = 10, Scope = "local", Value = "foo"};
 
@@ -38,7 +39,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var expected = new XElement("StructureValue",
                             new XAttribute("langId", "10"),
                             new XAttribute("scope", "global"),
-                            "foo");
+                            new XCData("foo"));
 
             var value = new StructureValue { LanguageId = 10, Value = "foo" };
 

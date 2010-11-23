@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components;
+using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
+using AgilityTools.ApiClient.Adsml.Client.Filters;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 using NUnit.Framework;
 
@@ -61,7 +64,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                             new XElement("StructureValue",
                                 new XAttribute("langId", "10"),
                                 new XAttribute("scope", "global"),
-                                "fooValue"
+                                new XCData("fooValue")
                             )
                         )
                     )
@@ -93,7 +96,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 new XElement("CreateRequest",
                     new XAttribute("name", "fooPath"),
                     new XAttribute("type", "fooObjectTypeName"),
-                    new XAttribute("returnAllAttributes", "false"),
+                    new XAttribute("returnNoAttributes", "true"),
                     new XAttribute("failOnError", "true"),
                     new XElement("AttributesToSet",
                         new XElement("StructureAttribute",
@@ -102,12 +105,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                             new XElement("StructureValue",
                                 new XAttribute("langId", "10"),
                                 new XAttribute("scope", "global"),
-                                "fooValue"
-                            )
-                        )
-                    )
-                )
-            );
+                                new XCData("fooValue"))))));
 
             var value = new StructureValue { LanguageId = 10, Value = "fooValue" };
             var attribute = new StructureAttribute { DefinitionId = 215, Name = "fooAttributeName", Values = new List<StructureValue> { value } };
@@ -151,7 +149,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                             new XElement("StructureValue",
                                 new XAttribute("langId", "10"),
                                 new XAttribute("scope", "global"),
-                                "fooValue"
+                                new XCData("fooValue")
                             )
                         )
                     )

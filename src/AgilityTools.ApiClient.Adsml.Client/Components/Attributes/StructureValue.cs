@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 {
     public class StructureValue : IAdsmlSerializable<XElement>
     {
@@ -24,7 +24,9 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
             this.Validate();
 
-            return new XElement("StructureValue", new XAttribute("langId", this.LanguageId.ToString()), new XAttribute("scope", this.Scope), this.Value);
+            return new XElement("StructureValue", new XAttribute("langId", this.LanguageId.ToString()),
+                                new XAttribute("scope", this.Scope), 
+                                new XCData(this.Value));
         }
 
         private void Validate() {

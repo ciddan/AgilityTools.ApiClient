@@ -1,3 +1,4 @@
+using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Helpers;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Requests
@@ -5,7 +6,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
     public class AqlQueryBuilder : IAqlQueryBuilder
     {
         internal string Path { get; private set; }
-        internal QueryTypes SelectedQueryType { get; private set; }
+        internal AqlQueryTypes SelectedAqlQueryType { get; private set; }
         internal int ObjectTypeId { get; private set; }
         internal string ObjectTypeName { get; private set; }
         internal string Query { get; private set; }
@@ -21,8 +22,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
             return this;
         }
 
-        public IOTTFindIQStringICSControls QueryType(QueryTypes type) {
-            this.SelectedQueryType = type;
+        public IOTTFindIQStringICSControls QueryType(AqlQueryTypes type) {
+            this.SelectedAqlQueryType = type;
             
             return this;
         }
@@ -65,7 +66,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                     ? this.SearchControlBuilder.Build()
                     : null;
 
-            return new AqlSearchRequest(this.Path, this.SelectedQueryType, objectTypeToFind, this.Query, searchControl);
+            return new AqlSearchRequest(this.Path, this.SelectedAqlQueryType, objectTypeToFind, this.Query, searchControl);
         }
     }
 }

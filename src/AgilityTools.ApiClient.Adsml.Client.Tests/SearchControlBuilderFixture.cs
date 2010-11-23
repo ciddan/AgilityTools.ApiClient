@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components;
+using AgilityTools.ApiClient.Adsml.Client.Filters;
 using NUnit.Framework;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests
@@ -134,7 +136,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 new XElement("SearchControls",
                              new XAttribute("excludeBin", "true"),
                              new XAttribute("excludeDocument", "true"),
-                             new XAttribute("returnAllAttributes", "false"),
+                             new XAttribute("returnNoAttributes", "true"),
                              new XAttribute("allowPaging", "true"),
                              new XAttribute("pageSize", "2"),
                              new XAttribute("countLimit", "5"),

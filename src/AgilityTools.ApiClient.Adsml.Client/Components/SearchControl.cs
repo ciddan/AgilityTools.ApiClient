@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Filters;
 
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public class SearchControl : ControlBase
     {

@@ -1,4 +1,8 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components;
+using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
+using AgilityTools.ApiClient.Adsml.Client.Filters;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 using System.Linq;
 using NUnit.Framework;
@@ -51,7 +55,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             builder.ReturnNoAttributes();
 
             //Assert
-            Assert.That(builder.RequestFilters[0], Is.InstanceOf<ReturnAllAttributesFilter>());
+            Assert.That(builder.RequestFilters[0], Is.InstanceOf<ReturnNoAttributesFilter>());
         }
 
         [Test]
@@ -69,7 +73,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Set_Attributes_To_Be_Created_With_Params_Overload() {
             //Act
-            _builder.AttributesToSet(StructureAttribute.CreateNew(10, new StructureValue(10, "foo")));
+            _builder.AttributesToSet(StructureAttribute.New(10, new StructureValue(10, "foo")));
 
             //Assert
             Assert.That(_builder.Attributes.Count(), Is.EqualTo(1));
@@ -79,13 +83,29 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         public void Can_Set_Attributes_To_Be_Created_With_List_Overload() {
             //Arrange
             var builder = new CreateRequestBuilder();
-            var attributes = new List<StructureAttribute>{StructureAttribute.CreateNew(10, new StructureValue(10, "foo"))};
+            var attributes = new List<StructureAttribute>{StructureAttribute.New(10, new StructureValue(10, "foo"))};
 
             //Act
             builder.AttributesToSet(attributes);
 
             //Assert
             Assert.That(builder.Attributes.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Can_Set_Attributes_To_Be_Created_With_ListFactory_Overload() {
+            //Arrange
+            var builder = new CreateRequestBuilder();
+            
+            //Act
+            builder.AttributesToSet(() => new List<IAdsmlAttribute<XElement>>
+                                          {
+                                              StructureAttribute.New(10, new StructureValue(10, "foo")),
+                                              SimpleAttribute.New(AttributeTypes.Text, "objectName", "foo")
+                                          });
+
+            //Assert
+            Assert.That(builder.Attributes.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -108,7 +128,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                    .ReturnNoAttributes()
                    .FailOnError()
                    .AttributesToSet(
-                        StructureAttribute.CreateNew(215, new StructureValue(10, "169010")))
+                        StructureAttribute.New(215, new StructureValue(10, "169010")))
                    .ConfigureLookupControls()
                         .ReturnAttributes(AttributeToReturn.WithDefinitionId(215))
                         .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
@@ -128,7 +148,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                    .ReturnNoAttributes()
                    .FailOnError()
                    .AttributesToSet(
-                       StructureAttribute.CreateNew(215, new StructureValue(10, "169010")))
+                       StructureAttribute.New(215, new StructureValue(10, "169010")))
                    .ConfigureLookupControls()
                        .ReturnAttributes(AttributeToReturn.WithDefinitionId(215))
                        .ReturnLanguages(LanguageToReturn.WithLanguageId(10))

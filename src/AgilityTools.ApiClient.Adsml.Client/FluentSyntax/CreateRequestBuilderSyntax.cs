@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.FluentSyntax
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ICreateRequestBuilder : IFluentInterface,
@@ -54,8 +57,9 @@ namespace AgilityTools.ApiClient.Adsml.Client
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IAttributesToSet : IFluentInterface
     {
-        IConfigLookupControls AttributesToSet(IEnumerable<StructureAttribute> structureAttributes);
-        IConfigLookupControls AttributesToSet(params StructureAttribute[] structureAttributes);
+        IConfigLookupControls AttributesToSet(IEnumerable<IAdsmlAttribute<XElement>> structureAttributes);
+        IConfigLookupControls AttributesToSet(params IAdsmlAttribute<XElement>[] structureAttributes);
+        IConfigLookupControls AttributesToSet(Func<IList<IAdsmlAttribute<XElement>>> attributeListFactory);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]

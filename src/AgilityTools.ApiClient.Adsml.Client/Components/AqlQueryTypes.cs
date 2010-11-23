@@ -1,8 +1,8 @@
 ﻿using AgilityTools.ApiClient.Adsml.Client.Helpers;
 
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
-    public enum QueryTypes
+    public enum AqlQueryTypes
     {
         [StringValue("")]
         None = 0,
