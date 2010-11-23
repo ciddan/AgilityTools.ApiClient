@@ -10,12 +10,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
 {
     public class CreateRequest : IAdsmlSerializable<XElement>
     {
-        public string ObjectTypeName { get; private set; }
-        public string CreationPath { get; private set; }
-        public IList<IAdsmlAttribute<XElement>> AttributesToSet { get; private set; }
+        internal string ObjectTypeName { get; private set; }
+        internal string CreationPath { get; private set; }
+        internal IList<IAdsmlAttribute<XElement>> AttributesToSet { get; private set; }
 
-        internal LookupControl LookupControl { get; set; }
-        internal IEnumerable<ICreateRequestFilter> RequestFilters { get; set; }
+        public LookupControl LookupControl { get; set; }
+        public IEnumerable<ICreateRequestFilter> RequestFilters { get; set; }
 
         public CreateRequest(string objectTypeName, string creationPath, params IAdsmlAttribute<XElement>[] attributesToSet) {
             if (string.IsNullOrEmpty(objectTypeName))
@@ -42,8 +42,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                                                      new XAttribute("name", this.CreationPath),
                                                      new XAttribute("type", this.ObjectTypeName),
                                                      new XElement("AttributesToSet",
-                                                                  this.AttributesToSet.Select(attrs => attrs.ToAdsml()))
-                                            ));
+                                                                  this.AttributesToSet.Select(attrs => attrs.ToAdsml()))));
 
             if (this.RequestFilters != null)
                 request.Descendants("CreateRequest").Single().Add(this.RequestFilters.Select(rf => rf.ToAdsml()));

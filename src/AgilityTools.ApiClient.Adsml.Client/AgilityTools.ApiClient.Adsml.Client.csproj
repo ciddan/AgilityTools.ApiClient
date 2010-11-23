@@ -47,6 +47,7 @@
     <Compile Include="Components\Attributes\AttributeTypes.cs" />
     <Compile Include="Components\Attributes\ContextAttribute.cs" />
     <Compile Include="Components\Attributes\IAdsmlAttribute.cs" />
+    <Compile Include="Components\Attributes\RelationAttribute.cs" />
     <Compile Include="Components\Attributes\SimpleAttribute.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
     <Compile Include="Components\ControlBase.cs" />
@@ -75,6 +76,9 @@
     <Compile Include="Components\AqlQueryTypes.cs" />
     <Compile Include="FluentSyntax\CreateRequestBuilderSyntax.cs" />
     <Compile Include="FluentSyntax\LookupControlBuilderSyntax.cs" />
+    <Compile Include="Requests\ModifyRequest.cs" />
+    <Compile Include="Requests\ModifyRequestBuilder.cs" />
+    <Compile Include="FluentSyntax\ModifyRequestBuilderSyntax.cs" />
     <Compile Include="FluentSyntax\SearchControlBuilderSyntax.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\StringValueAttribute.cs" />

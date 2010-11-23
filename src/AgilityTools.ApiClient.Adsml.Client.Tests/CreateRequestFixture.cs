@@ -64,7 +64,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                             new XElement("StructureValue",
                                 new XAttribute("langId", "10"),
                                 new XAttribute("scope", "global"),
-                                "fooValue"
+                                new XCData("fooValue")
                             )
                         )
                     )
@@ -105,7 +105,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                             new XElement("StructureValue",
                                 new XAttribute("langId", "10"),
                                 new XAttribute("scope", "global"),
-                                "fooValue"
+                                new XCData("fooValue")
                             )
                         )
                     )
@@ -154,7 +154,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                             new XElement("StructureValue",
                                 new XAttribute("langId", "10"),
                                 new XAttribute("scope", "global"),
-                                "fooValue"
+                                new XCData("fooValue")
                             )
                         )
                     )

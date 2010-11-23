@@ -55,7 +55,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             builder.ReturnNoAttributes();
 
             //Assert
-            Assert.That(builder.RequestFilters[0], Is.InstanceOf<ReturnAllAttributesFilter>());
+            Assert.That(builder.RequestFilters[0], Is.InstanceOf<ReturnNoAttributesFilter>());
         }
 
         [Test]

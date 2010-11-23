@@ -5,8 +5,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 {
     public class RelationAttribute : AttributeBase
     {
-        public RelationAttribute(int definitionId = -1, string nameParserClass = null) : base("RelationAttribute") {
+        public RelationAttribute(string name, int definitionId = -1, string nameParserClass = null) : base("RelationAttribute") {
             base.AttributeExtensions = new List<XAttribute>();
+            base.Name = name;
 
             if (!string.IsNullOrEmpty(nameParserClass)) {
                 base.AttributeExtensions.Add(new XAttribute("nameParserClass", nameParserClass));
@@ -18,7 +19,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
         }
 
         public static RelationAttribute New(string name, object value, int definitionId = -1, string nameParserClass = null) {
-            return new RelationAttribute(definitionId, nameParserClass) { Name = name, Value = value };
+            return new RelationAttribute(name, definitionId, nameParserClass) { Value = value };
         }
     }
 }

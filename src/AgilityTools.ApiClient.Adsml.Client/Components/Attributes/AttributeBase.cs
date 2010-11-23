@@ -19,8 +19,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
         public virtual XElement ToAdsml() {
             Validate();
 
-            var element = new XElement(this.ElementName, new XAttribute("name", this.Name), 
-                            new XElement("Value", new XCData(this.Value.ToString())));
+            var element = new XElement(this.ElementName, new XAttribute("name", this.Name));
+
+            if (this.Value != null) {
+                element.Add(new XElement("Value", new XCData(this.Value.ToString())));
+            }
 
             if (this.AttributeExtensions != null && this.AttributeExtensions.Count() >= 1) {
                 element.Add(AttributeExtensions);
@@ -32,10 +35,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
         protected virtual void Validate() {
             if (string.IsNullOrEmpty(this.Name)) {
                 throw new ApiSerializationValidationException("Name must be set.");
-            }
-
-            if (this.Value == null) {
-                throw new ApiSerializationValidationException("Value must be set.");
             }
         }
     }

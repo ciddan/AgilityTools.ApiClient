@@ -12,8 +12,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Filters
             return new ExcludeDocumentFilter(true);
         }
 
-        public static ReturnAllAttributesFilter OmitStructureAttributes() {
-            return new ReturnAllAttributesFilter(false);
+        public static ReturnNoAttributesFilter OmitStructureAttributes() {
+            return new ReturnNoAttributesFilter(true);
         }
 
         public static AllowPagingFilter AllowPaging() {
@@ -37,16 +37,16 @@ namespace AgilityTools.ApiClient.Adsml.Client.Filters
         }
     }
 
-    public class ReturnAllAttributesFilter : ISearchRequestFilter, ICreateRequestFilter, IModifyRequestFilter
+    public class ReturnNoAttributesFilter : ISearchRequestFilter, ICreateRequestFilter, IModifyRequestFilter
     {
-        private readonly bool _returnAllAttributes;
+        private readonly bool _returnNoAttributes;
 
-        public ReturnAllAttributesFilter(bool returnAllAttributes) {
-            _returnAllAttributes = returnAllAttributes;
+        public ReturnNoAttributesFilter(bool returnNoAttributes) {
+            _returnNoAttributes = returnNoAttributes;
         }
 
         public XAttribute ToAdsml() {
-            return new XAttribute("returnAllAttributes", _returnAllAttributes);
+            return new XAttribute("returnNoAttributes", _returnNoAttributes);
         }
     }
 

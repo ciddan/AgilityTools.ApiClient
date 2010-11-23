@@ -17,35 +17,38 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 		    this.Values = values;
 	    }
 
-        public StructureAttribute(int definitionId, IList<StructureValue> values) {
-            this.DefinitionId = definitionId;
-            this.Values = values;
-        }
+        public StructureAttribute(int definitionId, IList<StructureValue> values) 
+            : this (null, definitionId, values) { }
 
-        public StructureAttribute(string name, IList<StructureValue> values) {
+        public StructureAttribute(string name, IList<StructureValue> values) 
+            : this (name, 0, values) { }
+
+        public StructureAttribute(string name, int definitionId, IList<StructureValue> values) {
             this.Name = name;
+            this.DefinitionId = definitionId;
             this.Values = values;
         }
 
 	    public XElement ToAdsml() {
 		    this.Validate();
 
-	        return !string.IsNullOrEmpty(this.Name)
-	                   ? new XElement("StructureAttribute",
-	                                  new XAttribute("id", this.DefinitionId),
-	                                  new XAttribute("name", this.Name),
-	                                  this.Values.Select(val => val.ToAdsml()).ToList())
-	                   : new XElement("StructureAttribute",
-	                                  new XAttribute("id", this.DefinitionId),
-	                                  this.Values.Select(val => val.ToAdsml()).ToList());
+	        var element = new XElement("StructureAttribute");
+
+            if (this.DefinitionId != 0)
+                element.Add(new XAttribute("id", this.DefinitionId));
+
+            if (!string.IsNullOrEmpty(this.Name))
+                element.Add(new XAttribute("name", this.Name));
+
+            if (this.Values != null && this.Values.Count() >= 1)
+                element.Add(this.Values.Select(val => val.ToAdsml()));
+
+	        return element;
 	    }
 
         private void Validate() {
-		    if (this.DefinitionId == 0)
-                throw new ApiSerializationValidationException("DefinitionId has to be set.");
-		
-		    if (this.Values.Count() < 1)
-                throw new ApiSerializationValidationException("At least one StructureAttribute Value must be specified.");
+		    if (this.DefinitionId == 0 && string.IsNullOrEmpty(this.Name))
+                throw new ApiSerializationValidationException("DefinitionId or Name has to be set.");
 	    }
 
         public static StructureAttribute New(string name, params StructureValue[] values) {
@@ -54,6 +57,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 
         public static StructureAttribute New(int definitionId, params StructureValue[] values) {
             return new StructureAttribute(definitionId, values);
+        }
+
+        public static StructureAttribute New(string name, int definitionId, params StructureValue[] values)
+        {
+            return new StructureAttribute(name, definitionId, values);
         }
     }
 }

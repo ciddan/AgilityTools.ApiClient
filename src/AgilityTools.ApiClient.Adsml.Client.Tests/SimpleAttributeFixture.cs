@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
@@ -62,20 +61,27 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
+        public void Can_Generate_Api_Xml_Without_Value() {
+            //Arrange
+            var expected = new XElement("SimpleAttribute",
+                                        new XAttribute("name", "objectTypeId"),
+                                        new XAttribute("type", "integer")).ToString();
+
+            var attribute = new SimpleAttribute(AttributeTypes.Integer) { Name = "objectTypeId" };
+
+            //Act
+            var actual = attribute.ToAdsml().ToString();
+            Console.WriteLine(actual);
+
+            //Assert
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
         [ExpectedException(typeof(ApiSerializationValidationException), ExpectedMessage = "Name must be set.")]
         public void Validate_Throws_ASVE_If_Name_Is_Not_Set() {
             //Arrange
             var attribute = new SimpleAttribute(AttributeTypes.Binary) { Value = 1777 };
-
-            //Act
-            attribute.ToAdsml();
-        }
-
-        [Test]
-        [ExpectedException(typeof (ApiSerializationValidationException), ExpectedMessage = "Value must be set.")]
-        public void Validate_Throws_ASVE_If_Value_Is_Not_Set() {
-            //Arrange
-            var attribute = new SimpleAttribute(AttributeTypes.Decimal) { Name="foo" };
 
             //Act
             attribute.ToAdsml();
