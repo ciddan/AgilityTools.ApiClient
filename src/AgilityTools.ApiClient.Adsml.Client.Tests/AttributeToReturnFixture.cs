@@ -59,12 +59,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
         [Test]
         [ExpectedException(typeof(ApiSerializationValidationException), ExpectedMessage = "Invalid settings. Either DefinitionId or Name must be set.")]
-        public void ToApiXml_Throws_ASVE_If_DefinitionId_And_Name_Are_Unset() {
+        public void ToAdsml_Throws_ASVE_If_DefinitionId_And_Name_Are_Unset() {
             //Arrange
             var atr = new AttributeToReturn();
 
             //Act
-            atr.Validate();
+            atr.ToAdsml();
         }
     }
 }
