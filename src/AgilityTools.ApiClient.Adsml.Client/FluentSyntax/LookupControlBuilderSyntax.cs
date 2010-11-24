@@ -16,6 +16,6 @@ namespace AgilityTools.ApiClient.Adsml.Client
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ILookupRequestFilters : IFluentInterface
     {
-        IReturnedAttributesReturnedLanguagesConfigureReferences AddRequestFilters(params ILookupRequestFilter[] filters);
+        IReturnedAttributesReturnedLanguagesConfigureReferences AddRequestFilters(params ILookupControlFilter[] filters);
     }
 }

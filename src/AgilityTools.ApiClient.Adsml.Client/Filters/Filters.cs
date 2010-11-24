@@ -35,9 +35,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Filters
         public static ReturnRelationsAsAttributesFilter ReturnRelationsAsAttributes() {
             return new ReturnRelationsAsAttributesFilter(true);
         }
+
+        public static CopyLocalAttributesFromSourceFilter CopyLocalAttributesFromSource() {
+            return new CopyLocalAttributesFromSourceFilter(true);
+        }
     }
 
-    public class ReturnNoAttributesFilter : ISearchRequestFilter, ICreateRequestFilter, IModifyRequestFilter
+    public class ReturnNoAttributesFilter : ISearchRequestFilter, ICreateRequestFilter, IModifyRequestFilter, ILinkRequestFilter
     {
         private readonly bool _returnNoAttributes;
 
@@ -140,7 +144,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Filters
         }
     }
 
-    public class ReturnRelationsAsAttributesFilter : ILookupRequestFilter
+    public class ReturnRelationsAsAttributesFilter : ILookupControlFilter
     {
         private readonly bool _returnAsAttributes;
 
@@ -150,6 +154,19 @@ namespace AgilityTools.ApiClient.Adsml.Client.Filters
 
         public XAttribute ToAdsml() {
             return new XAttribute("returnRelationsAsAttributes", _returnAsAttributes);
+        }
+    }
+
+    public class CopyLocalAttributesFromSourceFilter : ICopyControlFilter
+    {
+        private readonly bool _copyFromSource;
+
+        public CopyLocalAttributesFromSourceFilter(bool copyFromSource) {
+            _copyFromSource = copyFromSource;
+        }
+
+        public XAttribute ToAdsml() {
+            return new XAttribute("copyLocalAttributes", _copyFromSource);
         }
     }
 }
