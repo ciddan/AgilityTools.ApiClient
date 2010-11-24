@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
@@ -12,12 +13,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
     public class ApiClientFixture
     {
         private IApiClient _client;
-        private Mock<IApiWebClient> _mockWebClient;
 
         [SetUp]
         public void Setup() {
             _client = new ApiClient(new ApiWebClient());
-            _mockWebClient = new Mock<IApiWebClient>();
         }
 
         [TearDown]
@@ -86,6 +85,30 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             //Assert
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.InstanceOf<XElement>());
+        }
+
+        [Test]
+        public void Can_Send_Async_ApiRequests_Via_ApiClient() {
+            //Arrange
+            var request = new CreateRequest("lol", "lol", StructureAttribute.New(215, new StructureValue(10, "foo")));
+
+            var manualEvent = new ManualResetEvent(false);
+            bool callbackCalled = false;
+
+            //Act
+            XElement result = null;
+
+            _client.SendApiRequestAsync(request, data => {
+                                                     result = data;
+                                                     callbackCalled = true;
+                                                     manualEvent.Set();
+                                                 });
+
+            manualEvent.WaitOne();
+
+            //Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(callbackCalled, Is.True);
         }
     }
 }
