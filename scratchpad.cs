@@ -94,3 +94,17 @@ builder.Context("/foo/bar")
 		   () => /*...*/)
 	   .ConfigureLookupControls()
 	   	.Foo();
+
+/*----------------------------------------------------------------------*/
+/*                      LINK OPERATION                                  */
+/*----------------------------------------------------------------------*/
+
+var builder = new LinkRequestBuilder();
+
+builder.Context("foo")
+	   .Target("bar")
+	   .ReturnNoAttributes()
+	   .CopyControls()
+	   	.CopyLocalAttributesFromSource()
+	   	.LookupControls()
+	   		.Foo();

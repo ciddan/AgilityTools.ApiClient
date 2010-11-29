@@ -1,0 +1,183 @@
+<!--Skapar en ny produkt-->
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd"
+		      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<CreateRequest name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT"
+			       type="Produkt">
+		<AttributesToSet>
+				<StructureAttribute id="215" name="Artikelnummer">
+					<StructureValue langId="10" scope="global"><![CDATA[000111]]></StructureValue>
+				</StructureAttribute>
+      			<StructureAttribute id="22" name="Produktnamn">
+        			<StructureValue langId="10" scope="global"><![CDATA[000111 TESTPRODUKT]]></StructureValue>
+      			</StructureAttribute>
+      			<StructureAttribute id="392" name="Artikelnummer för publicering">
+        			<StructureValue langId="10" scope="global"><![CDATA[000-111]]></StructureValue>
+      			</StructureAttribute>
+		</AttributesToSet>
+  	</CreateRequest>
+</BatchRequest>
+
+<!--Trunkerad response-->
+<?xml version="1.0" encoding="UTF-8"?>
+<BatchResponse version="5.1.16 build 116 (2010/05/27 14-36)" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="adsml.xsd">
+    <CreateResponse>
+        <StructureContext idPath="12:1516:145842:180789" name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT" sortPath="0:14:2:1">
+        	<!--Attribut-->
+        </StructureContext>
+    </CreateResponse>
+</BatchResponse>
+
+<!--Modifierar attribut på en produkt-->
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd"	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ModifyRequest name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT" returnNoAttributes="true">
+		<ModificationItem operation="replaceValue">
+			<AttributeDetails>
+      			<StructureAttribute id="421" name="yy Artikelstatus MMS001">
+        			<StructureValue langId="10" scope="global"><![CDATA[60]]></StructureValue>
+      			</StructureAttribute>
+			</AttributeDetails>
+		</ModificationItem>
+  	</ModifyRequest>
+</BatchRequest>
+
+<!--Lägger till en tillverkarrelation på en produkt-->
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ModifyRequest name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT" returnNoAttributes="true">
+		<ModificationItem operation="addAttribute">
+			<AttributeDetails>
+				<StructureAttribute id="31" name="Tillverkarrelation">
+					<StructureValue langId="10" scope="global"><![CDATA[69215]]></StructureValue>
+				</StructureAttribute>
+			</AttributeDetails>
+		</ModificationItem>
+  	</ModifyRequest>
+</BatchRequest>
+
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ModifyRequest name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT">
+		<LookupControls>
+			<AttributesToReturn>
+				<Attribute id="31"/>
+			</AttributesToReturn>
+		</LookupControls>
+		<ModificationItem operation="replaceValue">
+			<AttributeDetails>
+				<StructureAttribute id="392">
+					<StructureValue scope="global" langId="10" type="text"><![CDATA[111-111]]></StructureValue>
+				</StructureAttribute>
+			</AttributeDetails>
+		</ModificationItem>
+		<ModificationItem operation="replaceValue">
+			<AttributeDetails>
+				<StructureAttribute id="413">
+					<StructureValue scope="global" langId="10" type="text"><![CDATA[foo]]></StructureValue>
+				</StructureAttribute>
+			</AttributeDetails>
+		</ModificationItem>
+	</ModifyRequest>
+</BatchRequest>
+
+<!--Tar bort alla tillverkarrelationer på en produkt-->
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ModifyRequest name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT" returnNoAttributes="true">
+		<ModificationItem operation="removeAttribute">
+			<AttributeDetails>
+				<StructureAttribute id="31" name="Tilverkarrelation" />
+			</AttributeDetails>
+		</ModificationItem>
+  	</ModifyRequest>
+</BatchRequest>
+
+<!--Trunkerad Response-->
+<?xml version="1.0" encoding="UTF-8"?>
+<BatchResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="adsml.xsd">
+    <ErrorResponse id="4024" type="malformedRequest">
+        <Message><![CDATA[Error at line 2 column 63. cvc-elt.1: Cannot find the declaration of element 'BatchRequest'..]]></Message>
+    </ErrorResponse>
+    <CreateResponse>
+        <StructureContext idPath="12:1516:137713:138413" name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT">
+            <SimpleAttribute name="objectTypeId" type="integer">
+                <Value><![CDATA[12]]></Value>
+            </SimpleAttribute>
+			<!--Trunkerade attribut-->
+		</StructureContext>
+	</CreateResponse>
+</BatchResponse>
+
+<!--Skapar en ny varugrupp-->
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<CreateRequest name="/Structures/Classification/JULA Produkter/xx Import/Nya varugrupper/Testgrupp"
+				   type="Produktkategori">
+		<AttributesToSet>
+			<StructureAttribute id="411" name="Varugruppsnamn">
+				<StructureValue langId="10" scope="global"><![CDATA[Testgrupp]]></StructureValue>
+			</StructureAttribute>
+			<StructureAttribute id="20" name="Produktkategorinamn">
+				<StructureValue langId="10" scope="global"><![CDATA[Testgrupp]]></StructureValue>
+			</StructureAttribute>
+			<StructureAttribute id="46" name="Attributgrupp">
+				<StructureValue langId="10" scope="global"><![CDATA[000111]]></StructureValue>
+			</StructureAttribute>
+		</AttributesToSet>
+	</CreateRequest>
+</BatchRequest>
+
+<!--Länkar givet objekt till given plats-->
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<LinkRequest name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT"
+			     targetLocation="/Structures/Classification/JULA Produkter/xx Import/Nya varugrupper/Testgrupp/"
+				 returnNoAttributes="true">
+				 <CopyControls copyLocalAttributes="true" />
+	</LinkRequest>
+</BatchRequest>
+
+<!--Tar fram pathen till en given varugrupp (söker via varugrupps-kod från Movex)-->
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<SearchRequest base="/Structures/Classification/JULA Produkter">
+		<SearchControls excludeBin="true" excludeDocument="true" />
+		<Filter>
+			<FilterString><![CDATA[FIND BELOW #11 WHERE("Attributgrupp" = "160701")]]></FilterString>
+		</Filter>
+	</SearchRequest>
+</BatchRequest>
+
+<!--Söker fram en News-mapp i en given katalog-->
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<SearchRequest base="/Structures/Publication/V10">
+		<Filter>
+			<FilterString><![CDATA[FIND BELOW #18 WHERE(#375 = "News")]]></FilterString>
+		</Filter>
+	</SearchRequest>
+</BatchRequest>
+
+
+
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<SearchRequest base="/Structures/Classification/JULA Produkter">
+		<SearchControls excludeBin="true" excludeDocument="true" />
+		<Filter>
+			<FilterString><![CDATA[FIND BELOW #12 WHERE ("objectId" = "1777")]]></FilterString>
+		</Filter>
+	</SearchRequest>
+</BatchRequest>
+
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ModifyRequest name="/foo/bar">
+		<LookupControls>
+			<AttributesToReturn>
+				<Attribute id="215" />
+			</AttributesToReturn>
+			<LanguagesToReturn>
+				<Language id="10" />
+			</LanguagesToReturn>
+		</LookupControls>
+		<ModificationItem operation="addValue">
+			<AttributeDetails>
+				<StructureAttribute id="31">
+					<StructureValue langId="10" scope="global"><![CDATA[foo]]></StructureValue>
+				</StructureAttribute>
+			</AttributeDetails>
+		</ModificationItem>
+	</ModifyRequest>
+</BatchRequest>

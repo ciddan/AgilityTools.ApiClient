@@ -102,6 +102,8 @@
     <Compile Include="Components\Attributes\StructureAttribute.cs" />
     <Compile Include="Components\Attributes\StructureValue.cs" />
     <Compile Include="Requests\CreateRequestBuilder.cs" />
+    <Compile Include="Responses\AdsmlResponse.cs" />
+    <Compile Include="Responses\ResponseAdaptors.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj">

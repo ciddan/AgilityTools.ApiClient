@@ -66,6 +66,7 @@
     <Compile Include="ReferenceControlFixture.cs" />
     <Compile Include="ReferenceOptionsFixture.cs" />
     <Compile Include="RelationAttributeFixture.cs" />
+    <Compile Include="ResponseAdaptorFixture.cs" />
     <Compile Include="SearchControlBuilderFixture.cs" />
     <Compile Include="SimpleAttributeFixture.cs" />
     <Compile Include="StringValueFixture.cs" />
