@@ -2,7 +2,7 @@ using System.ComponentModel;
 using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Filters;
 
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.FluentSyntax
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ILookupControlBuilder : IFluentInterface,
