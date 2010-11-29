@@ -33,16 +33,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException), ExpectedMessage = "ObjectTypeName cannot be null or empty.")]
-        public void CreateRequest_Ctor_Throwns_InvalidOperationException_If_ObjectTypeName_Is_NullOrEmpty()
-        {
+        public void CreateRequest_Ctor_Throwns_InvalidOperationException_If_ObjectTypeName_Is_NullOrEmpty() {
             //Act
             new CreateRequest(null, "bar", new StructureAttribute());
         }
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException), ExpectedMessage = "CreationPath cannot be null or empty.")]
-        public void CreateRequest_Ctor_Throwns_InvalidOperationException_If_CreationPath_Is_NullOrEmpty()
-        {
+        public void CreateRequest_Ctor_Throwns_InvalidOperationException_If_CreationPath_Is_NullOrEmpty() {
             //Act
             new CreateRequest("foo", string.Empty, new StructureAttribute());
         }
@@ -64,12 +62,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                             new XElement("StructureValue",
                                 new XAttribute("langId", "10"),
                                 new XAttribute("scope", "global"),
-                                new XCData("fooValue")
-                            )
-                        )
-                    )
-                )
-            );
+                                new XCData("fooValue"))))));
 
             var value = new StructureValue {LanguageId = 10, Value = "fooValue"};
             var attribute = new StructureAttribute

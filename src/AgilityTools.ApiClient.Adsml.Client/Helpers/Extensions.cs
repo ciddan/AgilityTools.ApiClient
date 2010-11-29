@@ -20,5 +20,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Helpers
             // Return the first if there was a match.
             return attribs.Length > 0 ? attribs[0].StringValue : null;
         }
+
+        public static bool IsNullOrEmpty(this string str) {
+            return string.IsNullOrEmpty(str);
+        }
     }
 }

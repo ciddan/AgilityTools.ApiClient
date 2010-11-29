@@ -6,7 +6,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public class LookupControl : ControlBase
     {
-        internal LookupControl(IEnumerable<ILookupRequestFilter> requestFilters, IEnumerable<ILookupControlComponent> components) {
+        internal LookupControl(IEnumerable<ILookupControlFilter> requestFilters, IEnumerable<ILookupControlComponent> components) {
             if (requestFilters != null)
                 this.RequestFilters = new List<IRequestFilter>(requestFilters);
 

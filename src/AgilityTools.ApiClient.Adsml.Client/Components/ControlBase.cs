@@ -21,8 +21,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             this.ApplyFilters();
 
             if (this.Components != null) {
-                foreach (var searchControlComponent in this.Components) {
-                    this.Request.Add(searchControlComponent.ToAdsml());
+                foreach (var controlComponent in this.Components) {
+                    this.Request.Add(controlComponent.ToAdsml());
                 }
             }
 

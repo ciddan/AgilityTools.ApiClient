@@ -1,21 +1,22 @@
 using System.Collections.Generic;
 using AgilityTools.ApiClient.Adsml.Client.Filters;
+using AgilityTools.ApiClient.Adsml.Client.FluentSyntax;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public class LookupControlBuilder : ILookupControlBuilder
     {
-        private IList<ILookupRequestFilter> RequestFilterList { get; set; }
+        private IList<ILookupControlFilter> RequestFilterList { get; set; }
         private IList<ILookupControlComponent> ControlComponents { get; set; }
 
         public LookupControlBuilder() {
             ControlComponents = new List<ILookupControlComponent>();
         }
 
-        public IReturnedAttributesReturnedLanguagesConfigureReferences AddRequestFilters(params ILookupRequestFilter[] filters) {
+        public IReturnedAttributesReturnedLanguagesConfigureReferences AddRequestFilters(params ILookupControlFilter[] filters) {
             if (filters != null) {
                 this.RequestFilterList =
-                    new List<ILookupRequestFilter>(filters);
+                    new List<ILookupControlFilter>(filters);
             }
 
             return this;

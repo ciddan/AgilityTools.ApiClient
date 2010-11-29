@@ -51,6 +51,8 @@
     <Compile Include="Components\Attributes\SimpleAttribute.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
     <Compile Include="Components\ControlBase.cs" />
+    <Compile Include="Components\CopyControl.cs" />
+    <Compile Include="Components\CopyControlBuilder.cs" />
     <Compile Include="Components\Interfaces\IAttributeControl.cs" />
     <Compile Include="Components\Interfaces\ILookupControlComponent.cs" />
     <Compile Include="Components\Interfaces\IReturnedLanguageControl.cs" />
@@ -64,8 +66,10 @@
     <Compile Include="Components\ControlComponentBase.cs" />
     <Compile Include="Filters\Filters.cs" />
     <Compile Include="Components\Interfaces\IControlComponent.cs" />
+    <Compile Include="Filters\ICopyControlFilter.cs" />
     <Compile Include="Filters\ICreateRequestFilter.cs" />
-    <Compile Include="Filters\ILookupRequestFilter.cs" />
+    <Compile Include="Filters\ILinkRequestFilter.cs" />
+    <Compile Include="Filters\ILookupControlFilter.cs" />
     <Compile Include="Components\Interfaces\IReferenceOptions.cs" />
     <Compile Include="Filters\IModifyRequestFilter.cs" />
     <Compile Include="Filters\IRequestFilter.cs" />
@@ -74,8 +78,12 @@
     <Compile Include="Components\SearchControlBuilder.cs" />
     <Compile Include="FluentSyntax\AqlQueryBuilderSyntax.cs" />
     <Compile Include="Components\AqlQueryTypes.cs" />
+    <Compile Include="FluentSyntax\CopyControlBuilderSyntax.cs" />
     <Compile Include="FluentSyntax\CreateRequestBuilderSyntax.cs" />
+    <Compile Include="FluentSyntax\LinkRequestBuilderSyntax.cs" />
     <Compile Include="FluentSyntax\LookupControlBuilderSyntax.cs" />
+    <Compile Include="Requests\LinkRequestBuilder.cs" />
+    <Compile Include="Requests\LinkRequest.cs" />
     <Compile Include="Requests\ModifyRequest.cs" />
     <Compile Include="Requests\ModifyRequestBuilder.cs" />
     <Compile Include="FluentSyntax\ModifyRequestBuilderSyntax.cs" />
