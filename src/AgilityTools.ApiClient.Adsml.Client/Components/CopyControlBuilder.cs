@@ -6,8 +6,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public class CopyControlBuilder : ICopyControlBuilder
     {
-        private CopyControl _copyControl;
-
         internal ILookupControlBuilder LookupControlBuilder { get; set; }
         internal IList<ICopyControlFilter> RequestFilters { get; private set; }
 
