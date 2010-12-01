@@ -37,7 +37,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var expected = new XAttribute("returnNoAttributes", "true");
 
             //Act
-            var actual = Filter.OmitStructureAttributes();
+            var actual = Filter.ReturnNoAttributes();
 
             //Assert
             Assert.That(actual.ToAdsml().ToString(), Is.EqualTo(expected.ToString()));

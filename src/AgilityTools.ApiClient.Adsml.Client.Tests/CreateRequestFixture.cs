@@ -108,7 +108,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                               RequestFilters =
                                   new List<ICreateRequestFilter>
                                   {
-                                      Filter.OmitStructureAttributes(),
+                                      Filter.ReturnNoAttributes(),
                                       Filter.FailOnError()
                                   }
                           };

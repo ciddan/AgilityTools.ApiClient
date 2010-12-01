@@ -184,7 +184,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             {
                 RequestFilters = new List<IModifyRequestFilter>
                                  {
-                                     Filter.OmitStructureAttributes(),
+                                     Filter.ReturnNoAttributes(),
                                      Filter.FailOnError()
                                  }
             };

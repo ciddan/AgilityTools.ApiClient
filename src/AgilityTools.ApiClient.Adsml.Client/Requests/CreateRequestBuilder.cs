@@ -34,7 +34,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         }
 
         public IFOErrorIATSet ReturnNoAttributes() {
-            this.RequestFilters.Add(Filter.OmitStructureAttributes());
+            this.RequestFilters.Add(Filter.ReturnNoAttributes());
 
             return this;
         }

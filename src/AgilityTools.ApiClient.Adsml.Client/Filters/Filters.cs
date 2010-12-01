@@ -12,7 +12,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Filters
             return new ExcludeDocumentFilter(true);
         }
 
-        public static ReturnNoAttributesFilter OmitStructureAttributes() {
+        public static ReturnNoAttributesFilter ReturnNoAttributes() {
             return new ReturnNoAttributesFilter(true);
         }
 

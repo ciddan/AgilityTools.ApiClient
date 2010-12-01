@@ -158,7 +158,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 .AddRequestFilters(
                     Filter.ExcludeBin(),
                     Filter.ExcludeDocument(),
-                    Filter.OmitStructureAttributes(),
+                    Filter.ReturnNoAttributes(),
                     Filter.AllowPaging(),
                     Filter.PageSize(2),
                     Filter.CountLimit(5))

@@ -107,7 +107,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                             Filter.ExcludeBin(),
                             Filter.ExcludeDocument(),
                             Filter.CountLimit(1),
-                            Filter.OmitStructureAttributes())
+                            Filter.ReturnNoAttributes())
                         .ReturnAttributes(AttributeToReturn.WithDefinitionId(215))
                         .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
                         .ConfigureReferenceHandling(

@@ -43,7 +43,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var request = new LinkRequest("foo", "bar");
 
             //Act
-            request.RequestFilters.Add(Filter.OmitStructureAttributes());
+            request.RequestFilters.Add(Filter.ReturnNoAttributes());
 
             //Assert
             Assert.That(request.RequestFilters.Count(), Is.EqualTo(1));
@@ -98,7 +98,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             var request = new LinkRequest("foo", "bar")
                           {
-                              RequestFilters = new List<ILinkRequestFilter> {Filter.OmitStructureAttributes()}
+                              RequestFilters = new List<ILinkRequestFilter> {Filter.ReturnNoAttributes()}
                           };
 
             //Act
