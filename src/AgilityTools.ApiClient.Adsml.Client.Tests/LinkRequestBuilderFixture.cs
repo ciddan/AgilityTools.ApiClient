@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Filters;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
@@ -81,19 +82,65 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Build_Basic_LinkRequest() {
             //Arrange
+            XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+            string expected = new XElement("BatchRequest",
+                new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+                new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                new XElement("LinkRequest",
+                    new XAttribute("name", "/foo"),
+                    new XAttribute("targetLocation", "/bar"))).ToString();
+
+
             _builder.SourceContext("/foo")
-                    .TargetPath("/bar")
-                    .ReturnNoAttributes();
+                    .TargetPath("/bar");
 
             //Act
             var request = _builder.Build();
+            string actual = _builder.Build().ToAdsml().ToString();
 
             //Assert
-            Assert.That(request, Is.Not.Null);
-            Assert.That(request, Is.InstanceOf<LinkRequest>());
             Assert.That(request.SourcePath, Is.EqualTo(_builder.Source));
             Assert.That(request.TargetPath, Is.EqualTo(_builder.Target));
             Assert.That(request.RequestFilters.Count(), Is.EqualTo(_builder.RequestFilters.Count()));
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Can_Build_Advanced_LinkRequest() {
+            //Arrange
+            XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+            string expected = new XElement("BatchRequest",
+                new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+                new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                new XElement("LinkRequest",
+                    new XAttribute("name", "/foo"),
+                    new XAttribute("targetLocation", "/bar"),
+                    new XAttribute("returnNoAttributes", "true"),
+                    new XElement("CopyControls",
+                        new XAttribute("copyLocalAttributes", "true"),
+                        new XElement("LookupControls",
+                            new XElement("LanguagesToReturn",
+                                new XElement("Language",
+                                    new XAttribute("id", "10"))))))).ToString();
+
+            _builder.SourceContext("/foo")
+                    .TargetPath("/bar")
+                    .ReturnNoAttributes()
+                    .ConfigureCopyControls()
+                        .CopyLocalAttributesFromSource()
+                        .ConfigureLookupControls()
+                            .ReturnLanguages(LanguageToReturn.WithLanguageId(10));
+
+            //Act
+            var request = _builder.Build();
+            string actual = _builder.Build().ToAdsml().ToString();
+
+            //Assert
+            Assert.That(request.SourcePath, Is.EqualTo(_builder.Source));
+            Assert.That(request.TargetPath, Is.EqualTo(_builder.Target));
+            Assert.That(request.RequestFilters.Count(), Is.EqualTo(_builder.RequestFilters.Count()));
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]

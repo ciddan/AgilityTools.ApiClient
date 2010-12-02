@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Helpers
 {
@@ -23,6 +24,16 @@ namespace AgilityTools.ApiClient.Adsml.Client.Helpers
 
         public static bool IsNullOrEmpty(this string str) {
             return string.IsNullOrEmpty(str);
+        }
+
+        public static string SanitizeContextName(this string str) {
+            if (str == null)
+                return null;
+
+            if (str == string.Empty)
+                return string.Empty;
+
+            return str.Replace("/", "@fs:");
         }
     }
 }

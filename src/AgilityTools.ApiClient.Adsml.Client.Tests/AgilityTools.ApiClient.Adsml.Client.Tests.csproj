@@ -53,6 +53,7 @@
     <Compile Include="ContextAttributeFixture.cs" />
     <Compile Include="CreateRequestBuilderFixture.cs" />
     <Compile Include="CreateRequestFixture.cs" />
+    <Compile Include="DeleteRequestFixture.cs" />
     <Compile Include="FilterFixture.cs" />
     <Compile Include="LanguageControlFixture.cs" />
     <Compile Include="LanguageToReturnFixture.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="ReferenceOptionsFixture.cs" />
     <Compile Include="RelationAttributeFixture.cs" />
     <Compile Include="ResponseAdaptorFixture.cs" />
+    <Compile Include="SanitizerFixture.cs" />
     <Compile Include="SearchControlBuilderFixture.cs" />
     <Compile Include="SimpleAttributeFixture.cs" />
     <Compile Include="StringValueFixture.cs" />
