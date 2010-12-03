@@ -6,6 +6,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
     public class DeleteResponseConverter : AdsmlResponseConverter<DeleteResponse>
     {
+        public DeleteResponseConverter() {
+            this.ElementName = "DeleteResponse";
+        }
+
         public override DeleteResponse Convert(XElement source) {
             if (source == null) 
                 throw new ArgumentNullException("source");

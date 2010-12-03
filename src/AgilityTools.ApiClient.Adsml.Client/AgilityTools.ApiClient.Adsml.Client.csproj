@@ -104,11 +104,14 @@
     <Compile Include="Components\Attributes\StructureValue.cs" />
     <Compile Include="Requests\CreateRequestBuilder.cs" />
     <Compile Include="Responses\AdsmlResponse.cs" />
+    <Compile Include="Responses\AdsmlResponseConverter.cs" />
     <Compile Include="Responses\AdsmlResult.cs" />
     <Compile Include="Responses\DeleteResponse.cs" />
     <Compile Include="Responses\DeleteResponseConverter.cs" />
     <Compile Include="Responses\IResponseConverter.cs" />
     <Compile Include="Responses\ResponseAdaptors.cs" />
+    <Compile Include="Responses\UnlinkResponse.cs" />
+    <Compile Include="Responses\UnlinkResponseConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj">

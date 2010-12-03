@@ -76,6 +76,7 @@
     <Compile Include="StructureAttributeFixture.cs" />
     <Compile Include="StructureValueFixture.cs" />
     <Compile Include="IdNameReferenceFixture.cs" />
+    <Compile Include="UnlinkResponseConverterFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Client\AgilityTools.ApiClient.Adsml.Client.csproj">
