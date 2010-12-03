@@ -5,7 +5,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
     public abstract class AdsmlResponseConverter<TOutput> : IResponseConverter<XElement, TOutput> where TOutput : AdsmlResult, new()
     {
-        public string ElementName { get; set; }
+        protected string ElementName { get; set; }
 
         public virtual TOutput Convert(XElement source) {
 
