@@ -104,6 +104,10 @@
     <Compile Include="Components\Attributes\StructureValue.cs" />
     <Compile Include="Requests\CreateRequestBuilder.cs" />
     <Compile Include="Responses\AdsmlResponse.cs" />
+    <Compile Include="Responses\AdsmlResult.cs" />
+    <Compile Include="Responses\DeleteResponse.cs" />
+    <Compile Include="Responses\DeleteResponseConverter.cs" />
+    <Compile Include="Responses\IResponseConverter.cs" />
     <Compile Include="Responses\ResponseAdaptors.cs" />
   </ItemGroup>
   <ItemGroup>

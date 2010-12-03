@@ -19,7 +19,7 @@ builder.Configure()
 var builder = new AqlQueryBuilder();
 
 builder.BasePath("/foo/bar")
-	   .QueryType(QueryTypes.Below) // Enum of types
+	   .QueryType(AqlQueryTypes.Below) // Enum of types
 	   .ObjectTypeToFind(12)		// Optional, can be string
 	   .QueryString("\"objectId\" <= \"10\"")
 	   .ConfigureSearchControls()
@@ -108,3 +108,38 @@ builder.Context("foo")
 	   	.CopyLocalAttributesFromSource()
 	   	.LookupControls()
 	   		.Foo();
+
+
+
+public interface IResponseConverter<TOutput> : Converter<XElement, out TOutput> where TOutput : class
+{
+	TOutput GetResponse(XElement source);
+}
+
+public class DeleteResponse : AdsmlResult { }
+
+public class AdsmlResult
+{
+	public IEnumerable<string> Messages { get; set; }
+	public string Code { get; set; }
+	public string Description { get; set; }
+}
+
+public class AdsmlResponseConverter : IResponseConverter
+{
+	TOutput GetResponse<TOutput>(XElement source) where TOutput : class, AdsmlResult {
+		var result = new AdsmlResult();
+		// fill properties
+		return (TOutput) result;
+	}
+}
+
+/*
+	<xsd:complexType name="ADSMLResult">
+		<xsd:sequence>
+			<xsd:element name="Message" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="description" type="xsd:string"/>
+	</xsd:complexType>
+*/
