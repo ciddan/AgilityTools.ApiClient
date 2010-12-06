@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Helpers;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
@@ -14,6 +15,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             if (source == null) 
                 throw new ArgumentNullException("source");
 
+            source.ValidateAdsmlResponse();
             CheckResponse(source);
 
             return base.Convert(source);

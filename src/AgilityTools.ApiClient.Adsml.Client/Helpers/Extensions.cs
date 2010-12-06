@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reflection;
+using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Schema;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Helpers
 {
@@ -34,6 +36,21 @@ namespace AgilityTools.ApiClient.Adsml.Client.Helpers
                 return string.Empty;
 
             return str.Replace("/", "@fs:");
+        }
+
+        public static void ValidateAdsmlResponse(this XDocument source) {
+            var schemaSet = new XmlSchemaSet();
+            schemaSet.Add("", XmlReader.Create("adsml.xsd"));
+
+            source.Validate(schemaSet, (sender, e) => {
+                if (e != null) throw new InvalidOperationException("Not a valid Adsml response.", e.Exception);
+            });
+        }
+
+        public static void ValidateAdsmlResponse(this XElement source) {
+            var doc = XDocument.Parse(source.ToString());
+
+            doc.ValidateAdsmlResponse();
         }
     }
 }
