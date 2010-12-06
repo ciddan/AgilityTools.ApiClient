@@ -108,6 +108,8 @@
     <Compile Include="Responses\AdsmlResult.cs" />
     <Compile Include="Responses\DeleteResponse.cs" />
     <Compile Include="Responses\DeleteResponseConverter.cs" />
+    <Compile Include="Responses\ErrorResponse.cs" />
+    <Compile Include="Responses\ErrorResponseConverter.cs" />
     <Compile Include="Responses\IResponseConverter.cs" />
     <Compile Include="Responses\ResponseAdaptors.cs" />
     <Compile Include="Responses\UnlinkResponse.cs" />
@@ -118,6 +120,12 @@
       <Project>{386AABE6-7A1F-40D9-A39D-183E433B3174}</Project>
       <Name>AgilityTools.ApiClient.Adsml.Communication</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="adsml.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

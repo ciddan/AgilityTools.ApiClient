@@ -9,8 +9,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
     public class UnlinkResponseConverterFixture
     {
         [Test]
-        public void Can_Instantiate_New_UnlinkResponseConverter()
-        {
+        public void Can_Instantiate_New_UnlinkResponseConverter() {
             //Act
             var urc = new UnlinkResponseConverter();
 
@@ -20,18 +19,17 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        public void Can_Convert_XElement_To_UnlinkResponse()
-        {
+        public void Can_Convert_XElement_To_UnlinkResponse() {
             //Arrange
             XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
             var response = new XElement("BatchResponse",
-                new XAttribute("version", "5.1.16 build 116 (2010/05/27 14-36)"),
-                new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-                new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-                new XElement("UnlinkResponse",
-                    new XAttribute("code", "0"),
-                    new XAttribute("description", "Success"),
-                    new XElement("Message", "foo")));
+                                        new XAttribute("version", "5.1.16 build 116 (2010/05/27 14-36)"),
+                                        new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                                        new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+                                        new XElement("UnlinkResponse",
+                                                     new XAttribute("code", "0"),
+                                                     new XAttribute("description", "Success"),
+                                                     new XElement("Message", "foo")));
 
             var urc = new UnlinkResponseConverter();
 
@@ -46,9 +44,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(System.ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: source")]
-        public void Throws_ArgumentNullException_If_Source_Is_Null()
-        {
+        [ExpectedException(typeof (System.ArgumentNullException),
+            ExpectedMessage = "Value cannot be null.\r\nParameter name: source")]
+        public void Throws_ArgumentNullException_If_Source_Is_Null() {
             //Arrange
             var urc = new UnlinkResponseConverter();
 
@@ -57,19 +55,20 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(System.InvalidOperationException), ExpectedMessage = "Not a valid UnlinkResponse.")]
-        public void Throws_InvalidOperationException_If_Response_Is_Not_UnlinkResponse()
-        {
+        [ExpectedException(typeof (System.InvalidOperationException), ExpectedMessage = "Not a valid UnlinkResponse.")]
+        public void Throws_InvalidOperationException_If_Response_Is_Not_UnlinkResponse() {
             //Arrange
             XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
             var response = new XElement("BatchResponse",
-                new XAttribute("version", "5.1.16 build 116 (2010/05/27 14-36)"),
-                new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-                new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-                new XElement("FooResponse",
-                    new XAttribute("code", "0"),
-                    new XAttribute("description", "Success"),
-                    new XElement("Message", "foo")));
+                                        new XAttribute("version", "5.1.16 build 116 (2010/05/27 14-36)"),
+                                        new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                                        new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+                                        new XElement("FooResponse",
+                                                     new XAttribute("code", "0"),
+                                                     new XAttribute("description", "Success"),
+                                                     new XElement("Message", "foo")));
+
+            var doc = XDocument.Parse(response.ToString());
 
             var urc = new UnlinkResponseConverter();
 

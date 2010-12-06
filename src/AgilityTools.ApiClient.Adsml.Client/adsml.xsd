@@ -1,7 +1,7 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
  
 	<xsd:annotation>
-		<xsd:appinfo version="5.1.16" />
+		<!--xsd:appinfo version="5.1.16" /-->
 		<xsd:documentation xml:lang="en">
 	         	XML Schema for Agility Directory Service Markup Language.
 	         	Copyright 2005 Pindar Graphics. All rights reserved.
