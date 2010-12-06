@@ -55,8 +55,28 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof (System.InvalidOperationException), ExpectedMessage = "Not a valid UnlinkResponse.")]
+        [ExpectedException(typeof(System.InvalidOperationException), ExpectedMessage = "Not a valid UnlinkResponse.")]
         public void Throws_InvalidOperationException_If_Response_Is_Not_UnlinkResponse() {
+            //Arrange
+            XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+            var response = new XElement("BatchResponse",
+                                        new XAttribute("version", "5.1.16 build 116 (2010/05/27 14-36)"),
+                                        new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                                        new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+                                        new XElement("AuthResponse",
+                                                     new XAttribute("code", "0"),
+                                                     new XAttribute("description", "Success"),
+                                                     new XElement("Message", "foo")));
+
+            var urc = new UnlinkResponseConverter();
+
+            //Act
+            urc.Convert(response);
+        }
+
+        [Test]
+        [ExpectedException(typeof(System.InvalidOperationException), ExpectedMessage = "Not a valid Adsml response.")]
+        public void Throws_InvalidOperationException_If_Response_Is_Not_Valid() {
             //Arrange
             XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
             var response = new XElement("BatchResponse",
