@@ -62,6 +62,27 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 new XAttribute("version", "5.1.16 build 116 (2010/05/27 14-36)"),
                 new XAttribute(XNamespace.Xmlns + "xsi", xsi),
                 new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+                new XElement("AuthResponse",
+                    new XAttribute("code", "0"),
+                    new XAttribute("description", "Success"),
+                    new XElement("Message", "foo")));
+
+            var drc = new DeleteResponseConverter();
+
+            //Act
+            drc.Convert(response);
+        }
+
+        [Test]
+        [ExpectedException(typeof(System.InvalidOperationException), ExpectedMessage = "Not a valid Adsml response.")]
+        public void Throws_InvalidOperationException_If_Response_Is_Not_Valid()
+        {
+            //Arrange
+            XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+            var response = new XElement("BatchResponse",
+                new XAttribute("version", "5.1.16 build 116 (2010/05/27 14-36)"),
+                new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
                 new XElement("FooResponse",
                     new XAttribute("code", "0"),
                     new XAttribute("description", "Success"),
