@@ -55,6 +55,7 @@
     <Compile Include="CreateRequestFixture.cs" />
     <Compile Include="DeleteRequestFixture.cs" />
     <Compile Include="DeleteResponseConverterFixture.cs" />
+    <Compile Include="ErrorResponseConverterFixture.cs" />
     <Compile Include="FilterFixture.cs" />
     <Compile Include="LanguageControlFixture.cs" />
     <Compile Include="LanguageToReturnFixture.cs" />
