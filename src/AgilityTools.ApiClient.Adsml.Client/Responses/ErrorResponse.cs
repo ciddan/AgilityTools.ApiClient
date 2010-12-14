@@ -7,7 +7,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         public string Message { get; internal set; }
         public string Description { get; internal set; }
 
-        internal ErrorResponse() {
+        public ErrorResponse() {
         }
 
         public ErrorResponse(ErrorTypes errorType, string errorId, string message, string description) {

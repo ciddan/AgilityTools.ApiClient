@@ -106,6 +106,8 @@
     <Compile Include="Responses\AdsmlResponse.cs" />
     <Compile Include="Responses\AdsmlResponseConverter.cs" />
     <Compile Include="Responses\AdsmlResult.cs" />
+    <Compile Include="Responses\ContextResponse.cs" />
+    <Compile Include="Responses\ContextResponseConverter.cs" />
     <Compile Include="Responses\DeleteResponse.cs" />
     <Compile Include="Responses\DeleteResponseConverter.cs" />
     <Compile Include="Responses\ErrorResponse.cs" />
