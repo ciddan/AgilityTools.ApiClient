@@ -7,6 +7,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.FluentSyntax
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ILookupControlBuilder : IFluentInterface,
                                              ILookupRequestFilters,
+                                             IAttributeNamelist,
                                              IReturnedAttributesReturnedLanguagesConfigureReferences,
                                              IReturnedLanguagesConfigureReferences
     {
@@ -17,5 +18,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.FluentSyntax
     public interface ILookupRequestFilters : IFluentInterface
     {
         IReturnedAttributesReturnedLanguagesConfigureReferences AddRequestFilters(params ILookupControlFilter[] filters);
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface IAttributeNamelist : IFluentInterface
+    {
+        IReturnedAttributesReturnedLanguagesConfigureReferences AttributeNamelist(string attributeNames);
     }
 }

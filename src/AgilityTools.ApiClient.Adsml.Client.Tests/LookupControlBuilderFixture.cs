@@ -1,3 +1,4 @@
+using System;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Filters;
@@ -5,7 +6,7 @@ using NUnit.Framework;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests
 {
-    public class LookupControlBuilderFixtureTests
+    public class LookupControlBuilderFixture
     {
         [Test]
         public void Can_Instantiate_New_LookupControlBuilder() {
@@ -29,6 +30,46 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             //Assert
             Assert.That(request.ToString(), Is.EqualTo(expected.ToString()));
+        }
+
+        [Test]
+        public void Can_Specify_AttributeNames_To_Return() {
+            //Arrange
+            string expected = new XElement("LookupControls",
+                            new XElement("AttributesToReturn",
+                                new XAttribute("namelist", "members"))).ToString();
+            var builder = new LookupControlBuilder();
+
+            //Act
+            builder.AttributeNamelist("members");
+            var actual = builder.Build().ToAdsml().ToString();
+
+            Console.WriteLine(actual);
+
+            //Assert
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Can_Specify_AttributeNamelist_And_AttributesToReturn()
+        {
+            //Arrange
+            string expected = new XElement("LookupControls",
+                                new XElement("AttributesToReturn",
+                                    new XAttribute("namelist", "members"),
+                                    new XElement("Attribute",
+                                        new XAttribute("id", "35")))).ToString();
+
+            var builder = new LookupControlBuilder();
+
+            //Act
+            builder.AttributeNamelist("members").ReturnAttributes(AttributeToReturn.WithDefinitionId(35));
+            var actual = builder.Build().ToAdsml().ToString();
+
+            Console.WriteLine(actual);
+
+            //Assert
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
