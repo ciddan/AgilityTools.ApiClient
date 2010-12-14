@@ -58,7 +58,9 @@
     <Compile Include="LanguageToReturnFixture.cs" />
     <Compile Include="LinkRequestBuilderFixture.cs" />
     <Compile Include="LinkRequestFixture.cs" />
-    <Compile Include="LookupControlBuilderFixtureTests.cs" />
+    <Compile Include="LookupControlBuilderFixture.cs" />
+    <Compile Include="LookupRequestBuilderFixture.cs" />
+    <Compile Include="LookupRequestFixture.cs" />
     <Compile Include="ModificationItemFixture.cs" />
     <Compile Include="ModifyRequestBuilderFixture.cs" />
     <Compile Include="ModifyRequestFixture.cs" />

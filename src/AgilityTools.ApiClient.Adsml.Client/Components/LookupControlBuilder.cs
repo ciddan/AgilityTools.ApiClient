@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Filters;
 using AgilityTools.ApiClient.Adsml.Client.FluentSyntax;
 
@@ -22,9 +24,31 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             return this;
         }
 
+        public IReturnedAttributesReturnedLanguagesConfigureReferences AttributeNamelist(string attributeNames) {
+            if (!string.IsNullOrEmpty(attributeNames)) {
+                var aControl = new AttributeControl {
+                                   OuterNodeAttributes = new List<XAttribute> {
+                                                             new XAttribute("namelist", attributeNames)
+                                                         }
+                               };
+                
+                this.ControlComponents.Add(aControl);
+            }
+
+            return this;
+        }
+
         public IReturnedLanguagesConfigureReferences ReturnAttributes(params IAttributeControl[] attributesToReturn) {
             if (attributesToReturn != null) {
-                this.ControlComponents.Add(new AttributeControl(attributesToReturn));
+
+                if (!this.ControlComponents.Any(cc => cc is AttributeControl)) {
+                    this.ControlComponents.Add(new AttributeControl(attributesToReturn));
+                } else {
+                    AttributeControl control =
+                        this.ControlComponents.Where(cc => cc is AttributeControl).Cast<AttributeControl>().Single();
+
+                    control.AddAttributes(attributesToReturn);
+                }
             }
 
             return this;

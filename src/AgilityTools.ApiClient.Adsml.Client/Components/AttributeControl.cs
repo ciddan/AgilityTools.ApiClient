@@ -14,5 +14,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             this.ContentNodes = new List<IAttributeControl>(attributesToReturn);
             this.NodeName = "AttributesToReturn";
         }
+
+        internal void AddAttributes(params IAttributeControl[] attributesToReturn) {
+            this.ContentNodes = new List<IAttributeControl>(attributesToReturn);
+        }
     }
 }
