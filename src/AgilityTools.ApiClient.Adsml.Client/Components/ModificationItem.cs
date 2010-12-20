@@ -7,10 +7,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
     public class ModificationItem : IAdsmlSerializable<XElement>
     {
         internal Modifications ModificationType { get; private set; }
-        internal IAdsmlAttribute<XElement> AttributeToModify { get; private set; }
+        internal IAdsmlAttribute AttributeToModify { get; private set; }
 
         public static ModificationItem New<TAttribute>(Modifications operation, TAttribute attribute)
-            where TAttribute : class, IAdsmlAttribute<XElement> {
+            where TAttribute : class, IAdsmlAttribute {
 
             return new ModificationItem {ModificationType = operation, AttributeToModify = attribute};
         }

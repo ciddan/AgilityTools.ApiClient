@@ -57,9 +57,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.FluentSyntax
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IAttributesToSet : IFluentInterface
     {
-        IConfigLookupControls AttributesToSet(IEnumerable<IAdsmlAttribute<XElement>> structureAttributes);
-        IConfigLookupControls AttributesToSet(params IAdsmlAttribute<XElement>[] structureAttributes);
-        IConfigLookupControls AttributesToSet(Func<IList<IAdsmlAttribute<XElement>>> attributeListFactory);
+        IConfigLookupControls AttributesToSet(IEnumerable<IAdsmlAttribute> structureAttributes);
+        IConfigLookupControls AttributesToSet(params IAdsmlAttribute[] structureAttributes);
+        IConfigLookupControls AttributesToSet(Func<IList<IAdsmlAttribute>> attributeListFactory);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]

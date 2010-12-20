@@ -9,18 +9,18 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         public string Name { get; set; }
         public string IdPath { get; set; }
         public string SortPath { get; set; }
-        public IList<IAdsmlAttribute<XElement>> Attributes { get; set; }
+        public IList<IAdsmlAttribute> Attributes { get; set; }
 
         public ContextResponse() {
-            this.Attributes = new List<IAdsmlAttribute<XElement>>();
+            this.Attributes = new List<IAdsmlAttribute>();
         }
 
-        public ContextResponse(string name, string idPath, string sortPath, IList<IAdsmlAttribute<XElement>> attributes = null) {
+        public ContextResponse(string name, string idPath, string sortPath, IList<IAdsmlAttribute> attributes = null) {
             this.Name = name;
             this.IdPath = idPath;
             this.SortPath = sortPath;
             
-            this.Attributes = attributes ?? new List<IAdsmlAttribute<XElement>>();
+            this.Attributes = attributes ?? new List<IAdsmlAttribute>();
         }
     }
 }

@@ -98,7 +98,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var builder = new CreateRequestBuilder();
             
             //Act
-            builder.AttributesToSet(() => new List<IAdsmlAttribute<XElement>>
+            builder.AttributesToSet(() => new List<IAdsmlAttribute>
                                           {
                                               StructureAttribute.New(10, new StructureValue(10, "foo")),
                                               SimpleAttribute.New(AttributeTypes.Text, "objectName", "foo")

@@ -70,7 +70,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.FluentSyntax
     public interface IAddModification : IFluentInterface
     {
         IAddModificationsConfigLookupControls AddModification<TAttribute>(Modifications modificationType, TAttribute attribute)
-            where TAttribute : class, IAdsmlAttribute<XElement>;
+            where TAttribute : class, IAdsmlAttribute;
 
         IAddModificationsConfigLookupControls AddModifications(Func<IList<ModificationItem>> modificationsFactory);
     }

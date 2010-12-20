@@ -13,7 +13,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
     {
         internal string ContextName { get; private set; }
         internal string ObjectType { get; private set; }
-        internal IAdsmlAttribute<XElement>[] Attributes { get; private set; }
+        internal IAdsmlAttribute[] Attributes { get; private set; }
         internal LookupControlBuilder LookupControlBuilder { get; private set; }
         internal IList<ICreateRequestFilter> RequestFilters { get; private set; }
 
@@ -45,19 +45,19 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
             return this;
         }
 
-        public IConfigLookupControls AttributesToSet(IEnumerable<IAdsmlAttribute<XElement>> structureAttributes) {
+        public IConfigLookupControls AttributesToSet(IEnumerable<IAdsmlAttribute> structureAttributes) {
             this.Attributes = structureAttributes.ToArray();
 
             return this;
         }
 
-        public IConfigLookupControls AttributesToSet(params IAdsmlAttribute<XElement>[] structureAttributes) {
+        public IConfigLookupControls AttributesToSet(params IAdsmlAttribute[] structureAttributes) {
             this.Attributes = structureAttributes;
 
             return this;
         }
 
-        public IConfigLookupControls AttributesToSet(Func<IList<IAdsmlAttribute<XElement>>> attributeFactory) {
+        public IConfigLookupControls AttributesToSet(Func<IList<IAdsmlAttribute>> attributeFactory) {
             this.Attributes = attributeFactory.Invoke().ToArray();
             
             return this;
