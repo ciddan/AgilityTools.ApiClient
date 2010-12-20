@@ -48,6 +48,8 @@
     <Compile Include="Components\Attributes\CompositeAttribute.cs" />
     <Compile Include="Components\Attributes\CompositeValue.cs" />
     <Compile Include="Components\Attributes\ContextAttribute.cs" />
+    <Compile Include="Components\Attributes\Deserialization\CompositeAttributeDeserializer.cs" />
+    <Compile Include="Components\Attributes\Deserialization\IAdsmlAttributeDeserializer.cs" />
     <Compile Include="Components\Attributes\IAdsmlAttribute.cs" />
     <Compile Include="Components\Attributes\RelationAttribute.cs" />
     <Compile Include="Components\Attributes\SimpleAttribute.cs" />
@@ -131,6 +133,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
