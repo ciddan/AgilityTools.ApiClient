@@ -8,10 +8,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
     public class CompositeAttribute : IAdsmlAttribute
     {
         public string Name { get; set; }
-        public IList<CompositeValue> Fields { get; set; }
+        public IList<CompositeValue> CompositeValues { get; set; }
 
         public CompositeAttribute() {
-            this.Fields = new List<CompositeValue>();
+            this.CompositeValues = new List<CompositeValue>();
         }
 
         public XElement ToAdsml() {
@@ -19,7 +19,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
                 throw new InvalidOperationException("Name not set.");
             }
 
-            return new XElement(this.Name, Fields.Select(f => f.ToAdsml()));
+            return new XElement("CompositeAttribute", new XAttribute("name", this.Name), CompositeValues.Select(f => f.ToAdsml()));
         }
     }
 }

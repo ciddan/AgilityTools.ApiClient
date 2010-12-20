@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,9 +54,12 @@
     <Compile Include="Components\Attributes\AttributeBase.cs" />
     <Compile Include="Components\Attributes\AttributeTypes.cs" />
     <Compile Include="Components\Attributes\CompositeAttribute.cs" />
+    <Compile Include="Components\Attributes\Field.cs" />
     <Compile Include="Components\Attributes\CompositeValue.cs" />
     <Compile Include="Components\Attributes\ContextAttribute.cs" />
+    <Compile Include="Components\Attributes\Deserialization\AttributeDeserializer.cs" />
     <Compile Include="Components\Attributes\Deserialization\CompositeAttributeDeserializer.cs" />
+    <Compile Include="Components\Attributes\Deserialization\DeserializationInstaller.cs" />
     <Compile Include="Components\Attributes\Deserialization\IAdsmlAttributeDeserializer.cs" />
     <Compile Include="Components\Attributes\IAdsmlAttribute.cs" />
     <Compile Include="Components\Attributes\RelationAttribute.cs" />

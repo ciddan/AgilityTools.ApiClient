@@ -19,15 +19,21 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes.Deserializat
             return new CompositeAttribute
                    {
                        Name = attribute.Name.ToString(),
-                       Fields = new List<CompositeValue>
+                       CompositeValues = new List<CompositeValue>
                            (
-                           attribute.Descendants("Field")
-                               .Select(f => new CompositeValue
-                                            {
-                                                Name = (string) f.Attribute("name"),
-                                                Type = (string) f.Attribute("type"),
-                                                Value = f.Value
-                                            })
+                           attribute.Descendants("CompositeValue")
+                                    .Select(cv => new CompositeValue
+                                                  {
+                                                      Fields = new List<Field>(
+                                                          cv.Descendants("Field")
+                                                            .Select(f => new Field
+                                                                         {
+                                                                             Name = (string) f.Attribute("name"),
+                                                                             Type = (string) f.Attribute("type"),
+                                                                             Value = f.Value
+                                                                         })
+                                                          )
+                                                  })
                            )
                    };
         }
