@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 {
-    public abstract class AttributeBase : IAdsmlAttribute//<XElement>
+    public abstract class AttributeBase : IAdsmlAttribute
     {
         public string Name { get; set; }
         public object Value { get; set; }
