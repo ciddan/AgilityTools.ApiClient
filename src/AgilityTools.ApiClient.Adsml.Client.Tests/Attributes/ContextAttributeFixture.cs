@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
@@ -46,7 +47,25 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
                                         new XAttribute("name", "defaultDesign"),
                                         new XElement("Value", new XCData("foo"))).ToString();
 
-            var attribute = new ContextAttribute { Name = "defaultDesign", Value = "foo" };
+            var attribute = new ContextAttribute { Name = "defaultDesign", Values = new List<string>{"foo"} };
+
+            //Act
+            var actual = attribute.ToAdsml().ToString();
+            Console.WriteLine(actual);
+
+            //Assert
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Can_Generate_Api_Xml_With_Multiple_Values() {
+            //Arrange
+            var expected = new XElement("ContextAttribute",
+                                        new XAttribute("name", "defaultDesign"),
+                                        new XElement("Value", new XCData("foo")),
+                                        new XElement("Value", new XCData("bar"))).ToString();
+
+            var attribute = ContextAttribute.New(name: "defaultDesign", nameParserClass: null, values: new[] {"foo", "bar"});
 
             //Act
             var actual = attribute.ToAdsml().ToString();

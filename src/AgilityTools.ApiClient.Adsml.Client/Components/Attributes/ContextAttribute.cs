@@ -14,8 +14,22 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
             }
         }
 
-        public static ContextAttribute New(string name, object value, string nameParserClass = null) {
-            return new ContextAttribute(nameParserClass) {Name = name, Value = value};
+        public static ContextAttribute New(string name, string value, string nameParserClass = null) {
+            var contextAttribute = new ContextAttribute(nameParserClass) {Name = name};
+
+            contextAttribute.Values.Add(value);
+
+            return contextAttribute;
+        }
+
+        public static ContextAttribute New(string name, string nameParserClass, IEnumerable<string> values) {
+            var contextAttribute = new ContextAttribute(nameParserClass) { Name = name };
+
+            if (values != null) {
+                contextAttribute.Values.AddRange(values);
+            }
+
+            return contextAttribute;
         }
     }
 }

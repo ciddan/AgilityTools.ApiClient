@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
@@ -18,8 +19,24 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
             }
         }
 
-        public static RelationAttribute New(string name, object value, int definitionId = -1, string nameParserClass = null) {
-            return new RelationAttribute(name, definitionId, nameParserClass) { Value = value };
+        public static RelationAttribute New(string name, string value, int definitionId = -1, string nameParserClass = null) {
+            var relationAttribute = new RelationAttribute(name, definitionId, nameParserClass);
+
+            if (value != null) {
+                relationAttribute.Values.Add(value);
+            }
+
+            return relationAttribute;
+        }
+
+        public static RelationAttribute New(string name, IEnumerable<string> values, int definitionId = -1, string nameParserClass = null) {
+            var relationAttribute = new RelationAttribute(name, definitionId, nameParserClass);
+
+            if (values != null && values.Count() >= 1) {
+                relationAttribute.Values.AddRange(values);
+            }
+
+            return relationAttribute;
         }
     }
 }

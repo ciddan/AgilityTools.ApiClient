@@ -62,5 +62,25 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
             //Assert
             Assert.That(actual, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void Can_Generate_Api_Xml_With_Multiple_Values() {
+            //Arrange
+            var expected = new XElement("RelationAttribute",
+                                        new XAttribute("name", "Tillverkarrelation"),
+                                        new XAttribute("id", "31"),
+                                        new XElement("Value", new XCData("foo")),
+                                        new XElement("Value", new XCData("bar"))).ToString();
+
+
+            var attribute = RelationAttribute.New("Tillverkarrelation", new[] {"foo", "bar"}, 31);
+
+            //Act
+            var actual = attribute.ToAdsml().ToString();
+            Console.WriteLine(actual);
+
+            //Assert
+            Assert.That(actual, Is.EqualTo(expected));
+        }
     }
 }

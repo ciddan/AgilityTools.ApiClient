@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
@@ -21,7 +22,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
         [Test]
         public void Can_Instantiate_New_SimpleAttribute_With_FactoryMethod() {
             //Act
-            var attribute = SimpleAttribute.New(AttributeTypes.Integer, "objectId", 1777);
+            var attribute = SimpleAttribute.New(AttributeTypes.Integer, "objectId", "1777");
 
             //Assert
             Assert.That(attribute, Is.Not.Null);
@@ -48,7 +49,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
 
             var attribute = new SimpleAttribute(AttributeTypes.Integer)
                             {
-                                Value = 12,
+                                Values = new List<string> {"12"},
                                 Name = "objectTypeId"
                             };
 
@@ -78,10 +79,30 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
         }
 
         [Test]
+        public void Can_Generate_Api_Xml_With_Multiple_Values()
+        {
+            //Arrange
+            var expected = new XElement("SimpleAttribute",
+                                                    new XAttribute("name", "objectTypeId"),
+                                                    new XAttribute("type", "integer"),
+                                                    new XElement("Value", new XCData("12")),
+                                                    new XElement("Value", new XCData("24"))).ToString();
+
+            var attribute = SimpleAttribute.New(AttributeTypes.Integer, "objectTypeId", new[] {"12", "24"});
+
+            //Act
+            var actual = attribute.ToAdsml().ToString();
+            Console.WriteLine(actual);
+
+            //Assert
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
         [ExpectedException(typeof(ApiSerializationValidationException), ExpectedMessage = "Name must be set.")]
         public void Validate_Throws_ASVE_If_Name_Is_Not_Set() {
             //Arrange
-            var attribute = new SimpleAttribute(AttributeTypes.Binary) { Value = 1777 };
+            var attribute = new SimpleAttribute(AttributeTypes.Binary) {Values = new List<string> {"1777"}};
 
             //Act
             attribute.ToAdsml();

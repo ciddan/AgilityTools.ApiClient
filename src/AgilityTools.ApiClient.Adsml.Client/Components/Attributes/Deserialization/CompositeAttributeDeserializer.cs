@@ -7,21 +7,21 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes.Deserializat
 {
     public class CompositeAttributeDeserializer : IAdsmlAttributeDeserializer
     {
-        public IAdsmlAttribute Deserialize(XElement attribute) {
-            if (attribute == null) {
-                throw new ArgumentNullException("attribute");
+        public IAdsmlAttribute Deserialize(XElement element) {
+            if (element == null) {
+                throw new ArgumentNullException("element");
             }
 
-            if ((string.IsNullOrEmpty(attribute.Name.ToString()) || attribute.Name.ToString() != "CompositeAttribute")) {
+            if ((string.IsNullOrEmpty(element.Name.ToString()) || element.Name.ToString() != "CompositeAttribute")) {
                 throw new InvalidOperationException("Not a valid CompositeAttribute.");
             }
 
             return new CompositeAttribute
                    {
-                       Name = attribute.Name.ToString(),
+                       Name = (string) element.Attribute("name"),
                        CompositeValues = new List<CompositeValue>
                            (
-                           attribute.Descendants("CompositeValue")
+                           element.Descendants("CompositeValue")
                                     .Select(cv => new CompositeValue
                                                   {
                                                       Fields = new List<Field>(

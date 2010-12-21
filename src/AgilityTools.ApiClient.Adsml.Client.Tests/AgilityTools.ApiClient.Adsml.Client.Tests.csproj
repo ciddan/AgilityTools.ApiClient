@@ -47,6 +47,8 @@
     <Compile Include="ApiClientFixture.cs" />
     <Compile Include="ApiSerializationValidationExceptionFixture.cs" />
     <Compile Include="Attributes\CompositeAttributeFixture.cs" />
+    <Compile Include="Attributes\Deserialization\AttributeDeserializerFixture.cs" />
+    <Compile Include="Attributes\Deserialization\CompositeAttributeDeserializerFixture.cs" />
     <Compile Include="Attributes\FieldFixture.cs" />
     <Compile Include="Attributes\CompositeValueFixture.cs" />
     <Compile Include="Requests\Builders\AqlQueryBuilderFixture.cs" />
@@ -92,9 +94,7 @@
       <Name>AgilityTools.ApiClient.Adsml.Communication</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Attributes\Deserialization\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
