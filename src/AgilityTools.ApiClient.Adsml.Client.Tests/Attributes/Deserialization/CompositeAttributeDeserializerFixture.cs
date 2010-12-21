@@ -81,7 +81,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes.Deserialization
             //Assert
             Assert.That(compAttr, Is.Not.Null);
             Assert.That(compAttr.Name, Is.EqualTo("foo"));
-
         }
 
         [Test]

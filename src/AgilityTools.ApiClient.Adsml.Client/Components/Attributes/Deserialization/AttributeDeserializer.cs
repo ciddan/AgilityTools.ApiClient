@@ -15,7 +15,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes.Deserializat
             }
 
             var deserializer =
-                _container.Resolve<IAdsmlAttributeDeserializer>(element.Name);
+                _container.Resolve<IAdsmlAttributeDeserializer>(element.Name.LocalName);
 
             return deserializer.Deserialize(element);
         }

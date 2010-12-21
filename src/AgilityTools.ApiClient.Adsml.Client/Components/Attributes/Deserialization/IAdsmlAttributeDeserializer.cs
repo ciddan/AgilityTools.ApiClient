@@ -4,6 +4,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes.Deserializat
 {
     public interface IAdsmlAttributeDeserializer
     {
-        IAdsmlAttribute Deserialize(XElement attribute);
+        IAdsmlAttribute Deserialize(XElement element);
     }
 }

@@ -12,6 +12,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes.Deserializat
                     .For<IAdsmlAttributeDeserializer>()
                     .ImplementedBy<CompositeAttributeDeserializer>()
                     .Named("CompositeAttribute")
+                    .LifeStyle.Singleton,
+                Component
+                    .For<IAdsmlAttributeDeserializer>()
+                    .ImplementedBy<RelationAttributeDeserializer>()
+                    .Named("RelationAttribute")
                     .LifeStyle.Singleton
                 );
         }
