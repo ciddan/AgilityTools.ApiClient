@@ -36,11 +36,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
             var attribute = new RelationAttribute("foo", 10, "foo");
 
             //Assert
-            Assert.That(attribute.AttributeExtensions.Count(), Is.EqualTo(2));
-            Assert.That(attribute.AttributeExtensions.ElementAt(0).ToString(),
-                        Is.EqualTo(new XAttribute("nameParserClass", "foo").ToString()));
-            Assert.That(attribute.AttributeExtensions.ElementAt(1).ToString(),
-                        Is.EqualTo(new XAttribute("id", "10").ToString()));
+            Assert.That(attribute.NameParserClass, Is.EqualTo("foo"));
+            Assert.That(attribute.DefinitionId, Is.EqualTo(10));
             Assert.That(attribute.ElementName, Is.EqualTo("RelationAttribute"));
         }
 

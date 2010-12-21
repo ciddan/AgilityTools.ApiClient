@@ -34,8 +34,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
             var attribute = new SimpleAttribute(AttributeTypes.Date);
 
             //Assert
-            Assert.That(attribute.AttributeExtensions.Count(), Is.EqualTo(1));
-            Assert.That(attribute.AttributeExtensions.ElementAt(0).ToString(), Is.EqualTo(new XAttribute("type", "date").ToString()));
+            Assert.That(attribute.AttributeType, Is.EqualTo(AttributeTypes.Date));
             Assert.That(attribute.ElementName, Is.EqualTo("SimpleAttribute"));
         }
 

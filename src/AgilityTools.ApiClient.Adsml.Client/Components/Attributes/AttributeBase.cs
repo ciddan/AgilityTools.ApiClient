@@ -10,7 +10,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
         public List<string> Values { get; set; }
 
         internal string ElementName { get; set; }
-        internal IList<XAttribute> AttributeExtensions { get; set; }
+        protected IList<XAttribute> AttributeExtensions { get; set; }
 
         protected AttributeBase(string elementName) {
             this.ElementName = elementName;

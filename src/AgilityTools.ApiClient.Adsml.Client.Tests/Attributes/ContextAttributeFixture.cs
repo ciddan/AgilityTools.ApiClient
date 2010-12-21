@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
 using NUnit.Framework;
@@ -34,9 +33,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
             var attribute = new ContextAttribute("foo");
 
             //Assert
-            Assert.That(attribute.AttributeExtensions.Count(), Is.EqualTo(1));
-            Assert.That(attribute.AttributeExtensions.ElementAt(0).ToString(),
-                        Is.EqualTo(new XAttribute("nameParserClass", "foo").ToString()));
+            Assert.That(attribute.NameParserClass, Is.EqualTo("foo"));
             Assert.That(attribute.ElementName, Is.EqualTo("ContextAttribute"));
         }
 

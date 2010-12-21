@@ -5,13 +5,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 {
     public class ContextAttribute : AttributeBase
     {
+        public string NameParserClass { get; set; }
+
         public ContextAttribute(string nameParserClass = null) : base("ContextAttribute") {
-            if (!string.IsNullOrEmpty(nameParserClass)) {
-                base.AttributeExtensions = new List<XAttribute>
-                                           {
-                                               new XAttribute("nameParserClass", nameParserClass)
-                                           };
-            }
+            this.NameParserClass = nameParserClass;
         }
 
         public static ContextAttribute New(string name, string value, string nameParserClass = null) {
@@ -30,6 +27,17 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
             }
 
             return contextAttribute;
+        }
+
+        public override XElement ToAdsml()
+        {
+            if (!string.IsNullOrEmpty(NameParserClass)) {
+                base.AttributeExtensions = new List<XAttribute> {
+                                               new XAttribute("nameParserClass", this.NameParserClass)
+                                           };
+            }
+
+            return base.ToAdsml();
         }
     }
 }

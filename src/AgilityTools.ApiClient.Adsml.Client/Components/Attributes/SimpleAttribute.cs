@@ -7,11 +7,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 {
     public class SimpleAttribute : AttributeBase
     {
+        public AttributeTypes AttributeType { get; set; }
+
         public SimpleAttribute(AttributeTypes attributeType) : base("SimpleAttribute") {
-            base.AttributeExtensions = new List<XAttribute>
-                                        {
-                                            new XAttribute("type", attributeType.GetStringValue())
-                                        };
+            this.AttributeType = attributeType;
         }
 
         public static SimpleAttribute New(AttributeTypes attributeType, string attributeName, string value = null) {
@@ -32,6 +31,15 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
             }
 
             return simpleAttribute;
+        }
+
+        public override XElement ToAdsml()
+        {
+            base.AttributeExtensions = new List<XAttribute> {
+                                            new XAttribute("type", this.AttributeType.GetStringValue())
+                                        };
+
+            return base.ToAdsml();
         }
     }
 }
