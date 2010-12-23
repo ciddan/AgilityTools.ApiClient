@@ -29,7 +29,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         }
 
         public IFailOnErrorAddModificationsConfigLookupControls ReturnNoAttributes() {
-            this.RequestFilters.Add(Filter.OmitStructureAttributes());
+            this.RequestFilters.Add(Filter.ReturnNoAttributes());
 
             return this;
         }
@@ -41,7 +41,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         }
 
         public IAddModificationsConfigLookupControls AddModification<TAttribute>(Modifications modificationType, TAttribute attribute) 
-        where TAttribute : class, IAdsmlAttribute<XElement> {
+        where TAttribute : class, IAdsmlAttribute {
             var modification = ModificationItem.New(modificationType, attribute);
 
             this.Modifications.Add(modification);

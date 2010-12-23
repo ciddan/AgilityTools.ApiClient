@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\lib\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\lib\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\lib\Moq.dll</HintPath>
     </Reference>
@@ -46,34 +52,48 @@
   <ItemGroup>
     <Compile Include="ApiClientFixture.cs" />
     <Compile Include="ApiSerializationValidationExceptionFixture.cs" />
-    <Compile Include="AqlQueryBuilderFixture.cs" />
-    <Compile Include="AqlSearchRequestFixture.cs" />
-    <Compile Include="AttributeControlFixture.cs" />
-    <Compile Include="AttributeToReturnFixture.cs" />
-    <Compile Include="ContextAttributeFixture.cs" />
-    <Compile Include="CreateRequestBuilderFixture.cs" />
-    <Compile Include="CreateRequestFixture.cs" />
-    <Compile Include="FilterFixture.cs" />
-    <Compile Include="LanguageControlFixture.cs" />
-    <Compile Include="LanguageToReturnFixture.cs" />
-    <Compile Include="LinkRequestBuilderFixture.cs" />
-    <Compile Include="LinkRequestFixture.cs" />
+    <Compile Include="Attributes\CompositeAttributeFixture.cs" />
+    <Compile Include="Attributes\Deserialization\AttributeDeserializerFixture.cs" />
+    <Compile Include="Attributes\Deserialization\CompositeAttributeDeserializerFixture.cs" />
+    <Compile Include="Attributes\Deserialization\ContextAttributeDeserializerFixture.cs" />
+    <Compile Include="Attributes\Deserialization\DeserializationInstallerFixture.cs" />
+    <Compile Include="Attributes\Deserialization\RelationAttributeDeserializerFixture.cs" />
+    <Compile Include="Attributes\Deserialization\SimpleAttributeDeserializerFixture.cs" />
+    <Compile Include="Attributes\Deserialization\StructureAttributeDeserializerFixture.cs" />
+    <Compile Include="Attributes\FieldFixture.cs" />
+    <Compile Include="Attributes\CompositeValueFixture.cs" />
+    <Compile Include="Requests\Builders\AqlQueryBuilderFixture.cs" />
+    <Compile Include="Requests\AqlSearchRequestFixture.cs" />
     <Compile Include="LookupControlBuilderFixture.cs" />
     <Compile Include="LookupRequestBuilderFixture.cs" />
     <Compile Include="LookupRequestFixture.cs" />
-    <Compile Include="ModificationItemFixture.cs" />
-    <Compile Include="ModifyRequestBuilderFixture.cs" />
-    <Compile Include="ModifyRequestFixture.cs" />
+    <Compile Include="Requests\Builders\CreateRequestBuilderFixture.cs" />
+    <Compile Include="Requests\CreateRequestFixture.cs" />
+    <Compile Include="Requests\DeleteRequestFixture.cs" />
+    <Compile Include="Responses\Converters\DeleteResponseConverterFixture.cs" />
+    <Compile Include="Responses\Converters\ErrorResponseConverterFixture.cs" />
+    <Compile Include="Components\FilterFixture.cs" />
+    <Compile Include="Components\LanguageControlFixture.cs" />
+    <Compile Include="Components\LanguageToReturnFixture.cs" />
+    <Compile Include="Requests\Builders\LinkRequestBuilderFixture.cs" />
+    <Compile Include="Requests\LinkRequestFixture.cs" />
+    <Compile Include="Requests\Builders\LookupControlBuilderFixture.cs" />
+    <Compile Include="Components\ModificationItemFixture.cs" />
+    <Compile Include="Requests\Builders\ModifyRequestBuilderFixture.cs" />
+    <Compile Include="Requests\ModifyRequestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReferenceControlFixture.cs" />
-    <Compile Include="ReferenceOptionsFixture.cs" />
-    <Compile Include="RelationAttributeFixture.cs" />
-    <Compile Include="SearchControlBuilderFixture.cs" />
-    <Compile Include="SimpleAttributeFixture.cs" />
+    <Compile Include="Components\ReferenceControlFixture.cs" />
+    <Compile Include="Components\ReferenceOptionsFixture.cs" />
+    <Compile Include="Attributes\RelationAttributeFixture.cs" />
+    <Compile Include="ResponseAdaptorFixture.cs" />
+    <Compile Include="SanitizerFixture.cs" />
+    <Compile Include="Requests\Builders\SearchControlBuilderFixture.cs" />
+    <Compile Include="Attributes\SimpleAttributeFixture.cs" />
     <Compile Include="StringValueFixture.cs" />
-    <Compile Include="StructureAttributeFixture.cs" />
-    <Compile Include="StructureValueFixture.cs" />
+    <Compile Include="Attributes\StructureAttributeFixture.cs" />
+    <Compile Include="Attributes\StructureValueFixture.cs" />
     <Compile Include="IdNameReferenceFixture.cs" />
+    <Compile Include="Responses\Converters\UnlinkResponseConverterFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Client\AgilityTools.ApiClient.Adsml.Client.csproj">
@@ -85,6 +105,7 @@
       <Name>AgilityTools.ApiClient.Adsml.Communication</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

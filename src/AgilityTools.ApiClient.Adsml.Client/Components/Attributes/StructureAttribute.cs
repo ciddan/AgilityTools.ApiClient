@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 {
-    public class StructureAttribute : IAdsmlAttribute<XElement>
+    public class StructureAttribute : IAdsmlAttribute
     {
         public int DefinitionId { get; set; }
         public string Name { get; set; }
