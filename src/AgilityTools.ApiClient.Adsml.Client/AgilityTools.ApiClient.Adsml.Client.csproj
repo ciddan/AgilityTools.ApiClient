@@ -102,6 +102,7 @@
     <Compile Include="FluentSyntax\LinkRequestBuilderSyntax.cs" />
     <Compile Include="FluentSyntax\LookupControlBuilderSyntax.cs" />
     <Compile Include="FluentSyntax\LookupRequestBuilderSyntax.cs" />
+    <Compile Include="Requests\DeleteRequest.cs" />
     <Compile Include="Requests\LinkRequestBuilder.cs" />
     <Compile Include="Requests\LinkRequest.cs" />
     <Compile Include="Requests\LookupRequest.cs" />

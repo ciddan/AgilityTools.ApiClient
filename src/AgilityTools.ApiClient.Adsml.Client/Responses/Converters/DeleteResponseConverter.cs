@@ -3,7 +3,7 @@ using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Helpers;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Responses
+namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
 {
     public class DeleteResponseConverter : AdsmlResponseConverter<DeleteResponse>
     {

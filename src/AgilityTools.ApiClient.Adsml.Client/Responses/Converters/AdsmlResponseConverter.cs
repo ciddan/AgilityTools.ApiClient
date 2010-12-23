@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Responses
+namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
 {
     public abstract class AdsmlResponseConverter<TOutput> : IResponseConverter<XElement, TOutput> where TOutput : AdsmlResult, new()
     {
