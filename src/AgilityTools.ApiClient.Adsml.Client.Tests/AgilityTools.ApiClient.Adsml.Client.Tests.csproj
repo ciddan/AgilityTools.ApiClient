@@ -55,9 +55,11 @@
     <Compile Include="Attributes\CompositeAttributeFixture.cs" />
     <Compile Include="Attributes\Deserialization\AttributeDeserializerFixture.cs" />
     <Compile Include="Attributes\Deserialization\CompositeAttributeDeserializerFixture.cs" />
+    <Compile Include="Attributes\Deserialization\ContextAttributeDeserializerFixture.cs" />
     <Compile Include="Attributes\Deserialization\DeserializationInstallerFixture.cs" />
     <Compile Include="Attributes\Deserialization\RelationAttributeDeserializerFixture.cs" />
     <Compile Include="Attributes\Deserialization\SimpleAttributeDeserializerFixture.cs" />
+    <Compile Include="Attributes\Deserialization\StructureAttributeDeserializerFixture.cs" />
     <Compile Include="Attributes\FieldFixture.cs" />
     <Compile Include="Attributes\CompositeValueFixture.cs" />
     <Compile Include="Requests\Builders\AqlQueryBuilderFixture.cs" />

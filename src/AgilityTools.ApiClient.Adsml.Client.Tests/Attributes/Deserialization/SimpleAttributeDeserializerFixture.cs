@@ -71,8 +71,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes.Deserialization
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException), ExpectedMessage = "Not a valid SimpleAttribute.")]
-        public void Throws_InvalidOperationException_If_Element_Name_Is_Not_RelationAttribute()
-        {
+        public void Throws_InvalidOperationException_If_Element_Name_Is_Not_SimpleAttribute() {
             //Arrange
             var sad = new SimpleAttributeDeserializer();
 
