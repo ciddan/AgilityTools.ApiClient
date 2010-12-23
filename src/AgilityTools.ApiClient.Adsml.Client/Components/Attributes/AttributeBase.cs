@@ -4,16 +4,17 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 {
-    public abstract class AttributeBase : IAdsmlAttribute//<XElement>
+    public abstract class AttributeBase : IAdsmlAttribute
     {
         public string Name { get; set; }
-        public object Value { get; set; }
+        public List<string> Values { get; set; }
 
         internal string ElementName { get; set; }
-        internal IList<XAttribute> AttributeExtensions { get; set; }
+        protected IList<XAttribute> AttributeExtensions { get; set; }
 
         protected AttributeBase(string elementName) {
             this.ElementName = elementName;
+            this.Values = new List<string>();
         }
 
         public virtual XElement ToAdsml() {
@@ -21,8 +22,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
 
             var element = new XElement(this.ElementName, new XAttribute("name", this.Name));
 
-            if (this.Value != null) {
-                element.Add(new XElement("Value", new XCData(this.Value.ToString())));
+            if (this.Values.Count() >= 1) {
+                foreach (var value in Values) {
+                    element.Add(new XElement("Value", new XCData(value.ToString())));    
+                } 
             }
 
             if (this.AttributeExtensions != null && this.AttributeExtensions.Count() >= 1) {
