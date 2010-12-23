@@ -12,7 +12,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
         [Test]
         public void Can_Instantiate_New_DeleteResponseConverter() {
             //Act
-            var drc = new DeleteResponseConverter();
+            var drc = new DeleteResultResponseConverter();
 
             //Assert
             Assert.That(drc, Is.Not.Null);
@@ -32,10 +32,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                     new XAttribute("description", "Success"),
                     new XElement("Message", "foo")));
 
-            var drc = new DeleteResponseConverter();
+            var drc = new DeleteResultResponseConverter();
 
             //Act
-            var converted = drc.Convert(response);
+            var converted = drc.ConvertSingle(response);
 
             //Assert
             Assert.That(converted.Code, Is.EqualTo("0"));
@@ -48,10 +48,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
         [ExpectedException(typeof (System.ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: source")]
         public void Throws_ArgumentNullException_If_Source_Is_Null() {
             //Arrange
-            var drc = new DeleteResponseConverter();
+            var drc = new DeleteResultResponseConverter();
 
             //Act
-            drc.Convert(null);
+            drc.ConvertSingle(null);
         }
 
         [Test]
@@ -68,10 +68,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                     new XAttribute("description", "Success"),
                     new XElement("Message", "foo")));
 
-            var drc = new DeleteResponseConverter();
+            var drc = new DeleteResultResponseConverter();
 
             //Act
-            drc.Convert(response);
+            drc.ConvertSingle(response);
         }
 
         [Test]
@@ -89,10 +89,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                     new XAttribute("description", "Success"),
                     new XElement("Message", "foo")));
 
-            var drc = new DeleteResponseConverter();
+            var drc = new DeleteResultResponseConverter();
 
             //Act
-            drc.Convert(response);
+            drc.ConvertSingle(response);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
         [Test]
         public void Can_Instantiate_New_UnlinkResponseConverter() {
             //Act
-            var urc = new UnlinkResponseConverter();
+            var urc = new UnlinkResultResponseConverter();
 
             //Assert
             Assert.That(urc, Is.Not.Null);
@@ -32,10 +32,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                                                      new XAttribute("description", "Success"),
                                                      new XElement("Message", "foo")));
 
-            var urc = new UnlinkResponseConverter();
+            var urc = new UnlinkResultResponseConverter();
 
             //Act
-            var converted = urc.Convert(response);
+            var converted = urc.ConvertSingle(response);
 
             //Assert
             Assert.That(converted.Code, Is.EqualTo("0"));
@@ -49,10 +49,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             ExpectedMessage = "Value cannot be null.\r\nParameter name: source")]
         public void Throws_ArgumentNullException_If_Source_Is_Null() {
             //Arrange
-            var urc = new UnlinkResponseConverter();
+            var urc = new UnlinkResultResponseConverter();
 
             //Act
-            urc.Convert(null);
+            urc.ConvertSingle(null);
         }
 
         [Test]
@@ -69,10 +69,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                                                      new XAttribute("description", "Success"),
                                                      new XElement("Message", "foo")));
 
-            var urc = new UnlinkResponseConverter();
+            var urc = new UnlinkResultResponseConverter();
 
             //Act
-            urc.Convert(response);
+            urc.ConvertSingle(response);
         }
 
         [Test]
@@ -91,10 +91,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
 
             var doc = XDocument.Parse(response.ToString());
 
-            var urc = new UnlinkResponseConverter();
+            var urc = new UnlinkResultResponseConverter();
 
             //Act
-            urc.Convert(response);
+            urc.ConvertSingle(response);
         }
     }
 }

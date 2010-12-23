@@ -1,24 +1,35 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Helpers;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
 {
-    public class UnlinkResponseConverter : AdsmlResponseConverter<UnlinkResponse>
+    public class UnlinkResultResponseConverter : AdsmlResultResponseConverter<UnlinkResponse>
     {
-        public UnlinkResponseConverter() {
+        public UnlinkResultResponseConverter() {
             this.ElementName = "UnlinkResponse";
         }
 
-        public override UnlinkResponse Convert(XElement source) {
+        public override UnlinkResponse ConvertSingle(XElement source) {
             if (source == null)
                 throw new ArgumentNullException("source");
 
             source.ValidateAdsmlResponse();
             CheckResponse(source);
 
-            return base.Convert(source);
+            return base.ConvertSingle(source);
+        }
+
+        public override IEnumerable<UnlinkResponse> ConvertMultiple(XElement source) {
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            source.ValidateAdsmlResponse();
+            CheckResponse(source);
+            
+            return base.ConvertMultiple(source);
         }
 
         private static void CheckResponse(XElement source) {

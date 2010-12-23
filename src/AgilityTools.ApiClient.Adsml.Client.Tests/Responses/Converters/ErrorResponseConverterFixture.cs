@@ -35,7 +35,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var erc = new ErrorResponseConverter();
             
             //Act
-            ErrorResponse errorResponse = erc.Convert(xml);
+            ErrorResponse errorResponse = erc.ConvertSingle(xml);
 
             //Assert
             Assert.That(errorResponse, Is.Not.Null);
@@ -52,7 +52,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var erc = new ErrorResponseConverter();
 
             //Act
-            erc.Convert(null);
+            erc.ConvertSingle(null);
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var erc = new ErrorResponseConverter();
 
             //Act
-            erc.Convert(response);
+            erc.ConvertSingle(response);
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var erc = new ErrorResponseConverter();
 
             //Act
-            erc.Convert(response);
+            erc.ConvertSingle(response);
         }
     }
 }
