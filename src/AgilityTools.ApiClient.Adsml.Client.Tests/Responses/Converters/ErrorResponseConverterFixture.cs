@@ -42,7 +42,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             Assert.That(errorResponse, Is.Not.Null);
             Assert.That(errorResponse.Description, Is.EqualTo("foo"));
             Assert.That(errorResponse.ErrorId, Is.EqualTo("1"));
-            Assert.That(errorResponse.ErrorType, Is.EqualTo(ErrorResponse.ErrorTypes.ObjectNotFound));
+            Assert.That(errorResponse.ErrorType, Is.EqualTo(ErrorResponse.ErrorTypes.MalformedRequest));
             Assert.That(errorResponse.Message, Is.EqualTo("Foo error"));
         }
 

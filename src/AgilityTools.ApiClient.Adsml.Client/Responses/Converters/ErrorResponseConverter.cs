@@ -13,23 +13,15 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
                 throw new ArgumentNullException("source");
             }
 
-            CheckResponse(source);
-
-            var errorResponse = source.Descendants("ErrorResponse").SingleOrDefault();
-
-            if (errorResponse == null) {
-                return null;
-            }
-
-            var errorType = (string) errorResponse.Attribute("type");
+            var errorType = (string) source.Attribute("type");
             errorType = errorType.Capitalize();
 
             return new ErrorResponse
                    {
-                       Description = (string) errorResponse.Attribute("description"),
-                       ErrorId = (string) errorResponse.Attribute("id"),
+                       Description = (string) source.Attribute("description"),
+                       ErrorId = (string) source.Attribute("id"),
                        ErrorType = (ErrorResponse.ErrorTypes) Enum.Parse(typeof(ErrorResponse.ErrorTypes), errorType),
-                       Message = errorResponse.Descendants("Message").First().Value
+                       Message = source.Descendants("Message").First().Value
                    };
         }
 

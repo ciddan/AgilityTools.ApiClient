@@ -16,8 +16,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            CheckResponse(source);
-
             return base.ConvertSingle(source);
         }
 
