@@ -12,27 +12,18 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
             this.ElementName = "DeleteResponse";
         }
 
-        public override DeleteResponse ConvertSingle(XElement source) {
-            if (source == null) 
-                throw new ArgumentNullException("source");
-
-            source.ValidateAdsmlResponse();
-            CheckResponse(source);
-
-            return base.ConvertSingle(source);
-        }
-
-        public override IEnumerable<DeleteResponse> ConvertMultiple(XElement source) {
+        public override IEnumerable<DeleteResponse> Convert(XElement source) {
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            source.ValidateAdsmlResponse();
             CheckResponse(source);
 
-            return base.ConvertMultiple(source);
+            return base.Convert(source);
         }
 
         private static void CheckResponse(XElement source) {
+            source.ValidateAdsmlResponse();
+
             if (source.Descendants("DeleteResponse").Count() < 1) {
                 throw new InvalidOperationException("Not a valid DeleteResponse.");
             }

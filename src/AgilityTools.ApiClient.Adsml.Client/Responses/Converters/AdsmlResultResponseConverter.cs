@@ -9,21 +9,16 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
     {
         protected string ElementName { get; set; }
 
-        public virtual TOutput ConvertSingle(XElement source) {
-
-            if (string.IsNullOrEmpty(ElementName)) {
-                throw new InvalidOperationException("ElementName must be set.");
-            }
-
+        protected virtual TOutput ConvertSingle(XElement source) {
             return new TOutput
                    {
-                       Code = (string) source.Descendants(this.ElementName).Single().Attribute("code"),
-                       Description = (string) source.Descendants(this.ElementName).Single().Attribute("description"),
+                       Code = (string) source.Attribute("code"),
+                       Description = (string) source.Attribute("description"),
                        Messages = source.Descendants("Message").Select(x => x.Value).ToList()
                    };
         }
 
-        public virtual IEnumerable<TOutput> ConvertMultiple(XElement source) {
+        public virtual IEnumerable<TOutput> Convert(XElement source) {
             if (string.IsNullOrEmpty(ElementName)) {
                 throw new InvalidOperationException("ElementName must be set.");
             }

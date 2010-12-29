@@ -10,12 +10,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
 {
     public class ContextResponseConverter : IResponseConverter<XElement, ContextResponse>
     {
-        public ContextResponse ConvertSingle(XElement source) {
+        private static ContextResponse ConvertSingle(XElement source) {
             if (source == null) {
                 throw new ArgumentNullException("source");
             }
 
-            source.ValidateAdsmlResponse();
             CheckResponse(source);
 
             XElement context = source.Descendants()
@@ -37,12 +36,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
                    };
         }
 
-        public IEnumerable<ContextResponse> ConvertMultiple(XElement source) {
+        public IEnumerable<ContextResponse> Convert(XElement source) {
             if (source == null) {
                 throw new ArgumentNullException("source");
             }
 
-            source.ValidateAdsmlResponse();
             CheckResponse(source);
 
             var contexts = source.Descendants()
@@ -52,6 +50,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
         }
 
         private static void CheckResponse(XElement source) {
+            source.ValidateAdsmlResponse();
+
             if ((source.Descendants("StructureContext").Count() < 1) && (source.Descendants("Context").Count() < 1)) {
                 throw new InvalidOperationException("Not a valid ContextResponse.");
             }

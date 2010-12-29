@@ -12,27 +12,27 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
             this.ElementName = "UnlinkResponse";
         }
 
-        public override UnlinkResponse ConvertSingle(XElement source) {
+        protected override UnlinkResponse ConvertSingle(XElement source) {
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            source.ValidateAdsmlResponse();
             CheckResponse(source);
 
             return base.ConvertSingle(source);
         }
 
-        public override IEnumerable<UnlinkResponse> ConvertMultiple(XElement source) {
+        public override IEnumerable<UnlinkResponse> Convert(XElement source) {
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            source.ValidateAdsmlResponse();
             CheckResponse(source);
             
-            return base.ConvertMultiple(source);
+            return base.Convert(source);
         }
 
         private static void CheckResponse(XElement source) {
+            source.ValidateAdsmlResponse();
+
             if (source.Descendants("UnlinkResponse").Count() < 1) {
                 throw new InvalidOperationException("Not a valid UnlinkResponse.");
             }

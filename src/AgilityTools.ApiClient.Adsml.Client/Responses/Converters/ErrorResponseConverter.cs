@@ -8,7 +8,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
 {
     public class ErrorResponseConverter : IResponseConverter<XElement, ErrorResponse> 
     {
-        public ErrorResponse ConvertSingle(XElement source) {
+        private static ErrorResponse ConvertSingle(XElement source) {
             if (source == null) {
                 throw new ArgumentNullException("source");
             }
@@ -33,7 +33,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
                    };
         }
 
-        public IEnumerable<ErrorResponse> ConvertMultiple(XElement source) {
+        public IEnumerable<ErrorResponse> Convert(XElement source) {
             if (source == null) {
                 throw new ArgumentNullException("source");
             }

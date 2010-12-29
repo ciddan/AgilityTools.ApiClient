@@ -35,7 +35,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var drc = new DeleteResultResponseConverter();
 
             //Act
-            var converted = drc.ConvertSingle(response);
+            var converted = drc.Convert(response).Single();
 
             //Assert
             Assert.That(converted.Code, Is.EqualTo("0"));
@@ -51,7 +51,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var drc = new DeleteResultResponseConverter();
 
             //Act
-            drc.ConvertSingle(null);
+            drc.Convert(null);
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var drc = new DeleteResultResponseConverter();
 
             //Act
-            drc.ConvertSingle(response);
+            drc.Convert(response);
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var drc = new DeleteResultResponseConverter();
 
             //Act
-            drc.ConvertSingle(response);
+            drc.Convert(response);
         }
     }
 }

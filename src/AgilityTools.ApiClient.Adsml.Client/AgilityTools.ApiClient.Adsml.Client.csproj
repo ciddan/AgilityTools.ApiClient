@@ -125,7 +125,6 @@
     <Compile Include="Components\Attributes\StructureAttribute.cs" />
     <Compile Include="Components\Attributes\StructureValue.cs" />
     <Compile Include="Requests\CreateRequestBuilder.cs" />
-    <Compile Include="Responses\AdsmlResponse.cs" />
     <Compile Include="Responses\Converters\AdsmlResultResponseConverter.cs" />
     <Compile Include="Responses\AdsmlResult.cs" />
     <Compile Include="Responses\ContextResponse.cs" />
@@ -135,7 +134,6 @@
     <Compile Include="Responses\ErrorResponse.cs" />
     <Compile Include="Responses\Converters\ErrorResponseConverter.cs" />
     <Compile Include="Responses\Converters\IResponseConverter.cs" />
-    <Compile Include="Responses\ResponseAdaptors.cs" />
     <Compile Include="Responses\UnlinkResponse.cs" />
     <Compile Include="Responses\Converters\UnlinkResultResponseConverter.cs" />
   </ItemGroup>

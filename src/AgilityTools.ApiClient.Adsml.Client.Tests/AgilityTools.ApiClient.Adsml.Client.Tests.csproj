@@ -85,7 +85,6 @@
     <Compile Include="Components\ReferenceControlFixture.cs" />
     <Compile Include="Components\ReferenceOptionsFixture.cs" />
     <Compile Include="Attributes\RelationAttributeFixture.cs" />
-    <Compile Include="ResponseAdaptorFixture.cs" />
     <Compile Include="SanitizerFixture.cs" />
     <Compile Include="Requests\Builders\SearchControlBuilderFixture.cs" />
     <Compile Include="Attributes\SimpleAttributeFixture.cs" />

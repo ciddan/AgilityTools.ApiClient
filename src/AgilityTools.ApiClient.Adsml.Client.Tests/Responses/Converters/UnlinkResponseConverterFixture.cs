@@ -35,7 +35,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var urc = new UnlinkResultResponseConverter();
 
             //Act
-            var converted = urc.ConvertSingle(response);
+            var converted = urc.Convert(response).Single();
 
             //Assert
             Assert.That(converted.Code, Is.EqualTo("0"));
@@ -52,7 +52,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var urc = new UnlinkResultResponseConverter();
 
             //Act
-            urc.ConvertSingle(null);
+            urc.Convert(null);
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var urc = new UnlinkResultResponseConverter();
 
             //Act
-            urc.ConvertSingle(response);
+            urc.Convert(response);
         }
 
         [Test]
@@ -94,7 +94,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var urc = new UnlinkResultResponseConverter();
 
             //Act
-            urc.ConvertSingle(response);
+            urc.Convert(response);
         }
     }
 }

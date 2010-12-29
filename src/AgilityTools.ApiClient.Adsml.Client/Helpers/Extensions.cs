@@ -9,8 +9,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Helpers
 {
     public static class Extensions
     {
-        public static string GetStringValue(this Enum value)
-        {
+        public static string GetStringValue(this Enum value) {
             // Get the type
             Type type = value.GetType();
 
@@ -19,7 +18,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Helpers
 
             // Get the stringvalue attributes
             var attribs = fieldInfo.GetCustomAttributes(
-                typeof(StringValueAttribute), false) as StringValueAttribute[];
+                typeof (StringValueAttribute), false) as StringValueAttribute[];
 
             // Return the first if there was a match.
             return attribs.Length > 0 ? attribs[0].StringValue : null;
@@ -43,13 +42,15 @@ namespace AgilityTools.ApiClient.Adsml.Client.Helpers
             if (source == null) {
                 throw new ArgumentNullException("source");
             }
-            
+
             var schemaSet = new XmlSchemaSet();
             schemaSet.Add("", XmlReader.Create("adsml.xsd"));
 
-            source.Validate(schemaSet, (sender, e) => {
-                if (e != null) throw new InvalidOperationException("Not a valid Adsml response.", e.Exception);
-            });
+            source.Validate(schemaSet,
+                            (sender, e) => {
+                                if (e != null)
+                                    throw new InvalidOperationException("Not a valid Adsml response.", e.Exception);
+                            });
         }
 
         public static void ValidateAdsmlResponse(this XElement source) {

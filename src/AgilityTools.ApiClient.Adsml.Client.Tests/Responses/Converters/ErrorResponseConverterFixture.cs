@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Responses;
 using AgilityTools.ApiClient.Adsml.Client.Responses.Converters;
@@ -28,14 +29,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                 new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
                 new XElement("ErrorResponse",
                     new XAttribute("id", "1"),
-                    new XAttribute("type", "objectNotFound"),
+                    new XAttribute("type", "malformedRequest"),
                     new XAttribute("description", "foo"),
                     new XElement("Message", "Foo error")));
 
             var erc = new ErrorResponseConverter();
             
             //Act
-            ErrorResponse errorResponse = erc.ConvertSingle(xml);
+            ErrorResponse errorResponse = erc.Convert(xml).Single();
 
             //Assert
             Assert.That(errorResponse, Is.Not.Null);
@@ -52,7 +53,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var erc = new ErrorResponseConverter();
 
             //Act
-            erc.ConvertSingle(null);
+            erc.Convert(null);
         }
 
         [Test]
@@ -72,7 +73,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var erc = new ErrorResponseConverter();
 
             //Act
-            erc.ConvertSingle(response);
+            erc.Convert(response);
         }
 
         [Test]
@@ -92,7 +93,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             var erc = new ErrorResponseConverter();
 
             //Act
-            erc.ConvertSingle(response);
+            erc.Convert(response);
         }
     }
 }
