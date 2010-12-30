@@ -10,8 +10,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
     public class RelationAttributeFixture
     {
         [Test]
-        public void Can_Instantiate_New_ContextAttribute()
-        {
+        public void Can_Instantiate_New_ContextAttribute() {
             //Act
             var attribute = new RelationAttribute("foo");
 
@@ -20,8 +19,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
         }
 
         [Test]
-        public void Can_Instantiate_New_RelationAttribute_With_FactoryMethod()
-        {
+        public void Can_Instantiate_New_RelationAttribute_With_FactoryMethod() {
             //Act
             var attribute = RelationAttribute.New("Tillverkarrelation", "foo", 31);
 
@@ -30,8 +28,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
         }
 
         [Test]
-        public void Instantiation_Sets_Correct_Values_On_BaseType_Props()
-        {
+        public void Instantiation_Sets_Correct_Values_On_BaseType_Props() {
             //Act
             var attribute = new RelationAttribute("foo", 10, "foo");
 
@@ -42,15 +39,15 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
         }
 
         [Test]
-        public void Can_Generate_Api_Xml()
-        {
+        public void Can_Generate_Api_Xml() {
             //Arrange
             var expected = new XElement("RelationAttribute",
                                         new XAttribute("name", "Tillverkarrelation"),
+                                        new XAttribute("nameParserClass", "foo"),
                                         new XAttribute("id", "31"),
                                         new XElement("Value", new XCData("foo"))).ToString();
 
-            var attribute = RelationAttribute.New("Tillverkarrelation", "foo", 31);
+            var attribute = RelationAttribute.New("Tillverkarrelation", "foo", 31, "foo");
 
             //Act
             var actual = attribute.ToAdsml().ToString();

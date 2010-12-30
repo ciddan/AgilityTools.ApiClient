@@ -45,10 +45,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes.Deserialization
             var xml = new XElement("RelationAttribute",
                         new XAttribute("id", "31"),
                         new XAttribute("name", "Tillverkarrelation"),
+                        new XAttribute("nameParserClass", "foo"),
                         new XElement("Value", new XCData("foo")),
                         new XElement("Value", new XCData("bar")));
 
-            var expected = RelationAttribute.New("Tillverkarrelation", new[] {"foo", "bar"}, 31);
+            var expected = RelationAttribute.New("Tillverkarrelation", new[] {"foo", "bar"}, 31, "foo");
 
             var rad = new RelationAttributeDeserializer();
 
@@ -58,6 +59,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes.Deserialization
             //Assert
             Assert.That(actual.Name, Is.EqualTo(expected.Name));
             Assert.That(actual.DefinitionId, Is.EqualTo(expected.DefinitionId));
+            Assert.That(actual.NameParserClass, Is.EqualTo(expected.NameParserClass));
 
             Assert.That(actual.Values.ElementAt(0), Is.EqualTo(expected.Values.ElementAt(0)));
             Assert.That(actual.Values.ElementAt(1), Is.EqualTo(expected.Values.ElementAt(1)));

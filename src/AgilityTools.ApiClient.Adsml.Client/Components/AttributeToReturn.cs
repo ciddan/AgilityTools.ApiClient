@@ -1,4 +1,5 @@
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components.Interfaces;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
