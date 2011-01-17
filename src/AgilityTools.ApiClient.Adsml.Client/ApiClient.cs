@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Communication;
@@ -19,20 +20,16 @@ namespace AgilityTools.ApiClient.Adsml.Client
         }
 
         public XElement SendApiRequest<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement> {
-            if (request == null)
-                throw new ArgumentNullException("request");
-
-            byte[] q = BuildRequest(request);
-
-            byte[] res = _webClient.UploadData(_adapiWsUrl, "POST", q);
-
-            XElement result = XElement.Parse(Encoding.UTF8.GetString(res));
-
-            // IBM WebSphere always returns an ErrorResponse first for some reason.
-            // If a real error occurs, the response will contain two ErrorResponse nodes.
-            result.FirstNode.Remove();
+            XElement result = SendRequest(request);
 
             return result;
+        }
+
+        public IEnumerable<TResponse> SendApiRequest<TRequest, TResponse>(TRequest request, Func<XElement, IEnumerable<TResponse>> responseConverter) 
+            where TRequest : class, IAdsmlSerializable<XElement> {
+            XElement result = SendRequest(request);
+
+            return responseConverter.Invoke(result);
         }
 
         public void SendApiRequestAsync<TRequest>(TRequest request, Action<XElement> callback) where TRequest : class, IAdsmlSerializable<XElement> {
@@ -48,6 +45,22 @@ namespace AgilityTools.ApiClient.Adsml.Client
                                                                    result.FirstNode.Remove();
                                                                    callback.Invoke(result);
                                                                });
+        }
+
+        private XElement SendRequest<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement> {
+            if (request == null)
+                throw new ArgumentNullException("request");
+
+            byte[] q = BuildRequest(request);
+
+            byte[] res = _webClient.UploadData(_adapiWsUrl, "POST", q);
+
+            XElement result = XElement.Parse(Encoding.UTF8.GetString(res));
+
+            // IBM WebSphere always returns an ErrorResponse first for some reason.
+            // If a real error occurs, the response will contain two ErrorResponse nodes.
+            result.FirstNode.Remove();
+            return result;
         }
 
         private static byte[] BuildRequest<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement> {

@@ -1,8 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
+using AgilityTools.ApiClient.Adsml.Client.Filters;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
+using AgilityTools.ApiClient.Adsml.Client.Responses;
+using AgilityTools.ApiClient.Adsml.Client.Responses.Converters;
 using AgilityTools.ApiClient.Adsml.Communication;
 using Moq;
 using NUnit.Framework;
@@ -119,6 +125,32 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             //Act
             client.SendApiRequestAsync<CreateRequest>(null, null);
+        }
+
+        [Test]
+        public void Can_Supply_Response_Converter_And_Receive_Correct_Response_Type() {
+            //Arrange
+            var client = new ApiClient(new ApiWebClient());
+            var request = new AqlQueryBuilder();
+
+            request.BasePath("/Structures/Classification/JULA Produkter")
+                .QueryType(AqlQueryTypes.Below)
+                .ObjectTypeToFind(12)
+                .QueryString("#215 = \"169010\"")
+                .ConfigureSearchControls()
+                    .AddRequestFilters(
+                        Filter.CountLimit(1),
+                        Filter.ExcludeBin());
+
+            var converter = new ContextResponseConverter();
+
+            //Act
+            var reply = client.SendApiRequest(request.Build(), converter.Convert);
+
+            //Assert
+            Assert.That(reply, Is.Not.Null);
+            Assert.That(reply, Is.InstanceOf<IEnumerable<ContextResponse>>());
+            Assert.That(reply.Count(), Is.EqualTo(1));
         }
     }
 }

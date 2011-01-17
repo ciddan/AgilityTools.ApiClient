@@ -15,22 +15,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
                 throw new ArgumentNullException("source");
             }
 
-            CheckResponse(source);
-
-            XElement context = source.Descendants()
-                .Where(d => (d.Name.LocalName == "Context" || d.Name.LocalName == "StructureContext")).SingleOrDefault();
-
-            if (context == null) {
-                return null;   
-            }
-
             return new ContextResponse
                    {
-                       Name = (string) context.Attribute("name"),
-                       IdPath = (string) context.Attribute("idPath"),
-                       SortPath = (string) context.Attribute("sortPath"),
+                       Name = (string) source.Attribute("name"),
+                       IdPath = (string) source.Attribute("idPath"),
+                       SortPath = (string) source.Attribute("sortPath"),
                        Attributes = new List<IAdsmlAttribute>(
-                           context.Descendants().Where(d => d.Name.LocalName.Contains("Attribute"))
+                           source.Descendants().Where(d => d.Name.LocalName.Contains("Attribute"))
                                .Select(AttributeDeserializer.Deserialize)
                            )
                    };
