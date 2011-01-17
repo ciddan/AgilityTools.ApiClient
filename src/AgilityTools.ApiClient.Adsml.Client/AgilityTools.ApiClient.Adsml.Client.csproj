@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdsmlException.cs" />
     <Compile Include="ApiClient.cs" />
     <Compile Include="ApiSerializationValidationException.cs" />
     <Compile Include="Components\AttributeControl.cs" />
