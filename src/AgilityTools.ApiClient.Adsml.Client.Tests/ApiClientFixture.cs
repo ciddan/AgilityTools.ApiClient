@@ -140,7 +140,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 .ConfigureSearchControls()
                     .AddRequestFilters(
                         Filter.CountLimit(1),
-                        Filter.ExcludeBin());
+                        Filter.ExcludeBin())
+                    .ReturnAttributes(
+                        AttributeToReturn.WithDefinitionId(215),
+                        AttributeToReturn.WithDefinitionId(24));
 
             var converter = new ContextResponseConverter();
 

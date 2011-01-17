@@ -462,6 +462,7 @@
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:string">
 				<xsd:attribute name="langId" type="xsd:positiveInteger"/>
+				<xsd:attribute name="stateId" type="xsd:positiveInteger"/>
 				<xsd:attribute name="scope" type="Scope"/>
 				<xsd:attribute name="isInherited" type="xsd:boolean"/>
 				<xsd:attribute name="isAvailable" type="xsd:boolean"/>
