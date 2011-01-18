@@ -1,6 +1,10 @@
+using System;
+using System.Runtime.Serialization;
+
 namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
-    public class ErrorResponse
+    [Serializable]
+    public class ErrorResponse : ISerializable
     {
         public ErrorTypes ErrorType { get; internal set; }
         public string ErrorId { get; internal set; }
@@ -17,6 +21,17 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             Description = description;
         }
 
+        protected ErrorResponse(SerializationInfo info, StreamingContext context) {
+            if (info == null) {
+                throw new ArgumentNullException("info");
+            }
+
+            this.ErrorId = (string) info.GetValue("ErrorId", typeof (string));
+            this.Message = (string) info.GetValue("Message", typeof(string));
+            this.Description = (string) info.GetValue("Description", typeof(string));
+            this.ErrorType = (ErrorTypes) info.GetValue("ErrorType", typeof (ErrorTypes));
+        }
+
         public override string ToString() {
             return string.Format("ErrorType: {0}, id: {1}, desc: {2}. Message: {3}.",
                                  this.ErrorType, this.ErrorId, this.Description, this.Message);
@@ -28,6 +43,17 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             ApplicationError,
             SystemError,
             ObjectNotFound
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (info == null) {
+                throw new ArgumentNullException("info");
+            }
+
+            info.AddValue("ErrorId", this.ErrorId);
+            info.AddValue("Message", this.Message);
+            info.AddValue("Description", this.Description);
+            info.AddValue("ErrorType", this.ErrorType);
         }
     }
 }
