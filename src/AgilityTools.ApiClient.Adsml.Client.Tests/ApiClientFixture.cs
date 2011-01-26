@@ -49,14 +49,16 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof (ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: webClient")]
+        [ExpectedException(typeof (ArgumentNullException),
+            ExpectedMessage = "Value cannot be null.\r\nParameter name: webClient")]
         public void ApiClient_Ctor_Throws_ArgumentNullException_If_ApiWebClient_Is_Null() {
             //Act
             new ApiClient(null);
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
+        [ExpectedException(typeof (ArgumentNullException),
+            ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
         public void SendRequest_Throws_ArgumentNullException_If_Request_Is_Null() {
             //Arrange
             var client = new ApiClient(new ApiWebClient());
@@ -83,10 +85,17 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Send_ApiRequests_Via_ApiClient() {
             //Arrange
-            var request = new CreateRequest("lol", "lol", StructureAttribute.New(215, new StructureValue(10, "foo")));
+            var builder = new AqlQueryBuilder();
+
+            builder.BasePath("/Structures/Classification/JULA Produkter")
+                .QueryType(AqlQueryTypes.Below)
+                .ObjectTypeToFind(12)
+                .QueryString("#215 = \"169010\"")
+                .ConfigureSearchControls()
+                    .AddRequestFilters(Filter.ReturnNoAttributes());
 
             //Act
-            var result = _client.SendApiRequest(request);
+            var result = _client.SendApiRequest(builder.Build());
 
             //Assert
             Assert.That(result, Is.Not.Null);
@@ -96,7 +105,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Send_Async_ApiRequests_Via_ApiClient() {
             //Arrange
-            var request = new CreateRequest("lol", "lol", StructureAttribute.New(215, new StructureValue(10, "foo")));
+            var builder = new AqlQueryBuilder();
+
+            builder.BasePath("/Structures/Classification/JULA Produkter")
+                .QueryType(AqlQueryTypes.Below)
+                .ObjectTypeToFind(12)
+                .QueryString("#215 = \"169010\"")
+                .ConfigureSearchControls()
+                    .AddRequestFilters(Filter.ReturnNoAttributes());
 
             var manualEvent = new ManualResetEvent(false);
             bool callbackCalled = false;
@@ -104,7 +120,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             //Act
             XElement result = null;
 
-            _client.SendApiRequestAsync(request, data => {
+            _client.SendApiRequestAsync(builder.Build(), data => {
                                                      result = data;
                                                      callbackCalled = true;
                                                      manualEvent.Set();
@@ -118,7 +134,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
+        [ExpectedException(typeof (ArgumentNullException),
+            ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
         public void SendRequestAsync_Throws_ArgumentNullException_If_Request_Is_Null() {
             //Arrange
             var client = new ApiClient(new ApiWebClient());
@@ -138,12 +155,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 .ObjectTypeToFind(12)
                 .QueryString("#215 = \"169010\"")
                 .ConfigureSearchControls()
-                    .AddRequestFilters(
-                        Filter.CountLimit(1),
-                        Filter.ExcludeBin())
-                    .ReturnAttributes(
-                        AttributeToReturn.WithDefinitionId(215),
-                        AttributeToReturn.WithDefinitionId(24));
+                .AddRequestFilters(
+                    Filter.CountLimit(1),
+                    Filter.ExcludeBin())
+                .ReturnAttributes(
+                    AttributeToReturn.WithDefinitionId(215),
+                    AttributeToReturn.WithDefinitionId(24));
 
             var converter = new ContextResponseConverter();
 
@@ -154,6 +171,53 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             Assert.That(reply, Is.Not.Null);
             Assert.That(reply, Is.InstanceOf<IEnumerable<ContextResponse>>());
             Assert.That(reply.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        [ExpectedException(typeof(AdsmlException), ExpectedMessage = "The request failed:\nErrorType: ApplicationError, id: 4013, desc: ERROR_CODE_4013. Message: Structure type \"Classifiation\" does not exist.")]
+        public void Should_Throw_AdsmlException_If_An_ErrorResponse_Is_Returned() {
+            //Arrange
+            XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+            string xml = new XElement("BatchResponse",
+                new XAttribute("version", "5.1.16 build 116 (2010/05/27 14-36)"),
+                new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+                new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+                new XElement("ErrorResponse",
+                    new XAttribute("id", "4024"),
+                    new XAttribute("type", "malformedRequest"),
+                    new XElement("Message", "Error at line 1 column 111. cvc-elt.1: Cannot find the declaration of element 'BatchRequest'..")
+                ),
+                new XElement("ErrorResponse",
+                    new XAttribute("description", "ERROR_CODE_4013"),
+                    new XAttribute("id", "4013"),
+                    new XAttribute("type", "applicationError"),
+                    new XElement("Message", "Structure type \"Classifiation\" does not exist"))).ToString();
+
+
+            var errorResponse = System.Text.Encoding.Default.GetBytes(xml);
+
+            var mockWebClient = new Mock<IApiWebClient>();
+            mockWebClient.Setup(m => m.UploadData(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<byte[]>())).Returns(
+                errorResponse);
+
+            var client = new ApiClient(mockWebClient.Object);
+
+            var request = new AqlQueryBuilder();
+
+            request.BasePath("/Structures/Classification/JULA Produkter")
+                .QueryType(AqlQueryTypes.Below)
+                .ObjectTypeToFind(12)
+                .QueryString("#215 = \"169010\"")
+                .ConfigureSearchControls()
+                .AddRequestFilters(
+                    Filter.CountLimit(1),
+                    Filter.ExcludeBin())
+                .ReturnAttributes(
+                    AttributeToReturn.WithDefinitionId(215),
+                    AttributeToReturn.WithDefinitionId(24));
+
+            //Act
+            client.SendApiRequest(request.Build());
         }
     }
 }

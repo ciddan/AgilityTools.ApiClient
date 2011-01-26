@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using AgilityTools.ApiClient.Adsml.Client.Responses;
 
@@ -7,23 +8,24 @@ namespace AgilityTools.ApiClient.Adsml.Client
     [Serializable]
     public class AdsmlException : Exception, ISerializable
     {
-        private ErrorResponse _errorResponse;
-        public ErrorResponse ErrorResponse {
-            get { return _errorResponse; }
-            set { _errorResponse = value; }
+        private IEnumerable<ErrorResponse> _errorResponses;
+        public IEnumerable<ErrorResponse> ErrorResponses {
+            get { return _errorResponses; }
+            set { _errorResponses = value; }
         }
 
-        public AdsmlException() {
+        public AdsmlException(IEnumerable<ErrorResponse> errorResponses = null) {
+            _errorResponses = errorResponses;
         }
 
-        public AdsmlException(string message, ErrorResponse errorResponse = null)
+        public AdsmlException(string message, IEnumerable<ErrorResponse> errorResponses = null)
             : base(message) {
-            _errorResponse = errorResponse;
+            _errorResponses = errorResponses;
         }
 
-        public AdsmlException(string message, Exception inner, ErrorResponse errorResponse = null)
+        public AdsmlException(string message, Exception inner, IEnumerable<ErrorResponse> errorResponses = null)
             : base(message, inner) {
-            _errorResponse = errorResponse;
+            _errorResponses = errorResponses;
         }
 
         protected AdsmlException(SerializationInfo info, StreamingContext context)

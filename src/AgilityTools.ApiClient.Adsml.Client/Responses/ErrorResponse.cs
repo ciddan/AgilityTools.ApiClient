@@ -32,6 +32,17 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             this.ErrorType = (ErrorTypes) info.GetValue("ErrorType", typeof (ErrorTypes));
         }
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context) {
+            if (info == null) {
+                throw new ArgumentNullException("info");
+            }
+
+            info.AddValue("ErrorId", this.ErrorId);
+            info.AddValue("Message", this.Message);
+            info.AddValue("Description", this.Description);
+            info.AddValue("ErrorType", this.ErrorType);
+        }
+
         public override string ToString() {
             return string.Format("ErrorType: {0}, id: {1}, desc: {2}. Message: {3}.",
                                  this.ErrorType, this.ErrorId, this.Description, this.Message);
@@ -43,17 +54,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             ApplicationError,
             SystemError,
             ObjectNotFound
-        }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context) {
-            if (info == null) {
-                throw new ArgumentNullException("info");
-            }
-
-            info.AddValue("ErrorId", this.ErrorId);
-            info.AddValue("Message", this.Message);
-            info.AddValue("Description", this.Description);
-            info.AddValue("ErrorType", this.ErrorType);
         }
     }
 }

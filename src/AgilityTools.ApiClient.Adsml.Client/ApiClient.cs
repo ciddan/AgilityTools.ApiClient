@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Responses.Converters;
 using AgilityTools.ApiClient.Adsml.Communication;
 
 namespace AgilityTools.ApiClient.Adsml.Client
@@ -43,6 +45,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
                                                                        XElement.Parse(Encoding.UTF8.GetString(data));
 
                                                                    result.FirstNode.Remove();
+                                                                   ValidateResponse(result);
+
                                                                    callback.Invoke(result);
                                                                });
         }
@@ -60,7 +64,26 @@ namespace AgilityTools.ApiClient.Adsml.Client
             // IBM WebSphere always returns an ErrorResponse first for some reason.
             // If a real error occurs, the response will contain two ErrorResponse nodes.
             result.FirstNode.Remove();
+
+            ValidateResponse(result);
+
             return result;
+        }
+
+        private static void ValidateResponse(XElement result) {
+            if (!result.Descendants().Any(n => n.Name.LocalName == "ErrorResponse")) {
+                return;
+            }
+            
+            var converter = new ErrorResponseConverter();
+            var errors = converter.Convert(result);
+
+            string errorMessages =
+                errors.Aggregate(string.Empty, (current, error) => current + (error.ToString() + "\n")).Trim();
+
+            throw new AdsmlException(
+                string.Format("{0}\n{1}", "The request failed:", errorMessages),
+                errors);
         }
 
         private static byte[] BuildRequest<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement> {
