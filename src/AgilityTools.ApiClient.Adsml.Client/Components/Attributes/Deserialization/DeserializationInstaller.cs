@@ -2,7 +2,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes.Deserialization
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public class DeserializationInstaller : IWindsorInstaller
     {

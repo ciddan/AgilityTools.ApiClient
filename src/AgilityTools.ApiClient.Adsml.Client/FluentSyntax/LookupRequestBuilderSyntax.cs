@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 
-namespace AgilityTools.ApiClient.Adsml.Client.FluentSyntax
+namespace AgilityTools.ApiClient.Adsml.Client
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ILookupRequestBuilder : IFluentInterface, IName, IConfigLookupControlsLookup

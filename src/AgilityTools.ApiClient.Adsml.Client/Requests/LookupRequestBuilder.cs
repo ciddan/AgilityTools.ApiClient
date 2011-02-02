@@ -1,6 +1,5 @@
 using System;
 using AgilityTools.ApiClient.Adsml.Client.Components;
-using AgilityTools.ApiClient.Adsml.Client.FluentSyntax;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Requests
 {

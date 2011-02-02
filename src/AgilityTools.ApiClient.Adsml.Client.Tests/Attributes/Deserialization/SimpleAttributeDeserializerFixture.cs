@@ -1,8 +1,7 @@
 using System;
 using System.Linq;
 using System.Xml.Linq;
-using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
-using AgilityTools.ApiClient.Adsml.Client.Components.Attributes.Deserialization;
+using AgilityTools.ApiClient.Adsml.Client.Components;
 using NUnit.Framework;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes.Deserialization

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using AgilityTools.ApiClient.Adsml.Client.Filters;
-using AgilityTools.ApiClient.Adsml.Client.FluentSyntax;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components
 {

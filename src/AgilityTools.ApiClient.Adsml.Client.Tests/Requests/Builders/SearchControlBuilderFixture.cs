@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components;
-using AgilityTools.ApiClient.Adsml.Client.Filters;
 using NUnit.Framework;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders

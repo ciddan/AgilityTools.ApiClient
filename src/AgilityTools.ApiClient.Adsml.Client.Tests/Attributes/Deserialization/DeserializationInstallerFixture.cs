@@ -1,5 +1,4 @@
-using System;
-using AgilityTools.ApiClient.Adsml.Client.Components.Attributes.Deserialization;
+using AgilityTools.ApiClient.Adsml.Client.Components;
 using Castle.MicroKernel;
 using Castle.Windsor;
 using NUnit.Framework;

@@ -1,9 +1,8 @@
 using System.Linq;
 using System.Xml.Linq;
 using System.Collections.Generic;
-using AgilityTools.ApiClient.Adsml.Client.Helpers;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public class SimpleAttribute : AttributeBase
     {

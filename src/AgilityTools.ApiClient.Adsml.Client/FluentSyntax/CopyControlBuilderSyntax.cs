@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace AgilityTools.ApiClient.Adsml.Client.FluentSyntax
+namespace AgilityTools.ApiClient.Adsml.Client
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ICopyControlBuilder : IFluentInterface, ICopyControlConfigLookupControls

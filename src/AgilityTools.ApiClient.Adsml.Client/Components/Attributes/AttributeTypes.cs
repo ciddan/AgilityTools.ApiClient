@@ -1,6 +1,4 @@
-﻿using AgilityTools.ApiClient.Adsml.Client.Helpers;
-
-namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
+﻿namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public enum AttributeTypes
     {

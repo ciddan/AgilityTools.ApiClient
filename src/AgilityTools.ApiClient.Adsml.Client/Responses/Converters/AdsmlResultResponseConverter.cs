@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
+namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
     public abstract class AdsmlResultResponseConverter<TOutput> : IResponseConverter<XElement, TOutput> where TOutput : AdsmlResult, new()
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using AgilityTools.ApiClient.Adsml.Client.Responses.Converters;
+using AgilityTools.ApiClient.Adsml.Client.Responses;
 using AgilityTools.ApiClient.Adsml.Communication;
 
 namespace AgilityTools.ApiClient.Adsml.Client

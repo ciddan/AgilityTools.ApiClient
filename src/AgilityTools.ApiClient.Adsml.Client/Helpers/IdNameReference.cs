@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Helpers
+namespace AgilityTools.ApiClient.Adsml.Client
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     internal class IdNameReference 

@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using AgilityTools.ApiClient.Adsml.Client.Helpers;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests
 {

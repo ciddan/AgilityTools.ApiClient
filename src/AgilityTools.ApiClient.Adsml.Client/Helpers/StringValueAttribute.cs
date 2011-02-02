@@ -1,6 +1,6 @@
 using System;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Helpers
+namespace AgilityTools.ApiClient.Adsml.Client
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class StringValueAttribute : Attribute

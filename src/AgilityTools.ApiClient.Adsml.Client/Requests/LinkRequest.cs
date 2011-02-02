@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components;
-using AgilityTools.ApiClient.Adsml.Client.Filters;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Requests
 {

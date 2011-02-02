@@ -1,4 +1,4 @@
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public interface ISearchControlComponent : IControlComponent { }
 }

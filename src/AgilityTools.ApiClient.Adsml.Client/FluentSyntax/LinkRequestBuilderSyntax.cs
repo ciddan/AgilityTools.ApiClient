@@ -1,4 +1,4 @@
-namespace AgilityTools.ApiClient.Adsml.Client.FluentSyntax
+namespace AgilityTools.ApiClient.Adsml.Client
 {
     public interface ILinkRequestBuilder : IFluentInterface,
         ILinkRequestTargetPathReturnNoAttributesConfigureCopyControls,

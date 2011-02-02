@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using Castle.Windsor;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes.Deserialization
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public static class AttributeDeserializer
     {

@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using AgilityTools.ApiClient.Adsml.Client.Components.Attributes;
-using AgilityTools.ApiClient.Adsml.Client.Components.Attributes.Deserialization;
-using AgilityTools.ApiClient.Adsml.Client.Helpers;
+using AgilityTools.ApiClient.Adsml.Client.Components;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Responses.Converters
+namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
     public class ContextResponseConverter : IResponseConverter<XElement, ContextResponse>
     {

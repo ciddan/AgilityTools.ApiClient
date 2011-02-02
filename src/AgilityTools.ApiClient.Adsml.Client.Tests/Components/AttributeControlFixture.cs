@@ -1,6 +1,5 @@
 using System;
 using AgilityTools.ApiClient.Adsml.Client.Components;
-using AgilityTools.ApiClient.Adsml.Client.Components.Interfaces;
 using NUnit.Framework;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests.Components

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public class CompositeAttribute : IAdsmlAttribute
     {

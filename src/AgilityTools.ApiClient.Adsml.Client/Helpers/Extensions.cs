@@ -5,7 +5,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Helpers
+namespace AgilityTools.ApiClient.Adsml.Client
 {
     public static class Extensions
     {

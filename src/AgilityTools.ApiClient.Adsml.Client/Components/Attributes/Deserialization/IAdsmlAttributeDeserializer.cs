@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes.Deserialization
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public interface IAdsmlAttributeDeserializer
     {

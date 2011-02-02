@@ -1,6 +1,4 @@
-﻿using AgilityTools.ApiClient.Adsml.Client.Helpers;
-
-namespace AgilityTools.ApiClient.Adsml.Client.Components
+﻿namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public enum AqlQueryTypes
     {

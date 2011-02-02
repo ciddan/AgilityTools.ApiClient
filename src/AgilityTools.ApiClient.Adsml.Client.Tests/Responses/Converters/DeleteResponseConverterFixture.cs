@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Responses;
-using AgilityTools.ApiClient.Adsml.Client.Responses.Converters;
 using NUnit.Framework;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters

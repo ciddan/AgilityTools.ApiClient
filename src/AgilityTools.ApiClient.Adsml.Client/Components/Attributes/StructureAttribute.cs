@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Components.Attributes
+namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public class StructureAttribute : IAdsmlAttribute
     {
