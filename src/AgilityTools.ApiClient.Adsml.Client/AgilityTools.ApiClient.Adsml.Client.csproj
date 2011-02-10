@@ -54,6 +54,7 @@
     <Compile Include="Components\AttributeControl.cs" />
     <Compile Include="Components\Attributes\AttributeBase.cs" />
     <Compile Include="Components\Attributes\AttributeTypes.cs" />
+    <Compile Include="Components\Attributes\AttributeValue.cs" />
     <Compile Include="Components\Attributes\CompositeAttribute.cs" />
     <Compile Include="Components\Attributes\Deserialization\ContextAttributeDeserializer.cs" />
     <Compile Include="Components\Attributes\Deserialization\RelationAttributeDeserializer.cs" />

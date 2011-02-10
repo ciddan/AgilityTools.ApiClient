@@ -14,6 +14,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             this.CompositeValues = new List<CompositeValue>();
         }
 
+        public string GetName() {
+            return this.Name;
+        }
+
+        public IEnumerable<AttributeValue> GetValues() {
+            throw new NotSupportedException();
+        }
+
         public XElement ToAdsml() {
             if (string.IsNullOrEmpty(this.Name)) {
                 throw new InvalidOperationException("Name not set.");

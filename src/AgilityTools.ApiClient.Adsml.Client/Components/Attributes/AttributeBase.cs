@@ -17,6 +17,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             this.Values = new List<string>();
         }
 
+        public string GetName() {
+            return this.Name;
+        }
+
+        public IEnumerable<AttributeValue> GetValues() {
+            return this.Values.Select(v => new AttributeValue {Value = v, LanguageId = 0});
+        }
+
         public virtual XElement ToAdsml() {
             Validate();
 

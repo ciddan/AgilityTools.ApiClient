@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
@@ -27,6 +28,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             this.Name = name;
             this.DefinitionId = definitionId;
             this.Values = values;
+        }
+
+        public string GetName() {
+            return this.Name;
+        }
+
+        public IEnumerable<AttributeValue> GetValues() {
+            return this.Values.Select(val => new AttributeValue {LanguageId = val.LanguageId, Value = val.Value});
         }
 
 	    public XElement ToAdsml() {
