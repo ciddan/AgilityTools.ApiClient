@@ -8,25 +8,25 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
 {
     public class CreateRequest : IAdsmlSerializable<XElement>
     {
-        internal string ObjectTypeName { get; private set; }
-        internal string CreationPath { get; private set; }
-        internal IList<IAdsmlAttribute> AttributesToSet { get; private set; }
+        public string ObjectTypeName { get; private set; }
+        public string ContextName { get; private set; }
+        public IList<IAdsmlAttribute> AttributesToSet { get; private set; }
 
         public LookupControl LookupControl { get; set; }
         public IEnumerable<ICreateRequestFilter> RequestFilters { get; set; }
 
-        public CreateRequest(string objectTypeName, string creationPath, params IAdsmlAttribute[] attributesToSet) {
+        public CreateRequest(string objectTypeName, string contextName, params IAdsmlAttribute[] attributesToSet) {
             if (string.IsNullOrEmpty(objectTypeName))
                 throw new InvalidOperationException("ObjectTypeName cannot be null or empty.");
 
-            if (string.IsNullOrEmpty(creationPath))
-                throw new InvalidOperationException("CreationPath cannot be null or empty.");
+            if (string.IsNullOrEmpty(contextName))
+                throw new InvalidOperationException("ContextName cannot be null or empty.");
 
             if (attributesToSet == null)
                 throw new ArgumentNullException("attributesToSet");
 
             this.ObjectTypeName = objectTypeName;
-            this.CreationPath = creationPath;
+            this.ContextName = contextName;
 
             this.AttributesToSet = new List<IAdsmlAttribute>(attributesToSet);
         }
@@ -37,7 +37,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                                         new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
                                         new XAttribute(XNamespace.Xmlns + "xsi", xsi),
                                         new XElement("CreateRequest",
-                                                     new XAttribute("name", this.CreationPath),
+                                                     new XAttribute("name", this.ContextName),
                                                      new XAttribute("type", this.ObjectTypeName),
                                                      new XElement("AttributesToSet",
                                                                   this.AttributesToSet.Select(attrs => attrs.ToAdsml()))));

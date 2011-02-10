@@ -18,7 +18,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
             //Assert
             Assert.That(cr, Is.Not.Null);
             Assert.That(cr.ObjectTypeName, Is.EqualTo("foo"));
-            Assert.That(cr.CreationPath, Is.EqualTo("bar"));
+            Assert.That(cr.ContextName, Is.EqualTo("bar"));
             Assert.That(cr.AttributesToSet.Count, Is.AtLeast(1));
         }
 
@@ -37,7 +37,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException), ExpectedMessage = "CreationPath cannot be null or empty.")]
+        [ExpectedException(typeof(InvalidOperationException), ExpectedMessage = "ContextName cannot be null or empty.")]
         public void CreateRequest_Ctor_Throwns_InvalidOperationException_If_CreationPath_Is_NullOrEmpty() {
             //Act
             new CreateRequest("foo", string.Empty, new StructureAttribute());
