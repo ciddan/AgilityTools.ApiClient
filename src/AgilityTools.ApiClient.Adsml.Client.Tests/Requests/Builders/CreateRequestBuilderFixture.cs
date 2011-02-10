@@ -26,6 +26,15 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
         }
 
         [Test]
+        public void Can_Specify_ParentIdPath() {
+            //Act
+            _builder.ParentIdPath("/1/2/3");
+
+            //Assert
+            Assert.That(_builder.ParentPath, Is.EqualTo("/1/2/3"));
+        }
+
+        [Test]
         public void Can_Specify_New_Context_Name() {
             //Act
             _builder.NewContextName("foo");
@@ -120,7 +129,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
             var builder = new CreateRequestBuilder();
 
             //Act
-            builder.NewContextName("/foo/bar")
+            builder.ParentIdPath("/1/2")
+                   .NewContextName("foo")
                    .ObjectTypeToCreate("baz")
                    .ReturnNoAttributes()
                    .FailOnError()

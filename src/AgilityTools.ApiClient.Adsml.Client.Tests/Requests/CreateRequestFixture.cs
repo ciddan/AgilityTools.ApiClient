@@ -52,8 +52,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
                 new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
                 new XAttribute(XNamespace.Xmlns + "xsi", xsi),
                 new XElement("CreateRequest",
-                    new XAttribute("name", "fooPath"),
+                    new XAttribute("name", "fooName"),
                     new XAttribute("type", "fooObjectTypeName"),
+                    new XAttribute("parentIdPath", "fooPath"),
                     new XElement("AttributesToSet",
                         new XElement("StructureAttribute",
                             new XAttribute("id", "215"),
@@ -67,7 +68,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
             var attribute = new StructureAttribute
                             {DefinitionId = 215, Name = "fooAttributeName", Values = new List<StructureValue> {value}};
 
-            var request = new CreateRequest("fooObjectTypeName", "fooPath", null, attribute);
+            var request = new CreateRequest("fooObjectTypeName", "fooName", "fooPath", attribute);
             
             //Act
             var actual = request.ToAdsml();
