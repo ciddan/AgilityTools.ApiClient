@@ -8,43 +8,54 @@ namespace AgilityTools.ApiClient.Adsml.Client
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ICreateRequestBuilder : IFluentInterface,
+                                             IParentIdPath,
                                              INewContextName,
                                              IObjectTypeToCreate,
                                              IFailOnError,
                                              IAttributesToSet,
-                                             IOTTCreateRNAttributesIFOErrorIATSet,
-                                             IRNAttributesFOErrorIATSet,
-                                             IFOErrorIATSet,
+                                             INewContextNameObjectTypeToCreateReturnNoAttributesFailOnErrorAttributesToSet,
+                                             IObjectTypeToCreateReturnNoAttributesFailOnErrorAttributesToSet,
+                                             IReturnNoAttributesFailOnErrorAttributesToSet,
+                                             IFailOnErrorAttributesToSet,
                                              IConfigLookupControls
     {
         CreateRequest Build();
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface IOTTCreateRNAttributesIFOErrorIATSet : IFluentInterface, IObjectTypeToCreate, IReturnNoAttributes, IFailOnError, IAttributesToSet { }
+    public interface INewContextNameObjectTypeToCreateReturnNoAttributesFailOnErrorAttributesToSet : IFluentInterface, INewContextName, IObjectTypeToCreate, IReturnNoAttributes, IFailOnError, IAttributesToSet { }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface IRNAttributesFOErrorIATSet : IFluentInterface, IReturnNoAttributes, IFailOnError, IAttributesToSet { }
+    public interface IObjectTypeToCreateReturnNoAttributesFailOnErrorAttributesToSet : IFluentInterface, IObjectTypeToCreate, IReturnNoAttributes, IFailOnError, IAttributesToSet { }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface IFOErrorIATSet : IFluentInterface, IFailOnError, IAttributesToSet { }
+    public interface IReturnNoAttributesFailOnErrorAttributesToSet : IFluentInterface, IReturnNoAttributes, IFailOnError, IAttributesToSet { }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface IFailOnErrorAttributesToSet : IFluentInterface, IFailOnError, IAttributesToSet { }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface IParentIdPath : IFluentInterface
+    {
+        INewContextNameObjectTypeToCreateReturnNoAttributesFailOnErrorAttributesToSet ParentIdPath(string parentIdPath);
+    }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface INewContextName : IFluentInterface
     {
-        IOTTCreateRNAttributesIFOErrorIATSet NewContextName(string contextName);
+        IObjectTypeToCreateReturnNoAttributesFailOnErrorAttributesToSet NewContextName(string contextName);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IObjectTypeToCreate : IFluentInterface
     {
-        IRNAttributesFOErrorIATSet ObjectTypeToCreate(string objectType);
+        IReturnNoAttributesFailOnErrorAttributesToSet ObjectTypeToCreate(string objectType);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IReturnNoAttributes : IFluentInterface
     {
-        IFOErrorIATSet ReturnNoAttributes();
+        IFailOnErrorAttributesToSet ReturnNoAttributes();
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]

@@ -13,12 +13,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
         [Test]
         public void Can_Instatiate_New_CreateRequest() {
             //Act
-            var cr = new CreateRequest("foo", "bar", new StructureAttribute());
+            var cr = new CreateRequest("foo", "bar", "/1/2", new StructureAttribute());
 
             //Assert
             Assert.That(cr, Is.Not.Null);
             Assert.That(cr.ObjectTypeName, Is.EqualTo("foo"));
             Assert.That(cr.ContextName, Is.EqualTo("bar"));
+            Assert.That(cr.ParentIdPath, Is.EqualTo("/1/2"));
             Assert.That(cr.AttributesToSet.Count, Is.AtLeast(1));
         }
 
@@ -26,21 +27,21 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
         [ExpectedException(typeof (ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: attributesToSet")]
         public void CreateRequest_Ctor_Throwns_ArgumentNullException_If_AttributesToSet_Is_Null() {
             //Act
-            new CreateRequest("foo", "bar", null);
+            new CreateRequest("foo", "bar", null, null);
         }
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException), ExpectedMessage = "ObjectTypeName cannot be null or empty.")]
         public void CreateRequest_Ctor_Throwns_InvalidOperationException_If_ObjectTypeName_Is_NullOrEmpty() {
             //Act
-            new CreateRequest(null, "bar", new StructureAttribute());
+            new CreateRequest(null, "bar", null, new StructureAttribute());
         }
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException), ExpectedMessage = "ContextName cannot be null or empty.")]
         public void CreateRequest_Ctor_Throwns_InvalidOperationException_If_CreationPath_Is_NullOrEmpty() {
             //Act
-            new CreateRequest("foo", string.Empty, new StructureAttribute());
+            new CreateRequest("foo", string.Empty, null, new StructureAttribute());
         }
 
         [Test]
@@ -66,7 +67,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
             var attribute = new StructureAttribute
                             {DefinitionId = 215, Name = "fooAttributeName", Values = new List<StructureValue> {value}};
 
-            var request = new CreateRequest("fooObjectTypeName", "fooPath", attribute);
+            var request = new CreateRequest("fooObjectTypeName", "fooPath", null, attribute);
             
             //Act
             var actual = request.ToAdsml();
@@ -101,7 +102,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
             var value = new StructureValue { LanguageId = 10, Value = "fooValue" };
             var attribute = new StructureAttribute { DefinitionId = 215, Name = "fooAttributeName", Values = new List<StructureValue> { value } };
 
-            var request = new CreateRequest("fooObjectTypeName", "fooPath", attribute)
+            var request = new CreateRequest("fooObjectTypeName", "fooPath", null, attribute)
                           {
                               RequestFilters =
                                   new List<ICreateRequestFilter>
@@ -154,7 +155,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
             lcb.ReturnAttributes(AttributeToReturn.WithDefinitionId(10));
             var lc = lcb.Build();
 
-            var request = new CreateRequest("fooObjectTypeName", "fooPath", attribute) { LookupControl = lc };
+            var request = new CreateRequest("fooObjectTypeName", "fooPath", null, attribute) { LookupControl = lc };
 
             //Act
             var actual = request.ToAdsml();

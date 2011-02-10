@@ -7,6 +7,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
 {
     public class CreateRequestBuilder : ICreateRequestBuilder
     {
+        internal string ParentPath { get; private set; }
         internal string ContextName { get; private set; }
         internal string ObjectType { get; private set; }
         internal IAdsmlAttribute[] Attributes { get; private set; }
@@ -17,19 +18,25 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
             this.RequestFilters = new List<ICreateRequestFilter>();
         }
 
-        public IOTTCreateRNAttributesIFOErrorIATSet NewContextName(string contextName) {
+        public INewContextNameObjectTypeToCreateReturnNoAttributesFailOnErrorAttributesToSet ParentIdPath(string parentIdPath) {
+            this.ParentPath = parentIdPath;
+
+            return this;
+        }
+
+        public IObjectTypeToCreateReturnNoAttributesFailOnErrorAttributesToSet NewContextName(string contextName) {
             this.ContextName = contextName;
 
             return this; 
         }
 
-        public IRNAttributesFOErrorIATSet ObjectTypeToCreate(string objectType) {
+        public IReturnNoAttributesFailOnErrorAttributesToSet ObjectTypeToCreate(string objectType) {
             this.ObjectType = objectType;
             
             return this;
         }
 
-        public IFOErrorIATSet ReturnNoAttributes() {
+        public IFailOnErrorAttributesToSet ReturnNoAttributes() {
             this.RequestFilters.Add(Filter.ReturnNoAttributes());
 
             return this;
@@ -66,7 +73,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         }
 
         public CreateRequest Build() {
-            var createRequest = new CreateRequest(this.ObjectType, this.ContextName, this.Attributes);
+            var createRequest = new CreateRequest(this.ObjectType, this.ContextName, this.ParentPath, this.Attributes);
 
             if (this.LookupControlBuilder != null)
                 createRequest.LookupControl = this.LookupControlBuilder.Build();
