@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
@@ -43,8 +44,11 @@ namespace AgilityTools.ApiClient.Adsml.Client
                 throw new ArgumentNullException("source");
             }
 
+            string assemblyPath = Assembly.GetExecutingAssembly().GetAssemblyPath();
+            string xsdPath = Path.Combine(assemblyPath, "adsml.xsd");
+
             var schemaSet = new XmlSchemaSet();
-            schemaSet.Add("", XmlReader.Create("adsml.xsd"));
+            schemaSet.Add("", XmlReader.Create(xsdPath));
 
             source.Validate(schemaSet,
                             (sender, e) => {
@@ -84,6 +88,15 @@ namespace AgilityTools.ApiClient.Adsml.Client
                                 current + (part.Substring(0, 1).ToUpper() + part.Substring(1) + " "));
 
             return result.TrimEnd(' ');
+        }
+
+        public static string GetAssemblyPath(this Assembly assembly) {
+            string codeBase = assembly.CodeBase;
+
+            var uri = new UriBuilder(codeBase);
+            string path = Uri.UnescapeDataString(uri.Path);
+            
+            return Path.GetDirectoryName(path);
         }
     }
 }
