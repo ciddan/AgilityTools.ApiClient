@@ -49,10 +49,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
                 new XAttribute(XNamespace.Xmlns + "xsi", xsi),
                 new XElement("LookupRequest",
-                    new XAttribute("name", "/foo/bar"))).ToString();
+                    new XAttribute("name", "/foo/bar+baz"))).ToString();
 
 
-            var req = new LookupRequest("/foo/bar");
+            var req = new LookupRequest("/foo/bar+baz");
 
             //Act
             string actual = req.ToAdsml().ToString();

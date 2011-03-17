@@ -55,11 +55,11 @@ namespace AgilityTools.ApiClient.Adsml.Client
             if (request == null)
                 throw new ArgumentNullException("request");
 
-            byte[] q = BuildRequest(request);
+            string req = BuildRequestString(request);
 
-            byte[] res = _webClient.UploadData(_adapiWsUrl, "POST", q);
+            string response = _webClient.UploadString(_adapiWsUrl, req);
 
-            XElement result = XElement.Parse(Encoding.UTF8.GetString(res));
+            XElement result = XElement.Parse(response);
 
             // IBM WebSphere always returns an ErrorResponse first for some reason.
             // If a real error occurs, the response will contain two ErrorResponse nodes.
@@ -93,6 +93,16 @@ namespace AgilityTools.ApiClient.Adsml.Client
             queryString = queryString.Replace("&quot;", "%26quot%3B");
 
             return Encoding.Default.GetBytes(queryString);
+        }
+
+        private static string BuildRequestString<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement>
+        {
+            var queryString = request.ToAdsml().ToString();
+            
+            queryString = System.Web.HttpUtility.UrlEncode(queryString, Encoding.Default);
+            queryString = "xml=" + queryString;
+
+            return queryString;
         }
 
         public void Dispose() {

@@ -29,6 +29,18 @@ namespace AgilityTools.ApiClient.Adsml.Communication
             return _webClient.UploadData(url, method, data);
         }
 
+        public string UploadString(string url, string request) {
+            if (string.IsNullOrEmpty(url))
+                throw new InvalidOperationException("Url must be provided.");
+
+            if (string.IsNullOrEmpty(request))
+                throw new InvalidOperationException("A request must be provided.");
+
+            _webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+
+            return _webClient.UploadString(url, request);
+        }
+
         public void UploadDataAsync(string url, string method, byte[] data, Action<byte[]> callback) {
             if (data == null)
                 throw new ArgumentNullException("data");

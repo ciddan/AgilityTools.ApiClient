@@ -84,7 +84,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             //Arrange
             var builder = new AqlQueryBuilder();
 
-            builder.BasePath("/Structures/Classification/JULA Produkter")
+            builder.BasePath("/Structures/Classification/JULA Produkter/")
                 .QueryType(AqlQueryTypes.Below)
                 .ObjectTypeToFind(12)
                 .QueryString("#215 = \"169010\"")
@@ -131,8 +131,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof (ArgumentNullException),
-            ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
+        [ExpectedException(typeof (ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
         public void SendRequestAsync_Throws_ArgumentNullException_If_Request_Is_Null() {
             //Arrange
             var client = new ApiClient(new ApiWebClient());
@@ -190,12 +189,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                     new XAttribute("type", "applicationError"),
                     new XElement("Message", "Structure type \"Classifiation\" does not exist"))).ToString();
 
-
-            var errorResponse = System.Text.Encoding.Default.GetBytes(xml);
-
             var mockWebClient = new Mock<IApiWebClient>();
-            mockWebClient.Setup(m => m.UploadData(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<byte[]>())).Returns(
-                errorResponse);
+            mockWebClient.Setup(m => m.UploadString(It.IsAny<string>(), It.IsAny<string>())).Returns(
+                xml);
 
             var client = new ApiClient(mockWebClient.Object);
 

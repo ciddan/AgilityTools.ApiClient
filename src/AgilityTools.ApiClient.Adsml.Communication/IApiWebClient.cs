@@ -6,5 +6,6 @@ namespace AgilityTools.ApiClient.Adsml.Communication
     {
         byte[] UploadData(string url, string method, byte[] data);
         void UploadDataAsync(string url, string method, byte[] data, Action<byte[]> callback);
+        string UploadString(string url, string request);
     }
 }
