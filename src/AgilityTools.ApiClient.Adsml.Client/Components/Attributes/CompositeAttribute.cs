@@ -22,6 +22,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             throw new NotSupportedException();
         }
 
+        public bool HasValues() {
+            return this.CompositeValues.Count > 0;
+        }
+
         public XElement ToAdsml() {
             if (string.IsNullOrEmpty(this.Name)) {
                 throw new InvalidOperationException("Name not set.");

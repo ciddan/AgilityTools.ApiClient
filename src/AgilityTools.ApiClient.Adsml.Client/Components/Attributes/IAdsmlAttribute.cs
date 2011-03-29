@@ -7,5 +7,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
     {
         string GetName();
         IEnumerable<AttributeValue> GetValues();
+        bool HasValues();
     }
 }

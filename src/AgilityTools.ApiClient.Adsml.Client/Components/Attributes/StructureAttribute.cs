@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
@@ -38,7 +37,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             return this.Values.Select(val => new AttributeValue {LanguageId = val.LanguageId, Value = val.Value});
         }
 
-	    public XElement ToAdsml() {
+        public bool HasValues() {
+            return this.Values.Count > 0;
+        }
+
+        public XElement ToAdsml() {
 		    this.Validate();
 
 	        var element = new XElement("StructureAttribute");
