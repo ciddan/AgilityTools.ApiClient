@@ -9,7 +9,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Components
     [TestFixture]
     public class ReferenceControlFixture
     {
-          [Test]
+        [Test]
         public void Can_Instantiate_New_ReferenceControl() {
             //Act
             var asc = new ReferenceControl();

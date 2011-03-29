@@ -8,16 +8,24 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             return new UseChannelFilter(channelId);
         }
 
-        public static ResolveAttributesFilter ResolveAttributes() {
-            return new ResolveAttributesFilter(true);
+        public static ResolveAttributesFilter ResolveAttributes(bool resolve = true) {
+            return new ResolveAttributesFilter(resolve);
         }
 
-        public static ResolveSpecialCharactersFilter ResolveSpecialCharacters() {
-            return new ResolveSpecialCharactersFilter(true);
+        public static ResolveSpecialCharactersFilter ResolveSpecialCharacters(bool resolve = true) {
+            return new ResolveSpecialCharactersFilter(resolve);
         }
 
-        public static ReturnValueOnlyFilter ReturnValuesOnly() {
-            return new ReturnValueOnlyFilter(true);
+        public static ResolvePricesFilter ResolvePrices(bool resolve = true) {
+            return new ResolvePricesFilter(resolve);
+        }
+
+        public static ResolvePriceFieldsFilter ResolvePriceFields(bool resolve = true) {
+            return new ResolvePriceFieldsFilter(resolve);
+        }
+
+        public static ReturnValueOnlyFilter ReturnValuesOnly(bool valuesOnly = true) {
+            return new ReturnValueOnlyFilter(valuesOnly);
         }
     }
 
@@ -44,6 +52,32 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
 
         public XAttribute ToAdsml() {
             return new XAttribute("resolveSpecialCharacters", _resolve);
+        }
+    }
+
+    public class ResolvePricesFilter : IReferenceOptions
+    {
+        private readonly bool _resolve;
+
+        internal ResolvePricesFilter(bool resolve) {
+            _resolve = resolve;
+        }
+
+        public XAttribute ToAdsml() {
+            return new XAttribute("resolvePrices", _resolve);
+        }
+    }
+
+    public class ResolvePriceFieldsFilter : IReferenceOptions
+    {
+        private readonly bool _resolve;
+
+        internal ResolvePriceFieldsFilter(bool resolve) {
+            _resolve = resolve;
+        }
+
+        public XAttribute ToAdsml() {
+            return new XAttribute("resolvePriceFields", _resolve);
         }
     }
 
