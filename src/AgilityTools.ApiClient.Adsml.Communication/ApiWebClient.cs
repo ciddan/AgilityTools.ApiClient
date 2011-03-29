@@ -8,28 +8,19 @@ namespace AgilityTools.ApiClient.Adsml.Communication
     {
         private readonly WebClient _webClient;
 
-        public ApiWebClient()
-        {
+        public ApiWebClient() {
             _webClient = new WebClient {Encoding = Encoding.UTF8};
         }
 
-        public byte[] UploadData(string url, string method, byte[] data)
-        {
-            if (data == null) 
-                throw new ArgumentNullException("data");
-
-            if (string.IsNullOrEmpty(url))
-                throw new InvalidOperationException("Url must be provided.");
-
-            if (string.IsNullOrEmpty(method))
-                throw new InvalidOperationException("A method must be provided.");
-
-            _webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-
-            return _webClient.UploadData(url, method, data);
-        }
-
         public string UploadString(string url, string request) {
+            if (url == null) {
+                throw new ArgumentNullException("url");
+            }
+
+            if (request == null) {
+                throw new ArgumentNullException("request");
+            }
+
             if (string.IsNullOrEmpty(url))
                 throw new InvalidOperationException("Url must be provided.");
 
@@ -41,26 +32,29 @@ namespace AgilityTools.ApiClient.Adsml.Communication
             return _webClient.UploadString(url, request);
         }
 
-        public void UploadDataAsync(string url, string method, byte[] data, Action<byte[]> callback) {
-            if (data == null)
+        public void UploadStringAsync(string url, string data, Action<string> callback) {
+            if (url == null) {
+                throw new ArgumentNullException("url");
+            }
+
+            if (data == null) {
                 throw new ArgumentNullException("data");
+            }
 
             if (callback == null) {
                 throw new ArgumentNullException("callback");
             }
 
-            if (string.IsNullOrEmpty(url))
-                throw new InvalidOperationException("Url must be provided.");
-
-            if (string.IsNullOrEmpty(method))
-                throw new InvalidOperationException("A method must be provided.");
+            if (string.IsNullOrEmpty(url)) {
+                throw new InvalidOperationException("Url cannot be empty.");
+            }
 
             var uri = new Uri(url, UriKind.Absolute);
 
             _webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
-            _webClient.UploadDataCompleted += (sender, args) => callback.Invoke(args.Result);
-            _webClient.UploadDataAsync(uri, method, data);
+            _webClient.UploadStringCompleted += (sender, args) => callback.Invoke(args.Result);
+            _webClient.UploadStringAsync(uri, data);
         }
 
         public void Dispose() {

@@ -22,7 +22,7 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            var result = client.UploadData("http://agilitytest:9080/Agility/Directory", "POST", new byte[] {});
+            var result = client.UploadString("http://agilitytest:9080/Agility/Directory", "req");
 
             //Assert
             Assert.That(result, Is.Not.Null);
@@ -37,13 +37,13 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
 
             bool callbackCalled = false;
 
-            Action<byte[]> callback = data => {
+            Action<string> callback = data => {
                                           callbackCalled = true;
                                           manualEvent.Set();
                                       };
 
             //Act
-            client.UploadDataAsync("http://penny:9080/Agility/Directory", "POST", new byte[] {}, callback);
+            client.UploadStringAsync("http://penny:9080/Agility/Directory", string.Empty, callback);
 
             manualEvent.WaitOne();
 
@@ -67,48 +67,28 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            client.UploadData(string.Empty, "POST", new byte[] {});
-        }
-
-        [Test]
-        [ExpectedException(typeof (InvalidOperationException), ExpectedMessage = "A method must be provided.")]
-        public void ApiWebClient_UploadData_Throws_InvalidOprtationException_If_Method_Is_NullOrEmpty() {
-            //Arrange
-            IApiWebClient client = new ApiWebClient();
-
-            //Act
-            client.UploadData("http://agilitytest:9080/Agility/Directory", string.Empty, new byte[] {});
+            client.UploadString(string.Empty, string.Empty);
         }
 
         [Test]
         [ExpectedException(typeof (ArgumentNullException),
-            ExpectedMessage = "Value cannot be null.\r\nParameter name: data")]
+            ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
         public void ApiWebClient_UploadData_Throws_ArgumentNullException_If_Data_Is_Null() {
             //Arrange
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            client.UploadData("http://agilitytest:9080/Agility/Directory", "POST", null);
+            client.UploadString("http://agilitytest:9080/Agility/Directory", null);
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidOperationException), ExpectedMessage = "Url must be provided.")]
+        [ExpectedException(typeof (InvalidOperationException), ExpectedMessage = "Url cannot be empty.")]
         public void ApiWebClient_UploadDataAsync_Throws_InvalidOprtationException_If_Url_Is_NullOrEmpty() {
             //Arrange
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            client.UploadDataAsync(string.Empty, "POST", new byte[] {}, d => { });
-        }
-
-        [Test]
-        [ExpectedException(typeof (InvalidOperationException), ExpectedMessage = "A method must be provided.")]
-        public void ApiWebClient_UploadDataAsync_Throws_InvalidOprtationException_If_Method_Is_NullOrEmpty() {
-            //Arrange
-            IApiWebClient client = new ApiWebClient();
-
-            //Act
-            client.UploadDataAsync("http://agilitytest:9080/Agility/Directory", string.Empty, new byte[] {}, d => { });
+            client.UploadStringAsync(string.Empty, string.Empty, d => { });
         }
 
         [Test]
@@ -119,7 +99,7 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            client.UploadDataAsync("http://agilitytest:9080/Agility/Directory", "POST", null, d => { });
+            client.UploadStringAsync("http://agilitytest:9080/Agility/Directory", null, d => { });
         }
 
         [Test]
@@ -130,7 +110,7 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
             IApiWebClient client = new ApiWebClient();
 
             //Act
-            client.UploadDataAsync("http://agilitytest:9080/Agility/Directory", "POST", new byte[] {}, null);
+            client.UploadStringAsync("http://agilitytest:9080/Agility/Directory", "req", null);
         }
     }
 }

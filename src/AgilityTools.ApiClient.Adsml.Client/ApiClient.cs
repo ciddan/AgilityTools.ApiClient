@@ -38,24 +38,23 @@ namespace AgilityTools.ApiClient.Adsml.Client
             if (request == null)
                 throw new ArgumentNullException("request");
 
-            byte[] q = BuildRequest(request);
+            string req = BuildRequest(request);
 
-            _webClient.UploadDataAsync(_adapiWsUrl, "POST", q, data => {
-                                                                   var result =
-                                                                       XElement.Parse(Encoding.UTF8.GetString(data));
+            _webClient.UploadStringAsync(_adapiWsUrl, req, data => {
+                                                               var result = XElement.Parse(data);
 
-                                                                   result.FirstNode.Remove();
-                                                                   ValidateResponse(result);
+                                                               result.FirstNode.Remove();
+                                                               ValidateResponse(result);
 
-                                                                   callback.Invoke(result);
-                                                               });
+                                                               callback.Invoke(result);
+                                                           });
         }
 
         private XElement SendRequest<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement> {
             if (request == null)
                 throw new ArgumentNullException("request");
 
-            string req = BuildRequestString(request);
+            string req = BuildRequest(request);
 
             string response = _webClient.UploadString(_adapiWsUrl, req);
 
@@ -86,14 +85,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
                 errors);
         }
 
-        private static byte[] BuildRequest<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement> {
-            string queryString = BuildRequestString(request);
-
-            return Encoding.Default.GetBytes(queryString);
-        }
-
-        private static string BuildRequestString<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement>
-        {
+        private static string BuildRequest<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement> {
             var queryString = request.ToAdsml().ToString();
             
             queryString = System.Web.HttpUtility.UrlEncode(queryString, Encoding.Default);
