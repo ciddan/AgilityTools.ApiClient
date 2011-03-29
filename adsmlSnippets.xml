@@ -1,30 +1,30 @@
 <!--Skapar en ny produkt-->
 <BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd"
-		      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<CreateRequest name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT"
-			       type="Produkt">
+			 type="Produkt">
 		<AttributesToSet>
-				<StructureAttribute id="215" name="Artikelnummer">
-					<StructureValue langId="10" scope="global"><![CDATA[000111]]></StructureValue>
-				</StructureAttribute>
-      			<StructureAttribute id="22" name="Produktnamn">
-        			<StructureValue langId="10" scope="global"><![CDATA[000111 TESTPRODUKT]]></StructureValue>
-      			</StructureAttribute>
-      			<StructureAttribute id="392" name="Artikelnummer för publicering">
-        			<StructureValue langId="10" scope="global"><![CDATA[000-111]]></StructureValue>
-      			</StructureAttribute>
+			<StructureAttribute id="215" name="Artikelnummer">
+				<StructureValue langId="10" scope="global"><![CDATA[000111]]></StructureValue>
+			</StructureAttribute>
+			<StructureAttribute id="22" name="Produktnamn">
+				<StructureValue langId="10" scope="global"><![CDATA[000111 TESTPRODUKT]]></StructureValue>
+			</StructureAttribute>
+			<StructureAttribute id="392" name="Artikelnummer för publicering">
+				<StructureValue langId="10" scope="global"><![CDATA[000-111]]></StructureValue>
+			</StructureAttribute>
 		</AttributesToSet>
-  	</CreateRequest>
+	</CreateRequest>
 </BatchRequest>
 
 <!--Trunkerad response-->
 <?xml version="1.0" encoding="UTF-8"?>
 <BatchResponse version="5.1.16 build 116 (2010/05/27 14-36)" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="adsml.xsd">
-    <CreateResponse>
-        <StructureContext idPath="12:1516:145842:180789" name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT" sortPath="0:14:2:1">
-        	<!--Attribut-->
-        </StructureContext>
-    </CreateResponse>
+	<CreateResponse>
+		<StructureContext idPath="12:1516:145842:180789" name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT" sortPath="0:14:2:1">
+			<!--Attribut-->
+		</StructureContext>
+	</CreateResponse>
 </BatchResponse>
 
 <!--Modifierar attribut på en produkt-->
@@ -32,12 +32,12 @@
 	<ModifyRequest name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT" returnNoAttributes="true">
 		<ModificationItem operation="replaceValue">
 			<AttributeDetails>
-      			<StructureAttribute id="421" name="yy Artikelstatus MMS001">
-        			<StructureValue langId="10" scope="global"><![CDATA[60]]></StructureValue>
-      			</StructureAttribute>
+				<StructureAttribute id="421" name="yy Artikelstatus MMS001">
+ 					<StructureValue langId="10" scope="global"><![CDATA[60]]></StructureValue>
+ 				</StructureAttribute>
 			</AttributeDetails>
 		</ModificationItem>
-  	</ModifyRequest>
+ 	</ModifyRequest>
 </BatchRequest>
 
 <!--Lägger till en tillverkarrelation på en produkt-->
@@ -50,7 +50,7 @@
 				</StructureAttribute>
 			</AttributeDetails>
 		</ModificationItem>
-  	</ModifyRequest>
+ 	</ModifyRequest>
 </BatchRequest>
 
 <BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -85,20 +85,20 @@
 				<StructureAttribute id="31" name="Tilverkarrelation" />
 			</AttributeDetails>
 		</ModificationItem>
-  	</ModifyRequest>
+	</ModifyRequest>
 </BatchRequest>
 
 <!--Trunkerad Response-->
 <?xml version="1.0" encoding="UTF-8"?>
 <BatchResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="adsml.xsd">
-    <ErrorResponse id="4024" type="malformedRequest">
-        <Message><![CDATA[Error at line 2 column 63. cvc-elt.1: Cannot find the declaration of element 'BatchRequest'..]]></Message>
-    </ErrorResponse>
-    <CreateResponse>
-        <StructureContext idPath="12:1516:137713:138413" name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT">
-            <SimpleAttribute name="objectTypeId" type="integer">
-                <Value><![CDATA[12]]></Value>
-            </SimpleAttribute>
+	<ErrorResponse id="4024" type="malformedRequest">
+		<Message><![CDATA[Error at line 2 column 63. cvc-elt.1: Cannot find the declaration of element 'BatchRequest'..]]></Message>
+	</ErrorResponse>
+	<CreateResponse>
+		<StructureContext idPath="12:1516:137713:138413" name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT">
+			<SimpleAttribute name="objectTypeId" type="integer">
+				<Value><![CDATA[12]]></Value>
+			</SimpleAttribute>
 			<!--Trunkerade attribut-->
 		</StructureContext>
 	</CreateResponse>
@@ -106,9 +106,9 @@
 
 <!--Skapar en ny varugrupp-->
 <BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd"
-			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<CreateRequest name="/Structures/Classification/JULA Produkter/xx Import/Nya varugrupper/Testgrupp"
-				   type="Produktkategori">
+				 type="Produktkategori">
 		<AttributesToSet>
 			<StructureAttribute id="411" name="Varugruppsnamn">
 				<StructureValue langId="10" scope="global"><![CDATA[Testgrupp]]></StructureValue>
@@ -126,7 +126,7 @@
 <!--Länkar givet objekt till given plats-->
 <BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<LinkRequest name="/Structures/Classification/JULA Produkter/xx Import/Produktimport/000111 TESTPRODUKT"
-			     targetLocation="/Structures/Classification/JULA Produkter/xx Import/Nya varugrupper/Testgrupp/"
+			 targetLocation="/Structures/Classification/JULA Produkter/xx Import/Nya varugrupper/Testgrupp/"
 				 returnNoAttributes="true">
 				 <CopyControls copyLocalAttributes="true" />
 	</LinkRequest>
@@ -180,4 +180,14 @@
 			</AttributeDetails>
 		</ModificationItem>
 	</ModifyRequest>
+</BatchRequest>
+
+<BatchRequest xsi:noNamespaceSchemaLocation="adsml.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<LookupRequest name="/Structures/Classification/JULA Produkter/Beslag, färg &amp; förvaring/Förvaring/Hyllor och tillbehör/Förvaringsskåp/340017 VERKTYGSSKÅP RÖD 2DELAR">
+		<LookupControls>
+			<AttributeTypesToReturn>
+				<AttributeType name="structure-text" />
+			</AttributeTypesToReturn>
+		</LookupControls>
+	</LookupRequest>
 </BatchRequest>
