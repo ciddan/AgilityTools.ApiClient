@@ -87,10 +87,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         }
 
         private static byte[] BuildRequest<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement> {
-            var queryString = String.Format("xml=<?xml version=\"1.0\" encoding=\"utf-8\"?>{0}", request.ToAdsml());
-
-            queryString = queryString.Replace("&amp;", "%26amp%3B");
-            queryString = queryString.Replace("&quot;", "%26quot%3B");
+            string queryString = BuildRequestString(request);
 
             return Encoding.Default.GetBytes(queryString);
         }
