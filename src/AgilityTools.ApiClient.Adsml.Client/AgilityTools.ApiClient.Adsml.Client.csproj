@@ -72,6 +72,7 @@
     <Compile Include="Components\Attributes\RelationAttribute.cs" />
     <Compile Include="Components\Attributes\SimpleAttribute.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
+    <Compile Include="Components\AttributeTypeToReturn.cs" />
     <Compile Include="Components\ControlBase.cs" />
     <Compile Include="Components\CopyControl.cs" />
     <Compile Include="Components\CopyControlBuilder.cs" />

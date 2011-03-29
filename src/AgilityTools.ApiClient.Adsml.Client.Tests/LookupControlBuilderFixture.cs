@@ -37,10 +37,32 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             string expected = new XElement("LookupControls",
                             new XElement("AttributesToReturn",
                                 new XAttribute("namelist", "members"))).ToString();
+
             var builder = new LookupControlBuilder();
 
             //Act
             builder.AttributeNamelist("members");
+            var actual = builder.Build().ToAdsml().ToString();
+
+            Console.WriteLine(actual);
+
+            //Assert
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Can_Specify_Attribute_Types_To_Return() {
+            //Arrange
+            string expected =
+                new XElement("LookupControls",
+                    new XElement("AttributeTypesToReturn",
+                        new XElement("AttributeType",
+                           new XAttribute("name", "structure-text")))).ToString();
+
+            var builder = new LookupControlBuilder();
+
+            //Act
+            builder.AttributeTypesToReturn(AttributeTypeToReturn.OfType(AttributeDataType.StructureText));
             var actual = builder.Build().ToAdsml().ToString();
 
             Console.WriteLine(actual);

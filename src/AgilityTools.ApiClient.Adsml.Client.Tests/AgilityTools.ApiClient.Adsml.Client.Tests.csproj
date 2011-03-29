@@ -64,6 +64,7 @@
     <Compile Include="Attributes\CompositeValueFixture.cs" />
     <Compile Include="Components\AttributeControlFixture.cs" />
     <Compile Include="Components\AttributeToReturnFixture.cs" />
+    <Compile Include="Components\AttributeTypeToReturnFixture.cs" />
     <Compile Include="Requests\Builders\AqlQueryBuilderFixture.cs" />
     <Compile Include="Requests\AqlSearchRequestFixture.cs" />
     <Compile Include="LookupControlBuilderFixture.cs" />

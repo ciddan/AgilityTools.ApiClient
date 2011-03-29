@@ -36,14 +36,31 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             return this;
         }
 
-        public IReturnedLanguagesConfigureReferences ReturnAttributes(params IAttributeControl[] attributesToReturn) {
-            if (attributesToReturn != null) {
+        public IReturnedAttributesReturnedLanguagesConfigureReferences AttributeTypesToReturn(params AttributeTypeToReturn[] types) {
+            if (types != null) {
+                if (!this.ControlComponents.Any(cc => cc is AttributeControl && cc.ToAdsml().Name.ToString() == "AttributeTypesToReturn")) {
+                    this.ControlComponents.Add(new AttributeControl("AttributeTypesToReturn", types));
+                }
+                else {
+                    AttributeControl control =
+                        this.ControlComponents.Where(cc => cc is AttributeControl && cc.ToAdsml().Name.ToString() == "AttributeTypesToReturn")
+                                              .Cast<AttributeControl>().Single();
 
-                if (!this.ControlComponents.Any(cc => cc is AttributeControl)) {
+                    control.AddAttributes(types);
+                }
+            }
+            
+            return this;
+        }
+
+        public IReturnedLanguagesConfigureReferences ReturnAttributes(params AttributeToReturn[] attributesToReturn) {
+            if (attributesToReturn != null) {
+                if (!this.ControlComponents.Any(cc => cc is AttributeControl && cc.ToAdsml().Name.ToString() == "AttributesToReturn")) {
                     this.ControlComponents.Add(new AttributeControl(attributesToReturn));
                 } else {
                     AttributeControl control =
-                        this.ControlComponents.Where(cc => cc is AttributeControl).Cast<AttributeControl>().Single();
+                        this.ControlComponents.Where(cc => cc is AttributeControl && cc.ToAdsml().Name.ToString() == "AttributesToReturn")
+                                              .Cast<AttributeControl>().Single();
 
                     control.AddAttributes(attributesToReturn);
                 }

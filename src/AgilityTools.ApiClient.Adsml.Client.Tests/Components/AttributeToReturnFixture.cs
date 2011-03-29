@@ -29,7 +29,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Components
         [Test]
         public void Can_Use_Factory_Method_To_Create_AttributeToReturn_With_Name() {
             //Act
-            var atr = AttributeToReturn.WithAttributeName("foo");
+            var atr = AttributeToReturn.WithName("foo");
 
             //Assert
             Assert.That(atr.Name, Is.EqualTo("foo"));

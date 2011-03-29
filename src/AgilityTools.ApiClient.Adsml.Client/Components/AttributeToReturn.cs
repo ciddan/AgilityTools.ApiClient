@@ -27,7 +27,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             return new AttributeToReturn {DefinitionId = definitionId};
         }
 
-        public static AttributeToReturn WithAttributeName(string name) {
+        public static AttributeToReturn WithName(string name) {
             return new AttributeToReturn {Name = name};
         }
 

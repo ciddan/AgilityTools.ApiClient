@@ -20,7 +20,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             return this;
         }
 
-        public IReturnedLanguagesConfigureReferences ReturnAttributes(params IAttributeControl[] attributesToReturn)
+        public IReturnedLanguagesConfigureReferences ReturnAttributes(params AttributeToReturn[] attributesToReturn)
         {
             if (attributesToReturn != null) {
                 this.ControlComponents.Add(new AttributeControl(attributesToReturn));

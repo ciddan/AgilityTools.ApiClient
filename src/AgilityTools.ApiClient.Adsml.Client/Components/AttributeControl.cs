@@ -6,13 +6,17 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
     public class AttributeControl : ControlComponentBase<IAttributeControl>, ISearchControlComponent, ILookupControlComponent
     {
-        internal AttributeControl(params IAttributeControl[] attributesToReturn) {
+        internal AttributeControl(params IAttributeControl[] attributesToReturn)
+            : this("AttributesToReturn", attributesToReturn) {
+        }
+
+        internal AttributeControl(string nodeName = "AttributesToReturn", params IAttributeControl[] attributesToReturn) {
             if (attributesToReturn == null)
                 throw new ArgumentNullException("attributesToReturn");
 
             this.OuterNodeAttributes = new List<XAttribute>();
             this.ContentNodes = new List<IAttributeControl>(attributesToReturn);
-            this.NodeName = "AttributesToReturn";
+            this.NodeName = nodeName;
         }
 
         internal void AddAttributes(params IAttributeControl[] attributesToReturn) {
