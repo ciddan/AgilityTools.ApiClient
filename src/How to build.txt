@@ -1,0 +1,9 @@
+1. Install ruby (http://rubyinstaller.org/downloads/)
+2. Install the following gems:
+   - rake
+   - albacore
+   - version_bumper
+3. Run rake in /src
+4. Build artefacts located in /src/AgilityTools.ApiClient.Adsml.Client/bin/Release
+
+(or just build it in Visual Studio, but where's the fun in that?)
