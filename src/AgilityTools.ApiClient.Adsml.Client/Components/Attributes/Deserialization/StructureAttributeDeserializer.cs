@@ -16,7 +16,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
                 throw new InvalidOperationException("Not a valid StructureAttribute.");
             }
 
-            int definitionId = 0;
+            int definitionId;
             int.TryParse((string) element.Attribute("id"), out definitionId);
 
             var structureAttribute = new StructureAttribute
@@ -28,7 +28,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
                                                  .Select(sv => new StructureValue
                                                                {
                                                                    LanguageId = int.Parse((string) sv.Attribute("langId")),
-                                                                   Scope = (Scopes) Enum.Parse(typeof(Scopes), (string)sv.Attribute("scope")),
+                                                                   Scope = (Scopes) Enum.Parse(typeof(Scopes), (string)sv.Attribute("scope"), true),
                                                                    Value = sv.Value
                                                                })
                                              )
