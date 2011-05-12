@@ -68,6 +68,7 @@
     <Compile Include="Components\Attributes\Deserialization\IAdsmlAttributeDeserializer.cs" />
     <Compile Include="Components\Attributes\IAdsmlAttribute.cs" />
     <Compile Include="Components\Attributes\RelationAttribute.cs" />
+    <Compile Include="Components\Attributes\Scopes.cs" />
     <Compile Include="Components\Attributes\SimpleAttribute.cs" />
     <Compile Include="Components\AttributeToReturn.cs" />
     <Compile Include="Components\AttributeTypeToReturn.cs" />

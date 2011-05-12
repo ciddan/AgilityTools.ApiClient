@@ -5,27 +5,24 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
     public class StructureValue : IAdsmlSerializable<XElement>
     {
         public int LanguageId { get; set; }
-        public string Scope { get; set; }
+        public Scopes Scope { get; set; }
         public string Value { get; set; }
 
         public StructureValue() {
             
         }
 
-        public StructureValue(int languageId, string value, string scope = "global") {
+        public StructureValue(int languageId, string value, Scopes scope = Scopes.Global) {
             this.LanguageId = languageId;
             this.Value = value;
             this.Scope = scope;
         }
 
         public XElement ToAdsml() {
-            if (string.IsNullOrEmpty(this.Scope))
-                this.Scope = "global";
-
             this.Validate();
 
             return new XElement("StructureValue", new XAttribute("langId", this.LanguageId.ToString()),
-                                new XAttribute("scope", this.Scope), 
+                                new XAttribute("scope", this.Scope.GetStringValue()), 
                                 new XCData(this.Value));
         }
 

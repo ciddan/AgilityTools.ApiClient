@@ -62,7 +62,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
                                            new StructureValue
                                            {
                                                LanguageId = 10,
-                                               Scope = "global",
+                                               Scope = Scopes.Global,
                                                Value = "foo"
                                            }
                                        });

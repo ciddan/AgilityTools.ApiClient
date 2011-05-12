@@ -24,7 +24,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
                                         new XAttribute("scope", "local"),
                                         new XCData("foo"));
 
-            var value = new StructureValue {LanguageId = 10, Scope = "local", Value = "foo"};
+            var value = new StructureValue {LanguageId = 10, Scope = Scopes.Local, Value = "foo"};
 
             //Act
             var actual = value.ToAdsml();
@@ -71,7 +71,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
         [ExpectedException(typeof(ApiSerializationValidationException), ExpectedMessage = "LanguageId has to be set.")]
         public void Validate_Throws_ApiSerializationValidationException_If_LanguageId_Is_Not_Set() {
             //Arrange
-            var value = new StructureValue { Scope = "local", Value = "foo" };
+            var value = new StructureValue { Scope = Scopes.Local, Value = "foo" };
 
             //Act
             value.ToAdsml();

@@ -28,7 +28,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
                                                  .Select(sv => new StructureValue
                                                                {
                                                                    LanguageId = int.Parse((string) sv.Attribute("langId")),
-                                                                   Scope = (string) sv.Attribute("scope"),
+                                                                   Scope = (Scopes) Enum.Parse(typeof(Scopes), (string)sv.Attribute("scope")),
                                                                    Value = sv.Value
                                                                })
                                              )
