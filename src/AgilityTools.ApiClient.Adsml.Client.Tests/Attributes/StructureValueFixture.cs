@@ -51,6 +51,23 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes
         }
 
         [Test]
+        public void Can_Set_Scope_Using_Scope_Enum() {
+            //Arrange
+            var expected = new XElement("StructureValue",
+                new XAttribute("langId", "10"),
+                new XAttribute("scope", "edgespecific"),
+                new XCData("foo"));
+
+            var value = new StructureValue { LanguageId = 10, Value = "foo", Scope = Scopes.EdgeSpecific };
+
+            //Act
+            var actual = value.ToAdsml();
+
+            //Assert
+            Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+        }
+
+        [Test]
         [ExpectedException(typeof(ApiSerializationValidationException), ExpectedMessage = "LanguageId has to be set.")]
         public void Validate_Throws_ApiSerializationValidationException_If_LanguageId_Is_Not_Set() {
             //Arrange
