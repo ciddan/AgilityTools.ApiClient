@@ -21,6 +21,10 @@ namespace AgilityTools.ApiClient.Adsml.Client
             var attribs = fieldInfo.GetCustomAttributes(
                 typeof (StringValueAttribute), false) as StringValueAttribute[];
 
+            if (attribs == null) {
+                return null;
+            }
+
             // Return the first if there was a match.
             return attribs.Length > 0 ? attribs[0].StringValue : null;
         }
@@ -39,7 +43,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             return str.Replace("/", "@fs:");
         }
 
-        public static void ValidateAdsmlResponse(this XDocument source) {
+        private static void ValidateAdsmlResponse(this XDocument source) {
             if (source == null) {
                 throw new ArgumentNullException("source");
             }
@@ -90,7 +94,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             return result.TrimEnd(' ');
         }
 
-        public static string GetAssemblyPath(this Assembly assembly) {
+        private static string GetAssemblyPath(this Assembly assembly) {
             string codeBase = assembly.CodeBase;
 
             var uri = new UriBuilder(codeBase);
