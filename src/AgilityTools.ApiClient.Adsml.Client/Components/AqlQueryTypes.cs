@@ -1,5 +1,8 @@
 ﻿namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
+    /// <summary>
+    /// Contains the types of queries that are supported by the library when sending AQL queries.
+    /// </summary>
     public enum AqlQueryTypes
     {
         [StringValue("")]

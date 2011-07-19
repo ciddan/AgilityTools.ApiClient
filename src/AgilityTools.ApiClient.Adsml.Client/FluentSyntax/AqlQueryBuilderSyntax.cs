@@ -4,6 +4,9 @@ using AgilityTools.ApiClient.Adsml.Client.Requests;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
+    /// <summary>
+    /// Defines available commands and command order for the <see cref="AqlQueryBuilder"/>. 
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IAqlQueryBuilder : IFluentInterface, IBasePath, IQTypeIOTTFindIQStringICSControls, IOTTFindIQStringICSControls, IQStringICSControls
     {

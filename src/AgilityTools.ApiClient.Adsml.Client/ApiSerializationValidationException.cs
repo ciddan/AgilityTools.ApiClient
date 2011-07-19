@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
+    /// <summary>
+    /// Used to report that a convertion to adsml failed.
+    /// </summary>
     [Serializable]
     public class ApiSerializationValidationException : Exception, ISerializable
     {

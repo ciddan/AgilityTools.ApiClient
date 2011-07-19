@@ -2,6 +2,9 @@ using System.ComponentModel;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
+    /// <summary>
+    /// Internal conveniance class for use with AQL-queries. Used when the source data can contain either an attribute name or definition id.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     internal class IdNameReference 
     {

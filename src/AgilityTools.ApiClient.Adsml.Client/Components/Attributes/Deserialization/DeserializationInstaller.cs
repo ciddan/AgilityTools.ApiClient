@@ -4,6 +4,9 @@ using Castle.Windsor;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Components
 {
+    /// <summary>
+    /// Installs components needed by the <see cref="AttributeDeserializer"/>.
+    /// </summary>
     public class DeserializationInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store) {

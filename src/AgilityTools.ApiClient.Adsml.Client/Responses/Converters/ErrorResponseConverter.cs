@@ -7,6 +7,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
     public class ErrorResponseConverter : IResponseConverter<XElement, ErrorResponse> 
     {
+        /// <summary>
+        /// Converts an <see cref="XElement"/> into a <see cref="ErrorResponse"/>.
+        /// </summary>
+        /// <param name="source">Required. The response to convert.</param>
+        /// <returns>An <see cref="ErrorResponse"/>.</returns>
         private static ErrorResponse ConvertSingle(XElement source) {
             if (source == null) {
                 throw new ArgumentNullException("source");
@@ -24,6 +29,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
                    };
         }
 
+        /// <summary>
+        /// Converts an <see cref="XElement"/> into an <see cref="IEnumerable{T}"/> of <see cref="ErrorResponse"/>.
+        /// </summary>
+        /// <param name="source">Required. The response to convert.</param>
+        /// <returns></returns>
         public IEnumerable<ErrorResponse> Convert(XElement source) {
             if (source == null) {
                 throw new ArgumentNullException("source");

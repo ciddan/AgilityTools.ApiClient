@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
+    /// <summary>
+    /// Used to represent an Agility Api ErrorResponse.
+    /// </summary>
     [Serializable]
     public class ErrorResponse : ISerializable
     {
@@ -11,9 +14,19 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         public string Message { get; internal set; }
         public string Description { get; internal set; }
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public ErrorResponse() {
         }
 
+        /// <summary>
+        /// Overload.
+        /// </summary>
+        /// <param name="errorType">Optional. The type of the error.</param>
+        /// <param name="errorId">Optional. The id of the error.</param>
+        /// <param name="message">Optional. The error message.</param>
+        /// <param name="description">Optional. A further description of the error.</param>
         public ErrorResponse(ErrorTypes errorType, string errorId, string message, string description) {
             ErrorType = errorType;
             ErrorId = errorId;
@@ -21,6 +34,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             Description = description;
         }
 
+        /// <summary>
+        /// Overload. Used for serialization.
+        /// </summary>
         protected ErrorResponse(SerializationInfo info, StreamingContext context) {
             if (info == null) {
                 throw new ArgumentNullException("info");
@@ -32,6 +48,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             this.ErrorType = (ErrorTypes) info.GetValue("ErrorType", typeof (ErrorTypes));
         }
 
+        /// <summary>
+        /// Used for serialization.
+        /// </summary>
         public void GetObjectData(SerializationInfo info, StreamingContext context) {
             if (info == null) {
                 throw new ArgumentNullException("info");
@@ -48,6 +67,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
                                  this.ErrorType, this.ErrorId, this.Description, this.Message);
         }
 
+        /// <summary>
+        /// An enum containing the existing Agility Api error types.
+        /// </summary>
         public enum ErrorTypes
         {
             MalformedRequest,

@@ -5,10 +5,19 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
+    /// <summary>
+    /// Abstract base class for all response converters. Implements <see cref="IResponseConverter{XElement, TOutput}"/>.
+    /// </summary>
+    /// <typeparam name="TOutput">The type of the resulting object after the conversion.</typeparam>
     public abstract class AdsmlResultResponseConverter<TOutput> : IResponseConverter<XElement, TOutput> where TOutput : AdsmlResult, new()
     {
         protected string ElementName { get; set; }
 
+        /// <summary>
+        /// Used to convert an <see cref="XElement"/> source into a single <typeparamref name="TOutput"/>.
+        /// </summary>
+        /// <param name="source">Required. The data to convert.</param>
+        /// <returns>The result of the conversion of type <typeparamref name="TOutput"/>.</returns>
         protected virtual TOutput ConvertSingle(XElement source) {
             return new TOutput
                    {
@@ -18,6 +27,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
                    };
         }
 
+        /// <summary>
+        /// Converts the input of <see cref="XElement"/> to <typeparamref name="TOutput"/>.
+        /// </summary>
+        /// <param name="source">Required. The data to convert.</param>
+        /// <returns>An <see cref="IEnumerable{TOutput}"/> containing the converted results.</returns>
         public virtual IEnumerable<TOutput> Convert(XElement source) {
             if (string.IsNullOrEmpty(ElementName)) {
                 throw new InvalidOperationException("ElementName must be set.");

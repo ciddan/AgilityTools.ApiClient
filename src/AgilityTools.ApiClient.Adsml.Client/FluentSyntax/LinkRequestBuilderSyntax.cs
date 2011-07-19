@@ -1,5 +1,8 @@
 namespace AgilityTools.ApiClient.Adsml.Client
 {
+    /// <summary>
+    /// Defines available commands and command order for the <see cref="ILinkRequestBuilder"/>. 
+    /// </summary>
     public interface ILinkRequestBuilder : IFluentInterface,
         ILinkRequestTargetPathReturnNoAttributesConfigureCopyControls,
         ILinkRequestReturnNoAttributesConfigureCopyControls,

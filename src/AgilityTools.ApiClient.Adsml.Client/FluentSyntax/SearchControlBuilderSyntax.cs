@@ -3,6 +3,9 @@ using AgilityTools.ApiClient.Adsml.Client.Components;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
+    /// <summary>
+    /// Defines available commands and command order for the <see cref="ISearchControlBuilder"/>. 
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ISearchControlBuilder : IFluentInterface, 
                                              ISearchRequestFilters, 

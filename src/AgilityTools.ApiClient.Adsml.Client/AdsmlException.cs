@@ -5,6 +5,9 @@ using AgilityTools.ApiClient.Adsml.Client.Responses;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
+    /// <summary>
+    /// Thrown when an Api request failes.
+    /// </summary>
     [Serializable]
     public class AdsmlException : Exception, ISerializable
     {

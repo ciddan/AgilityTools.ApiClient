@@ -3,6 +3,9 @@ using System.ComponentModel;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
+    /// <summary>
+    /// Interface that hides the auto-inherited methods from <see cref="object"/> from IntelliSense for any class which implements it.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IFluentInterface
     {

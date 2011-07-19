@@ -2,6 +2,9 @@ using System.ComponentModel;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
+    /// <summary>
+    /// Defines available commands and command order for the <see cref="ICopyControlBuilder"/>. 
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ICopyControlBuilder : IFluentInterface, ICopyControlConfigLookupControls
     {

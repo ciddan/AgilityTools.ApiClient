@@ -6,12 +6,19 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
     {
         public AttributeDataType Type { get; set; }
 
+        /// <summary>
+        /// Constructor. Internal.
+        /// </summary>
         internal AttributeTypeToReturn() { }
 
         public static AttributeTypeToReturn OfType(AttributeDataType type) {
             return new AttributeTypeToReturn {Type = type};
         }
 
+        /// <summary>
+        /// Serializes the object to ADSML xml form.
+        /// </summary>
+        /// <returns><see cref="XElement"/></returns>
         public XElement ToAdsml() {
             var attributeElement = new XElement("AttributeType");
 
@@ -21,6 +28,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
         }
     }
 
+    /// <summary>
+    /// Enum containing the various Agility attribute data types. The string value is the adsml.xsd mandated name for the attribute type.
+    /// </summary>
     public enum AttributeDataType
     {
         [StringValue("structure")]

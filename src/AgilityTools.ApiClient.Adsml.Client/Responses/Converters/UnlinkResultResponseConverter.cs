@@ -7,10 +7,18 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
     public class UnlinkResultResponseConverter : AdsmlResultResponseConverter<UnlinkResponse>
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public UnlinkResultResponseConverter() {
             this.ElementName = "UnlinkResponse";
         }
 
+        /// <summary>
+        /// Converts the <see cref="XElement"/> into a <see cref="UnlinkResponse"/>.
+        /// </summary>
+        /// <param name="source">Required. The response to convert.</param>
+        /// <returns>An <see cref="UnlinkResponse"/>.</returns>
         protected override UnlinkResponse ConvertSingle(XElement source) {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -18,6 +26,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             return base.ConvertSingle(source);
         }
 
+        /// <summary>
+        /// Converts the <see cref="XElement"/> into an <see cref="IEnumerable{T}"/> of <see cref="UnlinkResponse"/>.
+        /// </summary>
+        /// <param name="source">Required. The response to convert.</param>
+        /// <returns><see cref="IEnumerable{T}"/> of <see cref="UnlinkResponse"/></returns>
         public override IEnumerable<UnlinkResponse> Convert(XElement source) {
             if (source == null)
                 throw new ArgumentNullException("source");

@@ -8,6 +8,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
     public class ContextResponseConverter : IResponseConverter<XElement, ContextResponse>
     {
+        /// <summary>
+        /// Converts the input of <see cref="XElement"/> to a single <see cref="ContextResponse"/>.
+        /// </summary>
+        /// <param name="source">Required. The <see cref="XElement"/> to convert.</param>
+        /// <returns>A <see cref="ContextResponse"/>.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="source"/> is null.</exception>
         private static ContextResponse ConvertSingle(XElement source) {
             if (source == null) {
                 throw new ArgumentNullException("source");
@@ -25,6 +31,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
                    };
         }
 
+        /// <summary>
+        /// Converts the input of <see cref="XElement"/> to an <see cref="IEnumerable{T}"/> of <see cref="ContextResponse"/>.
+        /// </summary>
+        /// <param name="source">Required. The data to convert.</param>
+        /// <returns>An <see cref="IEnumerable{TOutput}"/> of <see cref="ContextResponse"/> containing the converted results.</returns>
         public IEnumerable<ContextResponse> Convert(XElement source) {
             if (source == null) {
                 throw new ArgumentNullException("source");
@@ -38,6 +49,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             return contexts.Select(ConvertSingle);
         }
 
+        /// <summary>
+        /// Checks to see whether the response really is a ContextResponse.
+        /// </summary>
+        /// <param name="source">The reponse to check for syntax validity.</param>
         private static void CheckResponse(XElement source) {
             source.ValidateAdsmlResponse();
 
