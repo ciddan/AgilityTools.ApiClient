@@ -12,26 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgilityTools.ApiClient.Adsml.Client.Tests", "AgilityTools.ApiClient.Adsml.Client.Tests\AgilityTools.ApiClient.Adsml.Client.Tests.csproj", "{C13FFA76-5856-4120-80AA-F9B221BF2EB2}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://nemi:8080/tfs/jula-movex%20projekt
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = AgilityTools.ApiClient.Adsml.Client.Tests\\AgilityTools.ApiClient.Adsml.Client.Tests.csproj
-		SccProjectTopLevelParentUniqueName1 = AgilityTools.ApiClient.sln
-		SccProjectName1 = AgilityTools.ApiClient.Adsml.Client.Tests
-		SccLocalPath1 = AgilityTools.ApiClient.Adsml.Client.Tests
-		SccProjectUniqueName2 = AgilityTools.ApiClient.Adsml.Client\\AgilityTools.ApiClient.Adsml.Client.csproj
-		SccProjectName2 = AgilityTools.ApiClient.Adsml.Client
-		SccLocalPath2 = AgilityTools.ApiClient.Adsml.Client
-		SccProjectUniqueName3 = AgilityTools.ApiClient.Adsml.Communication.Tests\\AgilityTools.ApiClient.Adsml.Communication.Tests.csproj
-		SccProjectTopLevelParentUniqueName3 = AgilityTools.ApiClient.sln
-		SccProjectName3 = AgilityTools.ApiClient.Adsml.Communication.Tests
-		SccLocalPath3 = AgilityTools.ApiClient.Adsml.Communication.Tests
-		SccProjectUniqueName4 = AgilityTools.ApiClient.Adsml.Communication\\AgilityTools.ApiClient.Adsml.Communication.csproj
-		SccProjectName4 = AgilityTools.ApiClient.Adsml.Communication
-		SccLocalPath4 = AgilityTools.ApiClient.Adsml.Communication
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
