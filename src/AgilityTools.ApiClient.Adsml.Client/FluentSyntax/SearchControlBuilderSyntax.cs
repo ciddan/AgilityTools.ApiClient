@@ -13,6 +13,13 @@ namespace AgilityTools.ApiClient.Adsml.Client
                                              IReturnedLanguagesConfigureReferences
     {
         SearchControl Build();
+
+        /// <summary>
+        /// Used to restrict which attributes get returned by the API.
+        /// </summary>
+        /// <param name="attributesToReturn">A params array of <see cref="AttributeToReturn"/> defining which attributes get returned.</param>
+        /// <returns>Itself as a <see cref="IReturnedLanguagesConfigureReferences"/>.</returns>
+        IReturnedLanguagesConfigureReferences ReturnAttributes(params int[] attributesToReturn);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -31,12 +38,14 @@ namespace AgilityTools.ApiClient.Adsml.Client
     public interface IReturnedAttributes : IFluentInterface
     {
         IReturnedLanguagesConfigureReferences ReturnAttributes(params AttributeToReturn[] attributesToReturn);
+        IReturnedLanguagesConfigureReferences ReturnAttributes(params int[] attributesToReturn);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IReturnedLanguages : IFluentInterface
     {
         IConfigureReferences ReturnLanguages(params IReturnedLanguageControl[] languagesToReturn);
+        IConfigureReferences ReturnLanguages(params int[] languagesToReturn);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]

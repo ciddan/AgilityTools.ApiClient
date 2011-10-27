@@ -15,6 +15,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
                                              IReturnedLanguagesConfigureReferences
     {
         LookupControl Build();
+        IConfigureReferences ReturnLanguages(params int[] languagesToReturn);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]

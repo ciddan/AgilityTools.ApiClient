@@ -96,6 +96,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             return this;
         }
 
+        public IReturnedLanguagesConfigureReferences ReturnAttributes(params int[] attributesToReturn) {
+            AttributeToReturn[] atr = attributesToReturn.Select(AttributeToReturn.WithDefinitionId).ToArray();
+            return (ReturnAttributes(atr));
+        }
+
         /// <summary>
         /// Restricts in which languages data gets returned.
         /// </summary>
@@ -107,6 +112,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             }
 
             return this;
+        }
+
+        public IConfigureReferences ReturnLanguages(params int[] languagesToReturn) {
+            LanguageToReturn[] ltr = languagesToReturn.Select(LanguageToReturn.WithLanguageId).ToArray();
+            return ReturnLanguages(ltr);
         }
 
         /// <summary>

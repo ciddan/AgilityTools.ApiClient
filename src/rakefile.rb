@@ -11,11 +11,11 @@ assemblyinfo :assemblyinfo do |asm|
 
   asm.namespaces 'System.Runtime.CompilerServices'
   asm.version = bumper_version.to_s
-  asm.company_name = "Jula AB"
+  asm.company_name = "Axpa Elektronik AB"
   asm.product_name = "Agility API Client"
   asm.title = "AgilityTools.ApiClient"
   asm.description = "A common set of tools for communicating with the Agility Adsml WebServices Api."
-  asm.copyright = "Copyright (c) Jula AB 2011"
+  asm.copyright = "Copyright (c) Axpa Elektronik AB 2011"
   asm.output_file = "AgilityTools.ApiClient.Adsml.Client/Properties/AssemblyInfo.cs"
   asm.custom_attributes :InternalsVisibleTo => "AgilityTools.ApiClient.Adsml.Client.Tests"
 end
