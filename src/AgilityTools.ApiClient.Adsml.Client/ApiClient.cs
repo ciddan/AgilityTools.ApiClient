@@ -153,7 +153,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             where TRequest : class, IAdsmlSerializable<XElement> {
             var queryString = request.ToAdsml().ToString();
 
-            queryString = System.Web.HttpUtility.UrlEncode(queryString, Encoding.Default);
+            queryString = System.Web.HttpUtility.UrlEncode(queryString, Encoding.UTF8);
             queryString = "xml=" + queryString;
 
             return queryString;

@@ -41,7 +41,7 @@ namespace AgilityTools.ApiClient.Adsml.Communication
             if (string.IsNullOrEmpty(request))
                 throw new InvalidOperationException("A request must be provided.");
 
-            _webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            _webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 
             return _webClient.UploadString(url, request);
         }
