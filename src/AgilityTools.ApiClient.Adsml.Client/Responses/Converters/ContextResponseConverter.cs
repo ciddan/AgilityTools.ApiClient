@@ -44,9 +44,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             CheckResponse(source);
 
             var contexts = source.Descendants()
-                .Where(d => (d.Name.LocalName == "Context" || d.Name.LocalName == "StructureContext"));
+                .Where(d => (d.Name.LocalName == "Context" || d.Name.LocalName == "StructureContext"))
+                .ToList();
 
-            return contexts.Select(ConvertSingle);
+            return contexts.Count() == 0 
+                ? new List<ContextResponse>() 
+                : contexts.Select(ConvertSingle);
         }
 
         /// <summary>
@@ -56,8 +59,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         private static void CheckResponse(XElement source) {
             source.ValidateAdsmlResponse();
 
-            if ((source.Descendants("StructureContext").Count() < 1) && (source.Descendants("Context").Count() < 1)) {
-                throw new InvalidOperationException("Not a valid ContextResponse.");
+            if (source.Descendants("SearchResults").Count() != 0) {
+                
+            } else {
+                if ((source.Descendants("StructureContext").Count() < 1) && (source.Descendants("Context").Count() < 1)) {
+                    throw new InvalidOperationException(string.Format("Not a valid ContextResponse.\r\nResponse:\r\n{0}", source));
+                }    
             }
         }
     }
