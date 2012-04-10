@@ -73,7 +73,7 @@ namespace AgilityTools.ApiClient.Adsml.Communication
 
             var uri = new Uri(url, UriKind.Absolute);
 
-            _webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            _webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 
             _webClient.UploadStringCompleted += (sender, args) => callback.Invoke(args.Result);
             _webClient.UploadStringAsync(uri, request);
