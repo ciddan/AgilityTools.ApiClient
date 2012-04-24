@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
@@ -15,18 +16,30 @@ namespace AgilityTools.ApiClient.Adsml.Client
     {
         private readonly IApiWebClient _webClient;
         private readonly string _adapiWsUrl;
+        private readonly string _validationDocument;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="webClient">Required. Used to send data to the API.</param>
         /// <param name="adapiWsUrl">Optional. A url to an Agility Directory Services endpoint. Defaults to <example>http://penny:9080/Agility/Directory</example></param>
-        public ApiClient(IApiWebClient webClient, string adapiWsUrl = "http://penny:9080/Agility/Directory") {
+        /// <param name="validationDocument">Optional. Relative or full path to the Agility ADMSL API definition file, adsml.xsd.</param>
+        public ApiClient(IApiWebClient webClient, string adapiWsUrl = "http://penny:9080/Agility/Directory", string validationDocument = "adsml.xsd") {
             if (webClient == null)
                 throw new ArgumentNullException("webClient");
 
             _webClient = webClient;
             _adapiWsUrl = adapiWsUrl;
+
+            if (string.IsNullOrEmpty(validationDocument)) {
+                throw new ArgumentNullException("validationDocument");
+            }
+
+            if (!File.Exists(validationDocument)) {
+                throw new FileNotFoundException("API definition file not found.", "adsml.xsd");
+            }
+
+            _validationDocument = validationDocument;
         }
 
         /// <summary>
@@ -127,12 +140,12 @@ namespace AgilityTools.ApiClient.Adsml.Client
         /// Checks to see whether the Api-response contains any errors. If so, throws an <see cref="AdsmlException"/> containing the error details.
         /// </summary>
         /// <param name="result">The response to check for errors.</param>
-        private static void ValidateResponse(XElement result) {
+        private void ValidateResponse(XElement result) {
             if (!result.Descendants().Any(n => n.Name.LocalName == "ErrorResponse")) {
                 return;
             }
 
-            var converter = new ErrorResponseConverter();
+            var converter = new ErrorResponseConverter(_validationDocument);
             var errors = converter.Convert(result).ToList();
 
             string errorMessages =

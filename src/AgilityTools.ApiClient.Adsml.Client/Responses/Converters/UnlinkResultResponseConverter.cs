@@ -10,7 +10,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         /// <summary>
         /// Constructor.
         /// </summary>
-        public UnlinkResultResponseConverter() {
+        public UnlinkResultResponseConverter(string validationDocument) : base(validationDocument) {
             this.ElementName = "UnlinkResponse";
         }
 
@@ -40,10 +40,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             return base.Convert(source);
         }
 
-        private static void CheckResponse(XElement source) {
-            source.ValidateAdsmlResponse();
+        private void CheckResponse(XElement source) {
+            source.ValidateAdsmlResponse(_validationDocument);
 
-            if (source.Descendants("UnlinkResponse").Count() < 1) {
+            if (!source.Descendants("UnlinkResponse").Any()) {
                 throw new InvalidOperationException("Not a valid UnlinkResponse.");
             }
         }

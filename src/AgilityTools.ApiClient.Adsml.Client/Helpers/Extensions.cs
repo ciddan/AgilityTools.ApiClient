@@ -62,16 +62,14 @@ namespace AgilityTools.ApiClient.Adsml.Client
         /// Validates an <see cref="XDocument"/> against the adsml language definition adsml.xsd. The xsd should be placed in the same directory as the executing assembly.
         /// </summary>
         /// <param name="source">Required. The document to validate.</param>
-        private static void ValidateAdsmlResponse(this XDocument source) {
+        /// <param name="xsdValidator">Required. Relative or full path to the Agility ADMSL API definition file, adsml.xsd.</param>
+        private static void ValidateAdsmlResponse(this XDocument source, string xsdValidator) {
             if (source == null) {
                 throw new ArgumentNullException("source");
             }
 
-            string assemblyPath = Assembly.GetExecutingAssembly().GetAssemblyPath();
-            string xsdPath = Path.Combine(assemblyPath, "adsml.xsd");
-
             var schemaSet = new XmlSchemaSet();
-            schemaSet.Add("", XmlReader.Create(xsdPath));
+            schemaSet.Add("", XmlReader.Create(xsdValidator));
 
             source.Validate(schemaSet,
                             (sender, e) => {
@@ -84,14 +82,15 @@ namespace AgilityTools.ApiClient.Adsml.Client
         /// Validates an <see cref="XElement"/> against the adsml.xsd definition file. The xsd should be placed in the same directory as the executing assembly.
         /// </summary>
         /// <param name="source">Required. The <see cref="XElement"/> to validate.</param>
-        public static void ValidateAdsmlResponse(this XElement source) {
+        /// <param name="xsdValidator">Required. Relative or full path to the Agility ADMSL API definition file, adsml.xsd.</param>
+        public static void ValidateAdsmlResponse(this XElement source, string xsdValidator) {
             if (source == null) {
                 throw new ArgumentNullException("source");
             }
 
             var doc = XDocument.Parse(source.ToString());
 
-            doc.ValidateAdsmlResponse();
+            doc.ValidateAdsmlResponse(xsdValidator);
         }
 
         /// <summary>

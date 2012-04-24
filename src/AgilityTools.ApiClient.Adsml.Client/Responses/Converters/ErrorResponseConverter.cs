@@ -5,8 +5,11 @@ using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
-    public class ErrorResponseConverter : IResponseConverter<XElement, ErrorResponse> 
+    public class ErrorResponseConverter : ResponseConverter<XElement, ErrorResponse>
     {
+        public ErrorResponseConverter(string validationDocument) : base(validationDocument) {
+        }
+
         /// <summary>
         /// Converts an <see cref="XElement"/> into a <see cref="ErrorResponse"/>.
         /// </summary>
@@ -34,7 +37,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         /// </summary>
         /// <param name="source">Required. The response to convert.</param>
         /// <returns></returns>
-        public IEnumerable<ErrorResponse> Convert(XElement source) {
+        public override IEnumerable<ErrorResponse> Convert(XElement source) {
             if (source == null) {
                 throw new ArgumentNullException("source");
             }
@@ -44,10 +47,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             return source.Descendants("ErrorResponse").Select(ConvertSingle);
         }
 
-        private static void CheckResponse(XElement source) {
-            source.ValidateAdsmlResponse();
+        private void CheckResponse(XElement source) {
+            source.ValidateAdsmlResponse(_validationDocument);
 
-            if (source.Descendants("ErrorResponse").Count() < 1) {
+            if (!source.Descendants("ErrorResponse").Any()) {
                 throw new InvalidOperationException("Not a valid ErrorResponse.");
             }
         }

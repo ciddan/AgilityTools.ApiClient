@@ -158,7 +158,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                     AttributeToReturn.WithDefinitionId(215),
                     AttributeToReturn.WithDefinitionId(24));
 
-            var converter = new ContextResponseConverter();
+            var converter = new ContextResponseConverter("adsml.xsd");
 
             //Act
             var reply = client.SendApiRequest(request.Build(), converter.Convert);

@@ -10,7 +10,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         /// <summary>
         /// Constructor.
         /// </summary>
-        public DeleteResultResponseConverter() {
+        public DeleteResultResponseConverter(string validationDocument) : base(validationDocument) {
             this.ElementName = "DeleteResponse";
         }
 
@@ -28,10 +28,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
             return base.Convert(source);
         }
 
-        private static void CheckResponse(XElement source) {
-            source.ValidateAdsmlResponse();
+        private void CheckResponse(XElement source) {
+            source.ValidateAdsmlResponse(_validationDocument);
 
-            if (source.Descendants("DeleteResponse").Count() < 1) {
+            if (!source.Descendants("DeleteResponse").Any()) {
                 throw new InvalidOperationException("Not a valid DeleteResponse.");
             }
         }

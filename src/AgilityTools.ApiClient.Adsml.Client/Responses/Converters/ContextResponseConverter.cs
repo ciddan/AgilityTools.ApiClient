@@ -6,8 +6,11 @@ using AgilityTools.ApiClient.Adsml.Client.Components;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
-    public class ContextResponseConverter : IResponseConverter<XElement, ContextResponse>
+    public class ContextResponseConverter : ResponseConverter<XElement, ContextResponse>
     {
+        public ContextResponseConverter(string validationDocument) : base(validationDocument) {
+        }
+
         /// <summary>
         /// Converts the input of <see cref="XElement"/> to a single <see cref="ContextResponse"/>.
         /// </summary>
@@ -36,7 +39,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         /// </summary>
         /// <param name="source">Required. The data to convert.</param>
         /// <returns>An <see cref="IEnumerable{TOutput}"/> of <see cref="ContextResponse"/> containing the converted results.</returns>
-        public IEnumerable<ContextResponse> Convert(XElement source) {
+        public override IEnumerable<ContextResponse> Convert(XElement source) {
             if (source == null) {
                 throw new ArgumentNullException("source");
             }
@@ -47,7 +50,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
                 .Where(d => (d.Name.LocalName == "Context" || d.Name.LocalName == "StructureContext"))
                 .ToList();
 
-            return contexts.Count() == 0 
+            return !contexts.Any() 
                 ? new List<ContextResponse>() 
                 : contexts.Select(ConvertSingle);
         }
@@ -56,13 +59,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         /// Checks to see whether the response really is a ContextResponse.
         /// </summary>
         /// <param name="source">The reponse to check for syntax validity.</param>
-        private static void CheckResponse(XElement source) {
-            source.ValidateAdsmlResponse();
+        private void CheckResponse(XElement source) {
+            source.ValidateAdsmlResponse(_validationDocument);
 
             if (source.Descendants("SearchResults").Count() != 0) {
                 
             } else {
-                if ((source.Descendants("StructureContext").Count() < 1) && (source.Descendants("Context").Count() < 1)) {
+                if ((!source.Descendants("StructureContext").Any()) && (!source.Descendants("Context").Any())) {
                     throw new InvalidOperationException(string.Format("Not a valid ContextResponse.\r\nResponse:\r\n{0}", source));
                 }    
             }

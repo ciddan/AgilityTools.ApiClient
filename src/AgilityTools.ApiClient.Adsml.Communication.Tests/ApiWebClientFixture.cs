@@ -93,8 +93,8 @@ namespace AgilityTools.ApiClient.Adsml.Communication.Tests
 
         [Test]
         [ExpectedException(typeof (ArgumentNullException),
-            ExpectedMessage = "Value cannot be null.\r\nParameter name: data")]
-        public void ApiWebClient_UploadDataAsync_Throws_ArgumentNullException_If_Data_Is_Null() {
+            ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
+        public void ApiWebClient_UploadDataAsync_Throws_ArgumentNullException_If_Request_Is_Null() {
             //Arrange
             IApiWebClient client = new ApiWebClient();
 

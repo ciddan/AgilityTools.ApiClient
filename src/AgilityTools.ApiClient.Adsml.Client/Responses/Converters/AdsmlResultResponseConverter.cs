@@ -9,8 +9,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
     /// Abstract base class for all response converters. Implements <see cref="IResponseConverter{XElement, TOutput}"/>.
     /// </summary>
     /// <typeparam name="TOutput">The type of the resulting object after the conversion.</typeparam>
-    public abstract class AdsmlResultResponseConverter<TOutput> : IResponseConverter<XElement, TOutput> where TOutput : AdsmlResult, new()
+    public abstract class AdsmlResultResponseConverter<TOutput> : ResponseConverter<XElement, TOutput> where TOutput : AdsmlResult, new()
     {
+        protected AdsmlResultResponseConverter(string validationDocument) : base(validationDocument) {
+        }
+
         protected string ElementName { get; set; }
 
         /// <summary>
@@ -32,7 +35,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         /// </summary>
         /// <param name="source">Required. The data to convert.</param>
         /// <returns>An <see cref="IEnumerable{TOutput}"/> containing the converted results.</returns>
-        public virtual IEnumerable<TOutput> Convert(XElement source) {
+        public override IEnumerable<TOutput> Convert(XElement source) {
             if (string.IsNullOrEmpty(ElementName)) {
                 throw new InvalidOperationException("ElementName must be set.");
             }

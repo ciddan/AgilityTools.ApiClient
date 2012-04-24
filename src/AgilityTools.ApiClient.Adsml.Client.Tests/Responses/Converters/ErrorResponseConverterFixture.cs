@@ -12,7 +12,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
         [Test]
         public void Can_Instantiate_New_ErrorResponseConverter() {
             //Act
-            var erc = new ErrorResponseConverter();
+            var erc = new ErrorResponseConverter("adsml.xsd");
 
             //Assert
             Assert.That(erc, Is.Not.Null);
@@ -32,7 +32,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                     new XAttribute("description", "foo"),
                     new XElement("Message", "Foo error")));
 
-            var erc = new ErrorResponseConverter();
+            var erc = new ErrorResponseConverter("adsml.xsd");
             
             //Act
             ErrorResponse errorResponse = erc.Convert(xml).Single();
@@ -49,7 +49,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
         [ExpectedException(typeof(ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: source")]
         public void Convert_Throws_ArgumentNullException_If_Source_Is_Null() {
             //Arrange
-            var erc = new ErrorResponseConverter();
+            var erc = new ErrorResponseConverter("adsml.xsd");
 
             //Act
             erc.Convert(null);
@@ -69,7 +69,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                     new XAttribute("description", "Success"),
                     new XElement("Message", "foo")));
 
-            var erc = new ErrorResponseConverter();
+            var erc = new ErrorResponseConverter("adsml.xsd");
 
             //Act
             erc.Convert(response);
@@ -89,7 +89,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                     new XAttribute("description", "Success"),
                     new XElement("Message", "foo")));
 
-            var erc = new ErrorResponseConverter();
+            var erc = new ErrorResponseConverter("adsml.xsd");
 
             //Act
             erc.Convert(response);

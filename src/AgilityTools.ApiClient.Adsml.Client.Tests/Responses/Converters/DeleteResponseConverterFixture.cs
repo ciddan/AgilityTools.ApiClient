@@ -11,7 +11,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
         [Test]
         public void Can_Instantiate_New_DeleteResponseConverter() {
             //Act
-            var drc = new DeleteResultResponseConverter();
+            var drc = new DeleteResultResponseConverter("adsml.xsd");
 
             //Assert
             Assert.That(drc, Is.Not.Null);
@@ -31,7 +31,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                     new XAttribute("description", "Success"),
                     new XElement("Message", "foo")));
 
-            var drc = new DeleteResultResponseConverter();
+            var drc = new DeleteResultResponseConverter("adsml.xsd");
 
             //Act
             var converted = drc.Convert(response).Single();
@@ -47,7 +47,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
         [ExpectedException(typeof (System.ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: source")]
         public void Throws_ArgumentNullException_If_Source_Is_Null() {
             //Arrange
-            var drc = new DeleteResultResponseConverter();
+            var drc = new DeleteResultResponseConverter("adsml.xsd");
 
             //Act
             drc.Convert(null);
@@ -67,7 +67,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                     new XAttribute("description", "Success"),
                     new XElement("Message", "foo")));
 
-            var drc = new DeleteResultResponseConverter();
+            var drc = new DeleteResultResponseConverter("adsml.xsd");
 
             //Act
             drc.Convert(response);
@@ -88,7 +88,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                     new XAttribute("description", "Success"),
                     new XElement("Message", "foo")));
 
-            var drc = new DeleteResultResponseConverter();
+            var drc = new DeleteResultResponseConverter("adsml.xsd");
 
             //Act
             drc.Convert(response);

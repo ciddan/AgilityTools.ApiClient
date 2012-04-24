@@ -11,7 +11,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
         [Test]
         public void Can_Instantiate_New_UnlinkResponseConverter() {
             //Act
-            var urc = new UnlinkResultResponseConverter();
+            var urc = new UnlinkResultResponseConverter("adsml.xsd");
 
             //Assert
             Assert.That(urc, Is.Not.Null);
@@ -31,7 +31,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                                                      new XAttribute("description", "Success"),
                                                      new XElement("Message", "foo")));
 
-            var urc = new UnlinkResultResponseConverter();
+            var urc = new UnlinkResultResponseConverter("adsml.xsd");
 
             //Act
             var converted = urc.Convert(response).Single();
@@ -48,7 +48,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
             ExpectedMessage = "Value cannot be null.\r\nParameter name: source")]
         public void Throws_ArgumentNullException_If_Source_Is_Null() {
             //Arrange
-            var urc = new UnlinkResultResponseConverter();
+            var urc = new UnlinkResultResponseConverter("adsml.xsd");
 
             //Act
             urc.Convert(null);
@@ -68,7 +68,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                                                      new XAttribute("description", "Success"),
                                                      new XElement("Message", "foo")));
 
-            var urc = new UnlinkResultResponseConverter();
+            var urc = new UnlinkResultResponseConverter("adsml.xsd");
 
             //Act
             urc.Convert(response);
@@ -90,7 +90,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
 
             var doc = XDocument.Parse(response.ToString());
 
-            var urc = new UnlinkResultResponseConverter();
+            var urc = new UnlinkResultResponseConverter("adsml.xsd");
 
             //Act
             urc.Convert(response);
