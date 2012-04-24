@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Axpa Elektronik AB")]
 [assembly: AssemblyProduct("Agility API Client")]
 [assembly: AssemblyCopyright("Copyright (c) Axpa Elektronik AB 2011")]
-[assembly: AssemblyVersion("1.2.0.1")]
+[assembly: AssemblyVersion("1.2.0.2")]
 
 [assembly: InternalsVisibleTo("AgilityTools.ApiClient.Adsml.Client.Tests")]
 

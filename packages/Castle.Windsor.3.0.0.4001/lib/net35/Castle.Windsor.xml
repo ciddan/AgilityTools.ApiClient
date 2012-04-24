@@ -4,6 +4,123 @@
         <name>Castle.Windsor</name>
     </assembly>
     <members>
+        <member name="T:Castle.MicroKernel.ComponentActivator.WebUserControlComponentActivator">
+            <summary>
+              Attempts to dynamically load a UserControl by invoking Page.LoadControl.  
+              There are two uses of this class.  
+              <para>
+                1) Add a component to the Kernel and add a VirtualPath attribute specifying 
+                the relative path of the .ascx file for the associated UserControl. (easy)
+              </para>
+              <example>
+                <code>
+                  &lt;component id="BasketView" 
+                  service="Castle.ShoppingCart.IBasketView, Castle.ShoppingCart"
+                  type="Castle.ShoppingCart.BasketView, Castle.ShoppingCart" 
+                  lifestyle="transient"
+                  virtualPath="~/Views/BasketView.ascx"
+                  /&gt;
+                </code>
+              </example>
+              <para>
+                2) Precompile a UserControl and add the pre-compiled class to the Kernel. (hard)  
+                Has not been tested with proxies.
+              </para>
+            </summary>
+        </member>
+        <member name="T:Castle.MicroKernel.ComponentActivator.DefaultComponentActivator">
+            <summary>
+              Standard implementation of <see cref="T:Castle.MicroKernel.IComponentActivator"/>.
+              Handles the selection of the best constructor, fills the
+              writable properties the component exposes, run the commission 
+              and decommission lifecycles, etc.
+            </summary>
+            <remarks>
+              Custom implementors can just override the <c>CreateInstance</c> method.
+              Please note however that the activator is responsible for the proxy creation
+              when needed.
+            </remarks>
+        </member>
+        <member name="T:Castle.MicroKernel.ComponentActivator.AbstractComponentActivator">
+            <summary>
+              Abstract implementation of <see cref="T:Castle.MicroKernel.IComponentActivator"/>.
+              The implementors must only override the InternalCreate and 
+              InternalDestroy methods in order to perform their creation and
+              destruction logic.
+            </summary>
+        </member>
+        <member name="T:Castle.MicroKernel.IComponentActivator">
+            <summary>
+              Implements the instance creation logic. The default
+              implementation should rely on an ordinary call to 
+              Activator.CreateInstance().
+            </summary>
+            <remarks>
+              This interface is provided in order to allow custom components
+              to be created using a different logic, such as using a specific factory
+              or builder.
+              <para>
+                The constructor for implementation has the following signature:
+              </para>
+              <code>
+                ComponentModel model, IKernel kernel, 
+                ComponentInstanceDelegate onCreation, 
+                ComponentInstanceDelegate onDestruction
+              </code>
+              <para>
+                The Activator should raise the events onCreation and onDestruction
+                in order to correctly implement the contract. Usually the best
+                way of creating a custom activator is by extending the existing ones.
+              </para>
+              <seealso cref="T:Castle.MicroKernel.ComponentActivator.AbstractComponentActivator"/>
+              <seealso cref="T:Castle.MicroKernel.ComponentActivator.DefaultComponentActivator"/>
+            </remarks>
+        </member>
+        <member name="M:Castle.MicroKernel.IComponentActivator.Create(Castle.MicroKernel.Context.CreationContext,Castle.MicroKernel.Burden)">
+            <summary>
+              Should return a new component instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.MicroKernel.IComponentActivator.Destroy(System.Object)">
+            <summary>
+              Should perform all necessary work to dispose the instance
+              and/or any resource related to it.
+            </summary>
+            <param name = "instance"></param>
+        </member>
+        <member name="M:Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.#ctor(Castle.Core.ComponentModel,Castle.MicroKernel.IKernel,Castle.MicroKernel.ComponentInstanceDelegate,Castle.MicroKernel.ComponentInstanceDelegate)">
+            <summary>
+              Constructs an AbstractComponentActivator
+            </summary>
+        </member>
+        <member name="M:Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.#ctor(Castle.Core.ComponentModel,Castle.MicroKernel.IKernel,Castle.MicroKernel.ComponentInstanceDelegate,Castle.MicroKernel.ComponentInstanceDelegate)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Castle.MicroKernel.ComponentActivator.DefaultComponentActivator"/> class.
+            </summary>
+            <param name="model"></param>
+            <param name="kernel"></param>
+            <param name="onCreation"></param>
+            <param name="onDestruction"></param>
+        </member>
+        <member name="M:Castle.MicroKernel.ComponentActivator.WebUserControlComponentActivator.#ctor(Castle.Core.ComponentModel,Castle.MicroKernel.IKernel,Castle.MicroKernel.ComponentInstanceDelegate,Castle.MicroKernel.ComponentInstanceDelegate)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Castle.MicroKernel.ComponentActivator.WebUserControlComponentActivator"/> class.
+            </summary>
+            <param name="model">The model.</param>
+            <param name="kernel">The kernel.</param>
+            <param name="onCreation">The on creation.</param>
+            <param name="onDestruction">The on destruction.</param>
+        </member>
+        <member name="M:Castle.MicroKernel.ComponentActivator.WebUserControlComponentActivator.CreateInstance(Castle.MicroKernel.Context.CreationContext,Castle.Core.ConstructorCandidate,System.Object[])">
+            <summary>
+              Creates the instance.
+            </summary>
+            <param name = "context">The context.</param>
+            <param name = "constructor"></param>
+            <param name = "arguments">The arguments.</param>
+            <returns></returns>
+        </member>
         <member name="T:Castle.Core.BoundToAttribute">
             <summary>
               Indicates that the target components wants instance lifetime and reuse scope to be bound to another component further up the object graph.
@@ -531,59 +648,6 @@
               If set to <c>true</c>, all methods with names like 'GetSomething' will try to resolve by name component 'something'.
             </summary>
         </member>
-        <member name="T:Castle.MicroKernel.ComponentActivator.AbstractComponentActivator">
-            <summary>
-              Abstract implementation of <see cref="T:Castle.MicroKernel.IComponentActivator"/>.
-              The implementors must only override the InternalCreate and 
-              InternalDestroy methods in order to perform their creation and
-              destruction logic.
-            </summary>
-        </member>
-        <member name="T:Castle.MicroKernel.IComponentActivator">
-            <summary>
-              Implements the instance creation logic. The default
-              implementation should rely on an ordinary call to 
-              Activator.CreateInstance().
-            </summary>
-            <remarks>
-              This interface is provided in order to allow custom components
-              to be created using a different logic, such as using a specific factory
-              or builder.
-              <para>
-                The constructor for implementation has the following signature:
-              </para>
-              <code>
-                ComponentModel model, IKernel kernel, 
-                ComponentInstanceDelegate onCreation, 
-                ComponentInstanceDelegate onDestruction
-              </code>
-              <para>
-                The Activator should raise the events onCreation and onDestruction
-                in order to correctly implement the contract. Usually the best
-                way of creating a custom activator is by extending the existing ones.
-              </para>
-              <seealso cref="T:Castle.MicroKernel.ComponentActivator.AbstractComponentActivator"/>
-              <seealso cref="T:Castle.MicroKernel.ComponentActivator.DefaultComponentActivator"/>
-            </remarks>
-        </member>
-        <member name="M:Castle.MicroKernel.IComponentActivator.Create(Castle.MicroKernel.Context.CreationContext,Castle.MicroKernel.Burden)">
-            <summary>
-              Should return a new component instance.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Castle.MicroKernel.IComponentActivator.Destroy(System.Object)">
-            <summary>
-              Should perform all necessary work to dispose the instance
-              and/or any resource related to it.
-            </summary>
-            <param name = "instance"></param>
-        </member>
-        <member name="M:Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.#ctor(Castle.Core.ComponentModel,Castle.MicroKernel.IKernel,Castle.MicroKernel.ComponentInstanceDelegate,Castle.MicroKernel.ComponentInstanceDelegate)">
-            <summary>
-              Constructs an AbstractComponentActivator
-            </summary>
-        </member>
         <member name="T:Castle.MicroKernel.ComponentActivator.IDependencyAwareActivator">
             <summary>
             Implemented by <see cref="T:Castle.MicroKernel.IComponentActivator"/> which don't necessarily need dependencies from the container to activate new instances of the component.
@@ -658,28 +722,6 @@
             <summary>
               Exception thrown when resolution process for a component was unsuccessful at some point for whatever reason.
             </summary>
-        </member>
-        <member name="T:Castle.MicroKernel.ComponentActivator.DefaultComponentActivator">
-            <summary>
-              Standard implementation of <see cref="T:Castle.MicroKernel.IComponentActivator"/>.
-              Handles the selection of the best constructor, fills the
-              writable properties the component exposes, run the commission 
-              and decommission lifecycles, etc.
-            </summary>
-            <remarks>
-              Custom implementors can just override the <c>CreateInstance</c> method.
-              Please note however that the activator is responsible for the proxy creation
-              when needed.
-            </remarks>
-        </member>
-        <member name="M:Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.#ctor(Castle.Core.ComponentModel,Castle.MicroKernel.IKernel,Castle.MicroKernel.ComponentInstanceDelegate,Castle.MicroKernel.ComponentInstanceDelegate)">
-            <summary>
-              Initializes a new instance of the <see cref="T:Castle.MicroKernel.ComponentActivator.DefaultComponentActivator"/> class.
-            </summary>
-            <param name="model"></param>
-            <param name="kernel"></param>
-            <param name="onCreation"></param>
-            <param name="onDestruction"></param>
         </member>
         <member name="P:Castle.MicroKernel.Burden.RequiresPolicyRelease">
             <summary>
@@ -963,7 +1005,9 @@
         </member>
         <member name="M:Castle.MicroKernel.Handlers.DefaultHandler.#ctor(Castle.Core.ComponentModel)">
             <summary>
-              Initializes a new instance of the <see cref="T:Castle.MicroKernel.Handlers.DefaultHandler"/> class.
+              Initializes a new instance of the
+              <see cref="T:Castle.MicroKernel.Handlers.DefaultHandler"/>
+              class.
             </summary>
             <param name="model"></param>
         </member>
@@ -971,7 +1015,7 @@
             <summary>
               disposes the component instance (or recycle it)
             </summary>
-            <param name = "burden"></param>
+            <param name="burden"></param>
             <returns>true if destroyed</returns>
         </member>
         <member name="M:Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(Castle.MicroKernel.Context.CreationContext,System.Boolean,System.Boolean,Castle.MicroKernel.Burden@)">
@@ -979,10 +1023,10 @@
               Returns an instance of the component this handler
               is responsible for
             </summary>
-            <param name = "context"></param>
-            <param name = "requiresDecommission"></param>
-            <param name = "instanceRequired"></param>
-            <param name = "burden"></param>
+            <param name="context"></param>
+            <param name="requiresDecommission"></param>
+            <param name="instanceRequired"></param>
+            <param name="burden"></param>
             <returns></returns>
         </member>
         <member name="P:Castle.MicroKernel.Handlers.DefaultHandler.LifestyleManager">
@@ -1878,25 +1922,52 @@
         </member>
         <member name="M:Castle.MicroKernel.CircularDependencyException.#ctor(System.String)">
             <summary>
-              Initializes a new instance of the <see cref="T:Castle.MicroKernel.CircularDependencyException"/> class.
+              Initializes a new instance of the
+              <see cref="T:Castle.MicroKernel.CircularDependencyException"/>
+              class.
             </summary>
             <param name="message">The message.</param>
         </member>
         <member name="M:Castle.MicroKernel.CircularDependencyException.#ctor(System.String,System.Exception)">
             <summary>
-              Initializes a new instance of the <see cref="T:Castle.MicroKernel.CircularDependencyException"/> class.
+              Initializes a new instance of the
+              <see cref="T:Castle.MicroKernel.CircularDependencyException"/>
+              class.
             </summary>
             <param name="message">The message.</param>
             <param name="innerException">The inner exception.</param>
         </member>
+        <member name="M:Castle.MicroKernel.CircularDependencyException.#ctor(System.String,Castle.Core.ComponentModel)">
+            <summary>
+              Initializes a new instance of the
+              <see cref="T:Castle.MicroKernel.CircularDependencyException"/>
+              class.
+            </summary>
+            <param name="message"></param>
+            <param name="component"></param>
+        </member>
         <member name="M:Castle.MicroKernel.CircularDependencyException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
-              Initializes a new instance of the <see cref="T:Castle.MicroKernel.CircularDependencyException"/> class.
+              Initializes a new instance of the
+              <see cref="T:Castle.MicroKernel.CircularDependencyException"/>
+              class.
             </summary>
-            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
-            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
-            <exception cref="T:System.ArgumentNullException">The <paramref name="info"/> parameter is <see langword="null"/>.</exception>
-            <exception cref="T:System.Runtime.Serialization.SerializationException">The class name is <see langword="null"/> or <see cref="P:System.Exception.HResult"/> is zero (0).</exception>
+            <param name="info">The
+              <see cref="T:System.Runtime.Serialization.SerializationInfo"/>
+              that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The
+              <see cref="T:System.Runtime.Serialization.StreamingContext"/>
+              that contains contextual information about the source or destination.</param>
+            <exception cref="T:System.ArgumentNullException">The
+              <paramref name="info"/>
+              parameter is
+              <see langword="null"/>
+              .</exception>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">The class name is
+              <see langword="null"/>
+              or
+              <see cref="P:System.Exception.HResult"/>
+              is zero (0).</exception>
         </member>
         <member name="T:Castle.MicroKernel.ComponentNotFoundException">
             <summary>
@@ -2466,7 +2537,7 @@
         </member>
         <member name="T:Castle.MicroKernel.Lifestyle.AbstractLifestyleManager">
             <summary>
-              Summary description for AbstractLifestyleManager.
+              Base implementation of <see cref="T:Castle.MicroKernel.ILifestyleManager"/>
             </summary>
         </member>
         <member name="T:Castle.MicroKernel.ILifestyleManager">
@@ -2530,6 +2601,13 @@
             </summary>
             <param name="context">Current creation context</param>
             <exception cref="T:System.InvalidOperationException"> Thrown when scope cache could not be accessed.</exception>
+        </member>
+        <member name="M:Castle.MicroKernel.Lifestyle.PerWebRequestLifestyleModule.YieldScope">
+            <summary>
+              Returns current request's scope and detaches it from the request context.
+              Does not throw if scope or context not present. To be used for disposing of the context.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Castle.MicroKernel.Lifestyle.PoolableLifestyleManager">
             <summary>
@@ -4827,34 +4905,50 @@
         </member>
         <member name="M:Castle.MicroKernel.Registration.Lifestyle.LifestyleGroup`1.Is(Castle.Core.LifestyleType)">
             <summary>
-              Sets the lifestyle to the specified <paramref name = "type" />.
+              Sets the lifestyle to the specified
+              <paramref name="type" />
+              .
             </summary>
-            <param name = "type">The type.</param>
+            <param name="type">The type.</param>
             <returns></returns>
         </member>
         <member name="M:Castle.MicroKernel.Registration.Lifestyle.LifestyleGroup`1.Scoped``1">
             <summary>
-              Assigns scoped lifestyle with scope accessed via <typeparamref name = "TScopeAccessor" /> instances.
+              Assigns scoped lifestyle with scope accessed via
+              <typeparamref name="TScopeAccessor" />
+              instances.
             </summary>
-            <typeparam name = "TScopeAccessor"></typeparam>
+            <typeparam name="TScopeAccessor"></typeparam>
             <returns></returns>
         </member>
         <member name="M:Castle.MicroKernel.Registration.Lifestyle.LifestyleGroup`1.Scoped(System.Type)">
             <summary>
-              Assigns scoped lifestyle with scope accessed via <paramref name = "scopeAccessorType" /> instances if provided, or default accessor otherwise.
+              Assigns scoped lifestyle with scope accessed via
+              <paramref name="scopeAccessorType" />
+              instances if provided, or default accessor otherwise.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.MicroKernel.Registration.Lifestyle.LifestyleGroup`1.Scoped">
+            <summary>
+              Assigns scoped lifestyle with scope accessed via default accessor.
             </summary>
             <returns></returns>
         </member>
         <member name="M:Castle.MicroKernel.Registration.Lifestyle.LifestyleGroup`1.Custom(System.Type)">
             <summary>
-              Assign a custom lifestyle type, that implements <see cref="T:Castle.MicroKernel.ILifestyleManager"/>.
+              Assign a custom lifestyle type, that implements
+              <see cref="T:Castle.MicroKernel.ILifestyleManager"/>
+              .
             </summary>
             <param name="customLifestyleType">Type of the custom lifestyle.</param>
             <returns></returns>
         </member>
         <member name="M:Castle.MicroKernel.Registration.Lifestyle.LifestyleGroup`1.Custom``1">
             <summary>
-              Assign a custom lifestyle type, that implements <see cref="T:Castle.MicroKernel.ILifestyleManager"/>.
+              Assign a custom lifestyle type, that implements
+              <see cref="T:Castle.MicroKernel.ILifestyleManager"/>
+              .
             </summary>
             <typeparam name="TLifestyleManager">The type of the custom lifestyle</typeparam>
             <returns></returns>
@@ -5789,11 +5883,6 @@
             </summary>
             <param name="info">The object that holds the serialized object data.</param>
             <param name="context">The contextual information about the source or destination.</param>
-        </member>
-        <member name="T:Castle.MicroKernel.Resolvers.LazyOfTComponentLoader">
-            <summary>
-              Lazily adds component for <see cref="T:System.Lazy`1"/>.
-            </summary>
         </member>
         <member name="T:Castle.MicroKernel.Resolvers.SpecializedResolvers.ArrayResolver">
             <summary>
