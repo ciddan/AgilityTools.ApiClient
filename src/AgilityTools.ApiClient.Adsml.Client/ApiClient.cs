@@ -16,23 +16,37 @@ namespace AgilityTools.ApiClient.Adsml.Client
     {
         private readonly IApiWebClient _webClient;
         private readonly string _adapiWsUrl;
+        private readonly string _userName;
+        private readonly string _password;
         private readonly string _validationDocument;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="webClient">Required. Used to send data to the API.</param>
-        /// <param name="adapiWsUrl">Optional. A url to an Agility Directory Services endpoint. Defaults to <example>http://penny:9080/Agility/Directory</example></param>
-        /// <param name="validationDocument">Optional. Relative or full path to the Agility ADMSL API definition file, adsml.xsd.</param>
-        public ApiClient(IApiWebClient webClient, string adapiWsUrl = "http://penny:9080/Agility/Directory", string validationDocument = "adsml.xsd") {
+        /// <param name="adapiWsUrl">Required. A url to an Agility Directory Services endpoint. Example: <example>http://192.168.0.100:9080/Agility/Directory</example>.</param>
+        /// <param name="userName">Required. Username for Agility auth.</param>
+        /// <param name="password">Required. Password for Agility auth.</param>
+        /// <param name="validationDocument">Optional. Relative or full path to an Agility ADMSL API definition file. Used for query validation. Defaults to <example>adsml.xsd</example>.</param>
+        public ApiClient(IApiWebClient webClient, string adapiWsUrl, string userName, string password, string validationDocument = "adsml.xsd") {
             if (webClient == null)
                 throw new ArgumentNullException("webClient");
 
             _webClient = webClient;
             _adapiWsUrl = adapiWsUrl;
+            _userName = userName;
+            _password = password;
 
-            if (string.IsNullOrEmpty(validationDocument)) {
-                throw new ArgumentNullException("validationDocument");
+            if (string.IsNullOrEmpty(adapiWsUrl)) {
+                throw new ArgumentNullException("adapiWsUrl");
+            }
+
+            if (string.IsNullOrEmpty(userName)) {
+                throw new ArgumentNullException("userName");
+            }
+
+            if (string.IsNullOrEmpty(password)) {
+                throw new ArgumentNullException("password");
             }
 
             if (!File.Exists(validationDocument)) {
@@ -129,7 +143,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
             // IBM WebSphere always returns an ErrorResponse first for some reason.
             // If a real error occurs, the response will contain two ErrorResponse nodes.
-            result.FirstNode.Remove();
+            // result.FirstNode.Remove();
 
             ValidateResponse(result);
 
@@ -162,12 +176,12 @@ namespace AgilityTools.ApiClient.Adsml.Client
         /// <typeparam name="TRequest">The type of the request.</typeparam>
         /// <param name="request">The request to encode.</param>
         /// <returns>A url-encoded string representation of the request.</returns>
-        private static string BuildRequest<TRequest>(TRequest request)
+        private string BuildRequest<TRequest>(TRequest request)
             where TRequest : class, IAdsmlSerializable<XElement> {
             var queryString = request.ToAdsml().ToString();
 
             queryString = System.Web.HttpUtility.UrlEncode(queryString, Encoding.UTF8);
-            queryString = "xml=" + queryString;
+            queryString = string.Format("xml={0}&user={1}&password={2}", queryString, _userName, PasswordEncoder.EncodePassword(_password));
 
             return queryString;
         }
