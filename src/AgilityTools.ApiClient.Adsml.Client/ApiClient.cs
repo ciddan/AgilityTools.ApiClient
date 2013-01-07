@@ -181,7 +181,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
             var queryString = request.ToAdsml().ToString();
 
             queryString = System.Web.HttpUtility.UrlEncode(queryString, Encoding.UTF8);
-            queryString = string.Format("xml={0}&user={1}&password={2}", queryString, _userName, _password);
+            queryString = string.Format("xml={0}&user={1}&password={2}", queryString, _userName, PasswordEncoder.EncodePassword(_password));
 
             return queryString;
         }
