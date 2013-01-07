@@ -8,9 +8,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
             using (SHA1 encoder = new SHA1Managed()) {
                 var utf8Encoder = new System.Text.UTF8Encoding();
                 byte[] hash = encoder.ComputeHash(utf8Encoder.GetBytes(password));
-                string encodedString = System.Convert.ToBase64String(hash);
-
-                return encodedString;
+                
+                return System.Convert.ToBase64String(hash);
             }
         }
     }
