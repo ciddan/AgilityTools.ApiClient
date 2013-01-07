@@ -19,7 +19,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
         [SetUp]
         public void Setup() {
-            _client = new ApiClient(new ApiWebClient());
+            _client = new ApiClient(new ApiWebClient(), "http://192.168.32.85:9080/Agility/Directory", "admin", "qcteam");
         }
 
         [TearDown]
@@ -30,38 +30,19 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Instantiate_New_ApiClient() {
             //Act
-            IApiClient client = new ApiClient(new ApiWebClient());
+            IApiClient client = new ApiClient(new ApiWebClient(), "http://192.168.32.85:9080/Agility/Directory", "admin", "qcteam");
 
             //Assert
             Assert.That(client, Is.Not.Null);
         }
 
         [Test]
-        public void Can_Instantiate_New_ApiClient_And_Supply_Specific_Endpoint_Url() {
-            //Act
-            IApiClient client = new ApiClient(new ApiWebClient(), "http://agilitytest:9080/Agility/Directory");
-
+        public void ApiClient_Ctor_Throws_ArgumentNullException_If_Any_Required_Parameter_Is_Null() {
             //Assert
-            Assert.That(client, Is.Not.Null);
-        }
-
-        [Test]
-        [ExpectedException(typeof (ArgumentNullException),
-            ExpectedMessage = "Value cannot be null.\r\nParameter name: webClient")]
-        public void ApiClient_Ctor_Throws_ArgumentNullException_If_ApiWebClient_Is_Null() {
-            //Act
-            new ApiClient(null);
-        }
-
-        [Test]
-        [ExpectedException(typeof (ArgumentNullException),
-            ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
-        public void SendRequest_Throws_ArgumentNullException_If_Request_Is_Null() {
-            //Arrange
-            var client = new ApiClient(new ApiWebClient());
-
-            //Act
-            client.SendApiRequest<CreateRequest>(null);
+            Assert.Throws<ArgumentNullException>(() => new ApiClient(null, "a", "a", "a"));
+            Assert.Throws<ArgumentNullException>(() => new ApiClient(new ApiWebClient(), null, "a", "a"));
+            Assert.Throws<ArgumentNullException>(() => new ApiClient(new ApiWebClient(), "a", null, "a"));
+            Assert.Throws<ArgumentNullException>(() => new ApiClient(new ApiWebClient(), "a", "a", null));
         }
 
         [Test]
@@ -70,7 +51,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var mockWebClient = new Mock<IApiWebClient>();
             mockWebClient.Setup(s => s.Dispose()).Verifiable();
 
-            IApiClient client = new ApiClient(mockWebClient.Object);
+            IApiClient client = new ApiClient(mockWebClient.Object, "foo", "bar", "baz");
 
             //Act
             client.Dispose();
@@ -134,7 +115,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [ExpectedException(typeof (ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
         public void SendRequestAsync_Throws_ArgumentNullException_If_Request_Is_Null() {
             //Arrange
-            var client = new ApiClient(new ApiWebClient());
+            var client = new ApiClient(new ApiWebClient(), "http://192.168.32.85:9080/Agility/Directory", "admin", "qcteam");
 
             //Act
             client.SendApiRequestAsync<CreateRequest>(null, null);
@@ -143,7 +124,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         [Test]
         public void Can_Supply_Response_Converter_And_Receive_Correct_Response_Type() {
             //Arrange
-            var client = new ApiClient(new ApiWebClient());
             var request = new AqlQueryBuilder();
 
             request.BasePath("/Structures/Classification/JULA Produkter")
@@ -161,7 +141,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             var converter = new ContextResponseConverter("adsml.xsd");
 
             //Act
-            var reply = client.SendApiRequest(request.Build(), converter.Convert);
+            var reply = _client.SendApiRequest(request.Build(), converter.Convert);
 
             //Assert
             Assert.That(reply, Is.Not.Null);
@@ -179,21 +159,15 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 new XAttribute(XNamespace.Xmlns + "xsi", xsi),
                 new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
                 new XElement("ErrorResponse",
-                    new XAttribute("id", "4024"),
-                    new XAttribute("type", "malformedRequest"),
-                    new XElement("Message", "Error at line 1 column 111. cvc-elt.1: Cannot find the declaration of element 'BatchRequest'..")
-                ),
-                new XElement("ErrorResponse",
                     new XAttribute("description", "ERROR_CODE_4013"),
                     new XAttribute("id", "4013"),
                     new XAttribute("type", "applicationError"),
                     new XElement("Message", "Structure type \"Classifiation\" does not exist"))).ToString();
 
             var mockWebClient = new Mock<IApiWebClient>();
-            mockWebClient.Setup(m => m.UploadString(It.IsAny<string>(), It.IsAny<string>())).Returns(
-                xml);
+            mockWebClient.Setup(m => m.UploadString(It.IsAny<string>(), It.IsAny<string>())).Returns(xml);
 
-            var client = new ApiClient(mockWebClient.Object);
+            var client = new ApiClient(mockWebClient.Object, "f", "b", "q");
 
             var request = new AqlQueryBuilder();
 
