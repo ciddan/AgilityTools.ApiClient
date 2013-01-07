@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
+using Autofac.Registrars;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {

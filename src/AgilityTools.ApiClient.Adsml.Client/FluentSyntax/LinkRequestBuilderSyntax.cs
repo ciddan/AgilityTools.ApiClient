@@ -1,3 +1,5 @@
+using Autofac.Registrars;
+
 namespace AgilityTools.ApiClient.Adsml.Client
 {
     /// <summary>

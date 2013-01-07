@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using AgilityTools.ApiClient.Adsml.Client.Components;
+using Autofac.Registrars;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {

@@ -31,3 +31,4 @@ _ReSharper*/
 *.[Pp]ublish.xml
 Castle.Windsor.XML
 *.dotCover
+*.DotSettings
