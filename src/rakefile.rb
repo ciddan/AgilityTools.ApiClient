@@ -15,7 +15,7 @@ assemblyinfo :assemblyinfo do |asm|
   asm.product_name = "Agility API Client"
   asm.title = "AgilityTools.ApiClient"
   asm.description = "A common set of tools for communicating with the Agility Adsml WebServices Api."
-  asm.copyright = "Copyright (c) Axpa Elektronik AB 2011"
+  asm.copyright = "Copyright (c) Axpa Elektronik AB 2011-2013"
   asm.output_file = "AgilityTools.ApiClient.Adsml.Client/Properties/AssemblyInfo.cs"
   asm.custom_attributes :InternalsVisibleTo => "AgilityTools.ApiClient.Adsml.Client.Tests"
 end
