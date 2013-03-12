@@ -29,8 +29,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         /// <param name="password">Required. Password for Agility auth.</param>
         /// <param name="validationDocument">Optional. Relative or full path to an Agility ADMSL API definition file. Used for query validation. Defaults to <example>adsml.xsd</example>.</param>
         public ApiClient(IApiWebClient webClient, string adapiWsUrl, string userName, string password, string validationDocument = "adsml.xsd") {
-            if (webClient == null)
-                throw new ArgumentNullException("webClient");
+            if (webClient == null) throw new ArgumentNullException("webClient");
 
             _webClient = webClient;
             _adapiWsUrl = adapiWsUrl;
@@ -64,9 +63,17 @@ namespace AgilityTools.ApiClient.Adsml.Client
         /// <returns>An <see cref="XElement"/> with the result of the request.</returns>
         /// <exception cref="AdsmlException">Thrown if the response contains an error.</exception>
         public XElement SendApiRequest<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement> {
-            XElement result = SendRequest(request);
+            return SendRequest(request);
+        }
 
-            return result;
+        /// <summary>
+        /// Sends a request to the Agility API.
+        /// </summary>
+        /// <param name="request">The request to send.</param>
+        /// <returns>An <see cref="XElement"/> with the result of the request.</returns>
+        /// <exception cref="AdsmlException">Thrown if the response contains an error.</exception>
+        public XElement SendApiRequest(string request) {
+            return SendRequest(request);
         }
 
         /// <summary>
@@ -79,17 +86,10 @@ namespace AgilityTools.ApiClient.Adsml.Client
         /// <returns>An <see cref="IEnumerable{TResult}"/>.</returns>
         /// <exception cref="AdsmlException">Thrown if the response contains an error.</exception>
         /// <exception cref="ArgumentNullException">Thrown if any of the required paramaters (<paramref name="request"/>, <paramref name="responseConverter"/>) are null.</exception>
-        public IEnumerable<TResponse> SendApiRequest<TRequest, TResponse>(TRequest request,
-                                                                          Func<XElement, IEnumerable<TResponse>>
-                                                                              responseConverter)
-            where TRequest : class, IAdsmlSerializable<XElement> {
-            if (request == null) {
-                throw new ArgumentNullException("request");
-            }
-
-            if (responseConverter == null) {
-                throw new ArgumentNullException("responseConverter");
-            }
+        public IEnumerable<TResponse> SendApiRequest<TRequest, TResponse>(TRequest request, Func<XElement, IEnumerable<TResponse>> responseConverter) 
+        where TRequest : class, IAdsmlSerializable<XElement> {
+            if (request == null) throw new ArgumentNullException("request");
+            if (responseConverter == null) throw new ArgumentNullException("responseConverter");
 
             XElement result = SendRequest(request);
 
@@ -104,8 +104,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         /// <param name="callback">Required.</param>
         /// <exception cref="AdsmlException">Thrown if the response contains an error.</exception>
         /// <exception cref="ArgumentNullException">Thrown if any of the required paramaters (<paramref name="request"/>, <paramref name="callback"/>) are null.</exception>
-        public void SendApiRequestAsync<TRequest>(TRequest request, Action<XElement> callback)
-            where TRequest : class, IAdsmlSerializable<XElement> {
+        public void SendApiRequestAsync<TRequest>(TRequest request, Action<XElement> callback) where TRequest : class, IAdsmlSerializable<XElement> {
             if (request == null)
                 throw new ArgumentNullException("request");
 
@@ -114,15 +113,14 @@ namespace AgilityTools.ApiClient.Adsml.Client
             }
 
             string req = BuildRequest(request);
+            _webClient.UploadStringAsync(
+                _adapiWsUrl, req, data => {
+                    var result = XElement.Parse(data);
+                    ValidateResponse(result);
 
-            _webClient.UploadStringAsync(_adapiWsUrl, req, data => {
-                                                               var result = XElement.Parse(data);
-
-                                                               result.FirstNode.Remove();
-                                                               ValidateResponse(result);
-
-                                                               callback.Invoke(result);
-                                                           });
+                    callback.Invoke(result);
+                }
+            );
         }
 
         /// <summary>
@@ -132,19 +130,29 @@ namespace AgilityTools.ApiClient.Adsml.Client
         /// <param name="request">Required. The request to send.</param>
         /// <returns>An <see cref="XElement"/> that contains the response.</returns>
         private XElement SendRequest<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement> {
-            if (request == null)
-                throw new ArgumentNullException("request");
+            if (request == null) throw new ArgumentNullException("request");
 
             string req = BuildRequest(request);
-
             string response = _webClient.UploadString(_adapiWsUrl, req);
 
             XElement result = XElement.Parse(response);
+            ValidateResponse(result);
 
-            // IBM WebSphere always returns an ErrorResponse first for some reason.
-            // If a real error occurs, the response will contain two ErrorResponse nodes.
-            // result.FirstNode.Remove();
+            return result;
+        }
 
+        /// <summary>
+        /// Private function that sends requests to the API.
+        /// </summary>
+        /// <param name="request">Required. The request to send.</param>
+        /// <returns>An <see cref="XElement"/> that contains the response.</returns>
+        private XElement SendRequest(string request) {
+            if (request == null) throw new ArgumentNullException("request");
+
+            string req = BuildRequest(request);
+            string response = _webClient.UploadString(_adapiWsUrl, req);
+
+            XElement result = XElement.Parse(response);
             ValidateResponse(result);
 
             return result;
@@ -179,6 +187,20 @@ namespace AgilityTools.ApiClient.Adsml.Client
         private string BuildRequest<TRequest>(TRequest request)
             where TRequest : class, IAdsmlSerializable<XElement> {
             var queryString = request.ToAdsml().ToString();
+
+            queryString = System.Web.HttpUtility.UrlEncode(queryString, Encoding.UTF8);
+            queryString = string.Format("xml={0}&user={1}&password={2}", queryString, _userName, PasswordEncoder.EncodePassword(_password));
+
+            return queryString;
+        }
+
+        /// <summary>
+        /// Converts the request from a <see cref="IAdsmlSerializable{TResult}"/> of <see cref="XElement"/> into a url-encoded <see cref="string"/>. 
+        /// </summary>
+        /// <param name="request">The request to encode.</param>
+        /// <returns>A url-encoded string representation of the request.</returns>
+        private string BuildRequest(string request) {
+            var queryString = request;
 
             queryString = System.Web.HttpUtility.UrlEncode(queryString, Encoding.UTF8);
             queryString = string.Format("xml={0}&user={1}&password={2}", queryString, _userName, PasswordEncoder.EncodePassword(_password));
