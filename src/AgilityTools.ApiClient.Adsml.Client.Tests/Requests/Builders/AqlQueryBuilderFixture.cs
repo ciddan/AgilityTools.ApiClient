@@ -1,3 +1,4 @@
+using System;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
@@ -84,7 +85,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
       var aql = new AqlQueryBuilder();
 
       //Act
-      aql.ConfigureSearchControls().AddRequestFilters(Filter.CountLimit(1));
+      aql.ConfigureSearchControls().AddSearchControlFilters(Filter.CountLimit(1));
 
       //Assert
       Assert.That(
@@ -100,15 +101,15 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
 
       //Act
       aqlBuilder.BasePath("/foo/bar")
+                .SearchRequestFilters(Filter.ReturnNoAttributes())
                 .QueryType(AqlQueryTypes.Below)
                 .ObjectTypeToFind(12)
                 .QueryString("#215 = \"foo\"")
                 .ConfigureSearchControls()
-                  .AddRequestFilters(
+                  .AddSearchControlFilters(
                       Filter.ExcludeBin(),
                       Filter.ExcludeDocument(),
-                      Filter.CountLimit(1),
-                      Filter.ReturnNoAttributes())
+                      Filter.CountLimit(1))
                   .ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"))
                   .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
                   .ConfigureReferenceHandling(
@@ -117,8 +118,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                       ReferenceOptions.UseChannel(3),
                       ReferenceOptions.ReturnValuesOnly());
 
+      Console.WriteLine(aqlBuilder.Build().ToAdsml().ToString());
+
       //Assert
       Assert.DoesNotThrow(() => aqlBuilder.Build());
+      Assert.DoesNotThrow(() => aqlBuilder.Build().ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]

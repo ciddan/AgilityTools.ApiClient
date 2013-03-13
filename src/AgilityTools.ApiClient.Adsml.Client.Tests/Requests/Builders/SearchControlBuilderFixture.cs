@@ -79,13 +79,16 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                     new XAttribute("excludeBin", "true"),
                     new XAttribute("excludeDocument", "true"),
                     new XElement("AttributesToReturn",
-                        new XElement("Attribute", new XAttribute("id", "Bar"))));
+                        new XElement("Attribute", new XAttribute("name", "Bar"))));
 
             var builder = new SearchControlBuilder();
 
-            builder.AddRequestFilters(Filter.ExcludeBin(),
-                                   Filter.ExcludeDocument())
-                .ReturnAttributes(AttributeToReturn.WithName("Bar"));
+            builder
+              .AddSearchControlFilters(
+                Filter.ExcludeBin(),
+                Filter.ExcludeDocument()
+              )
+              .ReturnAttributes(AttributeToReturn.WithName("Bar"));
 
             var controls = builder.Build();
 
@@ -135,7 +138,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                 new XElement("SearchControls",
                              new XAttribute("excludeBin", "true"),
                              new XAttribute("excludeDocument", "true"),
-                             new XAttribute("returnNoAttributes", "true"),
+                             new XAttribute("returnAllAttributes", "true"),
                              new XAttribute("allowPaging", "true"),
                              new XAttribute("pageSize", "2"),
                              new XAttribute("countLimit", "5"),
@@ -154,10 +157,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
             var builder = new SearchControlBuilder();
 
             builder
-                .AddRequestFilters(
+                .AddSearchControlFilters(
                     Filter.ExcludeBin(),
                     Filter.ExcludeDocument(),
-                    Filter.ReturnNoAttributes(),
+                    Filter.ReturnAllAttributes(true),
                     Filter.AllowPaging(),
                     Filter.PageSize(2),
                     Filter.CountLimit(5))

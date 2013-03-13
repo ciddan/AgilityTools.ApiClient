@@ -40,7 +40,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -57,16 +57,15 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
                 new XElement("Filter",
                     new XElement("FilterString", "FIND BELOW #10 WHERE (#10 = \"foo\")"))));
 
-      var aql = 
+      var aql =
         new AqlSearchRequest(
           "/foo/bar",
+          new ISearchRequestFilter[] {Filter.ReturnNoAttributes()},
           AqlQueryTypes.Below,
           new IdNameReference(10),
           "#10 = \"foo\"",
           null
-        ) {
-          ReturnNoAttributes = true
-        };
+        );
 
       //Act
       var actual = aql.ToAdsml();
@@ -76,7 +75,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -95,20 +94,19 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
                 new XElement("SearchControls", new XAttribute("excludeBin", "true"), new XAttribute("excludeDocument", "true"))));
 
       var builder = new SearchControlBuilder();
-      builder.AddRequestFilters(Filter.ExcludeBin(), Filter.ExcludeDocument());
+      builder.AddSearchControlFilters(Filter.ExcludeBin(), Filter.ExcludeDocument());
 
       var searchControls = builder.Build();
 
       var aql =
         new AqlSearchRequest(
           "/foo/bar",
+          new ISearchRequestFilter[] {Filter.ReturnNoAttributes()},
           AqlQueryTypes.Below,
           new IdNameReference(10),
           "#10 = \"foo\"",
           searchControls
-        ) {
-          ReturnNoAttributes = true
-        };
+        );
 
       //Act
       var actual = aql.ToAdsml();
@@ -118,7 +116,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -144,7 +142,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       var builder = new SearchControlBuilder();
 
       builder
-        .AddRequestFilters(
+        .AddSearchControlFilters(
           Filter.ExcludeBin(),
           Filter.ExcludeDocument()
         )
@@ -155,13 +153,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       var aql =
         new AqlSearchRequest(
           "/foo/bar",
+          new ISearchRequestFilter[] {Filter.ReturnNoAttributes()},
           AqlQueryTypes.Below,
           new IdNameReference(10),
           "#10 = \"foo\"",
           searchControls
-        ) {
-          ReturnNoAttributes = true
-        };
+        );
 
       //Act
       var actual = aql.ToAdsml();
@@ -171,7 +168,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -208,13 +205,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       var aql =
         new AqlSearchRequest(
           "/foo/bar",
+          new ISearchRequestFilter[] { Filter.ReturnNoAttributes() },
           AqlQueryTypes.Below,
           new IdNameReference(10),
           "#10 = \"foo\"",
           searchControls
-        ) {
-          ReturnNoAttributes = true
-        };
+        );
 
       //Act
       var actual = aql.ToAdsml();
@@ -224,7 +220,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]

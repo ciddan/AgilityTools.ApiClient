@@ -108,6 +108,7 @@
     <Compile Include="Components\Interfaces\IReferenceOptions.cs" />
     <Compile Include="Filters\IModifyRequestFilter.cs" />
     <Compile Include="Filters\IRequestFilter.cs" />
+    <Compile Include="Filters\ISearchControlFilter.cs" />
     <Compile Include="Filters\ISearchRequestFilter.cs" />
     <Compile Include="Components\SearchControl.cs" />
     <Compile Include="Components\SearchControlBuilder.cs" />

@@ -63,7 +63,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
     /// </summary>
     /// <param name="source">Required. The document to validate.</param>
     /// <param name="xsdValidator">Required. Relative or full path to the Agility ADMSL API definition file, adsml.xsd.</param>
-    private static void ValidateAdsmlResponse(this XDocument source, string xsdValidator) {
+    private static void ValidateAdsmlDocument(this XDocument source, string xsdValidator) {
       if (source == null) throw new ArgumentNullException("source");
 
       var schemaSet = new XmlSchemaSet();
@@ -83,11 +83,11 @@ namespace AgilityTools.ApiClient.Adsml.Client
     /// </summary>
     /// <param name="source">Required. The <see cref="XElement"/> to validate.</param>
     /// <param name="xsdValidator">Required. Relative or full path to the Agility ADMSL API definition file, adsml.xsd.</param>
-    public static void ValidateAdsmlResponse(this XElement source, string xsdValidator) {
+    public static void ValidateAdsmlDocument(this XElement source, string xsdValidator) {
       if (source == null) throw new ArgumentNullException("source");
       var doc = XDocument.Parse(source.ToString());
 
-      doc.ValidateAdsmlResponse(xsdValidator);
+      doc.ValidateAdsmlDocument(xsdValidator);
     }
 
     /// <summary>

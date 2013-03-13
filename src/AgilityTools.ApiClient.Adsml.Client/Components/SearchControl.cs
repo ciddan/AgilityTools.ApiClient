@@ -13,7 +13,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
         /// </summary>
         /// <param name="requestFilters">Optional. Any <see cref="ISearchRequestFilter"/> used to configure the SearchControl.</param>
         /// <param name="components">Optional. Any <see cref="ISearchControlComponent"/> used to further configure the SearchControl.</param>
-        internal SearchControl(IEnumerable<ISearchRequestFilter> requestFilters, IEnumerable<ISearchControlComponent> components) {
+        internal SearchControl(IEnumerable<ISearchControlFilter> requestFilters, IEnumerable<ISearchControlComponent> components) {
             if (requestFilters != null)
                 this.RequestFilters = new List<IRequestFilter>(requestFilters);
 

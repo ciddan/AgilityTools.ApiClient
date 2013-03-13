@@ -65,12 +65,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             //Arrange
             var builder = new AqlQueryBuilder();
 
-            builder.BasePath("/Structures/Classification/JULA Produkter/")
-                .QueryType(AqlQueryTypes.Below)
-                .ObjectTypeToFind(12)
-                .QueryString("#215 = \"169010\"")
-                .ConfigureSearchControls()
-                    .AddRequestFilters(Filter.ReturnNoAttributes());
+          builder
+            .BasePath("/Structures/Classification/JULA Produkter/")
+            .SearchRequestFilters(Filter.ReturnNoAttributes())
+            .QueryType(AqlQueryTypes.Below)
+            .ObjectTypeToFind(12)
+            .QueryString("#215 = \"169010\"");
 
             //Act
             var result = _client.SendApiRequest(builder.Build());
@@ -85,12 +85,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             //Arrange
             var builder = new AqlQueryBuilder();
 
-            builder.BasePath("/Structures/Classification/JULA Produkter")
-                .QueryType(AqlQueryTypes.Below)
-                .ObjectTypeToFind(12)
-                .QueryString("#215 = \"169010\"")
-                .ConfigureSearchControls()
-                    .AddRequestFilters(Filter.ReturnNoAttributes());
+          builder
+            .BasePath("/Structures/Classification/JULA Produkter")
+            .SearchRequestFilters(Filter.ReturnNoAttributes())
+            .QueryType(AqlQueryTypes.Below)
+            .ObjectTypeToFind(12)
+            .QueryString("#215 = \"169010\"");
 
             var manualEvent = new ManualResetEvent(false);
             bool callbackCalled = false;
@@ -131,7 +131,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 .ObjectTypeToFind(12)
                 .QueryString("#215 = \"169010\"")
                 .ConfigureSearchControls()
-                .AddRequestFilters(
+                .AddSearchControlFilters(
                     Filter.CountLimit(1),
                     Filter.ExcludeBin())
                 .ReturnAttributes(
@@ -176,7 +176,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                 .ObjectTypeToFind(12)
                 .QueryString("#215 = \"169010\"")
                 .ConfigureSearchControls()
-                .AddRequestFilters(
+                .AddSearchControlFilters(
                     Filter.CountLimit(1),
                     Filter.ExcludeBin())
                 .ReturnAttributes(

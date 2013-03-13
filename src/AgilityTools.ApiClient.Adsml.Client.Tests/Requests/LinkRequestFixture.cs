@@ -79,7 +79,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
 
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -104,7 +104,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
 
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -130,7 +130,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
 
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -167,7 +167,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
 
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
