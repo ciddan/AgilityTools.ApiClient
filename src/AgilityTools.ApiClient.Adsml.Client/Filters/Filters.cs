@@ -34,6 +34,18 @@ namespace AgilityTools.ApiClient.Adsml.Client
       return new ReturnAllAttributesFilter(returnAllAttributes);
     }
 
+    public static ResolveContextReferencesFilter ResolveContextReferences(bool resolveContextReferences = true) {
+      return new ResolveContextReferencesFilter(resolveContextReferences);
+    }
+
+    public static ReturnAvailableAttributesFilter ReturnAvailableAttributes(bool returnAvailableAttribute = false) {
+      return new ReturnAvailableAttributesFilter(returnAvailableAttribute);
+    }
+
+    public static ExpandLanguageIndependentAttributesFilter ExpandLanguageIndependentAttributes(bool expandLanguageIndependentAttributes = false) {
+      return new ExpandLanguageIndependentAttributesFilter(expandLanguageIndependentAttributes);
+    }
+
     /// <summary>
     /// Configures the API to only return basic attributes (name, id) for any returned contexts.
     /// </summary>
@@ -228,6 +240,47 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
     public XAttribute ToAdsml() {
       return new XAttribute("returnRelationsAsAttributes", _returnAsAttributes);
+    }
+  }
+
+  public class ResolveContextReferencesFilter : ILookupControlFilter
+  {
+    private readonly bool _resolveContextReferences;
+
+    public ResolveContextReferencesFilter(bool returnAsAtresolveContextReferencestributes) {
+      _resolveContextReferences = returnAsAtresolveContextReferencestributes;
+    }
+
+    public XAttribute ToAdsml() {
+      return new XAttribute("returnAsAtresolveContextReferencestributes", _resolveContextReferences);
+    }
+  }
+
+  public class ReturnAvailableAttributesFilter : ILookupControlFilter
+  {
+    private readonly bool _returnAvailableAttributes;
+
+    public ReturnAvailableAttributesFilter(bool returnAvailableAttributes)
+    {
+      _returnAvailableAttributes = returnAvailableAttributes;
+    }
+
+    public XAttribute ToAdsml()
+    {
+      return new XAttribute("returnAvailableAttributes", _returnAvailableAttributes);
+    }
+  }
+
+  public class ExpandLanguageIndependentAttributesFilter : ILookupControlFilter
+  {
+    private readonly bool _expandLanguageIndependentAttributes;
+
+    public ExpandLanguageIndependentAttributesFilter(bool expandLanguageIndependentAttributes) {
+      _expandLanguageIndependentAttributes = expandLanguageIndependentAttributes;
+    }
+
+    public XAttribute ToAdsml() {
+      return new XAttribute("expandLanguageIndependentAttributes", _expandLanguageIndependentAttributes);
     }
   }
 
