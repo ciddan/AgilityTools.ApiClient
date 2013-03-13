@@ -32,3 +32,4 @@ _ReSharper*/
 Castle.Windsor.XML
 *.dotCover
 *.DotSettings
+packages/*
