@@ -25,7 +25,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
 
       var aql =
         new AqlSearchRequest(
-          "/foo/bar",
+          "/Structures/Classification/JULA Produkter",
           AqlQueryTypes.Below,
           new IdNameReference(10),
           "#10 = \"foo\"",
@@ -40,6 +40,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
     }
 
     [Test]
@@ -75,6 +76,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
     }
 
     [Test]
@@ -88,9 +90,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
             new XElement("SearchRequest",
                 new XAttribute("base", "/foo/bar"),
                 new XAttribute("returnNoAttributes", "true"),
-                new XElement("SearchControls", new XAttribute("excludeBin", "true"), new XAttribute("excludeDocument", "true")),
                 new XElement("Filter",
-                    new XElement("FilterString", "FIND BELOW #10 WHERE (#10 = \"foo\")"))));
+                    new XElement("FilterString", "FIND BELOW #10 WHERE (#10 = \"foo\")")),
+                new XElement("SearchControls", new XAttribute("excludeBin", "true"), new XAttribute("excludeDocument", "true"))));
 
       var builder = new SearchControlBuilder();
       builder.AddRequestFilters(Filter.ExcludeBin(), Filter.ExcludeDocument());
@@ -116,6 +118,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
     }
 
     [Test]
@@ -129,14 +132,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
             new XElement("SearchRequest",
                 new XAttribute("base", "/foo/bar"),
                 new XAttribute("returnNoAttributes", "true"),
+                new XElement("Filter",
+                  new XElement("FilterString", "FIND BELOW #10 WHERE (#10 = \"foo\")")),
                 new XElement("SearchControls",
                     new XAttribute("excludeBin", "true"),
                     new XAttribute("excludeDocument", "true"),
                     new XElement("AttributesToReturn",
                         new XElement("Attribute",
-                            new XAttribute("name", "Foo")))),
-            new XElement("Filter",
-                new XElement("FilterString", "FIND BELOW #10 WHERE (#10 = \"foo\")"))));
+                            new XAttribute("name", "Foo"))))));
 
       var builder = new SearchControlBuilder();
 
@@ -168,6 +171,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
     }
 
     [Test]
@@ -181,14 +185,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
             new XElement("SearchRequest",
                 new XAttribute("base", "/foo/bar"),
                 new XAttribute("returnNoAttributes", "true"),
+                new XElement("Filter",
+                    new XElement("FilterString", "FIND BELOW #10 WHERE (#10 = \"foo\")")),
                 new XElement("SearchControls",
                     new XElement("ReferenceControls",
                         new XAttribute("channelId", "3"),
                         new XAttribute("resolveAttributes", "true"),
                         new XAttribute("resolveSpecialCharacters", "true"),
-                        new XAttribute("valueOnly", "true"))),
-                new XElement("Filter",
-                    new XElement("FilterString", "FIND BELOW #10 WHERE (#10 = \"foo\")"))));
+                        new XAttribute("valueOnly", "true")))));
 
       var builder = new SearchControlBuilder();
 
@@ -220,6 +224,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
+      Assert.DoesNotThrow(() => actual.ValidateAdsmlResponse("adsml.xsd"));
     }
 
     [Test]

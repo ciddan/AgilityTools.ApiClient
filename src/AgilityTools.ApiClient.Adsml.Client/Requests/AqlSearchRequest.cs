@@ -53,7 +53,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                 request.Descendants("SearchRequest").Single().Add(new XAttribute("returnNoAttributes", "true"));
 
             if (this.SearchControl != null)
-                request.Descendants("SearchRequest").Single().AddFirst(this.SearchControl.ToAdsml());
+                request.Descendants("SearchRequest").Single().Add(this.SearchControl.ToAdsml());
 
             return request;
         }
