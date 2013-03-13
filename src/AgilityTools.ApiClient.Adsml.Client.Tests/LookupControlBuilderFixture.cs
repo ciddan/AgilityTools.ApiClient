@@ -32,6 +32,50 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
     }
 
     [Test]
+    public void Can_Specify_Attribute_IdList_To_Return() {
+      //Arrange
+      string expected =
+        new XElement("LookupControls",
+            new XElement("AttributesToReturn",
+                new XAttribute("idlist", "1, 2, 3, 4"))).ToString();
+
+      var builder = new LookupControlBuilder();
+
+      //Act
+      builder.ReturnAttributes(1, 2, 3, 4);
+      var actual = builder.Build().ToAdsml().ToString();
+
+      Console.WriteLine(actual);
+
+      //Assert
+      Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Can_Specify_Attribute_IdList_And_NameList_To_Return() {
+      //Arrange
+      string expected =
+        new XElement("LookupControls",
+            new XElement("AttributesToReturn",
+                new XAttribute("namelist", "1, 2, 3, 4"),
+                new XAttribute("idlist", "1, 2, 3, 4"))).ToString();
+
+      var builder = new LookupControlBuilder();
+
+      //Act
+      builder
+        .AttributeNamelist("1, 2, 3, 4")
+        .ReturnAttributes(1, 2, 3, 4);
+
+      var actual = builder.Build().ToAdsml().ToString();
+
+      Console.WriteLine(actual);
+
+      //Assert
+      Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
     public void Can_Specify_AttributeNames_To_Return() {
       //Arrange
       string expected = 

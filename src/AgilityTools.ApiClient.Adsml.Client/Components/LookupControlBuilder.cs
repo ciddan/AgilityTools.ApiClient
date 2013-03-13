@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -73,6 +74,28 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
             control.AddAttributes(attributeControl);
           }
         }
+      }
+
+      return this;
+    }
+
+    public IReturnedLanguagesConfigureReferences ReturnAttributes(params int[] definitionIds) {
+      if (definitionIds == null || definitionIds.Length <= 0) return this;
+
+      const string nodeName = "AttributesToReturn";
+      if (!this.ControlComponents.Any(cc => cc is AttributeControl && cc.ToAdsml().Name.ToString() == nodeName)) {
+        this.ControlComponents.Add(new AttributeControl(nodeName, definitionIds));
+      } else {
+        AttributeControl control =
+          this.ControlComponents.Where(cc => cc is AttributeControl && cc.ToAdsml().Name.ToString() == nodeName)
+              .Cast<AttributeControl>().Single();
+
+        string idList =
+          definitionIds
+            .Select(d => d.ToString(CultureInfo.InvariantCulture))
+            .Aggregate((aggr, d) => aggr + ", " + d);
+
+        control.OuterNodeAttributes.Add(new XAttribute("idlist", idList));
       }
 
       return this;

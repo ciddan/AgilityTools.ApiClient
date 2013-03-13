@@ -32,6 +32,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
   public interface IReturnedAttributes : IFluentInterface
   {
     IReturnedLanguagesConfigureReferences ReturnAttributes(params IAttributeControl[] attributeControls);
+    IReturnedLanguagesConfigureReferences ReturnAttributes(params int[] definitionIds);
   }
 
   [EditorBrowsable(EditorBrowsableState.Never)]
