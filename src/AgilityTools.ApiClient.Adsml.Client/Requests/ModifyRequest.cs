@@ -34,7 +34,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                                                      _modifications.Select(m => m.ToAdsml())));
 
             if (this.LookupControl != null) {
-                request.Descendants("ModifyRequest").Single().AddFirst(this.LookupControl.ToAdsml());
+                request.Descendants("ModifyRequest").Single().Add(this.LookupControl.ToAdsml());
             }
 
             if (this.RequestFilters != null)
