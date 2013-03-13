@@ -34,9 +34,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
     [Test]
     public void Can_Specify_AttributeNames_To_Return() {
       //Arrange
-      string expected = new XElement("LookupControls",
-                                     new XElement("AttributesToReturn",
-                                                  new XAttribute("namelist", "members"))).ToString();
+      string expected = 
+        new XElement("LookupControls",
+            new XElement("AttributesToReturn",
+                new XAttribute("namelist", "members"))).ToString();
 
       var builder = new LookupControlBuilder();
 
@@ -62,7 +63,31 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
       var builder = new LookupControlBuilder();
 
       //Act
-      builder.AttributeTypesToReturn(AttributeTypeToReturn.OfType(AttributeDataType.StructureText));
+      builder.ReturnAttributes(AttributeTypeToReturn.OfType(AttributeDataType.StructureText));
+      var actual = builder.Build().ToAdsml().ToString();
+
+      Console.WriteLine(actual);
+
+      //Assert
+      Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Can_Specify_Attributes_And_AttributeTypes_ToReturn() {
+      //Arrange
+      string expected =
+        new XElement("LookupControls",
+          new XElement("AttributeTypesToReturn",
+            new XElement("AttributeType",
+                new XAttribute("name", "structure-text"))),
+          new XElement("AttributesToReturn",
+                new XElement("Attribute",
+                    new XAttribute("name", "foo")))).ToString();
+
+      var builder = new LookupControlBuilder();
+
+      //Act
+      builder.ReturnAttributes(AttributeTypeToReturn.OfType(AttributeDataType.StructureText), AttributeToReturn.WithName("foo"));
       var actual = builder.Build().ToAdsml().ToString();
 
       Console.WriteLine(actual);
@@ -79,14 +104,21 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             new XElement("AttributesToReturn",
                 new XAttribute("namelist", "members"),
                 new XElement("Attribute",
-                    new XAttribute("name", "35")))).ToString();
+                    new XAttribute("name", "35")),
+                new XElement("Attribute",
+                    new XAttribute("name", "36")))).ToString();
 
       var builder = new LookupControlBuilder();
 
       //Act
-      builder.AttributeNamelist("members").ReturnAttributes(AttributeToReturn.WithName("35"));
-      var actual = builder.Build().ToAdsml().ToString();
+      builder
+        .AttributeNamelist("members")
+        .ReturnAttributes(
+          AttributeToReturn.WithName("35"), 
+          AttributeToReturn.WithName("36")
+        );
 
+      var actual = builder.Build().ToAdsml().ToString();
       Console.WriteLine(actual);
 
       //Assert

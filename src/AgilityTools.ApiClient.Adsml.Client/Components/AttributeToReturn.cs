@@ -9,6 +9,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
   {
     public string Name { get; set; }
 
+    public string OuterNodeName {
+      get { return "AttributesToReturn"; }
+    }
+
     internal AttributeToReturn() {
     }
 

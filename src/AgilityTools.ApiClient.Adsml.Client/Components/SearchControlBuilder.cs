@@ -29,14 +29,27 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
       return this;
     }
 
+
     /// <summary>
     /// Used to restrict which attributes get returned by the API.
     /// </summary>
-    /// <param name="attributesToReturn">A params array of <see cref="AttributeToReturn"/> defining which attributes get returned.</param>
+    /// <param name="attributeControls">A params array of <see cref="AttributeToReturn"/> defining which attributes get returned.</param>
     /// <returns>Itself as a <see cref="IReturnedLanguagesConfigureReferences"/>.</returns>
-    public IReturnedLanguagesConfigureReferences ReturnAttributes(params AttributeToReturn[] attributesToReturn) {
-      if (attributesToReturn != null) {
-        this.ControlComponents.Add(new AttributeControl(attributesToReturn));
+    public IReturnedLanguagesConfigureReferences ReturnAttributes(params IAttributeControl[] attributeControls) {
+      if (attributeControls != null && attributeControls.Length > 0) {
+        foreach (IAttributeControl attributeControl in attributeControls) {
+          string nodeName = attributeControl.OuterNodeName;
+
+          if (!this.ControlComponents.Any(cc => cc is AttributeControl && cc.ToAdsml().Name.ToString() == nodeName)) {
+            this.ControlComponents.Add(new AttributeControl(nodeName, attributeControl));
+          } else {
+            AttributeControl control =
+              this.ControlComponents.Where(cc => cc is AttributeControl && cc.ToAdsml().Name.ToString() == nodeName)
+                  .Cast<AttributeControl>().Single();
+
+            control.AddAttributes(attributeControl);
+          }
+        }
       }
 
       return this;
