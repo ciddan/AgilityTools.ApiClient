@@ -47,21 +47,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
         }
 
         /// <summary>
-        /// Used to restrict which attributes get returned by the API.
-        /// </summary>
-        /// <param name="attributesToReturn">A params array of <see cref="AttributeToReturn"/> defining which attributes get returned.</param>
-        /// <returns>Itself as a <see cref="IReturnedLanguagesConfigureReferences"/>.</returns>
-        public IReturnedLanguagesConfigureReferences ReturnAttributes(params int[] attributesToReturn) {
-            AttributeToReturn[] atr = attributesToReturn.Select(AttributeToReturn.WithDefinitionId).ToArray();
-
-            if (attributesToReturn != null) {
-                this.ControlComponents.Add(new AttributeControl(atr));
-            }
-
-            return this;
-        }
-
-        /// <summary>
         /// Used to restrict in which languages attribute data gets returned.
         /// </summary>
         /// <param name="languagesToReturn">A params array of <see cref="IReturnedLanguageControl"/> containing which languages attribute data should be returned for.</param>

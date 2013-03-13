@@ -56,7 +56,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
             //Act
             lrb.ConfigureLookupControls()
-                .ReturnAttributes(AttributeToReturn.WithDefinitionId(10));
+                .ReturnAttributes(AttributeToReturn.WithName("foo"));
 
             //Assert
             Assert.That(lrb.LookupControlBuilder, Is.Not.Null);
@@ -69,7 +69,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             
             lrb.ContextName("foo")
                 .ConfigureLookupControls()
-                .ReturnAttributes(AttributeToReturn.WithDefinitionId(10));
+                .ReturnAttributes(AttributeToReturn.WithName("bar"));
 
             //Act
             var lr = lrb.Build();

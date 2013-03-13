@@ -135,8 +135,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                     Filter.CountLimit(1),
                     Filter.ExcludeBin())
                 .ReturnAttributes(
-                    AttributeToReturn.WithDefinitionId(215),
-                    AttributeToReturn.WithDefinitionId(24));
+                    AttributeToReturn.WithName("Artikelnummer"),
+                    AttributeToReturn.WithName("2_Rubrik"));
 
             var converter = new ContextResponseConverter("adsml.xsd");
 
@@ -180,8 +180,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
                     Filter.CountLimit(1),
                     Filter.ExcludeBin())
                 .ReturnAttributes(
-                    AttributeToReturn.WithDefinitionId(215),
-                    AttributeToReturn.WithDefinitionId(24));
+                    AttributeToReturn.WithName("Artikelnummer"),
+                    AttributeToReturn.WithName("2_Rubrik"));
 
             //Act
             client.SendApiRequest(request.Build());

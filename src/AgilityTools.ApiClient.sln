@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgilityTools.ApiClient.Adsml.Communication", "AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj", "{386AABE6-7A1F-40D9-A39D-183E433B3174}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgilityTools.ApiClient.Adsml.Communication.Tests", "AgilityTools.ApiClient.Adsml.Communication.Tests\AgilityTools.ApiClient.Adsml.Communication.Tests.csproj", "{6A9C6D0D-3A89-4A50-ABBB-16F23822013B}"
@@ -10,6 +10,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgilityTools.ApiClient.Adsml.Client", "AgilityTools.ApiClient.Adsml.Client\AgilityTools.ApiClient.Adsml.Client.csproj", "{0C8C8A8D-9948-4189-89F3-43549B4C8410}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgilityTools.ApiClient.Adsml.Client.Tests", "AgilityTools.ApiClient.Adsml.Client.Tests\AgilityTools.ApiClient.Adsml.Client.Tests.csproj", "{C13FFA76-5856-4120-80AA-F9B221BF2EB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{94242C35-B2BB-4503-85B4-6FDC40AF223D}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

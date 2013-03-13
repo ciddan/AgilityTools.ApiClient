@@ -151,11 +151,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
                             new XAttribute("copyLocalAttributes", "true"),
                             new XElement("LookupControls", 
                                 new XElement("AttributesToReturn", 
-                                    new XElement("Attribute", 
-                                    new XAttribute("id", "215"))))))).ToString();
+                                    new XElement("Attribute",
+                                    new XAttribute("name", "Artikelnummer"))))))).ToString();
 
             var lookupBuilder = new LookupControlBuilder();
-            lookupBuilder.ReturnAttributes(AttributeToReturn.WithDefinitionId(215));
+            lookupBuilder.ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"));
 
             var request = new LinkRequest("foo", "bar")
                           {

@@ -33,10 +33,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
             var expected =
                 new XElement("SearchControls",
                     new XElement("AttributesToReturn",
-                        new XElement("Attribute", new XAttribute("id", "20"))));
+                        new XElement("Attribute", new XAttribute("name", "Bar"))));
 
             var builder = new SearchControlBuilder();
-            builder.ReturnAttributes(AttributeToReturn.WithDefinitionId(20));
+            builder.ReturnAttributes(AttributeToReturn.WithName("Bar"));
 
             var controls = builder.Build();
 
@@ -79,13 +79,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                     new XAttribute("excludeBin", "true"),
                     new XAttribute("excludeDocument", "true"),
                     new XElement("AttributesToReturn",
-                        new XElement("Attribute", new XAttribute("id", "20"))));
+                        new XElement("Attribute", new XAttribute("id", "Bar"))));
 
             var builder = new SearchControlBuilder();
 
             builder.AddRequestFilters(Filter.ExcludeBin(),
                                    Filter.ExcludeDocument())
-                .ReturnAttributes(AttributeToReturn.WithDefinitionId(20));
+                .ReturnAttributes(AttributeToReturn.WithName("Bar"));
 
             var controls = builder.Build();
 
@@ -140,8 +140,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                              new XAttribute("pageSize", "2"),
                              new XAttribute("countLimit", "5"),
                              new XElement("AttributesToReturn",
-                                          new XElement("Attribute", new XAttribute("id", "215")),
-                                          new XElement("Attribute", new XAttribute("id", "390"))),
+                                          new XElement("Attribute", new XAttribute("name", "Artikelnummer")),
+                                          new XElement("Attribute", new XAttribute("name", "Sammanslagna dataattribut"))),
                              new XElement("LanguagesToReturn",
                                           new XElement("Language", new XAttribute("id", "10")),
                                           new XElement("Language", new XAttribute("id", "11"))),
@@ -162,11 +162,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                     Filter.PageSize(2),
                     Filter.CountLimit(5))
                 .ReturnAttributes(
-                    AttributeToReturn.WithDefinitionId(215),
-                    AttributeToReturn.WithDefinitionId(390))
+                    AttributeToReturn.WithName("Artikelnummer"),
+                    AttributeToReturn.WithName("Sammanslagna dataattribut")
+                )
                 .ReturnLanguages(
                     LanguageToReturn.WithLanguageId(10),
-                    LanguageToReturn.WithLanguageId(11))
+                    LanguageToReturn.WithLanguageId(11)
+                )
                 .ConfigureReferenceHandling(
                     ReferenceOptions.UseChannel(3),
                     ReferenceOptions.ResolveAttributes(),

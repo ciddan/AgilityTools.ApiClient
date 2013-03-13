@@ -72,10 +72,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                     .ConfigureCopyControls()
                         .CopyLocalAttributesFromSource()
                         .ConfigureLookupControls()
-                            .ReturnAttributes(AttributeToReturn.WithDefinitionId(10));
+                            .ReturnAttributes(AttributeToReturn.WithName("Foo"));
 
             //Assert
-            Assert.Pass("Compilation test only");
+            Assert.DoesNotThrow(() => _builder.Build());
         }
         
         [Test]

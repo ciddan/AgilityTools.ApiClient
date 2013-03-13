@@ -111,7 +111,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
                     new XElement("LookupControls",
                         new XElement("AttributesToReturn",
                             new XElement("Attribute",
-                                new XAttribute("id", "215"))),
+                                new XAttribute("name", "Artikelnummer"))),
                         new XElement("LanguagesToReturn",
                             new XElement("Language",
                                 new XAttribute("id", "10")))),
@@ -128,7 +128,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
 
             var lookupBuilder = new LookupControlBuilder();
 
-            lookupBuilder.ReturnAttributes(AttributeToReturn.WithDefinitionId(215))
+            lookupBuilder.ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"))
                          .ReturnLanguages(LanguageToReturn.WithLanguageId(10));
 
             var modReq = new ModifyRequest("/foo/bar", new List<ModificationItem> 

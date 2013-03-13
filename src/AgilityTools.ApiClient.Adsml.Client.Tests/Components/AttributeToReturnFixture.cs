@@ -18,15 +18,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Components
         }
 
         [Test]
-        public void Can_Use_Factory_Method_To_Create_AttributeToReturn_With_DefinitionId() {
-            //Act
-            var atr = AttributeToReturn.WithDefinitionId(10);
-
-            //Assert
-            Assert.That(atr.DefinitionId, Is.EqualTo(10));
-        }
-
-        [Test]
         public void Can_Use_Factory_Method_To_Create_AttributeToReturn_With_Name() {
             //Act
             var atr = AttributeToReturn.WithName("foo");
@@ -36,25 +27,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Components
         }
 
         [Test]
-        public void Can_Use_Factory_Method_To_Create_AttributeToReturn_With_Name_And_DefinitionId() {
-            //Act
-            var atr = AttributeToReturn.WithNameAndId("foo", 10);
-
-            //Assert
-            Assert.That(atr.Name, Is.EqualTo("foo"));
-            Assert.That(atr.DefinitionId, Is.EqualTo(10));
-        }
-
-        [Test]
         public void Can_Generate_Api_Xml() {
             //Arrange
             string expected = 
                 new XElement("Attribute", 
-                    new XAttribute("name", "foo"), 
-                    new XAttribute("id", "10"))
+                    new XAttribute("name", "foo"))
                     .ToString();
 
-            var atr = AttributeToReturn.WithNameAndId("foo", 10);
+            var atr = AttributeToReturn.WithName("foo");
 
             //Act
             string actual = atr.ToAdsml().ToString();

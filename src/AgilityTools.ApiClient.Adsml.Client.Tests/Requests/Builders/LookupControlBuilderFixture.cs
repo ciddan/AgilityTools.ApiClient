@@ -37,13 +37,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
             var expected = new XElement("LookupControls", 
                            new XAttribute("returnRelationsAsAttributes", "true"),
                              new XElement("AttributesToReturn",
-                                new XElement("Attribute", new XAttribute("id", "215"))));
+                                new XElement("Attribute", new XAttribute("name", "Artikelnummer"))));
 
             var builder = new LookupControlBuilder();
 
             //Act
             builder.AddRequestFilters(Filter.ReturnRelationsAsAttributes())
-                   .ReturnAttributes(AttributeToReturn.WithDefinitionId(215));
+                   .ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"));
 
             var request = builder.Build().ToAdsml();
 
@@ -58,7 +58,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
             var expected = new XElement("LookupControls",
                            new XAttribute("returnRelationsAsAttributes", "true"),
                              new XElement("AttributesToReturn",
-                                new XElement("Attribute", new XAttribute("id", "215"))),
+                                new XElement("Attribute", new XAttribute("name", "Artikelnummer"))),
                              new XElement("LanguagesToReturn",
                                 new XElement("Language", new XAttribute("id", "10"))));
 
@@ -66,7 +66,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
 
             //Act
             builder.AddRequestFilters(Filter.ReturnRelationsAsAttributes())
-                   .ReturnAttributes(AttributeToReturn.WithDefinitionId(215))
+                   .ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"))
                    .ReturnLanguages(LanguageToReturn.WithLanguageId(10));
 
             var request = builder.Build().ToAdsml();
@@ -82,7 +82,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
             var expected = new XElement("LookupControls",
                            new XAttribute("returnRelationsAsAttributes", "true"),
                              new XElement("AttributesToReturn",
-                                new XElement("Attribute", new XAttribute("id", "215"))),
+                                new XElement("Attribute", new XAttribute("name", "Artikelnummer"))),
                              new XElement("LanguagesToReturn",
                                 new XElement("Language", new XAttribute("id", "10"))),
                              new XElement("ReferenceControls", new XAttribute("valueOnly", "true")));
@@ -91,7 +91,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
 
             //Act
             builder.AddRequestFilters(Filter.ReturnRelationsAsAttributes())
-                   .ReturnAttributes(AttributeToReturn.WithDefinitionId(215))
+                   .ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"))
                    .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
                    .ConfigureReferenceHandling(ReferenceOptions.ReturnValuesOnly());
 

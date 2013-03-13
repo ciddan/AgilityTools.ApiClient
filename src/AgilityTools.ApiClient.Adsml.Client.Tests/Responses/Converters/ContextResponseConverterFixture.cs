@@ -85,5 +85,28 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
       //Act
       Assert.Throws<InvalidOperationException>(() => crc.Convert(response));
     }
+
+    [Test]
+    public void Returns_Empty_List_If_There_Are_No_Contexts_In_The_Response() {
+      //Arrange
+      const string xml =
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n" +
+        "<BatchResponse version=\"5.2.05 build 22 (2013/03/07 15-37)\" \n" +
+        "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"adsml.xsd\"> \n" +
+        "  <SearchResponse executionTime=\"411ms\" resultCount=\"0\"> \n" +
+        "    <SearchResults base=\"/Structures/Classification/JULA Produkter\"/> \n" +
+        "  </SearchResponse> \n" +
+        "</BatchResponse> \n";
+
+      XElement response = XElement.Parse(xml);
+      var crc = new ContextResponseConverter("adsml.xsd");
+
+      //Act
+      var contexts = crc.Convert(response);
+
+      //Assert
+      Assert.That(contexts, Is.Not.Null);
+      Assert.That(contexts.Count(), Is.EqualTo(0));
+    }
   }
 }

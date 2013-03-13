@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -9,11 +8,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
   public abstract class ResponseConverter<TOutput> : IResponseConverter<XElement, TOutput> where TOutput : class, new()
   {
     protected readonly string _validationDocument;
-    protected readonly string _responseNodeName;
+    protected readonly string[] _responseNodeNames;
 
-    protected ResponseConverter(string validationDocument, string responseNodeName) {
+    protected ResponseConverter(string validationDocument, string[] responseNodeNames) {
       _validationDocument = validationDocument;
-      _responseNodeName = responseNodeName;
+      _responseNodeNames = responseNodeNames;
     }
 
     /// <summary>
@@ -24,7 +23,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
     public virtual IEnumerable<TOutput> Convert(XElement source) {
       CheckResponse(source);
       
-      var results = source.Descendants().Where(d => d.Name.LocalName == _responseNodeName);
+      var results = source.Descendants().Where(d => _responseNodeNames.Contains(d.Name.LocalName));
       return results.Select(ConvertSingle);
     }
 
@@ -43,8 +42,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
     protected void CheckResponse(XElement source) {
       if (source == null) throw new ArgumentNullException("source");
 
-      if (source.Elements().Any(e => e.Name.LocalName.ToString(CultureInfo.InvariantCulture) != _responseNodeName))
-        throw new InvalidOperationException(string.Format("Not a valid {0}.\r\nResponse:\r\n{1}", _responseNodeName, source));
+      if (source.Elements().Any(e => !_responseNodeNames.Contains(e.Name.LocalName)))
+        throw new InvalidOperationException(string.Format("Not a valid {0}.\r\nResponse:\r\n{1}", _responseNodeNames[0], source));
     }
   }
 }

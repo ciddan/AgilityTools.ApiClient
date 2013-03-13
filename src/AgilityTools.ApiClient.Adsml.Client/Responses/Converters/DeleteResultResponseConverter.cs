@@ -8,7 +8,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
     /// <summary>
     /// Constructor.
     /// </summary>
-    public DeleteResultResponseConverter(string validationDocument) : base(validationDocument, "DeleteResponse") {}
+    public DeleteResultResponseConverter(string validationDocument) : base(validationDocument, new[] { "DeleteResponse" }) { }
 
     protected override DeleteResponse ConvertSingle(XElement source) {
       return new DeleteResponse {
