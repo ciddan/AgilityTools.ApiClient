@@ -140,6 +140,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
       //Assert
       Assert.That(request, Is.Not.Null);
       Assert.That(request, Is.InstanceOf<AqlSearchRequest>());
+      
+      Assert.DoesNotThrow(() => builder.Build().ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
   }
 }

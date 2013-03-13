@@ -144,6 +144,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
 
       //Assert
       Assert.DoesNotThrow(() => builder.Build());
+      Assert.DoesNotThrow(() => builder.Build().ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -167,6 +168,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
 
       //Assert
       Assert.That(request, Is.Not.Null);
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
   }
 }
