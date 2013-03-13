@@ -163,7 +163,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         /// </summary>
         /// <param name="result">The response to check for errors.</param>
         private void ValidateResponse(XElement result) {
-            if (!result.Descendants().Any(n => n.Name.LocalName == "ErrorResponse")) {
+            if (result.Descendants().All(n => n.Name.LocalName != "ErrorResponse")) {
                 return;
             }
 
@@ -175,7 +175,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
             throw new AdsmlException(
                 string.Format("{0}\n{1}", "The request failed:", errorMessages),
-                errors);
+                errors
+            );
         }
 
         /// <summary>

@@ -186,5 +186,20 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
             //Act
             client.SendApiRequest(request.Build());
         }
+
+        [Test]
+        public void Should_Not_Throw_Exception_If_Query_Returns_No_Results() {
+            //Arrange
+            AqlQueryBuilder builder = new AqlQueryBuilder();
+            builder.BasePath("/Structures/Classification/JULA Produkter")
+                   .QueryType(AqlQueryTypes.Below)
+                   .ObjectTypeToFind(12)
+                   .QueryString("#215 = \"000\"");
+
+            var query = builder.Build();
+
+            //Act
+            _client.SendApiRequest(query);
+        }
     }
 }
