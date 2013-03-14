@@ -21,9 +21,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
         /// Overload.
         /// </summary>
         /// <param name="languageId">The language id of the language which the value is in.</param>
-        /// <param name="value">The value.</param>
+        /// <param name="value">The value. Defaults to an empty <see cref="System.String"/>.</param>
         /// <param name="scope">The <see cref="Scopes"/> scope of the attribute value. Defaults to <see cref="Scopes.Global"/>.</param>
-        public StructureValue(int languageId, string value, Scopes scope = Scopes.Global) {
+        public StructureValue(int languageId, string value = "", Scopes scope = Scopes.Global) {
             this.LanguageId = languageId;
             this.Value = value;
             this.Scope = scope;

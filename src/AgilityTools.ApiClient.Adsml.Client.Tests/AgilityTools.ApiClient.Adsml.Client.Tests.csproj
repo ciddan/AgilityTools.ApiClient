@@ -91,9 +91,9 @@
     <Compile Include="Components\AttributeTypeToReturnFixture.cs" />
     <Compile Include="Requests\Builders\AqlQueryBuilderFixture.cs" />
     <Compile Include="Requests\AqlSearchRequestFixture.cs" />
-    <Compile Include="LookupControlBuilderFixture.cs" />
-    <Compile Include="LookupRequestBuilderFixture.cs" />
-    <Compile Include="LookupRequestFixture.cs" />
+    <Compile Include="Requests\Builders\LookupControlBuilderFixture.cs" />
+    <Compile Include="Requests\Builders\LookupRequestBuilderFixture.cs" />
+    <Compile Include="Requests\LookupRequestFixture.cs" />
     <Compile Include="Requests\Builders\CreateRequestBuilderFixture.cs" />
     <Compile Include="Requests\CreateRequestFixture.cs" />
     <Compile Include="Requests\DeleteRequestFixture.cs" />
@@ -105,7 +105,6 @@
     <Compile Include="Components\LanguageToReturnFixture.cs" />
     <Compile Include="Requests\Builders\LinkRequestBuilderFixture.cs" />
     <Compile Include="Requests\LinkRequestFixture.cs" />
-    <Compile Include="Requests\Builders\LookupControlBuilderFixture.cs" />
     <Compile Include="Components\ModificationItemFixture.cs" />
     <Compile Include="Requests\Builders\ModifyRequestBuilderFixture.cs" />
     <Compile Include="Requests\ModifyRequestFixture.cs" />
