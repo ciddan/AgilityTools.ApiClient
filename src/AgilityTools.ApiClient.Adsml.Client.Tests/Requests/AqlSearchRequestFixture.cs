@@ -94,7 +94,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
                 new XElement("SearchControls", new XAttribute("excludeBin", "true"), new XAttribute("excludeDocument", "true"))));
 
       var builder = new SearchControlBuilder();
-      builder.AddSearchControlFilters(Filter.ExcludeBin(), Filter.ExcludeDocument());
+      builder.AddRequestFilters(Filter.ExcludeBin(), Filter.ExcludeDocument());
 
       var searchControls = builder.Build();
 
@@ -142,7 +142,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       var builder = new SearchControlBuilder();
 
       builder
-        .AddSearchControlFilters(
+        .AddRequestFilters(
           Filter.ExcludeBin(),
           Filter.ExcludeDocument()
         )

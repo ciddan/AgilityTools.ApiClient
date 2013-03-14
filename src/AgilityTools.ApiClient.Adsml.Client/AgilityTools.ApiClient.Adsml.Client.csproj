@@ -91,6 +91,7 @@
     <Compile Include="Components\Interfaces\IAttributeControl.cs" />
     <Compile Include="Components\Interfaces\ILookupControlComponent.cs" />
     <Compile Include="Components\Interfaces\IReturnedLanguageControl.cs" />
+    <Compile Include="FluentSyntax\RequestControlBuilderSyntax.cs" />
     <Compile Include="Components\LanguageControl.cs" />
     <Compile Include="Components\LanguageToReturn.cs" />
     <Compile Include="Components\LookupControl.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Components\ReferenceControl.cs" />
     <Compile Include="Components\ReferenceOptions.cs" />
     <Compile Include="Components\ControlComponentBase.cs" />
+    <Compile Include="Components\RequestControlBuilder.cs" />
     <Compile Include="Filters\Filters.cs" />
     <Compile Include="Components\Interfaces\IControlComponent.cs" />
     <Compile Include="Filters\ICopyControlFilter.cs" />

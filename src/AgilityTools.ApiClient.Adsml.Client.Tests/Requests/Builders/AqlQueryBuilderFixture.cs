@@ -85,7 +85,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
       var aql = new AqlQueryBuilder();
 
       //Act
-      aql.ConfigureSearchControls().AddSearchControlFilters(Filter.CountLimit(1));
+      aql.ConfigureSearchControls().AddRequestFilters(Filter.CountLimit(1));
 
       //Assert
       Assert.That(
@@ -106,7 +106,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                 .ObjectTypeToFind(12)
                 .QueryString("#215 = \"foo\"")
                 .ConfigureSearchControls()
-                  .AddSearchControlFilters(
+                  .AddRequestFilters(
                       Filter.ExcludeBin(),
                       Filter.ExcludeDocument(),
                       Filter.CountLimit(1))

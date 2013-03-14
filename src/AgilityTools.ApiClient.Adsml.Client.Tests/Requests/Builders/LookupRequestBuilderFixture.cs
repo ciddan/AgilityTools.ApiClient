@@ -3,7 +3,7 @@ using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 using NUnit.Framework;
 
-namespace AgilityTools.ApiClient.Adsml.Client.Tests
+namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
 {
     [TestFixture]
     public class LookupRequestBuilderFixture

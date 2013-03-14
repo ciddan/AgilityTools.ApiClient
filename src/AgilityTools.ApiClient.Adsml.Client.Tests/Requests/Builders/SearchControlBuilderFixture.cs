@@ -84,7 +84,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
       var builder = new SearchControlBuilder();
 
       builder
-        .AddSearchControlFilters(
+        .AddRequestFilters(
           Filter.ExcludeBin(),
           Filter.ExcludeDocument()
         )
@@ -159,7 +159,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
       var builder = new SearchControlBuilder();
 
       builder
-        .AddSearchControlFilters(
+        .AddRequestFilters(
           Filter.ExcludeBin(),
           Filter.ExcludeDocument(),
           Filter.ReturnAllAttributes(true),

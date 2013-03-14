@@ -10,41 +10,14 @@ namespace AgilityTools.ApiClient.Adsml.Client
   [EditorBrowsable(EditorBrowsableState.Never)]
   public interface ISearchControlBuilder : IFluentInterface,
                                            ISearchControlFilters,
-                                           IReturnedAttributesReturnedLanguagesConfigureReferences,
-                                           IReturnedLanguagesConfigureReferences
+                                           IRequestControlBuilder<SearchControl>
   {
     SearchControl Build();
   }
 
   [EditorBrowsable(EditorBrowsableState.Never)]
-  public interface IReturnedAttributesReturnedLanguagesConfigureReferences : IFluentInterface, IReturnedAttributes, IReturnedLanguages, IConfigureReferences { }
-
-  [EditorBrowsable(EditorBrowsableState.Never)]
-  public interface IReturnedLanguagesConfigureReferences : IReturnedLanguages, IConfigureReferences { }
-
-  [EditorBrowsable(EditorBrowsableState.Never)]
   public interface ISearchControlFilters : IFluentInterface
   {
-    IReturnedAttributesReturnedLanguagesConfigureReferences AddSearchControlFilters(params ISearchControlFilter[] filters);
-  }
-
-  [EditorBrowsable(EditorBrowsableState.Never)]
-  public interface IReturnedAttributes : IFluentInterface
-  {
-    IReturnedLanguagesConfigureReferences ReturnAttributes(params IAttributeControl[] attributeControls);
-    IReturnedLanguagesConfigureReferences ReturnAttributes(params int[] definitionIds);
-  }
-
-  [EditorBrowsable(EditorBrowsableState.Never)]
-  public interface IReturnedLanguages : IFluentInterface
-  {
-    IConfigureReferences ReturnLanguages(params IReturnedLanguageControl[] languagesToReturn);
-    IConfigureReferences ReturnLanguages(params int[] languagesToReturn);
-  }
-
-  [EditorBrowsable(EditorBrowsableState.Never)]
-  public interface IConfigureReferences : IFluentInterface
-  {
-    void ConfigureReferenceHandling(params IReferenceOptions[] referenceOptions);
+    IReturnedAttributesReturnedLanguagesConfigureReferences AddRequestFilters(params ISearchControlFilter[] filters);
   }
 }
