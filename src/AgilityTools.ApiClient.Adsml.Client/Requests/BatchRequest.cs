@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AgilityTools.ApiClient.Adsml.Client
+namespace AgilityTools.ApiClient.Adsml.Client.Requests
 {
   public class BatchRequest : IAdsmlSerializable<XElement>
   {

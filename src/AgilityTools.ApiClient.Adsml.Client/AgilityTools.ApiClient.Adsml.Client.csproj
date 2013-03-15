@@ -120,12 +120,9 @@
     <Compile Include="FluentSyntax\LookupRequestBuilderSyntax.cs" />
     <Compile Include="Helpers\PasswordEncoder.cs" />
     <Compile Include="Requests\DeleteRequest.cs" />
-    <Compile Include="Requests\LinkRequestBuilder.cs" />
     <Compile Include="Requests\LinkRequest.cs" />
     <Compile Include="Requests\LookupRequest.cs" />
-    <Compile Include="Requests\LookupRequestBuilder.cs" />
     <Compile Include="Requests\ModifyRequest.cs" />
-    <Compile Include="Requests\ModifyRequestBuilder.cs" />
     <Compile Include="FluentSyntax\ModifyRequestBuilderSyntax.cs" />
     <Compile Include="FluentSyntax\SearchControlBuilderSyntax.cs" />
     <Compile Include="Helpers\Extensions.cs" />
@@ -136,12 +133,10 @@
     <Compile Include="Components\Interfaces\ISearchControlComponent.cs" />
     <Compile Include="FluentSyntax\IFluentInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests\AqlQueryBuilder.cs" />
     <Compile Include="Requests\AqlSearchRequest.cs" />
     <Compile Include="Requests\CreateRequest.cs" />
     <Compile Include="Components\Attributes\StructureAttribute.cs" />
     <Compile Include="Components\Attributes\StructureValue.cs" />
-    <Compile Include="Requests\CreateRequestBuilder.cs" />
     <Compile Include="Responses\AdsmlResult.cs" />
     <Compile Include="Responses\ContextResponse.cs" />
     <Compile Include="Responses\Converters\ContextResponseConverter.cs" />
@@ -155,6 +150,12 @@
     <Compile Include="Responses\Converters\UnlinkResultResponseConverter.cs" />
     <Compile Include="Requests\BatchRequest.cs" />
     <Compile Include="FluentSyntax\IRequestBuilder.cs" />
+    <Compile Include="Requests\Builders\AqlQueryBuilder.cs" />
+    <Compile Include="Requests\Builders\BatchRequestBuilder.cs" />
+    <Compile Include="Requests\Builders\CreateRequestBuilder.cs" />
+    <Compile Include="Requests\Builders\LinkRequestBuilder.cs" />
+    <Compile Include="Requests\Builders\LookupRequestBuilder.cs" />
+    <Compile Include="Requests\Builders\ModifyRequestBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj">
@@ -180,4 +181,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Requests\Builders\" />
+  </ItemGroup>
 </Project>
