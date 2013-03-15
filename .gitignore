@@ -32,6 +32,6 @@ _ReSharper*/
 Castle.Windsor.XML
 *.dotCover
 *.DotSettings
-packages/*
+src/packages/*
 src/AgilityTools.ApiClient.Adsml.Client.Tests/test-results
 *.userprefs
