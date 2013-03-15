@@ -125,11 +125,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                 .ReturnAttributes(390, 24)
                 .ReturnLanguages(10);
 
+      var request = new BatchRequest(builder.Build());
       Console.WriteLine(builder.Build().ToAdsml().ToString());
 
       //Assert
       Assert.DoesNotThrow(() => builder.Build());
-      Assert.DoesNotThrow(() => builder.Build().ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -137,17 +138,18 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
       //Arrange
       var builder = new ModifyRequestBuilder();
 
+      //Act
       builder.Context("/foo/bar")
              .AddModification(Modifications.RemoveAttribute, SimpleAttribute.New(AttributeTypes.Integer, "objectId"));
 
-      //Act
       var request = builder.Build();
+      var batchRequest = new BatchRequest(request);
 
       //Assert
       Assert.That(request, Is.Not.Null);
       Assert.That(request, Is.InstanceOf<ModifyRequest>());
 
-      Assert.DoesNotThrow(() => builder.Build().ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => batchRequest.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -155,20 +157,21 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
       //Arrange
       var builder = new ModifyRequestBuilder();
 
+      //Act
       builder.Context("/foo/bar")
              .ReturnNoAttributes()
              .FailOnError()
              .AddModification(Modifications.RemoveAttribute, SimpleAttribute.New(AttributeTypes.Integer, "objectId"));
 
-      //Act
       var request = builder.Build();
+      var batchRequest = new BatchRequest(request);
 
       //Assert
       Assert.That(request.RequestFilters.Count(), Is.EqualTo(2));
       Assert.That(request.RequestFilters.ElementAt(0), Is.InstanceOf<ReturnNoAttributesFilter>());
       Assert.That(request.RequestFilters.ElementAt(1), Is.InstanceOf<FailOnErrorFilter>());
 
-      Assert.DoesNotThrow(() => builder.Build().ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => batchRequest.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -176,18 +179,19 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
       //Arrange
       var builder = new ModifyRequestBuilder();
 
+      //Act
       builder.Context("/foo/bar")
              .AddModification(Modifications.RemoveAttribute, SimpleAttribute.New(AttributeTypes.Integer, "objectId"))
              .ConfigureLookupControls();
 
-      //Act
       var request = builder.Build();
+      var batchRequest = new BatchRequest(request);
 
       //Assert
       Assert.That(request.LookupControl, Is.Not.Null);
       Assert.That(request.LookupControl, Is.InstanceOf<LookupControl>());
 
-      Assert.DoesNotThrow(() => builder.Build().ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => batchRequest.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
   }
 }

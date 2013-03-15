@@ -8,9 +8,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
     /// Defines available commands and command order for the <see cref="ILookupRequestBuilder"/>. 
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface ILookupRequestBuilder : IFluentInterface, IName, IConfigLookupControlsLookup
+    public interface ILookupRequestBuilder : IFluentInterface, IRequestBuilder<LookupRequest>, IName, IConfigLookupControlsLookup
     {
-        LookupRequest Build();
     }
 
     public interface IName

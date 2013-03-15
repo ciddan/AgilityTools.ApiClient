@@ -12,6 +12,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ICreateRequestBuilder : IFluentInterface,
+                                             IRequestBuilder<CreateRequest>,
                                              IParentIdPath,
                                              INewContextName,
                                              IObjectTypeToCreate,
@@ -23,7 +24,6 @@ namespace AgilityTools.ApiClient.Adsml.Client
                                              IFailOnErrorAttributesToSet,
                                              IConfigLookupControls
     {
-        CreateRequest Build();
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]

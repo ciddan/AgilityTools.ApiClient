@@ -56,38 +56,32 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     [Test]
     public void Can_Generate_Api_Xml() {
       //Arrange
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       string expected = 
-        new XElement("BatchRequest",
-          new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-          new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-            new XElement("LinkRequest",
-              new XAttribute("name", "foo"),
-              new XAttribute("targetLocation", "bar"))).ToString();
+        new XElement("LinkRequest",
+          new XAttribute("name", "foo"),
+          new XAttribute("targetLocation", "bar")).ToString();
       
       var request = new LinkRequest("foo", "bar");
       
       //Act
       var actual = request.ToAdsml();
+      var batchRequest = new BatchRequest(request);
+
       Console.WriteLine(actual.ToString());
       
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => batchRequest.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
     
     [Test]
     public void Can_Generate_Api_Xml_With_RequestFilter() {
       //Arrange
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       string expected = 
-        new XElement("BatchRequest",
-          new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-          new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-            new XElement("LinkRequest",
-              new XAttribute("name", "foo"),
-              new XAttribute("targetLocation", "bar"),
-              new XAttribute("returnNoAttributes", "true"))).ToString();
+        new XElement("LinkRequest",
+          new XAttribute("name", "foo"),
+          new XAttribute("targetLocation", "bar"),
+          new XAttribute("returnNoAttributes", "true")).ToString();
       
       var request = new LinkRequest("foo", "bar") {
         RequestFilters = new List<ILinkRequestFilter> { Filter.ReturnNoAttributes() }
@@ -95,26 +89,24 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       
       //Act
       var actual = request.ToAdsml();
+      var batchRequest = new BatchRequest(request);
+      
       Console.WriteLine(actual.ToString());
       
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => batchRequest.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
     
     [Test]
     public void Can_Generate_Api_Xml_With_CopyControl() {
       //Arrange
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       string expected = 
-        new XElement("BatchRequest",
-          new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-          new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-          new XElement("LinkRequest",
-            new XAttribute("name", "foo"),
-            new XAttribute("targetLocation", "bar"),
-            new XElement("CopyControls",
-              new XAttribute("copyLocalAttributes", "true")))).ToString();
+        new XElement("LinkRequest",
+          new XAttribute("name", "foo"),
+          new XAttribute("targetLocation", "bar"),
+          new XElement("CopyControls",
+            new XAttribute("copyLocalAttributes", "true"))).ToString();
       
       var request = new LinkRequest("foo", "bar") {
         CopyControl = new CopyControl(new List<ICopyControlFilter> { Filter.CopyLocalAttributesFromSource() })
@@ -122,30 +114,28 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       
       //Act
       var actual = request.ToAdsml();
+      var batchRequest = new BatchRequest(request);
+      
       Console.WriteLine(actual.ToString());
       
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => batchRequest.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
     
     [Test]
     public void Can_Generate_Api_Xml_With_CopyControl_Containing_LookupControl() {
       //Arrange
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       string expected = 
-        new XElement("BatchRequest",
-          new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-          new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-          new XElement("LinkRequest",
-            new XAttribute("name", "foo"),
-            new XAttribute("targetLocation", "bar"),
-            new XElement("CopyControls",
-              new XAttribute("copyLocalAttributes", "true"),
-              new XElement("LookupControls",
-                new XElement("AttributesToReturn",
-                  new XElement("Attribute",
-                    new XAttribute("name", "Artikelnummer"))))))).ToString();
+        new XElement("LinkRequest",
+          new XAttribute("name", "foo"),
+          new XAttribute("targetLocation", "bar"),
+          new XElement("CopyControls",
+            new XAttribute("copyLocalAttributes", "true"),
+            new XElement("LookupControls",
+              new XElement("AttributesToReturn",
+                new XElement("Attribute",
+                  new XAttribute("name", "Artikelnummer")))))).ToString();
       
       var lookupBuilder = new LookupControlBuilder();
       lookupBuilder.ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"));
@@ -160,11 +150,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       
       //Act
       var actual = request.ToAdsml();
+      var batchRequest = new BatchRequest(request);
+      
       Console.WriteLine(actual.ToString());
       
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => batchRequest.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
     
     [Test]

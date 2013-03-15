@@ -119,10 +119,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                       ReferenceOptions.ReturnValuesOnly());
 
       Console.WriteLine(aqlBuilder.Build().ToAdsml().ToString());
+      var request = new BatchRequest(aqlBuilder.Build());
 
       //Assert
       Assert.DoesNotThrow(() => aqlBuilder.Build());
-      Assert.DoesNotThrow(() => aqlBuilder.Build().ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -135,13 +136,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
              .ObjectTypeToFind("baz")
              .QueryString("foo");
 
-      var request = builder.Build();
+      var aql = builder.Build();
+      var request = new BatchRequest(aql);
 
       //Assert
-      Assert.That(request, Is.Not.Null);
-      Assert.That(request, Is.InstanceOf<AqlSearchRequest>());
+      Assert.That(aql, Is.Not.Null);
+      Assert.That(aql, Is.InstanceOf<AqlSearchRequest>());
       
-      Assert.DoesNotThrow(() => builder.Build().ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
   }
 }
