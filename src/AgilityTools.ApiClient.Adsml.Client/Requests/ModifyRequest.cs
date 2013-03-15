@@ -31,11 +31,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
             _modifications.Select(m => m.ToAdsml()));
       
       if (this.LookupControl != null) {
-        request.Descendants("ModifyRequest").Single().Add(this.LookupControl.ToAdsml());
+        request.Add(this.LookupControl.ToAdsml());
       }
       
       if (this.RequestFilters != null)
-        request.Descendants("ModifyRequest").Single().Add(this.RequestFilters.Select(rf => rf.ToAdsml()));
+        request.Add(this.RequestFilters.Select(rf => rf.ToAdsml()));
       
       return request;
     }

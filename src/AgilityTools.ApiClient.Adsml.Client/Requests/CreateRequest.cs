@@ -43,14 +43,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
               this.AttributesToSet.Select(attrs => attrs.ToAdsml())));
       
       if (!string.IsNullOrEmpty(this.ParentIdPath)) {
-        request.Descendants("CreateRequest").Single().Add(new XAttribute("parentIdPath", this.ParentIdPath));
+        request.Add(new XAttribute("parentIdPath", this.ParentIdPath));
       }
       
       if (this.RequestFilters != null)
-        request.Descendants("CreateRequest").Single().Add(this.RequestFilters.Select(rf => rf.ToAdsml()));
+        request.Add(this.RequestFilters.Select(rf => rf.ToAdsml()));
       
       if (this.LookupControl != null)
-        request.Descendants("CreateRequest").Single().AddFirst(this.LookupControl.ToAdsml());
+        request.AddFirst(this.LookupControl.ToAdsml());
       
       return request;
     }

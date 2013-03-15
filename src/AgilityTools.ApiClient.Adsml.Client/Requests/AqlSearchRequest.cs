@@ -48,13 +48,13 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
                 _aqlFind, this.QueryString))));
 
       if (!string.IsNullOrEmpty(this.BasePath))
-        request.Descendants("SearchRequest").Single().Add(new XAttribute("base", this.BasePath));
+        request.Add(new XAttribute("base", this.BasePath));
 
       if (this.RequestFilters != null)
-        request.Descendants("SearchRequest").Single().Add(this.RequestFilters.Select(f => f.ToAdsml()));
+        request.Add(this.RequestFilters.Select(f => f.ToAdsml()));
 
       if (this.SearchControl != null)
-        request.Descendants("SearchRequest").Single().Add(this.SearchControl.ToAdsml());
+        request.Add(this.SearchControl.ToAdsml());
 
       return request;
     }

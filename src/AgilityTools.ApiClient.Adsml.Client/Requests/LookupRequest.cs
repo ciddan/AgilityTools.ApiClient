@@ -25,9 +25,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
       var request = new XElement("LookupRequest", new XAttribute("name", this.Name));
       
       if (this.LookupControls != null) {
-        request.Descendants("LookupRequest")
-          .Single()
-          .AddFirst(this.LookupControls.ToAdsml());
+        request.AddFirst(this.LookupControls.ToAdsml());
       }
       
       return request;

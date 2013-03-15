@@ -36,11 +36,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
           new XAttribute("targetLocation", this.TargetPath));
       
       if (this.RequestFilters.Count() >= 1 ) {
-        request.Descendants("LinkRequest").Single().Add(this.RequestFilters.Select(rf => rf.ToAdsml()));
+        request.Add(this.RequestFilters.Select(rf => rf.ToAdsml()));
       }
       
       if (this.CopyControl != null) {
-        request.Descendants("LinkRequest").Single().AddFirst(this.CopyControl.ToAdsml());
+        request.AddFirst(this.CopyControl.ToAdsml());
       }
       
       return request;
