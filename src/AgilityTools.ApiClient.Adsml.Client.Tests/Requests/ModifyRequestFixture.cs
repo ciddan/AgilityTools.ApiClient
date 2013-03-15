@@ -31,9 +31,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     public void Validate_Throws_ApiSerializationValidationException_When_Context_Is_Empty() {
       //Arrange
       var modReq = new ModifyRequest(string.Empty, new List<ModificationItem> {
-        ModificationItem.New(Modifications.AddValue,
-                             StructureAttribute.New(31,
-                                                    new StructureValue(10, "foo")))
+        ModificationItem.New(
+          Modifications.AddValue,
+          StructureAttribute.New(31, new StructureValue(10, "foo"))
+        )
       });
 
       //Act
@@ -59,122 +60,108 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     [Test]
     public void Can_Generate_Api_Xml() {
       //Arrange
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       string expected =
-        new XElement("BatchRequest",
-            new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-            new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-            new XElement("ModifyRequest",
-                new XAttribute("name", "/foo/bar"),
-                new XElement("ModificationItem",
-                    new XAttribute("operation", "addValue"),
-                    new XElement("AttributeDetails",
-                        new XElement("StructureAttribute",
-                            new XAttribute("id", "31"),
-                            new XElement("StructureValue",
-                                new XAttribute("langId", "10"),
-                                new XAttribute("scope", "global"),
-                                new XCData("foo"))))))).ToString();
+        new XElement("ModifyRequest",
+            new XAttribute("name", "/foo/bar"),
+            new XElement("ModificationItem",
+                new XAttribute("operation", "addValue"),
+                new XElement("AttributeDetails",
+                    new XElement("StructureAttribute",
+                        new XAttribute("id", "31"),
+                        new XElement("StructureValue",
+                            new XAttribute("langId", "10"),
+                            new XAttribute("scope", "global"),
+                            new XCData("foo")))))).ToString();
 
-
+      //Act
       var modReq = new ModifyRequest("/foo/bar", new List<ModificationItem> {
         ModificationItem.New(
           Modifications.AddValue,
-          StructureAttribute.New(
-            31, new StructureValue(10, "foo")
-          )
+          StructureAttribute.New(31, new StructureValue(10, "foo"))
         )
       });
 
-      //Act
       var actual = modReq.ToAdsml();
+      var request = new BatchRequest(modReq);
+
       Console.WriteLine(actual.ToString());
 
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
     public void Can_Generate_Api_Xml_With_LookupControls() {
       //Arrange
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       string expected =
-        new XElement("BatchRequest",
-            new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-            new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-            new XElement("ModifyRequest",
-                new XAttribute("name", "/foo/bar"),
-                new XElement("ModificationItem",
-                    new XAttribute("operation", "addValue"),
-                    new XElement("AttributeDetails",
-                        new XElement("StructureAttribute",
-                            new XAttribute("id", "31"),
-                            new XElement("StructureValue",
-                                new XAttribute("langId", "10"),
-                                new XAttribute("scope", "global"),
-                                new XCData("foo"))))),
-                    new XElement("LookupControls",
-                    new XElement("AttributesToReturn",
-                        new XElement("Attribute",
-                            new XAttribute("name", "Artikelnummer"))),
-                    new XElement("LanguagesToReturn",
-                        new XElement("Language",
-                            new XAttribute("id", "10")))))).ToString();
+        new XElement("ModifyRequest",
+            new XAttribute("name", "/foo/bar"),
+            new XElement("ModificationItem",
+                new XAttribute("operation", "addValue"),
+                new XElement("AttributeDetails",
+                    new XElement("StructureAttribute",
+                        new XAttribute("id", "31"),
+                        new XElement("StructureValue",
+                            new XAttribute("langId", "10"),
+                            new XAttribute("scope", "global"),
+                            new XCData("foo"))))),
+                new XElement("LookupControls",
+                new XElement("AttributesToReturn",
+                    new XElement("Attribute",
+                        new XAttribute("name", "Artikelnummer"))),
+                new XElement("LanguagesToReturn",
+                    new XElement("Language",
+                        new XAttribute("id", "10"))))).ToString();
 
       var lookupBuilder = new LookupControlBuilder();
 
       lookupBuilder.ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"))
                    .ReturnLanguages(LanguageToReturn.WithLanguageId(10));
 
+      //Act
       var modReq = new ModifyRequest("/foo/bar", new List<ModificationItem> {
         ModificationItem.New(
           Modifications.AddValue,
-          StructureAttribute.New(
-            31, new StructureValue(10, "foo")
-          )
+          StructureAttribute.New(31, new StructureValue(10, "foo"))
         )
       }) {
         LookupControl = lookupBuilder.Build()
       };
 
-      //Act
       var actual = modReq.ToAdsml();
+      var request = new BatchRequest(modReq);
+
       Console.WriteLine(actual.ToString());
 
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
     public void Can_Generate_Api_Xml_With_RequestFilters() {
       //Arrange
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       string expected =
-        new XElement("BatchRequest",
-            new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-            new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-            new XElement("ModifyRequest",
-                new XAttribute("name", "/foo/bar"),
-                new XAttribute("returnNoAttributes", "true"),
-                new XAttribute("failOnError", "true"),
-                new XElement("ModificationItem",
-                    new XAttribute("operation", "addValue"),
-                    new XElement("AttributeDetails",
-                        new XElement("StructureAttribute",
-                            new XAttribute("id", "31"),
-                            new XElement("StructureValue",
-                                new XAttribute("langId", "10"),
-                                new XAttribute("scope", "global"),
-                                new XCData("foo"))))))).ToString();
+        new XElement("ModifyRequest",
+            new XAttribute("name", "/foo/bar"),
+            new XAttribute("returnNoAttributes", "true"),
+            new XAttribute("failOnError", "true"),
+            new XElement("ModificationItem",
+                new XAttribute("operation", "addValue"),
+                new XElement("AttributeDetails",
+                    new XElement("StructureAttribute",
+                        new XAttribute("id", "31"),
+                        new XElement("StructureValue",
+                            new XAttribute("langId", "10"),
+                            new XAttribute("scope", "global"),
+                            new XCData("foo")))))).ToString();
 
+      //Act
       var modReq = new ModifyRequest("/foo/bar", new List<ModificationItem> {
         ModificationItem.New(
           Modifications.AddValue,
-          StructureAttribute.New(
-            31, new StructureValue(10, "foo")
-          )
+          StructureAttribute.New(31, new StructureValue(10, "foo"))
         )
       }) {
         RequestFilters = new List<IModifyRequestFilter> {
@@ -183,13 +170,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
         }
       };
 
-      //Act
       var actual = modReq.ToAdsml();
+      var request = new BatchRequest(modReq);
+
       Console.WriteLine(actual.ToString());
 
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
   }
 }

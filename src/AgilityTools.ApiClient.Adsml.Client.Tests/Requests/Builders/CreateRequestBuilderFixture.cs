@@ -142,9 +142,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                   .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
                   .ConfigureReferenceHandling(ReferenceOptions.ReturnValuesOnly());
 
+      var request = new BatchRequest(builder.Build());
+
       //Assert
       Assert.DoesNotThrow(() => builder.Build());
-      Assert.DoesNotThrow(() => builder.Build().ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
@@ -152,22 +154,26 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
       //Arrange
       var builder = new CreateRequestBuilder();
 
-      builder.NewContextName("/foo/bar")
-             .ObjectTypeToCreate("baz")
-             .ReturnNoAttributes()
-             .FailOnError()
-             .AttributesToSet(
-                 StructureAttribute.New(215, new StructureValue(10, "169010")))
-             .ConfigureLookupControls()
-                 .ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"))
-                 .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
-                 .ConfigureReferenceHandling(ReferenceOptions.ReturnValuesOnly());
-
       //Act
-      var request = builder.Build();
+      builder
+        .NewContextName("/foo/bar")
+        .ObjectTypeToCreate("baz")
+        .ReturnNoAttributes()
+        .FailOnError()
+        .AttributesToSet(
+          StructureAttribute.New(215, new StructureValue(10, "169010"))
+        )
+        .ConfigureLookupControls()
+          .ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"))
+          .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
+          .ConfigureReferenceHandling(
+            ReferenceOptions.ReturnValuesOnly()
+          );
+
+      var request = new BatchRequest(builder.Build());
 
       //Assert
-      Assert.That(request, Is.Not.Null);
+      Assert.That(builder.Build(), Is.Not.Null);
       Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
   }

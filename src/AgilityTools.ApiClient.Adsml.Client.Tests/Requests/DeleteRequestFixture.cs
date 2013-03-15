@@ -24,30 +24,23 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
 
       //Assert
       Assert.That(dr.ContextToDelete, Is.EqualTo("/foo/bar"));
-      Assert.DoesNotThrow(() => dr.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
     public void Can_Build_Api_Xml() {
       //Arrange
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
-      string expected = 
-        new XElement("BatchRequest",
-            new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-            new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-            new XElement("DeleteRequest",
-                new XAttribute("name", "foo"))).ToString();
-
-      var request = new DeleteRequest("foo");
+      string expected = new XElement("DeleteRequest", new XAttribute("name", "foo")).ToString();
 
       //Act
-      var actual = request.ToAdsml();
+      var deleteRequest = new DeleteRequest("foo");
+      var batchRequest = new BatchRequest(deleteRequest);
+      var actual = deleteRequest.ToAdsml();
 
       Console.WriteLine(actual);
 
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => batchRequest.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
