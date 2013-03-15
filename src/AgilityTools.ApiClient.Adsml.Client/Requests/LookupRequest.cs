@@ -22,8 +22,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
     }
     
     public XElement ToAdsml() {
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
-      
       var request = new XElement("LookupRequest", new XAttribute("name", this.Name));
       
       if (this.LookupControls != null) {

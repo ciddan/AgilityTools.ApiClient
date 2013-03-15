@@ -30,8 +30,6 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
     public XElement ToAdsml() {
       this.Validate();
       
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
-      
       var request = 
         new XElement("LinkRequest",
           new XAttribute("name", this.SourcePath),
