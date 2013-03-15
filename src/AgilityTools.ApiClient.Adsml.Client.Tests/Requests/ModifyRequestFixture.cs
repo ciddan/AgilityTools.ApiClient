@@ -20,17 +20,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     }
 
     [Test]
-    [ExpectedException(typeof (ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: contextToModify")]
-    public void Ctor_Throws_ArgumentNullException_When_Context_Is_Null() {
-      //Act
-      new ModifyRequest(null, new List<ModificationItem>());
-    }
-
-    [Test]
-    [ExpectedException(typeof (ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: modifications")]
-    public void Ctor_Throws_ArgumentNullException_When_Modifications_Are_Null() {
-      //Act
-      new ModifyRequest("foo", null);
+    public void Ctor_Throws_ArgumentNullException_If_Required_Params_Are_Null() {
+      //Assert
+      Assert.Throws<ArgumentNullException>(() => new ModifyRequest(null, new List<ModificationItem>()));
+      Assert.Throws<ArgumentNullException>(() => new ModifyRequest("foo", null));
     }
 
     [Test]

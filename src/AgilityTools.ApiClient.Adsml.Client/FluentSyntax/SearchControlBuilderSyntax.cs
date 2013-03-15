@@ -11,9 +11,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
   public interface ISearchControlBuilder : IFluentInterface,
                                            ISearchControlFilters,
                                            IRequestControlBuilder<SearchControl>
-  {
-    SearchControl Build();
-  }
+  {}
 
   [EditorBrowsable(EditorBrowsableState.Never)]
   public interface ISearchControlFilters : IFluentInterface

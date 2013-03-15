@@ -113,7 +113,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
              .ReturnNoAttributes()
              .FailOnError()
              .AddModification(Modifications.RemoveAttribute, SimpleAttribute.New(AttributeTypes.Integer, "objectId"))
-             .AddModifications(() => new List<ModificationItem>() {
+             .AddModifications(() => new List<ModificationItem> {
                ModificationItem.New(
                  Modifications.AdvanceState, StructureAttribute.New(390, new StructureValue(10))
                ),

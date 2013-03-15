@@ -10,12 +10,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
   [EditorBrowsable(EditorBrowsableState.Never)]
   public interface ILookupControlBuilder : IFluentInterface,
                                            ILookupRequestFilters,
-                                           IAttributeNamelist,
-                                           IReturnedAttributesReturnedLanguagesConfigureReferences,
-                                           IReturnedLanguagesConfigureReferences
-  {
-    LookupControl Build();
-  }
+                                           IRequestControlBuilder<LookupControl>
+  {}
 
   [EditorBrowsable(EditorBrowsableState.Never)]
   public interface ILookupRequestFilters : IFluentInterface

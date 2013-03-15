@@ -47,7 +47,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Components
     [Test]
     public void Throws_ArgumentNullException_If_No_AttributesToReturn_Are_Specified() {
       //Assert
-      Assert.Throws<ArgumentNullException>(() => new AttributeControl(attributesToReturn: null));
+      Assert.Throws<ArgumentNullException>(() => new AttributeControl("AttributesToReturn", attributesToReturn: null));
     }
   }
 }

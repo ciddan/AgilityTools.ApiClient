@@ -116,13 +116,12 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
     }
 
     [Test]
-    [ExpectedException(typeof(ArgumentNullException), ExpectedMessage = "Value cannot be null.\r\nParameter name: request")]
     public void SendRequestAsync_Throws_ArgumentNullException_If_Request_Is_Null() {
       //Arrange
       var client = new ApiClient(new ApiWebClient(), "http://192.168.32.85:9080/Agility/Directory", "admin", "qcteam");
 
-      //Act
-      client.SendApiRequestAsync<CreateRequest>(null, null);
+      //Assert
+      Assert.Throws<ArgumentNullException>(() => client.SendApiRequestAsync<CreateRequest>(null, null));
     }
 
     [Test]
