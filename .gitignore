@@ -36,3 +36,4 @@ src/packages/*
 src/AgilityTools.ApiClient.Adsml.Client.Tests/test-results
 *.userprefs
 src/packages
+packages
