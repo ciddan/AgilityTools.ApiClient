@@ -43,14 +43,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
 
       var request =
         new XElement("BatchRequest",
-                     new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-                     new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-                     new XElement("SearchRequest",
-                                  new XElement("Filter",
-                                               new XElement("FilterString",
-                                                            string.Format(
-                                                              "{0}WHERE ({1})",
-                                                              _aqlFind, this.QueryString)))));
+          new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
+          new XAttribute(XNamespace.Xmlns + "xsi", xsi),
+          new XElement("SearchRequest",
+            new XElement("Filter",
+              new XElement("FilterString",
+                string.Format(
+                  "{0}WHERE ({1})",
+                  _aqlFind, this.QueryString)))));
 
       if (!string.IsNullOrEmpty(this.BasePath))
         request.Descendants("SearchRequest").Single().Add(new XAttribute("base", this.BasePath));

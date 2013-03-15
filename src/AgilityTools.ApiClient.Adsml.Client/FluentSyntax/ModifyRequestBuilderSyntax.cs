@@ -12,6 +12,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IModifyRequestBuilder : IFluentInterface,
+                                             IRequestBuilder<ModifyRequest>,
                                              IReturnNoAttributesFailOnErrorAddModificationsConfigLookupControls,
                                              IFailOnErrorAddModificationsConfigLookupControls,
                                              IAddModificationsConfigLookupControls,
@@ -20,7 +21,6 @@ namespace AgilityTools.ApiClient.Adsml.Client
                                              IFailOnErrorModify,
                                              IReturnNoAttributesModify
     {
-        ModifyRequest Build();
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]

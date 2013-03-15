@@ -153,6 +153,8 @@
     <Compile Include="Responses\Converters\IResponseConverter.cs" />
     <Compile Include="Responses\UnlinkResponse.cs" />
     <Compile Include="Responses\Converters\UnlinkResultResponseConverter.cs" />
+    <Compile Include="Requests\BatchRequest.cs" />
+    <Compile Include="FluentSyntax\IRequestBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj">
