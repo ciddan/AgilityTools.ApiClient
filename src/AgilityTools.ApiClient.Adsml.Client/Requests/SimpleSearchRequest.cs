@@ -4,14 +4,14 @@ using AgilityTools.ApiClient.Adsml.Client.Components;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
-  public class SearchRequest : IAdsmlSerializable<XElement>
+  public class SimpleSearchRequest : IAdsmlSerializable<XElement>
   {
     private readonly string baseContext;
     private readonly SearchControl searchControls;
 
-    public SearchRequest(string baseContext) : this(baseContext, null) {}
+    public SimpleSearchRequest(string baseContext) : this(baseContext, null) {}
 
-    public SearchRequest(string baseContext, SearchControl searchControls) {
+    public SimpleSearchRequest(string baseContext, SearchControl searchControls) {
       if (baseContext == null)
         throw new ArgumentNullException("baseContext");
       
@@ -23,7 +23,13 @@ namespace AgilityTools.ApiClient.Adsml.Client
     }
 
     public XElement ToAdsml() {
-      throw new NotImplementedException();
+      var request = new XElement("SearchRequest", new XAttribute("base", this.baseContext));
+      
+      if (this.searchControls != null) {
+        request.AddFirst(this.searchControls.ToAdsml());
+      }
+      
+      return request;
     }
   }
 }
