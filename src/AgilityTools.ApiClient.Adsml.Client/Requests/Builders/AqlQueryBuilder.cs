@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AgilityTools.ApiClient.Adsml.Client.Components;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Requests
@@ -7,14 +8,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
         internal string Path { get; private set; }
         internal ISearchRequestFilter[] RequestFilters { get; private set; }
         internal AqlQueryTypes SelectedAqlQueryType { get; private set; }
-        internal int ObjectTypeId { get; private set; }
+        internal List<int> ObjectTypeIds { get; private set; }
         internal string ObjectTypeName { get; private set; }
         internal string Query { get; private set; }
         internal SearchControlBuilder SearchControlBuilder { get; private set; }
-
-        public AqlQueryBuilder() {
-            this.ObjectTypeId = -1;
-        }
 
         public IQTypeIOTTFindIQStringICSControls BasePath(string path) {
             this.Path = path;
@@ -34,8 +31,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
             return this;
         }
 
-        public IQStringICSControls ObjectTypeToFind(int typeId) {
-            this.ObjectTypeId = typeId;
+        public IQStringICSControls ObjectTypeToFind(params int[] typeIds) {
+            this.ObjectTypeIds = new List<int>(typeIds);
 
             return this;
         }
@@ -64,8 +61,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
             if (!string.IsNullOrEmpty(this.ObjectTypeName))
                 objectTypeToFind = new IdNameReference(this.ObjectTypeName);
 
-            if (this.ObjectTypeId != -1)
-                objectTypeToFind = new IdNameReference(this.ObjectTypeId);
+            if (this.ObjectTypeIds != null && this.ObjectTypeIds.Count > 0)
+                objectTypeToFind = new IdNameReference(this.ObjectTypeIds);
 
             var searchControl =
                 this.SearchControlBuilder != null

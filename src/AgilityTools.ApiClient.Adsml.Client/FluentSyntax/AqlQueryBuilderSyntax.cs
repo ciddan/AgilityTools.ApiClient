@@ -49,7 +49,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
   [EditorBrowsable(EditorBrowsableState.Never)]
   public interface IObjectTypeToFind : IFluentInterface
   {
-    IQStringICSControls ObjectTypeToFind(int typeId);
+    IQStringICSControls ObjectTypeToFind(params int[] typeIds);
     IQStringICSControls ObjectTypeToFind(string typeName);
   }
 

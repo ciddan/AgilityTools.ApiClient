@@ -3,6 +3,7 @@ using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Components;
 using AgilityTools.ApiClient.Adsml.Client.Requests;
 using NUnit.Framework;
+using System.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
 {
@@ -51,7 +52,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
       aql.ObjectTypeToFind(10);
 
       //Assert
-      Assert.That(aql.ObjectTypeId, Is.EqualTo(10));
+      Assert.That(aql.ObjectTypeIds.Count, Is.EqualTo(1));
+      Assert.That(aql.ObjectTypeIds.Single(), Is.EqualTo(10));
     }
 
     [Test]
