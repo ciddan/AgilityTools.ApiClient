@@ -157,6 +157,7 @@
     <Compile Include="Requests\Builders\LookupRequestBuilder.cs" />
     <Compile Include="Requests\Builders\ModifyRequestBuilder.cs" />
     <Compile Include="Components\Attributes\Deserialization\Helpers.cs" />
+    <Compile Include="Requests\SimpleSearchRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj">
