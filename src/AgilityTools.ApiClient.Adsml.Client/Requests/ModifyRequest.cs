@@ -8,6 +8,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
 {
   public class ModifyRequest : IAdsmlSerializable<XElement>
   {
+    public string Context { get { return this._contextToModify; } }
+    public IList<ModificationItem> Modifications { get { return this._modifications; } }
+
     public LookupControl LookupControl { get; set; }
     public IEnumerable<IModifyRequestFilter> RequestFilters { get; set; }
     
