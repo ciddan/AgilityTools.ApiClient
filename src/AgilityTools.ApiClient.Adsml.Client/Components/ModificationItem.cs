@@ -7,8 +7,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
   /// </summary>
   public class ModificationItem : IAdsmlSerializable<XElement>
   {
-    internal Modifications ModificationType { get; private set; }
-    internal IAdsmlAttribute AttributeToModify { get; private set; }
+    public Modifications ModificationType { get; private set; }
+    public IAdsmlAttribute AttributeToModify { get; private set; }
 
     /// <summary>
     /// Factory method for instantiating a new <see cref="ModificationItem"/> with the specified parameters.
