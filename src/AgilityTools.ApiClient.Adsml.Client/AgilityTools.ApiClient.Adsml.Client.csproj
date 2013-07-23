@@ -158,6 +158,10 @@
     <Compile Include="Requests\Builders\ModifyRequestBuilder.cs" />
     <Compile Include="Components\Attributes\Deserialization\Helpers.cs" />
     <Compile Include="Requests\SimpleSearchRequest.cs" />
+    <Compile Include="Requests\MoveRequest.cs" />
+    <Compile Include="Filters\IMoveRequestFilter.cs" />
+    <Compile Include="Requests\Builders\MoveRequestBuilder.cs" />
+    <Compile Include="FluentSyntax\MoveRequestBuilderSyntax.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj">
