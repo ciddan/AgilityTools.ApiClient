@@ -114,7 +114,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
     }
   }
   
-  public class ReturnNoAttributesFilter : ISearchRequestFilter, ICreateRequestFilter, IModifyRequestFilter, ILinkRequestFilter, IMoveRequestFilter
+  public class ReturnNoAttributesFilter : ISearchRequestFilter, ICreateRequestFilter, IModifyRequestFilter, ILinkRequestFilter, IMoveRequestFilter, ILookupRequestFilter
   {
     private readonly bool _returnNoAttributes;
 

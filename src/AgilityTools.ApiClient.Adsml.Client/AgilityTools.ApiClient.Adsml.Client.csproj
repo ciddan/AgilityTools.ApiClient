@@ -162,6 +162,7 @@
     <Compile Include="Filters\IMoveRequestFilter.cs" />
     <Compile Include="Requests\Builders\MoveRequestBuilder.cs" />
     <Compile Include="FluentSyntax\MoveRequestBuilderSyntax.cs" />
+    <Compile Include="Filters\ILookupRequestFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj">
