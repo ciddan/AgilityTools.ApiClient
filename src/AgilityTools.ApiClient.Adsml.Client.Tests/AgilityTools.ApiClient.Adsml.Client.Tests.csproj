@@ -109,6 +109,8 @@
     <Compile Include="Attributes\StructureValueFixture.cs" />
     <Compile Include="IdNameReferenceFixture.cs" />
     <Compile Include="Responses\Converters\UnlinkResponseConverterFixture.cs" />
+    <Compile Include="Requests\MoveRequestFixture.cs" />
+    <Compile Include="Requests\Builders\MoveRequestBuilderFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Client\AgilityTools.ApiClient.Adsml.Client.csproj">

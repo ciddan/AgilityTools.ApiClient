@@ -10,7 +10,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
   public class LookupRequestFixture
   {
     [Test]
-    public void Can_Instatiate_New_LookupRequest() {
+    public void CanInstatiateNewLookupRequest() {
       //Act
       var request = new LookupRequest("foo");
       
@@ -19,7 +19,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     }
     
     [Test]
-    public void Can_Instatiate_New_LookupRequest_With_LookupControls() {
+    public void CanInstatiateNewLookupRequestWithLookupControls() {
       //Act
       var request = new LookupRequest("foo", new LookupControl(null, null));
       
@@ -29,20 +29,20 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     
     [Test]
     [ExpectedException(typeof(InvalidOperationException), ExpectedMessage = "name cannot be null or empty.")]
-    public void Ctor_Throws_InvalidOperationException_If_Name_Is_Empty() {
+    public void CtorThrowsInvalidOperationExceptionIfNameIsEmpty() {
       //Act
       new LookupRequest("");
     }
     
     [Test]
     [ExpectedException(typeof(InvalidOperationException), ExpectedMessage = "name cannot be null or empty.")]
-    public void Ctor_Throws_InvalidOperationException_If_Name_Is_Null() {
+    public void CtorThrowsInvalidOperationExceptionIfNameIsNull() {
       //Act
       new LookupRequest(null);
     }
     
     [Test]
-    public void Can_Generate_Basic_Api_Xml() {
+    public void CanGenerateBasicApiXml() {
       //Arrange
       string expected = new XElement("LookupRequest", new XAttribute("name", "/foo/bar")).ToString();
       
@@ -51,15 +51,37 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       var actual = req.ToAdsml();
       var batchRequest = new BatchRequest(req);
       
-      Console.WriteLine(actual.ToString());
+      Console.WriteLine(actual);
       
       //Assert
       Assert.That(actual.ToString(), Is.EqualTo(expected));
       Assert.DoesNotThrow(() => batchRequest.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
-    
+
     [Test]
-    public void Can_Generate_Api_Xml_With_LookupControl() {
+    public void CanGenerateApiXmlWithFilter() {
+      //Arrange
+      string expected = 
+        new XElement("LookupRequest", 
+          new XAttribute("name", "/foo/bar"), 
+          new XAttribute("returnNoAttributes", "true")
+        ).ToString();
+
+      //Act
+      var req = new LookupRequest("/foo/bar", null, Filter.ReturnNoAttributes(true));
+      var actual = req.ToAdsml();
+      var batchRequest = new BatchRequest(req);
+
+      Console.WriteLine(actual);
+
+      //Assert
+      Assert.That(actual.ToString(), Is.EqualTo(expected));
+      Assert.DoesNotThrow(() => batchRequest.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
+    }
+
+
+    [Test]
+    public void CanGenerateApiXmlWithLookupControl() {
       //Arrange
       string expexcted = 
         new XElement("LookupRequest",

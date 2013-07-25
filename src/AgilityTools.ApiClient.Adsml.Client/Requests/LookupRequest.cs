@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Xml.Linq;
+using System.Collections.Generic;
 using AgilityTools.ApiClient.Adsml.Client.Components;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Requests
@@ -9,8 +10,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
   {
     internal string Name { get; private set; }
     internal LookupControl LookupControls { get; private set; }
+    public IEnumerable<ILookupRequestFilter> RequestFilters { get; set; }
     
-    public LookupRequest(string name, LookupControl lookupControls = null) {
+    public LookupRequest(string name, LookupControl lookupControls = null, params ILookupRequestFilter [] filters) {
       Name = name;
       LookupControls = lookupControls;
       
@@ -19,6 +21,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
       
       this.Name = name;
       this.LookupControls = lookupControls;
+
+      if (filters != null && filters.Any()) {
+        this.RequestFilters = filters;
+      }
     }
     
     public XElement ToAdsml() {
@@ -27,6 +33,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Requests
       if (this.LookupControls != null) {
         request.AddFirst(this.LookupControls.ToAdsml());
       }
+
+      if (this.RequestFilters != null)
+        request.Add(this.RequestFilters.Select(rf => rf.ToAdsml()));
       
       return request;
     }

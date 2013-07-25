@@ -34,6 +34,10 @@ namespace AgilityTools.ApiClient.Adsml.Client
       return new ReturnAllAttributesFilter(returnAllAttributes);
     }
 
+    public static RecursiveFilter Recursive(bool recursive = true) {
+      return new RecursiveFilter(recursive);
+    }
+
     public static ResolveContextReferencesFilter ResolveContextReferences(bool resolveContextReferences = true) {
       return new ResolveContextReferencesFilter(resolveContextReferences);
     }
@@ -109,19 +113,30 @@ namespace AgilityTools.ApiClient.Adsml.Client
       return new CopyLocalAttributesFromSourceFilter(copyLocalFromGlobal);
     }
   }
-
-  public class ReturnNoAttributesFilter : ISearchRequestFilter, ICreateRequestFilter, IModifyRequestFilter, ILinkRequestFilter
+  
+  public class ReturnNoAttributesFilter : ISearchRequestFilter, ICreateRequestFilter, IModifyRequestFilter, ILinkRequestFilter, IMoveRequestFilter, ILookupRequestFilter
   {
     private readonly bool _returnNoAttributes;
 
-    public ReturnNoAttributesFilter(bool returnNoAttributes)
-    {
+    public ReturnNoAttributesFilter(bool returnNoAttributes) {
       _returnNoAttributes = returnNoAttributes;
     }
 
-    public XAttribute ToAdsml()
-    {
+    public XAttribute ToAdsml() {
       return new XAttribute("returnNoAttributes", _returnNoAttributes);
+    }
+  }
+
+  public class RecursiveFilter : ILinkRequestFilter
+  {
+    private readonly bool _recursive;
+
+    public RecursiveFilter(bool recursive = true) {
+      _recursive = recursive;
+    }
+
+    public XAttribute ToAdsml() {
+      return new XAttribute("recursive", _recursive);
     }
   }
 
@@ -129,13 +144,11 @@ namespace AgilityTools.ApiClient.Adsml.Client
   {
     private readonly bool _returnAllAttributes;
 
-    public ReturnAllAttributesFilter(bool returnAllAttributes)
-    {
+    public ReturnAllAttributesFilter(bool returnAllAttributes) {
       _returnAllAttributes = returnAllAttributes;
     }
 
-    public XAttribute ToAdsml()
-    {
+    public XAttribute ToAdsml() {
       return new XAttribute("returnAllAttributes", _returnAllAttributes);
     }
   }
