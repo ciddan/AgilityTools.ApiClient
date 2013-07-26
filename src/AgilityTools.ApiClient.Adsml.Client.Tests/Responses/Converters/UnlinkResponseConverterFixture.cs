@@ -10,9 +10,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
   public class UnlinkResponseConverterFixture
   {
     [Test]
-    public void Can_Instantiate_New_UnlinkResponseConverter() {
+    public void CanInstantiateNewUnlinkResponseConverter() {
       //Act
-      var urc = new UnlinkResultResponseConverter("adsml.xsd");
+      var urc = new UnlinkResultResponseConverter();
 
       //Assert
       Assert.That(urc, Is.Not.Null);
@@ -20,7 +20,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
     }
 
     [Test]
-    public void Can_Convert_XElement_To_UnlinkResponse() {
+    public void CanConvertXElementToUnlinkResponse() {
       //Arrange
       XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       var response =
@@ -33,7 +33,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                 new XAttribute("description", "Success"),
                 new XElement("Message", "foo")));
 
-      var urc = new UnlinkResultResponseConverter("adsml.xsd");
+      var urc = new UnlinkResultResponseConverter();
 
       //Act
       var converted = urc.Convert(response).Single();
@@ -46,16 +46,16 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
     }
 
     [Test]
-    public void Throws_ArgumentNullException_If_Source_Is_Null() {
+    public void ThrowsArgumentNullExceptionIfSourceIsNull() {
       //Arrange
-      var urc = new UnlinkResultResponseConverter("adsml.xsd");
+      var urc = new UnlinkResultResponseConverter();
 
       //Act
       Assert.Throws<ArgumentNullException>(() => urc.Convert(null));
     }
 
     [Test]
-    public void Throws_InvalidOperationException_If_Response_Is_Not_UnlinkResponse() {
+    public void ThrowsInvalidOperationExceptionIfResponseIsNotUnlinkResponse() {
       //Arrange
       XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       var response =
@@ -68,14 +68,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                   new XAttribute("description", "Success"),
                   new XElement("Message", "foo")));
 
-      var urc = new UnlinkResultResponseConverter("adsml.xsd");
+      var urc = new UnlinkResultResponseConverter();
 
       //Act
       Assert.Throws<InvalidOperationException>(() => urc.Convert(response));
     }
 
     [Test]
-    public void Throws_InvalidOperationException_If_Response_Is_Not_Valid() {
+    public void ThrowsInvalidOperationExceptionIfResponseIsNotValid() {
       //Arrange
       XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       var response =
@@ -88,7 +88,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                   new XAttribute("description", "Success"),
                   new XElement("Message", "foo")));
 
-      var urc = new UnlinkResultResponseConverter("adsml.xsd");
+      var urc = new UnlinkResultResponseConverter();
 
       //Act
       Assert.Throws<InvalidOperationException>(() => urc.Convert(response));

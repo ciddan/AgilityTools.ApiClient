@@ -185,7 +185,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         return;
       }
 
-      var converter = new ErrorResponseConverter(_validationDocument);
+      var converter = new ErrorResponseConverter();
       var errors = converter.Convert(result).ToList();
 
       string errorMessages =
@@ -194,7 +194,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
       throw new AdsmlException(
         string.Format("{0}\n{1}", "The request failed:", errorMessages),
         errors
-        );
+      );
     }
 
     /// <summary>

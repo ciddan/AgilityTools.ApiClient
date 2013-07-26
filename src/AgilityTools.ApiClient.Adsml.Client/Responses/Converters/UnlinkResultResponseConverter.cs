@@ -8,7 +8,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
     /// <summary>
     /// Constructor.
     /// </summary>
-    public UnlinkResultResponseConverter(string validationDocument) : base(validationDocument, new[] { "UnlinkResponse" }) { }
+    public UnlinkResultResponseConverter() : base(new[] { "UnlinkResponse" }) { }
 
     /// <summary>
     /// Converts the <see cref="XElement"/> into a <see cref="UnlinkResponse"/>.
