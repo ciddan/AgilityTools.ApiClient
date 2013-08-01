@@ -96,6 +96,15 @@ namespace AgilityTools.ApiClient.Adsml.Client
     }
 
     /// <summary>
+    /// Updates the target context if it already exists in the exact structure point given in the <see cref="CreateRequest"/>.
+    /// </summary>
+    /// <returns><see cref="UpdateIfExistsFilter"/>.</returns>
+    /// <param name="updateIfExists">Optional. Defaults to true.</param>
+    public static UpdateIfExistsFilter UpdateIfExists(bool updateIfExists = true) {
+      return new UpdateIfExistsFilter(true);
+    }
+
+    /// <summary>
     /// Configures the API to return relations as attributes. That representation of the relation is closer to how relations are persisted in the Agility database.
     /// </summary>
     /// <param name="returnAsAttributes">Optional. Defaults to true.</param>
@@ -163,6 +172,20 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
     public XAttribute ToAdsml() {
       return new XAttribute("failOnError", _failOnError);
+    }
+  }
+
+  public class UpdateIfExistsFilter : ICreateRequestFilter
+  {
+    private readonly bool _updateIfExists;
+
+    public UpdateIfExistsFilter(bool updateIfExists = false)
+    {
+      _updateIfExists = updateIfExists;
+    }
+
+    public XAttribute ToAdsml() {
+      return new XAttribute("updateIfExists", _updateIfExists);
     }
   }
 
