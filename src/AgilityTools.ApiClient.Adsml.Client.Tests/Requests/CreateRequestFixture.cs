@@ -11,7 +11,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
   public class CreateRequestFixture
   {
     [Test]
-    public void Can_Instatiate_New_CreateRequest() {
+    public void CanInstatiateNewCreateRequest() {
       //Act
       var cr = new CreateRequest("foo", "bar", "/1/2", new StructureAttribute());
 
@@ -24,7 +24,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     }
 
     [Test]
-    public void Parameter_Guards() {
+    public void ParameterGuards() {
       //Assert
       Assert.Throws<ArgumentNullException>(() => new CreateRequest("foo", "bar", null, null));
       Assert.Throws<InvalidOperationException>(() => new CreateRequest(null, "bar", null, new StructureAttribute()));
@@ -34,7 +34,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     }
 
     [Test]
-    public void Can_Generate_Api_Xml() {
+    public void CanGenerateApiXml() {
       //Arrange
       var expected = 
         new XElement("CreateRequest",
@@ -70,7 +70,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     }
 
     [Test]
-    public void Can_Generate_Api_Xml_With_Request_Filters() {
+    public void CanGenerateApiXmlWithRequestFilters() {
       //Arrange
       var expected = 
         new XElement("CreateRequest",
@@ -78,6 +78,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
             new XAttribute("type", "fooObjectTypeName"),
             new XAttribute("returnNoAttributes", "true"),
             new XAttribute("failOnError", "true"),
+            new XAttribute("updateIfExists", "true"),
             new XElement("AttributesToSet",
                 new XElement("StructureAttribute",
                     new XAttribute("id", "215"),
@@ -98,7 +99,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
         RequestFilters =
           new List<ICreateRequestFilter> {
             Filter.ReturnNoAttributes(),
-            Filter.FailOnError()
+            Filter.FailOnError(),
+            Filter.UpdateIfExists()
           }
       };
 
@@ -113,7 +115,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     }
 
     [Test]
-    public void Can_Generate_Api_Xml_With_LookupControl() {
+    public void CanGenerateApiXmlWithLookupControl() {
       //Arrange
       var expected = 
         new XElement("CreateRequest",
@@ -149,7 +151,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       var actual = create.ToAdsml();
       var request = new BatchRequest(create);
 
-      Console.WriteLine(actual.ToString());
+      Console.WriteLine(actual);
 
       //Assert
       Assert.That(actual, Is.Not.Null);
