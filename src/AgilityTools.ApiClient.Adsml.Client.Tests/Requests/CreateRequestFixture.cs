@@ -11,7 +11,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
   public class CreateRequestFixture
   {
     [Test]
-    public void Can_Instatiate_New_CreateRequest() {
+    public void CanInstatiateNewCreateRequest() {
       //Act
       var cr = new CreateRequest("foo", "bar", "/1/2", new StructureAttribute());
 
@@ -24,7 +24,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     }
 
     [Test]
-    public void Parameter_Guards() {
+    public void ParameterGuards() {
       //Assert
       Assert.Throws<ArgumentNullException>(() => new CreateRequest("foo", "bar", null, null));
       Assert.Throws<InvalidOperationException>(() => new CreateRequest(null, "bar", null, new StructureAttribute()));
@@ -34,25 +34,21 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
     }
 
     [Test]
-    public void Can_Generate_Api_Xml() {
+    public void CanGenerateApiXml() {
       //Arrange
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       var expected = 
-        new XElement("BatchRequest",
-          new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-          new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-          new XElement("CreateRequest",
-              new XAttribute("name", "fooName"),
-              new XAttribute("type", "fooObjectTypeName"),
-              new XAttribute("parentIdPath", "fooPath"),
-              new XElement("AttributesToSet",
-                  new XElement("StructureAttribute",
-                      new XAttribute("id", "215"),
-                      new XAttribute("name", "fooAttributeName"),
-                      new XElement("StructureValue",
-                          new XAttribute("langId", "10"),
-                          new XAttribute("scope", "global"),
-                          new XCData("fooValue"))))));
+        new XElement("CreateRequest",
+            new XAttribute("name", "fooName"),
+            new XAttribute("type", "fooObjectTypeName"),
+            new XAttribute("parentIdPath", "fooPath"),
+            new XElement("AttributesToSet",
+                new XElement("StructureAttribute",
+                    new XAttribute("id", "215"),
+                    new XAttribute("name", "fooAttributeName"),
+                    new XElement("StructureValue",
+                        new XAttribute("langId", "10"),
+                        new XAttribute("scope", "global"),
+                        new XCData("fooValue")))));
 
       var value = new StructureValue {LanguageId = 10, Value = "fooValue"};
       var attribute = new StructureAttribute {
@@ -61,38 +57,36 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
         Values = new List<StructureValue> {value}
       };
 
-      var request = new CreateRequest("fooObjectTypeName", "fooName", "fooPath", attribute);
+      var create = new CreateRequest("fooObjectTypeName", "fooName", "fooPath", attribute);
 
       //Act
-      var actual = request.ToAdsml();
+      var actual = create.ToAdsml();
+      var request = new BatchRequest(create);
 
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
-    public void Can_Generate_Api_Xml_With_Request_Filters() {
+    public void CanGenerateApiXmlWithRequestFilters() {
       //Arrange
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       var expected = 
-        new XElement("BatchRequest",
-            new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-            new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-            new XElement("CreateRequest",
-                new XAttribute("name", "fooPath"),
-                new XAttribute("type", "fooObjectTypeName"),
-                new XAttribute("returnNoAttributes", "true"),
-                new XAttribute("failOnError", "true"),
-                new XElement("AttributesToSet",
-                    new XElement("StructureAttribute",
-                        new XAttribute("id", "215"),
-                        new XAttribute("name", "fooAttributeName"),
-                        new XElement("StructureValue",
-                            new XAttribute("langId", "10"),
-                            new XAttribute("scope", "global"),
-                            new XCData("fooValue"))))));
+        new XElement("CreateRequest",
+            new XAttribute("name", "fooPath"),
+            new XAttribute("type", "fooObjectTypeName"),
+            new XAttribute("returnNoAttributes", "true"),
+            new XAttribute("failOnError", "true"),
+            new XAttribute("updateIfExists", "true"),
+            new XElement("AttributesToSet",
+                new XElement("StructureAttribute",
+                    new XAttribute("id", "215"),
+                    new XAttribute("name", "fooAttributeName"),
+                    new XElement("StructureValue",
+                        new XAttribute("langId", "10"),
+                        new XAttribute("scope", "global"),
+                        new XCData("fooValue")))));
 
       var value = new StructureValue {LanguageId = 10, Value = "fooValue"};
       var attribute = new StructureAttribute {
@@ -101,46 +95,44 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
         Values = new List<StructureValue> {value}
       };
 
-      var request = new CreateRequest("fooObjectTypeName", "fooPath", null, attribute) {
+      var create = new CreateRequest("fooObjectTypeName", "fooPath", null, attribute) {
         RequestFilters =
           new List<ICreateRequestFilter> {
             Filter.ReturnNoAttributes(),
-            Filter.FailOnError()
+            Filter.FailOnError(),
+            Filter.UpdateIfExists()
           }
       };
 
       //Act
-      var actual = request.ToAdsml();
+      var actual = create.ToAdsml();
+      var request = new BatchRequest(create);
 
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
-    public void Can_Generate_Api_Xml_With_LookupControl() {
+    public void CanGenerateApiXmlWithLookupControl() {
       //Arrange
-      XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       var expected = 
-        new XElement("BatchRequest",
-            new XAttribute(xsi + "noNamespaceSchemaLocation", "adsml.xsd"),
-            new XAttribute(XNamespace.Xmlns + "xsi", xsi),
-            new XElement("CreateRequest",
-                new XAttribute("name", "fooPath"),
-                new XAttribute("type", "fooObjectTypeName"),
-                new XElement("LookupControls",
-                    new XElement("AttributesToReturn",
-                        new XElement("Attribute",
-                            new XAttribute("name", "fooAttributeName")))),
-                new XElement("AttributesToSet",
-                    new XElement("StructureAttribute",
-                        new XAttribute("id", "215"),
-                        new XAttribute("name", "fooAttributeName"),
-                        new XElement("StructureValue",
-                            new XAttribute("langId", "10"),
-                            new XAttribute("scope", "global"),
-                            new XCData("fooValue"))))));
+        new XElement("CreateRequest",
+            new XAttribute("name", "fooPath"),
+            new XAttribute("type", "fooObjectTypeName"),
+            new XElement("LookupControls",
+                new XElement("AttributesToReturn",
+                    new XElement("Attribute",
+                        new XAttribute("name", "fooAttributeName")))),
+            new XElement("AttributesToSet",
+                new XElement("StructureAttribute",
+                    new XAttribute("id", "215"),
+                    new XAttribute("name", "fooAttributeName"),
+                    new XElement("StructureValue",
+                        new XAttribute("langId", "10"),
+                        new XAttribute("scope", "global"),
+                        new XCData("fooValue")))));
       
       var value = new StructureValue {LanguageId = 10, Value = "fooValue"};
       var attribute = new StructureAttribute {
@@ -153,16 +145,18 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests
       lcb.ReturnAttributes(AttributeToReturn.WithName("fooAttributeName"));
       var lc = lcb.Build();
 
-      var request = new CreateRequest("fooObjectTypeName", "fooPath", null, attribute) {LookupControl = lc};
+      var create = new CreateRequest("fooObjectTypeName", "fooPath", null, attribute) {LookupControl = lc};
 
       //Act
-      var actual = request.ToAdsml();
-      Console.WriteLine(actual.ToString());
+      var actual = create.ToAdsml();
+      var request = new BatchRequest(create);
+
+      Console.WriteLine(actual);
 
       //Assert
       Assert.That(actual, Is.Not.Null);
       Assert.That(actual.ToString(), Is.EqualTo(expected.ToString()));
-      Assert.DoesNotThrow(() => actual.ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
   }
 }

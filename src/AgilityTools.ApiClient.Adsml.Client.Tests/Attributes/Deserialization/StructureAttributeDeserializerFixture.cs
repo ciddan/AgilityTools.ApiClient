@@ -62,6 +62,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Attributes.Deserialization
       Assert.That(actual.Values.Any(v => v.LanguageId == 11));
       Assert.That(actual.Values.Any(v => v.LanguageId == 12));
       Assert.That(actual.Values.Any(v => v.LanguageId == 13));
+
+      Assert.That(actual.Values.All(v => v.StateId.HasValue));
       
       Assert.That(actual.Values.Where(v => v.LanguageId == 10).Select(v => v.Value).Single(), Is.Not.EqualTo(string.Empty));
       Assert.That(actual.Values.Where(v => v.LanguageId == 11).Select(v => v.Value).Single(), Is.Not.EqualTo(string.Empty));

@@ -17,7 +17,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
     }
 
     [Test]
-    public void Can_Instantiate_New_CreateRequestBuilder() {
+    public void CanInstantiateNewCreateRequestBuilder() {
       //Act
       var builder = new CreateRequestBuilder();
 
@@ -26,7 +26,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
     }
 
     [Test]
-    public void Can_Specify_ParentIdPath() {
+    public void CanSpecifyParentIdPath() {
       //Act
       _builder.ParentIdPath("/1/2/3");
 
@@ -35,7 +35,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
     }
 
     [Test]
-    public void Can_Specify_New_Context_Name() {
+    public void CanSpecifyNewContextName() {
       //Act
       _builder.NewContextName("foo");
 
@@ -44,7 +44,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
     }
 
     [Test]
-    public void Can_Specify_Object_Type_To_Create() {
+    public void CanSpecifyObjectTypeToCreate() {
       //Act
       _builder.ObjectTypeToCreate("bar");
 
@@ -53,7 +53,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
     }
 
     [Test]
-    public void Can_Set_Return_No_Attributes() {
+    public void CanSetReturnNoAttributes() {
       //Arrange
       var builder = new CreateRequestBuilder();
 
@@ -65,7 +65,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
     }
 
     [Test]
-    public void Can_Set_Fail_On_Error() {
+    public void CanSetFailOnError() {
       //Arrange
       var builder = new CreateRequestBuilder();
 
@@ -77,7 +77,19 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
     }
 
     [Test]
-    public void Can_Set_Attributes_To_Be_Created_With_Params_Overload() {
+    public void CanSetUpdateIfExists() {
+      //Arrange
+      var builder = new CreateRequestBuilder();
+
+      //Act
+      builder.UpdateIfExists();
+
+      //Assert
+      Assert.That(builder.RequestFilters[0], Is.InstanceOf<UpdateIfExistsFilter>());
+    }
+
+    [Test]
+    public void CanSetAttributesToBeCreatedWithParamsOverload() {
       //Act
       _builder.AttributesToSet(StructureAttribute.New(10, new StructureValue(10, "foo")));
 
@@ -86,7 +98,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
     }
 
     [Test]
-    public void Can_Set_Attributes_To_Be_Created_With_List_Overload() {
+    public void CanSetAttributesToBeCreatedWithListOverload() {
       //Arrange
       var builder = new CreateRequestBuilder();
       var attributes = new List<StructureAttribute> { StructureAttribute.New(10, new StructureValue(10, "foo")) };
@@ -99,7 +111,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
     }
 
     [Test]
-    public void Can_Set_Attributes_To_Be_Created_With_ListFactory_Overload() {
+    public void CanSetAttributesToBeCreatedWithListFactoryOverload() {
       //Arrange
       var builder = new CreateRequestBuilder();
 
@@ -116,7 +128,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
     }
 
     [Test]
-    public void Can_Configure_LookupControls() {
+    public void CanConfigureLookupControls() {
       //Act
       _builder.ConfigureLookupControls().ReturnLanguages(LanguageToReturn.WithLanguageId(10));
 
@@ -125,7 +137,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
     }
 
     [Test]
-    public void Can_Combine_All_Commands() {
+    public void CanCombineAllCommands() {
       //Arrange
       var builder = new CreateRequestBuilder();
 
@@ -135,6 +147,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
              .ObjectTypeToCreate("baz")
              .ReturnNoAttributes()
              .FailOnError()
+             .UpdateIfExists()
              .AttributesToSet(
                   StructureAttribute.New(215, new StructureValue(10, "169010")))
              .ConfigureLookupControls()
@@ -142,32 +155,39 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Requests.Builders
                   .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
                   .ConfigureReferenceHandling(ReferenceOptions.ReturnValuesOnly());
 
+      var request = new BatchRequest(builder.Build());
+
       //Assert
       Assert.DoesNotThrow(() => builder.Build());
-      Assert.DoesNotThrow(() => builder.Build().ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
+      Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
 
     [Test]
-    public void Can_Build_CreateRequest() {
+    public void CanBuildCreateRequest() {
       //Arrange
       var builder = new CreateRequestBuilder();
 
-      builder.NewContextName("/foo/bar")
-             .ObjectTypeToCreate("baz")
-             .ReturnNoAttributes()
-             .FailOnError()
-             .AttributesToSet(
-                 StructureAttribute.New(215, new StructureValue(10, "169010")))
-             .ConfigureLookupControls()
-                 .ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"))
-                 .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
-                 .ConfigureReferenceHandling(ReferenceOptions.ReturnValuesOnly());
-
       //Act
-      var request = builder.Build();
+      builder
+        .NewContextName("/foo/bar")
+        .ObjectTypeToCreate("baz")
+        .ReturnNoAttributes()
+        .FailOnError()
+        .UpdateIfExists()
+        .AttributesToSet(
+          StructureAttribute.New(215, new StructureValue(10, "169010"))
+        )
+        .ConfigureLookupControls()
+          .ReturnAttributes(AttributeToReturn.WithName("Artikelnummer"))
+          .ReturnLanguages(LanguageToReturn.WithLanguageId(10))
+          .ConfigureReferenceHandling(
+            ReferenceOptions.ReturnValuesOnly()
+          );
+
+      var request = new BatchRequest(builder.Build());
 
       //Assert
-      Assert.That(request, Is.Not.Null);
+      Assert.That(builder.Build(), Is.Not.Null);
       Assert.DoesNotThrow(() => request.ToAdsml().ValidateAdsmlDocument("adsml.xsd"));
     }
   }

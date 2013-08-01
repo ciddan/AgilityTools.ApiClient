@@ -73,7 +73,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
         .QueryString("#215 = \"169010\"");
 
       //Act
-      var result = _client.SendApiRequest(builder.Build());
+      var request = new BatchRequest(builder.Build());
+      var result = _client.SendApiRequest(request);
 
       //Assert
       Assert.That(result, Is.Not.Null);
@@ -97,11 +98,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
 
       //Act
       XElement result = null;
+      var request = new BatchRequest(builder.Build());
 
       _client.SendApiRequestAsync(
-        builder.Build(),
-        data =>
-        {
+        request, data => {
           result = data;
           callbackCalled = true;
           manualEvent.Set();
@@ -127,24 +127,25 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
     [Test]
     public void Can_Supply_Response_Converter_And_Receive_Correct_Response_Type() {
       //Arrange
-      var request = new AqlQueryBuilder();
+      var aql = new AqlQueryBuilder();
 
-      request.BasePath("/Structures/Classification/JULA Produkter")
-          .QueryType(AqlQueryTypes.Below)
-          .ObjectTypeToFind(12)
-          .QueryString("#215 = \"169010\"")
-          .ConfigureSearchControls()
-          .AddRequestFilters(
-              Filter.CountLimit(1),
-              Filter.ExcludeBin())
-          .ReturnAttributes(
-              AttributeToReturn.WithName("Artikelnummer"),
-              AttributeToReturn.WithName("2_Rubrik"));
+      aql.BasePath("/Structures/Classification/JULA Produkter")
+         .QueryType(AqlQueryTypes.Below)
+         .ObjectTypeToFind(12)
+         .QueryString("#215 = \"169010\"")
+         .ConfigureSearchControls()
+         .AddRequestFilters(
+             Filter.CountLimit(1),
+             Filter.ExcludeBin())
+         .ReturnAttributes(
+             AttributeToReturn.WithName("Artikelnummer"),
+             AttributeToReturn.WithName("2_Rubrik"));
 
-      var converter = new ContextResponseConverter("adsml.xsd");
+      var converter = new ContextResponseConverter();
 
       //Act
-      var reply = _client.SendApiRequest(request.Build(), converter.Convert);
+      var request = new BatchRequest(aql.Build());
+      var reply = _client.SendApiRequest(request, converter.Convert);
 
       //Assert
       Assert.That(reply, Is.Not.Null);
@@ -199,10 +200,11 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
              .ObjectTypeToFind(12)
              .QueryString("#215 = \"000\"");
 
-      var query = builder.Build();
-
       //Act
-      _client.SendApiRequest(query);
+      var request = new BatchRequest(builder.Build());
+
+      //Assert
+      Assert.DoesNotThrow(() => _client.SendApiRequest(request));
     }
   }
 }

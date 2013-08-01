@@ -9,9 +9,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
   /// Defines available commands and command order for the <see cref="AqlQueryBuilder"/>. 
   /// </summary>
   [EditorBrowsable(EditorBrowsableState.Never)]
-  public interface IAqlQueryBuilder : IFluentInterface, IBasePath, IQTypeIOTTFindIQStringICSControls, IOTTFindIQStringICSControls, IQStringICSControls
+  public interface IAqlQueryBuilder : IFluentInterface, IRequestBuilder<AqlSearchRequest>, IBasePath, IQTypeIOTTFindIQStringICSControls, IOTTFindIQStringICSControls, IQStringICSControls
   {
-    AqlSearchRequest Build();
   }
 
   [EditorBrowsable(EditorBrowsableState.Never)]
@@ -50,7 +49,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
   [EditorBrowsable(EditorBrowsableState.Never)]
   public interface IObjectTypeToFind : IFluentInterface
   {
-    IQStringICSControls ObjectTypeToFind(int typeId);
+    IQStringICSControls ObjectTypeToFind(params int[] typeIds);
     IQStringICSControls ObjectTypeToFind(string typeName);
   }
 

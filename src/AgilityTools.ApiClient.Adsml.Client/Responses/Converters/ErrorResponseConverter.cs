@@ -7,7 +7,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
   public class ErrorResponseConverter : ResponseConverter<ErrorResponse>
   {
-    public ErrorResponseConverter(string validationDocument) : base(validationDocument, new[] { "ErrorResponse" }) { }
+    public ErrorResponseConverter() : base(new[] { "ErrorResponse" }) { }
 
     /// <summary>
     /// Converts an <see cref="XElement"/> into a <see cref="ErrorResponse"/>.

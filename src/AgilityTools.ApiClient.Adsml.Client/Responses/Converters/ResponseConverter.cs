@@ -7,11 +7,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
   public abstract class ResponseConverter<TOutput> : IResponseConverter<XElement, TOutput> where TOutput : class, new()
   {
-    protected readonly string _validationDocument;
-    protected readonly string[] _responseNodeNames;
+    private readonly string[] _responseNodeNames;
 
-    protected ResponseConverter(string validationDocument, string[] responseNodeNames) {
-      _validationDocument = validationDocument;
+    protected ResponseConverter(string[] responseNodeNames) {
       _responseNodeNames = responseNodeNames;
     }
 
