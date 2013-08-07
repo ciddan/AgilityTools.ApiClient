@@ -10,9 +10,9 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
   public class ContextResponseConverterFixture
   {
     [Test]
-    public void Can_Instantiate_New_ContextResponseConverter() {
+    public void CanInstantiateNewContextResponseConverter() {
       //Act
-      var contextResponseConverter = new ContextResponseConverter("adsml.xsd");
+      var contextResponseConverter = new ContextResponseConverter();
 
       //Assert
       Assert.That(contextResponseConverter, Is.Not.Null);
@@ -20,7 +20,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
     }
     
     [Test]
-    public void Can_Convert_XElement_To_ContextResponse() {
+    public void CanConvertXelementToContextResponse() {
       //Arrange
       const string xml =
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -45,7 +45,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
         "</BatchResponse>";
 
       XElement response = XElement.Parse(xml);
-      ContextResponseConverter crc = new ContextResponseConverter("adsml.xsd");
+      ContextResponseConverter crc = new ContextResponseConverter();
 
       //Act
       var converted = crc.Convert(response).Single();
@@ -58,16 +58,16 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
     }
 
     [Test]
-    public void Throws_ArgumentNullException_If_Source_Is_Null() {
+    public void ThrowsArgumentNullExceptionIfSourceIsNull() {
       //Arrange
-      var crc = new ContextResponseConverter("adsml.xsd");
+      var crc = new ContextResponseConverter();
 
       //Act
       Assert.Throws<ArgumentNullException>(() => crc.Convert(null));
     }
 
     [Test]
-    public void Throws_InvalidOperationException_If_Response_Is_Not_ContextResponse() {
+    public void ThrowsInvalidOperationExceptionIfResponseIsNotContextResponse() {
       //Arrange
       XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       var response =
@@ -80,14 +80,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
                   new XAttribute("description", "Success"),
                   new XElement("Message", "foo")));
 
-      var crc = new ContextResponseConverter("adsml.xsd");
+      var crc = new ContextResponseConverter();
 
       //Act
       Assert.Throws<InvalidOperationException>(() => crc.Convert(response));
     }
 
     [Test]
-    public void Returns_Empty_List_If_There_Are_No_Contexts_In_The_Response() {
+    public void ReturnsEmptyListIfThereAreNoContextsInTheResponse() {
       //Arrange
       const string xml =
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n" +
@@ -99,7 +99,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
         "</BatchResponse> \n";
 
       XElement response = XElement.Parse(xml);
-      var crc = new ContextResponseConverter("adsml.xsd");
+      var crc = new ContextResponseConverter();
 
       //Act
       var contexts = crc.Convert(response);

@@ -8,7 +8,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
   public class ContextResponseConverter : ResponseConverter<ContextResponse>
   {
-    public ContextResponseConverter(string validationDocument) : base(validationDocument, new[] { "SearchResponse", "ModifyResponse", "LookupResponse" }) { }
+    public ContextResponseConverter() : base(new[] { "SearchResponse", "ModifyResponse", "LookupResponse" }) { }
     
     /// <summary>
     /// Converts the input of <see cref="XElement"/> to a single <see cref="ContextResponse"/>.

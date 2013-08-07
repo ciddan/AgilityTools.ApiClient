@@ -141,7 +141,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests
              AttributeToReturn.WithName("Artikelnummer"),
              AttributeToReturn.WithName("2_Rubrik"));
 
-      var converter = new ContextResponseConverter("adsml.xsd");
+      var converter = new ContextResponseConverter();
 
       //Act
       var request = new BatchRequest(aql.Build());

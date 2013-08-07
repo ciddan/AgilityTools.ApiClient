@@ -10,18 +10,16 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
   public class ErrorResponseConverterFixture
   {
     [Test]
-    public void Can_Instantiate_New_ErrorResponseConverter()
-    {
+    public void CanInstantiateNewErrorResponseConverter() {
       //Act
-      var erc = new ErrorResponseConverter("adsml.xsd");
+      var erc = new ErrorResponseConverter();
 
       //Assert
       Assert.That(erc, Is.Not.Null);
     }
 
     [Test]
-    public void Can_Convert_ErrorResponse_Xml()
-    {
+    public void CanConvertErrorResponseXml() {
       //Arrange
       XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       var xml = new XElement("BatchResponse",
@@ -34,7 +32,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
               new XAttribute("description", "foo"),
               new XElement("Message", "Foo error")));
 
-      var erc = new ErrorResponseConverter("adsml.xsd");
+      var erc = new ErrorResponseConverter();
 
       //Act
       ErrorResponse errorResponse = erc.Convert(xml).Single();
@@ -48,18 +46,16 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
     }
 
     [Test]
-    public void Convert_Throws_ArgumentNullException_If_Source_Is_Null()
-    {
+    public void ConvertThrowsArgumentNullExceptionIfSourceIsNull() {
       //Arrange
-      var erc = new ErrorResponseConverter("adsml.xsd");
+      var erc = new ErrorResponseConverter();
 
       //Act
       Assert.Throws<ArgumentNullException>(() => erc.Convert(null));
     }
 
     [Test]
-    public void Convert_Throws_InvalidOperationException_If_Response_Is_Not_ErrorResponse()
-    {
+    public void ConvertThrowsInvalidOperationExceptionIfResponseIsNotErrorResponse() {
       //Arrange
       XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       var response = new XElement("BatchResponse",
@@ -71,15 +67,14 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
               new XAttribute("description", "Success"),
               new XElement("Message", "foo")));
 
-      var erc = new ErrorResponseConverter("adsml.xsd");
+      var erc = new ErrorResponseConverter();
 
       //Act
       Assert.Throws<InvalidOperationException>(() => erc.Convert(response));
     }
 
     [Test]
-    public void Convert_Throws_InvalidOperationException_If_Response_Is_Not_Valid()
-    {
+    public void ConvertThrowsInvalidOperationExceptionIfResponseIsNotValid() {
       //Arrange
       XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
       var response = new XElement("BatchResponse",
@@ -91,7 +86,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Tests.Responses.Converters
               new XAttribute("description", "Success"),
               new XElement("Message", "foo")));
 
-      var erc = new ErrorResponseConverter("adsml.xsd");
+      var erc = new ErrorResponseConverter();
 
       //Act
       Assert.Throws<InvalidOperationException>(() => erc.Convert(response));
