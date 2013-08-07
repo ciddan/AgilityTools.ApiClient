@@ -121,6 +121,18 @@ namespace AgilityTools.ApiClient.Adsml.Client
     public static CopyLocalAttributesFromSourceFilter CopyLocalAttributesFromSource(bool copyLocalFromGlobal = true) {
       return new CopyLocalAttributesFromSourceFilter(copyLocalFromGlobal);
     }
+
+    public static LangIdFilter LangId(int langId) {
+      return new LangIdFilter(langId);
+    }
+
+    public static OrderingDirectionFilter OrderingDirection(string direction = "ASC") {
+      return new OrderingDirectionFilter(direction);
+    }
+
+    public static MoveEmptyValuesToFilter MoveEmptyValuesTo(string moveEmptyTo = "TOP") {
+      return new MoveEmptyValuesToFilter(moveEmptyTo);
+    }
   }
   
   public class ReturnNoAttributesFilter : ISearchRequestFilter, ICreateRequestFilter, IModifyRequestFilter, ILinkRequestFilter, IMoveRequestFilter, ILookupRequestFilter
@@ -330,6 +342,45 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
     public XAttribute ToAdsml() {
       return new XAttribute("copyLocalAttributes", _copyFromSource);
+    }
+  }
+
+  public class LangIdFilter : ISortRequestFilter 
+  {
+    private readonly int langId;
+
+    public LangIdFilter(int langId) {
+      this.langId = langId;
+    }
+
+    public XAttribute ToAdsml() {
+      return new XAttribute("langId", langId);
+    }
+  }
+
+  public class OrderingDirectionFilter : ISortRequestFilter
+  {
+    private readonly string direction;
+
+    public OrderingDirectionFilter(string direction = "ASC") {
+      this.direction = direction;
+    }
+
+    public XAttribute ToAdsml() {
+      return new XAttribute("orderingDirection", this.direction);
+    }
+  }
+
+  public class MoveEmptyValuesToFilter : ISortRequestFilter
+  {
+    private readonly string moveEmptyTo;
+
+    public MoveEmptyValuesToFilter(string moveEmptyTo = "TOP") {
+      this.moveEmptyTo = moveEmptyTo;
+    }
+
+    public XAttribute ToAdsml() {
+      return new XAttribute("moveEmptyValuesTo", this.moveEmptyTo);
     }
   }
 }
