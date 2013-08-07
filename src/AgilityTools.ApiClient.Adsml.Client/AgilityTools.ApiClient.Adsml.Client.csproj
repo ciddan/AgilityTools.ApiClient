@@ -165,6 +165,8 @@
     <Compile Include="FluentSyntax\MoveRequestBuilderSyntax.cs" />
     <Compile Include="Filters\ILookupRequestFilter.cs" />
     <Compile Include="Requests\UnlinkRequest.cs" />
+    <Compile Include="Requests\SortChildrenRequest.cs" />
+    <Compile Include="Filters\ISortRequestFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj">
