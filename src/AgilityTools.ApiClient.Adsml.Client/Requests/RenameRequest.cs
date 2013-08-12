@@ -10,7 +10,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
     internal string Context { get; private set; }
     internal string NewName { get; private set; }
 
-    internal IList<IRenameRequestFilter> RequestFilters { get; private set; }
+    public IList<IRenameRequestFilter> RequestFilters { get; private set; }
 
     public RenameRequest(string context, string newName) {
       if (string.IsNullOrEmpty(context)) {
