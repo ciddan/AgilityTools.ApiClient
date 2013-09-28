@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using AgilityTools.ApiClient.Adsml.Client.Responses;
 using AgilityTools.ApiClient.Adsml.Communication;
@@ -137,8 +138,20 @@ namespace AgilityTools.ApiClient.Adsml.Client
         ValidateResponse(result);
 
         callback.Invoke(result);
+      });
+    }
+
+    public async Task<XElement> SendApiRequestAsync(string request) {
+      string req = BuildRequest(request);
+      using (IApiWebClient webClient = new ApiWebClient()) {
+        Task<string> response = webClient.UploadStringAsyncTask(_adapiWsUrl, req);
+        string responseString = await response;
+
+        XElement result = XElement.Parse(responseString);
+        ValidateResponse(result);
+
+        return result; 
       }
-      );
     }
 
     /// <summary>
