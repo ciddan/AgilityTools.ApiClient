@@ -175,6 +175,7 @@
     <Compile Include="Filters\ISortRequestFilter.cs" />
     <Compile Include="Requests\RenameRequest.cs" />
     <Compile Include="Filters\IRenameRequestFilter.cs" />
+    <Compile Include="Components\AttributesToMatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Communication\AgilityTools.ApiClient.Adsml.Communication.csproj">

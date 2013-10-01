@@ -118,6 +118,7 @@
     <Compile Include="Responses\Converters\UnlinkResponseConverterFixture.cs" />
     <Compile Include="Requests\MoveRequestFixture.cs" />
     <Compile Include="Requests\Builders\MoveRequestBuilderFixture.cs" />
+    <Compile Include="Requests\SimpleSearchRequestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgilityTools.ApiClient.Adsml.Client\AgilityTools.ApiClient.Adsml.Client.csproj">
