@@ -29,6 +29,10 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
       : this("AttributesToReturn", definitionIds) {
     }
 
+    internal AttributeControl(params string[] attributeNames)
+      : this("AttributesToReturn", attributeNames) {
+    }
+
     /// <summary>
     /// Constructor. Internal.
     /// </summary>
@@ -55,6 +59,22 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
       this.OuterNodeAttributes = new List<XAttribute>() {
         new XAttribute("idlist", idList)
       };
+
+      this.ContentNodes = new List<IAttributeControl>();
+      this.NodeName = nodeName;
+    }
+
+    internal AttributeControl(string nodeName = "AttributesToReturn", params string[] attributeNames) {
+      if (attributeNames.Length == 0) {
+        throw new ArgumentException("Parameter cannot be empty", "attributeNames");
+      }
+      string nameList =
+        attributeNames.Aggregate((aggr, d) => aggr + "+" + d);
+
+      this.OuterNodeAttributes = new List<XAttribute>() {
+        new XAttribute("namelist", nameList)
+      };
+
       this.ContentNodes = new List<IAttributeControl>();
       this.NodeName = nodeName;
     }

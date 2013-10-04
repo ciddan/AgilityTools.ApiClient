@@ -123,6 +123,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
     /// <param name="callback">Required.</param>
     /// <exception cref="AdsmlException">Thrown if the response contains an error.</exception>
     /// <exception cref="ArgumentNullException">Thrown if any of the required paramaters (<paramref name="request"/>, <paramref name="callback"/>) are null.</exception>
+    [Obsolete]
     public void SendApiRequestAsync<TRequest>(TRequest request, Action<XElement> callback) where TRequest : class, IAdsmlSerializable<XElement> {
       if (request == null)
         throw new ArgumentNullException("request");
@@ -141,6 +142,17 @@ namespace AgilityTools.ApiClient.Adsml.Client
       });
     }
 
+    public async Task<IEnumerable<TResponse>> SendApiRequestAsync<TRequest, TResponse>(
+        TRequest request, Func<XElement, IEnumerable<TResponse>> responseConverter
+      ) where TRequest : class, IAdsmlSerializable<XElement> {
+      if (request == null) throw new ArgumentNullException("request");
+      if (responseConverter == null) throw new ArgumentNullException("responseConverter");
+
+      XElement result = await SendRequestAsync(request);
+
+      return responseConverter.Invoke(result);
+    }
+
     public async Task<XElement> SendApiRequestAsync(string request) {
       string req = BuildRequest(request);
       using (IApiWebClient webClient = new ApiWebClient()) {
@@ -150,7 +162,7 @@ namespace AgilityTools.ApiClient.Adsml.Client
         XElement result = XElement.Parse(responseString);
         ValidateResponse(result);
 
-        return result; 
+        return result;
       }
     }
 
@@ -170,6 +182,22 @@ namespace AgilityTools.ApiClient.Adsml.Client
       ValidateResponse(result);
 
       return result;
+    }
+
+    private async Task<XElement> SendRequestAsync<TRequest>(TRequest request) where TRequest : class, IAdsmlSerializable<XElement> {
+      if (request == null) throw new ArgumentNullException("request");
+
+      string req = BuildRequest(request);
+
+      using (IApiWebClient webClient = new ApiWebClient()) {
+        Task<string> response = webClient.UploadStringAsyncTask(_adapiWsUrl, req);
+        string responseString = await response;
+
+        XElement result = XElement.Parse(responseString);
+        ValidateResponse(result);
+
+        return result;
+      }
     }
 
     /// <summary>

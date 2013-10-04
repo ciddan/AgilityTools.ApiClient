@@ -1,4 +1,5 @@
 using System.Xml.Linq;
+using AgilityTools.ApiClient.Adsml.Client.Components;
 
 namespace AgilityTools.ApiClient.Adsml.Client
 {
@@ -23,6 +24,10 @@ namespace AgilityTools.ApiClient.Adsml.Client
     /// <returns><see cref="ExcludeDocumentFilter"/>.</returns>
     public static ExcludeDocumentFilter ExcludeDocument(bool excludeDoc = true) {
       return new ExcludeDocumentFilter(excludeDoc);
+    }
+
+    public static SearchScopeFilter SearchScope(SearchScope scope = Components.SearchScope.OneLevel) {
+      return new SearchScopeFilter(scope);
     }
 
     /// <summary>
@@ -96,12 +101,12 @@ namespace AgilityTools.ApiClient.Adsml.Client
     }
 
     /// <summary>
-    /// Updates the target context if it already exists in the exact structure point given in the <see cref="CreateRequest"/>.
+    /// Updates the target context if it already exists in the exact structure point given in the <see cref="Requests.CreateRequest"/>.
     /// </summary>
     /// <returns><see cref="UpdateIfExistsFilter"/>.</returns>
     /// <param name="updateIfExists">Optional. Defaults to true.</param>
     public static UpdateIfExistsFilter UpdateIfExists(bool updateIfExists = true) {
-      return new UpdateIfExistsFilter(true);
+      return new UpdateIfExistsFilter(updateIfExists);
     }
 
     /// <summary>
@@ -275,6 +280,19 @@ namespace AgilityTools.ApiClient.Adsml.Client
 
     public XAttribute ToAdsml() {
       return new XAttribute("excludeDocument", _excludeDocument);
+    }
+  }
+
+  public class SearchScopeFilter : ISearchControlFilter
+  {
+    private readonly SearchScope _scope;
+
+    public SearchScopeFilter(SearchScope scope) {
+      _scope = scope;
+    }
+
+    public XAttribute ToAdsml() {
+      return new XAttribute("searchScope", this._scope.ToString().ToLower());
     }
   }
 

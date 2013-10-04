@@ -90,6 +90,35 @@ namespace AgilityTools.ApiClient.Adsml.Client.Components
       return this;
     }
 
+    public IReturnedLanguagesConfigureReferences ReturnAttributes(params string[] attributeNames) {
+      if (attributeNames == null || attributeNames.Length <= 0) return this;
+
+      const string nodeName = "AttributesToReturn";
+      if (!this.ControlComponents.Any(cc => cc is AttributeControl && cc.ToAdsml().Name.ToString() == nodeName)) {
+        this.ControlComponents.Add(new AttributeControl(nodeName, attributeNames));
+      }
+      else {
+        AttributeControl control =
+          this.ControlComponents.Where(cc => cc is AttributeControl && cc.ToAdsml().Name.ToString() == nodeName)
+            .Cast<AttributeControl>().Single();
+
+        string nameList =
+          attributeNames
+            .Aggregate((aggr, d) => aggr + "+" + d);
+
+        control.OuterNodeAttributes.Add(new XAttribute("namelist", nameList));
+      }
+
+      return this;
+    }
+
+    public IReturnedLanguagesConfigureReferences ReturnAttributes(int[] definitionIds, string[] attributeNames)  {
+      ReturnAttributes(definitionIds);
+      ReturnAttributes(attributeNames);
+
+      return this;
+    }
+
     /// <summary>
     /// Used to restrict in which languages attribute data gets returned.
     /// </summary>

@@ -16,6 +16,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
   {
     IReturnedLanguagesConfigureReferences ReturnAttributes(params IAttributeControl[] attributeControls);
     IReturnedLanguagesConfigureReferences ReturnAttributes(params int[] definitionIds);
+    IReturnedLanguagesConfigureReferences ReturnAttributes(params string[] attributeNames);
+    IReturnedLanguagesConfigureReferences ReturnAttributes(int[] definitionIds, string[] attributeNames);
   }
 
   [EditorBrowsable(EditorBrowsableState.Never)]

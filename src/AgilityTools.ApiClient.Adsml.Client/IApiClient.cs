@@ -41,5 +41,8 @@ namespace AgilityTools.ApiClient.Adsml.Client
       where TRequest : class, IAdsmlSerializable<XElement>;
 
     Task<XElement> SendApiRequestAsync(string request);
+    Task<IEnumerable<TResponse>> SendApiRequestAsync<TRequest, TResponse>(
+      TRequest request, Func<XElement, IEnumerable<TResponse>> responseConverter
+    ) where TRequest : class, IAdsmlSerializable<XElement>;
   }
 }
