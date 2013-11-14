@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Serialization;
+using System.Xml.Linq;
 
 namespace AgilityTools.ApiClient.Adsml.Client.Responses
 {
@@ -13,6 +14,7 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         public string ErrorId { get; internal set; }
         public string Message { get; internal set; }
         public string Description { get; internal set; }
+        public XElement Source { get; set; }
 
         /// <summary>
         /// Constructor.

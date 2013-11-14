@@ -24,7 +24,8 @@ namespace AgilityTools.ApiClient.Adsml.Client.Responses
         Description = (string)source.Attribute("description"),
         ErrorId = (string)source.Attribute("id"),
         ErrorType = (ErrorResponse.ErrorTypes)Enum.Parse(typeof(ErrorResponse.ErrorTypes), errorType),
-        Message = source.Descendants("Message").First().Value
+        Message = source.Descendants("Message").First().Value,
+        Source = source
       };
     }
 
